@@ -38,3 +38,6 @@ http://jack.rosenth.al/hacking-docutils.html#sphinx-hacks::
 
     def setup(app):
         app.set_translator('html', PatchedHTMLTranslator)
+
+If using this with github pages, we'll need a ``.nojekyll`` file in the root of
+the pages repo.

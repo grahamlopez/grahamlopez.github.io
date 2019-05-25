@@ -14,7 +14,7 @@ For quickly committing all changed (tracked) files, skip the index/staging, and
 only a one-line log message that doesn't open an editor (don't make this a habit
 - see best practices for how to write good log messages)::
 
-gi  t commit -am 'one-line log message'
+  git commit -am 'one-line log message'
 
 
 To fix the most recent commit without creating a new one.  I use this to fix up
