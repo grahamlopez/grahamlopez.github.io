@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Best Practices &#8212; grahamlopez.org  documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">grahamlopez.org  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="best-practices">
+<h1>Best Practices<a class="headerlink" href="#best-practices" title="Permalink to this headline">¶</a></h1>
+<p>General best practices</p>
+<ol class="arabic">
+<li><dl class="simple">
+<dt>Write good log messages</dt><dd><ul class="simple">
+<li><p>first line: “what this commit does” is &lt;= 80 characters (to be compatible with log analysis tools)</p></li>
+<li><p>blank line</p></li>
+<li><p>multiline: “why this commit is necessary or desired”</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Don’t track derived files</dt><dd><ul class="simple">
+<li><p>don’t track: binaries, object files, logs, .pdf, .aux, .bbl, .avi, etc.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Don’t track large files</dt><dd><ul class="simple">
+<li><p>git doesn’t handle them well - makes repo large and harder to work with</p></li>
+<li><p>can use other tools: git annex or LFS (large file storage) module</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Don’t alter public history</dt><dd><ul class="simple">
+<li><p>no –amend, rebase, reset on commits that have been pushed to a public server</p></li>
+<li><p>similarly, never push to any non-bare repository</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Public repos (including forked) should be bare</p></li>
+<li><dl class="simple">
+<dt>Every repo needs 4 files</dt><dd><ul class="simple">
+<li><p>LICENSE:  <a class="reference external" href="http://choosealicense.com">http://choosealicense.com</a>,  <a class="reference external" href="http://tldrlegal.com">http://tldrlegal.com</a></p></li>
+<li><dl class="simple">
+<dt>README</dt><dd><ul>
+<li><p>short description</p></li>
+<li><p>quickstart guide</p></li>
+<li><p>how to contribute</p></li>
+<li><p>TODO list</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>CITATION</p></li>
+<li><p>INSTALL</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>No merge commits in pull requests</dt><dd><ul class="simple">
+<li><p>makes code review easier</p></li>
+<li><p>keeps project history clean</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Use amend/rebase (squash) for small changes when iterating on pull requests</p></li>
+<li><p>Use topic (e.g. “foo”) or fix (e.g. “fix/bar”) for pull requests</p></li>
+<li><p>Make code cite-able with a DOI:  <a class="reference external" href="https://guides.github.com/activities/citable-code/">https://guides.github.com/activities/citable-code/</a></p></li>
+<li><p>Use semantic versioning (<a class="reference external" href="http://semver.org">http://semver.org</a>) for release branches and tags
+- but keep in mind that SemVer [has issues](<a class="reference external" href="http://akkartik.name/post/versioning">http://akkartik.name/post/versioning</a>)</p>
+<blockquote>
+<div><p>and some [serious issues](<a class="reference external" href="https://youtu.be/tlSy7EJQPzl">https://youtu.be/tlSy7EJQPzl</a>)</p>
+</div></blockquote>
+</li>
+</ol>
+<p>And some best practices for public collaboration on git repository services (e.g. Github, Gitlab, etc.)</p>
+<ol class="arabic simple">
+<li><p>Protect the master branch (no push)</p></li>
+<li><p>Fork developer repos, not clone</p></li>
+<li><dl class="simple">
+<dt>Use issue tracking</dt><dd><ul class="simple">
+<li><p>Not just for bug tracking</p></li>
+<li><p>reference code, pull requests, developers, assignees, etc.</p></li>
+<li><p>labels for filtering</p></li>
+<li><p>milestones</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Use automated services</dt><dd><ul class="simple">
+<li><p>continuous integration (CI): jenkins, travis-ci, gitlab built-in</p></li>
+<li><p>code coverage: codecov.io</p></li>
+<li><p>doc generation: sphinx-doc.org, readthedocs.org</p></li>
+<li><p>code lint (formatting standards)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Treat github as social media</dt><dd><ul class="simple">
+<li><p>curate personal information carefully</p></li>
+<li><p>follow/watch projects</p></li>
+<li><p>potential employers/followers can watch your activity</p></li>
+<li><p>pages: jekyllrb.com, getbootstrap.com, disqus.com</p></li>
+<li><p>chat: gitter.im, slack.io</p></li>
+<li><p>gist</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/git/best-practices.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">grahamlopez.org  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, M. Graham Lopez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

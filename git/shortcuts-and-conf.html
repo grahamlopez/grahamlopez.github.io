@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Shortcuts &#8212; grahamlopez.org  documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+    <li><a href="localhost:8080">grahamlopez.org</a> &raquo;</li>
+ 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="shortcuts">
+<h1>Shortcuts<a class="headerlink" href="#shortcuts" title="Permalink to this headline">¶</a></h1>
+<p>Some cheatsheets, tips, tricks, and shortcuts</p>
+<p>To quickly check the contents of a single file, from a single commit, without
+having to checkout, stash dirty working copy, etc. This is equivalent to “svn
+cat.”
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">git</span> <span class="pre">show</span> <span class="pre">rev:path/to/file</span>
+<span class="pre">`</span></code></p>
+<p>For quickly committing all changed (tracked) files, skip the index/staging, and
+only a one-line log message that doesn’t open an editor (don’t make this a habit
+- see best practices for how to write good log messages):
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-am</span> <span class="pre">'one-line</span> <span class="pre">log</span> <span class="pre">message'</span>
+<span class="pre">`</span></code></p>
+<p>To fix the most recent commit without creating a new one.  I use this to fix up
+the log message, or if I catch a minor typo in the content of the latest commit.
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">git</span> <span class="pre">commit</span> <span class="pre">--amend</span>
+<span class="pre">`</span></code>
+BEWARE: don’t use this after a commit has been pushed to a remote repository.</p>
+</div>
+<div class="section" id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<p>Some configuration hints</p>
+<p>Using your username in clone url saves typing at every server interaction (pull,
+push, fetch, etc.).
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://username&#64;code.ornl.gov/username/repo_name.git</span>
+<span class="pre">`</span></code>
+Setting up ssh keys saves more typing at every server interaction. Also, see the
+page on [git credentials](./git_credentials) for more options about safely
+storing your git passwords.</p>
+<p>Here is my <cite>.gitconfig</cite>. It sets up some nice conveniences for day-to-day
+working with git. Colors when diffing code and looking at branching graphs helps
+me quickly understand output that is otherwise too busy.  Aliases save me a lot
+of typing, and mean I don’t have to remember complex combinations of options.
+<a href="#id1"><span class="problematic" id="id2">``</span></a>`
+[user]</p>
+<blockquote>
+<div><p>name = Graham Lopez
+email = <a class="reference external" href="mailto:email&#37;&#52;&#48;domain&#46;com">email<span>&#64;</span>domain<span>&#46;</span>com</a></p>
+</div></blockquote>
+<dl>
+<dt>[color]</dt><dd><p>ui = auto</p>
+</dd>
+<dt>[color “branch”]</dt><dd><p>current = yellow reverse
+local = yellow
+remote = green</p>
+</dd>
+<dt>[color “diff”]</dt><dd><p>meta = yellow bold
+frag = magenta bold
+old = red bold
+new = green bold</p>
+</dd>
+<dt>[color “status”]</dt><dd><p>added = yellow
+changed = green
+untracked = cyan</p>
+</dd>
+<dt>[core]</dt><dd><p>whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+pager = less -RMFX</p>
+<blockquote>
+<div><p>excludesfile = /home/graham/.gitignore</p>
+</div></blockquote>
+</dd>
+<dt>[alias]</dt><dd><p>st = status
+ci = commit
+co = checkout
+br = branch
+logfiles = log –name-status
+logdiff = log -p –stat
+lot = log –graph –decorate –oneline –date-order –all
+lo = log –graph –decorate –oneline –all
+lt = log –graph –decorate –oneline –date-order
+l = log –graph –decorate –oneline
+ls = ls-files</p>
+</dd>
+<dt>[push]</dt><dd><p>default = simple</p>
+</dd>
+</dl>
+<p><a href="#id3"><span class="problematic" id="id4">``</span></a><a href="#id5"><span class="problematic" id="id6">`</span></a></p>
+<p>If you looked at the code, you’ll notice there are several very similar aliases
+for viewing logs. The differences, “–date-order” and “–all” respectively
+change the default log graph output to be ordered strictly by commit date, and
+toggle whether to show all branches, or only those branches who have some
+history in common with the current branch.  I keep all of these variants because
+sometimes logs and branching get messy, and different output might be cleaner
+than another. Compare git lo vs. git lot aliases on the resulting history from
+the script that is attached at the bottom of this page. When I am focused on
+development in a single branch, the git l alias is the one I use 90% of the
+time.</p>
+<p>Here are a couple of other git log aliases that people have found useful:
+<a href="#id7"><span class="problematic" id="id8">``</span></a><a href="#id9"><span class="problematic" id="id10">`</span></a></p>
+<blockquote>
+<div><dl class="simple">
+<dt>[alias]</dt><dd><p>lg1 = log –graph –abbrev-commit –decorate –date=relative –format=format:’%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset)%C(dim white)- %an%C(reset)%C(auto)%d%C(reset)’ –all
+lg2 = log –graph –abbrev-commit –decorate –format=format:’%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green (%ar)%C(reset)%C(auto)%d%C(reset)%n’’ %%C(white)%s%C(reset) %C(dim white)- %an%C(reset)’ –all</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><a href="#id11"><span class="problematic" id="id12">``</span></a><a href="#id13"><span class="problematic" id="id14">`</span></a></p>
+<p>You can see information about the current branch and state of a repository
+directly in a Bash or Zsh prompt using “git prompt”
+(<a class="reference external" href="https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh">https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh</a>).  It
+only adds the git-related information to the prompt when the current directory
+is part of a git repository.  This is the excerpt from my .zshrc that configures
+the prompt:
+<a href="#id15"><span class="problematic" id="id16">``</span></a><a href="#id17"><span class="problematic" id="id18">`</span></a></p>
+<blockquote>
+<div><p>source ~/.git-prompt.sh
+setopt prompt_subst</p>
+<p>export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWUPSTREAM=”auto”
+export GIT_PS1_SHOWCOLORHINTS=true</p>
+<p>PROMPT=’$WHITE%m$CYAN:$CYAN%3~$YELLOW$(__git_ps1 “(%s)”)$CYAN-| $NOCOLOR’
+RPROMPT=’$RED%(?..[%?]) $CYAN|$WHITE%*$NOCOLOR’</p>
+</div></blockquote>
+<p><a href="#id19"><span class="problematic" id="id20">``</span></a>`
+This configuration will cause the left side prompt to show the current branch
+name, if there are untracked files in the repository, if there are uncommitted
+changes in the repository, and whether the local branch is behind or ahead of
+the remote tracking branch.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">about graham</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">git hints</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+    <li><a href="localhost:8080">grahamlopez.org</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, M. Graham Lopez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

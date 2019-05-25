@@ -1,0 +1,12 @@
+
+#############
+about graham
+#############
+
+some info about me
+
+.. toctree::
+   :maxdepth: 2
+
+   cv
+   contact

@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>bare git repo dotfiles &#8212; grahamlopez.org  documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="unsorted" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="index.html" title="unsorted"
+             accesskey="P">previous</a> |</li>
+    <li><a href="https://grahamlopez.org">grahamlopez.org</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">unsorted</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="bare-git-repo-dotfiles">
+<h1>bare git repo dotfiles<a class="headerlink" href="#bare-git-repo-dotfiles" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>::</dt><dd>git init –bare $HOME/.mglcfg
+alias config=’git –git-dir=$HOME/.mglcfg/ –work-tree=$HOME’
+config config status.showUntrackedFiles no</dd>
+</dl>
+<p>## Usage
+Now any files in $HOME can be versioned as usual with things like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="n">status</span>
+<span class="n">config</span> <span class="n">add</span> <span class="o">.</span><span class="n">vimrc</span>
+<span class="n">config</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s1">&#39;add vimrc&#39;</span>
+<span class="n">config</span> <span class="n">push</span>
+</pre></div>
+</div>
+<p>To see what files are being tracked:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>``config ls-tree --full-tree -r HEAD``
+</pre></div>
+</div>
+<p>## Install the dotfiles onto a new system</p>
+<dl class="docutils">
+<dt>::</dt><dd>git clone –bare <a class="reference external" href="https://gitlab.com/grahamlopez/mglcfg.git" target="_blank">https://gitlab.com/grahamlopez/mglcfg.git</a> $HOME/.mglcfg
+config checkout</dd>
+</dl>
+<p>if there are already dotfiles present, then need to back them up and move out of
+the way:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mkdir -p .config-backup
+config checkout 2&gt;&amp;1 | egrep &quot;\s+\.&quot; | awk {`print $1`} | xargs -l{} mv {} .config-backup/{}
+</pre></div>
+</div>
+<p>and rerun <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">checkout</span></code></p>
+<p>Another way might be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>git clone --separate-git-dir=$HOME/.my-dotfiles https://github.com/Siilwyn/my-dotfiles.git my-dotfiles-tmp
+rsync --recursive --verbose --exclude &#39;.git&#39; my-dotfiles-tmp/ $HOME/
+rm --recursive my-dotfiles-tmp
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">about graham</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/index.html">git hints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html">working with sphinx</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">unsorted</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">bare git repo dotfiles</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="index.html" title="unsorted"
+             >previous</a> |</li>
+    <li><a href="https://grahamlopez.org">grahamlopez.org</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >unsorted</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, M. Graham Lopez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

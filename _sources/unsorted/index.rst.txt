@@ -1,0 +1,13 @@
+
+#########
+unsorted
+#########
+
+These are some things that don't yet have a better home, but hopefully I get
+them sorted soon. Because everyone likes a better home.
+
+.. toctree::
+   :maxdepth: 2
+
+   bare_repo_dotfiles
+   signing_code

@@ -1,0 +1,357 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Repository histories &#8212; grahamlopez.org  documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Big list o’ resources – links to external sites" href="resources.html" />
+    <link rel="prev" title="git Workflows – how to organize branching" href="git_workflows.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="resources.html" title="Big list o’ resources – links to external sites"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="git_workflows.html" title="git Workflows – how to organize branching"
+             accesskey="P">previous</a> |</li>
+    <li><a href="https://grahamlopez.org">grahamlopez.org</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">git hints</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="repository-histories">
+<h1>Repository histories<a class="headerlink" href="#repository-histories" title="Permalink to this headline">¶</a></h1>
+<p>Part of the reason to adopt and maintain a branching workflow is to maintain
+certain patterns in the project history.  Remember that git history is really
+only for humans; git doesn’t care how the commits relate to each other since
+they are each a complete, stand-alone snapshot of the repository.</p>
+<div class="section" id="gitflow-history">
+<h2>Gitflow History<a class="headerlink" href="#gitflow-history" title="Permalink to this headline">¶</a></h2>
+<p>So if you adopt the <a class="reference external" href="http://nvie.com/posts/a-successful-git-branching-model/" target="_blank">Gitflow workflow</a>, the figure
+below shows what it will look like in practice. This repository was generated
+with <a class="reference external" href="https://gitlab.com/grahamlopez/mgl_configs/uploads/3ffd72450352f16d96ec6d4eeeff6a20/gitflow_history.sh" target="_blank">this script</a></p>
+<p>Click the image for a larger view.
+<a class="reference external" href="images/gitflow_combined.png" target="_blank">gitflow combined</a></p>
+<p>The figure on the left is the main image from the original Gitflow post (Author:
+Vincent Driessen.  Original post:
+nvie.com/posts/a-successful-git-branching-model/  License: Creative Commons
+BY-SA). On the right is the exact history reproduced, with the commits log
+messages numbered in order of when they were committed. Remember that git log by
+default shows time progressing upwards, whereas the figure on the left
+represents time progressing downwards. You might also notice that the branches
+exist in the same order left to right, but they are mirrored.</p>
+<p>A couple of quick notes about reading git’s <code class="docutils literal notranslate"><span class="pre">--graph</span></code> output. First, at merges,
+“<code class="docutils literal notranslate"><span class="pre">|\</span></code>”,  the “<code class="docutils literal notranslate"><span class="pre">\</span></code>” is the branch being merged into the “<code class="docutils literal notranslate"><span class="pre">|</span></code>” branch. So reading
+from the top (progressing back in time), you can always stay on the “base”
+branch by keeping to the left at intersections. This rule doesn’t strictly hold
+at initial branchings when reading bottom to top.</p>
+</div>
+<div class="section" id="merge-vs-rebase-effects-on-repo-history">
+<h2>Merge vs. Rebase - effects on repo history<a class="headerlink" href="#merge-vs-rebase-effects-on-repo-history" title="Permalink to this headline">¶</a></h2>
+<p>We already saw a brief summary of <cite>git merge vs. git rebase</cite>, and there are a
+few links in the Resources page discussing this as well.  If you start to google
+around, you will find discussions in many places where people disagree about the
+merits of using merge vs. rebase and the resulting repository histories. There
+are some more subtle issues (see e.g.  <a class="reference external" href="http://bit-booster.blogspot.ca/2016/02/no-foxtrots-allowed.html)" target="_blank">here</a>
+at stake as well, if you really start to get into the nicer features of git.</p>
+<p>Personally, I was curious about a specific situation related to the Gitflow
+model shown above: if I am working on a feature branch forked from the “develop”
+branch, and I want to stay up to day with develop, should I be merging it into
+my feature branch or rebasing my feature branch onto develop? (Note: many people
+will say that well-managed features are short-lived enough that you shouldn’t
+need to update against the parent branch.)</p>
+<p>This figure shows equivalent repository histories, with each branch, commit, and
+merge made in the <strong>exact same sequence</strong>. The difference is that the repo on
+the left used <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> to periodically bring “feature-1” and “feature-2” up
+to date with “develop,” while the repo on the right used <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code> in place
+of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code>.  When the feature branches were finished and brought back into
+“develop,” <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> was used in both repositories.</p>
+<p>Click the image for a larger view.
+<a class="reference external" href="images/git_lot.png" target="_blank">gitflow lot</a></p>
+<p>Here we can start to see the different sides of the argument. On the left, it is
+clear from reading the history exactly how and when each commit got to its
+state, showing the divergences and mergings that led to the current repository
+state. On the right, we have a cleaner history that shows features branching
+from develop and being merged back in. Note that the graph on the right still
+uses “<code class="docutils literal notranslate"><span class="pre">--date-order</span></code>”, but the commit numbers are out of order because
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">--rebase</span></code> rewrites history, replaying commits onto the target branch tip at
+the time it is called. So we can see that “feature-2” was finished (merged)
+before “feature-1”, but there isn’t a good way (without digging into the commit
+timestamps) to know at the commit level what order development took place among
+feature-1, feature-2, and develop.</p>
+<p>Once repositories start to  get significant amounts of history and branches, no
+matter which method you adopt, the full repo history is going to get longer and
+more complicated to read (although the rebasing version might remain relatively
+shorter/simpler, albeit at the loss of some information about branch-local
+contexts). A lot of times, you just want to know how a certain branch got into
+its current state.  This is where the “<code class="docutils literal notranslate"><span class="pre">--first-parent</span></code>” option can help.  The
+next screenshot shows</p>
+<ol class="arabic simple">
+<li>with the first command the effect of <code class="docutils literal notranslate"><span class="pre">--first-parent</span></code> to explore the
+“release-1” branch. We see that “feature-1” is part of release-1’s history,
+so we want to know more about “feature-1”</li>
+<li>then the second command uses the same feature to get more detail about “feature-1.”</li>
+<li>Finally, the third command shows the complete history of “feature-1” by
+dropping the <code class="docutils literal notranslate"><span class="pre">--first-parent</span></code> option.</li>
+</ol>
+<p>These are the same repositories as in the previous screenshot: the merging
+history is on the left again, and the rebasing history is on the right.</p>
+<p>Click the image for a larger view.
+<a class="reference external" href="images/git_log.png" target="_blank">gitflow log</a></p>
+</div>
+<div class="section" id="a-viable-policy">
+<h2>A viable policy<a class="headerlink" href="#a-viable-policy" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>``git config [--global] pull.rebase true``
+</pre></div>
+</div>
+<p>So which do I personally choose, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> or <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code>?</p>
+<p>I think that seeing merges can give useful context like, “oh, this commit is
+from a branch that was started back when the API was different, and it hadn’t
+yet pulled in the updated policies.”  So when updating branches with information
+from others, and when reintegrating branches into a higher-up (more stable)
+branch, I like to use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span> <span class="pre">--no-ff</span></code>.</p>
+<p>However, I prefer to use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code> for a situation not covered yet on this
+page: when using git pull.  This is because git pull is almost always used on
+tracking branches, and branches track each other almost always because they are
+semantically the same: they just live in different repositories.  So using
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span> <span class="pre">--rebase</span></code> prevents all of the merge messages in a history that just
+say, “Merge branch origin/feature-1 into feature-1” from all of the different
+people working on it.  These merge messages DO unnecessarily clutter the history
+and make it more difficult to read. And when rebase is limited to tracking
+branches like this, it doesn’t make that branch’s history any less clear (in my
+opinion) because it is almost never important that two commits on the
+(functionally) same branch happened in two different repositories.</p>
+<p>A less verbose way to look at git <code class="docutils literal notranslate"><span class="pre">pull</span> <span class="pre">--rebase</span></code>: it has the same end effect on
+your history as if you had remembered to do a normal <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> as always before
+making any local changes to your repository.</p>
+<p>You can set this behavior as default for a user (goes into <code class="docutils literal notranslate"><span class="pre">~/.gitconfig</span></code>) by
+running <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">pull.rebase</span> <span class="pre">true</span></code>, or for a repository (goes into
+<code class="docutils literal notranslate"><span class="pre">.git/config</span></code>) by running <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">pull.rebase</span> <span class="pre">true</span></code>.</p>
+<p>If you can think of reasonable exceptions to the situations explained above,
+then your understanding of branching, merging, and rebasing is probably
+sufficient enough to justify your own opinions on the matter. :-)</p>
+</div>
+<div class="section" id="merge-commits-in-pull-requests">
+<h2>Merge commits in pull requests<a class="headerlink" href="#merge-commits-in-pull-requests" title="Permalink to this headline">¶</a></h2>
+<p>Another issue that commonly comes up when using something like the Gitflow
+workflow is merge commits in pull requests. This happens when somebody is
+working in their topic branch, <code class="docutils literal notranslate"><span class="pre">develop</span></code> advances, and they want to pull in
+those new developments into their topic branch while they are working.</p>
+<p>These merge commits will show up in the PR on Github, as shown below:
+!`github starting situation &lt;images/github_starting_situation.png&gt;`_</p>
+<p>There are a few options for dealing with this situation, which I will try to
+outline here. First, let’s set up a toy repository so that we can see how the
+resulting history changes based on the option we pick. The starting situation on
+the user’s local machine at the time they submit the pull request on the
+<code class="docutils literal notranslate"><span class="pre">test_github</span></code> branch might look like the following (I changed the commit messages
+of <code class="docutils literal notranslate"><span class="pre">3654867</span></code> and <code class="docutils literal notranslate"><span class="pre">f8a26aa</span></code> from the Github screenshot above to be more clear):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span> <span class="n">f8a26aa</span> <span class="p">(</span><span class="n">HEAD</span> <span class="o">-&gt;</span> <span class="n">test_github</span><span class="p">,</span> <span class="n">origin</span><span class="o">/</span><span class="n">test_github</span><span class="p">)</span> <span class="n">topic</span> <span class="n">change</span> <span class="n">after</span> <span class="n">update</span> <span class="k">with</span> <span class="n">master</span>
+<span class="o">*</span>   <span class="mf">478e332</span> <span class="n">Merge</span> <span class="n">branch</span> <span class="s1">&#39;master&#39;</span> <span class="n">into</span> <span class="n">test_github</span>
+<span class="o">|</span>\
+<span class="o">|</span> <span class="o">*</span> <span class="n">f70e459</span> <span class="p">(</span><span class="n">origin</span><span class="o">/</span><span class="n">master</span><span class="p">,</span> <span class="n">origin</span><span class="o">/</span><span class="n">HEAD</span><span class="p">,</span> <span class="n">master</span><span class="p">)</span> <span class="n">intermediate</span> <span class="n">change</span> <span class="n">on</span> <span class="n">master</span>
+<span class="o">*</span> <span class="o">|</span> <span class="mi">3654867</span> <span class="n">topic</span> <span class="n">change</span> <span class="n">pre</span> <span class="n">update</span> <span class="k">with</span> <span class="n">master</span>
+<span class="o">|/</span>
+<span class="o">*</span>   <span class="n">df26096</span> <span class="n">Merge</span> <span class="n">pull</span> <span class="n">request</span> <span class="c1">#3 from grahamlopez/readme_init</span>
+<span class="o">|</span>\
+<span class="o">|</span> <span class="o">*</span> <span class="mi">0911734</span> <span class="p">(</span><span class="n">origin</span><span class="o">/</span><span class="n">readme_init</span><span class="p">)</span> <span class="n">another</span> <span class="n">change</span>
+<span class="o">|</span> <span class="o">*</span> <span class="mf">520e2</span><span class="n">de</span> <span class="n">added</span> <span class="n">a</span> <span class="n">little</span> <span class="n">test</span> <span class="n">c</span> <span class="n">file</span> <span class="k">as</span> <span class="n">well</span>
+<span class="o">|</span> <span class="o">*</span> <span class="n">bcfd63e</span> <span class="n">initialized</span> <span class="n">the</span> <span class="n">README</span><span class="o">.</span><span class="n">md</span>
+<span class="o">|/</span>
+<span class="o">*</span> <span class="mi">9</span><span class="n">fef690</span> <span class="n">Initial</span> <span class="n">commit</span>
+</pre></div>
+</div>
+<p>Notice the sequence of events:</p>
+<ol class="arabic simple">
+<li>commit <code class="docutils literal notranslate"><span class="pre">3654867</span></code> happens first in the <code class="docutils literal notranslate"><span class="pre">topic</span></code> branch</li>
+<li>somebody meanwhile makes a change to <code class="docutils literal notranslate"><span class="pre">master</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">master</span></code> is merged into the topic branch (producing a merge commit)</li>
+<li>another commit is made to <code class="docutils literal notranslate"><span class="pre">topic</span></code></li>
+<li>(PR is submitted on the <code class="docutils literal notranslate"><span class="pre">topic</span></code> branch)</li>
+</ol>
+<div class="section" id="pr-with-merge-commits">
+<h3>1. PR with merge commits<a class="headerlink" href="#pr-with-merge-commits" title="Permalink to this headline">¶</a></h3>
+<p>One option is to just accept the PR as it stands, with the merge commits in
+tact. This will preserve the most complete history, and so is suitable for some
+situations where maximum detail is needed. After merging the PR and updating the
+new <code class="docutils literal notranslate"><span class="pre">master</span></code>, the local history will look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="mi">0</span><span class="n">bfcfd2</span> <span class="p">(</span><span class="n">HEAD</span> <span class="o">-&gt;</span> <span class="n">master</span><span class="p">,</span> <span class="n">origin</span><span class="o">/</span><span class="n">master</span><span class="p">,</span> <span class="n">origin</span><span class="o">/</span><span class="n">HEAD</span><span class="p">)</span> <span class="n">Merge</span> <span class="n">pull</span> <span class="n">request</span> <span class="c1">#7 from grahamlopez/test_github</span>
+<span class="o">|</span>\
+<span class="o">|</span> <span class="o">*</span> <span class="n">f8a26aa</span> <span class="p">(</span><span class="n">origin</span><span class="o">/</span><span class="n">test_github</span><span class="p">,</span> <span class="n">test_github</span><span class="p">)</span> <span class="n">topic</span> <span class="n">change</span> <span class="n">after</span> <span class="n">update</span> <span class="k">with</span> <span class="n">master</span>
+<span class="o">|</span> <span class="o">*</span>   <span class="mf">478e332</span> <span class="n">Merge</span> <span class="n">branch</span> <span class="s1">&#39;master&#39;</span> <span class="n">into</span> <span class="n">test_github</span>
+<span class="o">|</span> <span class="o">|</span>\
+<span class="o">|</span> <span class="o">|/</span>
+<span class="o">|/|</span>
+<span class="o">*</span> <span class="o">|</span> <span class="n">f70e459</span> <span class="n">intermediate</span> <span class="n">change</span> <span class="n">on</span> <span class="n">master</span>
+<span class="o">|</span> <span class="o">*</span> <span class="mi">3654867</span> <span class="n">topic</span> <span class="n">change</span> <span class="n">pre</span> <span class="n">update</span> <span class="k">with</span> <span class="n">master</span>
+<span class="o">|/</span>
+<span class="o">*</span>   <span class="n">df26096</span> <span class="n">Merge</span> <span class="n">pull</span> <span class="n">request</span> <span class="c1">#3 from grahamlopez/readme_init</span>
+<span class="o">|</span>\
+<span class="o">|</span> <span class="o">*</span> <span class="mi">0911734</span> <span class="p">(</span><span class="n">origin</span><span class="o">/</span><span class="n">readme_init</span><span class="p">)</span> <span class="n">another</span> <span class="n">change</span>
+<span class="o">|</span> <span class="o">*</span> <span class="mf">520e2</span><span class="n">de</span> <span class="n">added</span> <span class="n">a</span> <span class="n">little</span> <span class="n">test</span> <span class="n">c</span> <span class="n">file</span> <span class="k">as</span> <span class="n">well</span>
+<span class="o">|</span> <span class="o">*</span> <span class="n">bcfd63e</span> <span class="n">initialized</span> <span class="n">the</span> <span class="n">README</span><span class="o">.</span><span class="n">md</span>
+<span class="o">|/</span>
+<span class="o">*</span> <span class="mi">9</span><span class="n">fef690</span> <span class="n">Initial</span> <span class="n">commit</span>
+</pre></div>
+</div>
+<p>As you can see, this shows exactly what happened, but starts to look a little
+messy. Even if the above example is easy to understand, extrapolate this out to
+multiple topic branches and PRs that become intertwined with various merge
+commits, etc.</p>
+</div>
+<div class="section" id="locally-rebased">
+<h3>2. Locally rebased<a class="headerlink" href="#locally-rebased" title="Permalink to this headline">¶</a></h3>
+<p>This option involves asking the user to run a few commands to fix up their PR.
+They will rebase their work onto the new work in master, even though they’ve
+already merged it into their topic branch. During the rebase, the changes unique
+to the topic branch will get replayed onto master’s tip, and the merge commit(s)
+will disappear. When the user’s repo is locally rebased using <cite>git checkout test_github</cite>,
+then <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">master</span></code>, it looks like the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span> <span class="mi">7</span><span class="n">dfb8aa</span> <span class="p">(</span><span class="n">origin</span><span class="o">/</span><span class="n">test_github</span><span class="p">,</span> <span class="n">HEAD</span> <span class="o">-&gt;</span> <span class="n">test_github</span><span class="p">)</span> <span class="n">topic</span> <span class="n">change</span> <span class="n">after</span> <span class="n">update</span> <span class="k">with</span> <span class="n">master</span>
+<span class="o">*</span> <span class="n">b9de60f</span> <span class="n">topic</span> <span class="n">change</span> <span class="n">pre</span> <span class="n">update</span> <span class="k">with</span> <span class="n">master</span>
+<span class="o">*</span> <span class="n">f70e459</span> <span class="n">intermediate</span> <span class="n">change</span> <span class="n">on</span> <span class="n">master</span> <span class="p">(</span><span class="n">origin</span><span class="o">/</span><span class="n">master</span><span class="p">,</span> <span class="n">origin</span><span class="o">/</span><span class="n">HEAD</span><span class="p">,</span> <span class="n">master</span><span class="p">)</span>
+<span class="o">*</span>   <span class="n">df26096</span> <span class="n">Merge</span> <span class="n">pull</span> <span class="n">request</span> <span class="c1">#3 from grahamlopez/readme_init</span>
+<span class="o">|</span>\
+<span class="o">|</span> <span class="o">*</span> <span class="mi">0911734</span> <span class="p">(</span><span class="n">origin</span><span class="o">/</span><span class="n">readme_init</span><span class="p">)</span> <span class="n">another</span> <span class="n">change</span>
+<span class="o">|</span> <span class="o">*</span> <span class="mf">520e2</span><span class="n">de</span> <span class="n">added</span> <span class="n">a</span> <span class="n">little</span> <span class="n">test</span> <span class="n">c</span> <span class="n">file</span> <span class="k">as</span> <span class="n">well</span>
+<span class="o">|</span> <span class="o">*</span> <span class="n">bcfd63e</span> <span class="n">initialized</span> <span class="n">the</span> <span class="n">README</span><span class="o">.</span><span class="n">md</span>
+<span class="o">|/</span>
+<span class="o">*</span> <span class="mi">9</span><span class="n">fef690</span> <span class="n">Initial</span> <span class="n">commit</span>
+</pre></div>
+</div>
+<p>A force push on the topic branch to update the PR submitter’s Github fork will
+now be necessary, and the PR will be updated automatically. After it is merged
+and the local master is updated, the repo history will look like the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="mi">833</span><span class="n">a97b</span> <span class="p">(</span><span class="n">HEAD</span> <span class="o">-&gt;</span> <span class="n">master</span><span class="p">,</span> <span class="n">origin</span><span class="o">/</span><span class="n">master</span><span class="p">,</span> <span class="n">origin</span><span class="o">/</span><span class="n">HEAD</span><span class="p">)</span> <span class="n">Merge</span> <span class="n">pull</span> <span class="n">request</span> <span class="c1">#6 from grahamlopez/test_github</span>
+<span class="o">|</span>\
+<span class="o">|</span> <span class="o">*</span> <span class="mi">7</span><span class="n">dfb8aa</span> <span class="p">(</span><span class="n">origin</span><span class="o">/</span><span class="n">test_github</span><span class="p">,</span> <span class="n">test_github</span><span class="p">)</span> <span class="n">topic</span> <span class="n">change</span> <span class="n">after</span> <span class="n">update</span> <span class="k">with</span> <span class="n">master</span>
+<span class="o">|</span> <span class="o">*</span> <span class="n">b9de60f</span> <span class="n">topic</span> <span class="n">change</span> <span class="n">pre</span> <span class="n">update</span> <span class="k">with</span> <span class="n">master</span>
+<span class="o">|/</span>
+<span class="o">*</span> <span class="n">f70e459</span> <span class="n">intermediate</span> <span class="n">change</span> <span class="n">on</span> <span class="n">master</span>
+<span class="o">*</span>   <span class="n">df26096</span> <span class="n">Merge</span> <span class="n">pull</span> <span class="n">request</span> <span class="c1">#3 from grahamlopez/readme_init</span>
+<span class="o">|</span>\
+<span class="o">|</span> <span class="o">*</span> <span class="mi">0911734</span> <span class="p">(</span><span class="n">origin</span><span class="o">/</span><span class="n">readme_init</span><span class="p">)</span> <span class="n">another</span> <span class="n">change</span>
+<span class="o">|</span> <span class="o">*</span> <span class="mf">520e2</span><span class="n">de</span> <span class="n">added</span> <span class="n">a</span> <span class="n">little</span> <span class="n">test</span> <span class="n">c</span> <span class="n">file</span> <span class="k">as</span> <span class="n">well</span>
+<span class="o">|</span> <span class="o">*</span> <span class="n">bcfd63e</span> <span class="n">initialized</span> <span class="n">the</span> <span class="n">README</span><span class="o">.</span><span class="n">md</span>
+<span class="o">|/</span>
+<span class="o">*</span> <span class="mi">9</span><span class="n">fef690</span> <span class="n">Initial</span> <span class="n">commit</span>
+</pre></div>
+</div>
+<p>Notice that now there is a merge commit, but it is the normal kind that is
+usually desired when working with a pull request workflow. Rebasing “rewrote
+history,” so now it looks like the “pre” and “post” commits both happened after
+the “intermediate” commit on master, even though this isn’t the sequence that
+really took place.</p>
+</div>
+<div class="section" id="github-s-merge-rebase-button">
+<h3>3. Github’s “Merge + Rebase” button<a class="headerlink" href="#github-s-merge-rebase-button" title="Permalink to this headline">¶</a></h3>
+<p>Github also provides a solution to this. If you click the dropdown arrow on the
+“Merge” button on the commit, you will see an option for “Merge + Rebase.”  This
+is nice because you don’t have bug the PR submitter about anything and you can
+just accept the PR if the code is ready for merging. After this is done and
+<code class="docutils literal notranslate"><span class="pre">master</span></code> is updated, the local history will look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span> <span class="n">ea624c7</span> <span class="p">(</span><span class="n">HEAD</span> <span class="o">-&gt;</span> <span class="n">master</span><span class="p">,</span> <span class="n">origin</span><span class="o">/</span><span class="n">master</span><span class="p">,</span> <span class="n">origin</span><span class="o">/</span><span class="n">HEAD</span><span class="p">)</span> <span class="n">topic</span> <span class="n">change</span> <span class="n">after</span> <span class="n">update</span> <span class="k">with</span> <span class="n">master</span>
+<span class="o">*</span> <span class="mi">9</span><span class="n">d9dfad</span> <span class="n">topic</span> <span class="n">change</span> <span class="n">pre</span> <span class="n">update</span> <span class="k">with</span> <span class="n">master</span>
+<span class="o">*</span> <span class="n">f70e459</span> <span class="n">intermediate</span> <span class="n">change</span> <span class="n">on</span> <span class="n">master</span>
+<span class="o">*</span>   <span class="n">df26096</span> <span class="n">Merge</span> <span class="n">pull</span> <span class="n">request</span> <span class="c1">#3 from grahamlopez/readme_init</span>
+<span class="o">|</span>\
+<span class="o">|</span> <span class="o">*</span> <span class="mi">0911734</span> <span class="p">(</span><span class="n">origin</span><span class="o">/</span><span class="n">readme_init</span><span class="p">)</span> <span class="n">another</span> <span class="n">change</span>
+<span class="o">|</span> <span class="o">*</span> <span class="mf">520e2</span><span class="n">de</span> <span class="n">added</span> <span class="n">a</span> <span class="n">little</span> <span class="n">test</span> <span class="n">c</span> <span class="n">file</span> <span class="k">as</span> <span class="n">well</span>
+<span class="o">|</span> <span class="o">*</span> <span class="n">bcfd63e</span> <span class="n">initialized</span> <span class="n">the</span> <span class="n">README</span><span class="o">.</span><span class="n">md</span>
+<span class="o">|/</span>
+<span class="o">*</span> <span class="mi">9</span><span class="n">fef690</span> <span class="n">Initial</span> <span class="n">commit</span>
+</pre></div>
+</div>
+<p>Here, we don’t get the nice merge commit for the PR like we did with the
+locally-rebased option #2 above; it just looks like all of the development
+happened directly on master.</p>
+<p>Note that in the rebase scenarios, even though <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> will still show the
+correct commit times, the <code class="docutils literal notranslate"><span class="pre">--date-order</span></code> option does not seem to help in actually
+displaying these in the correct sequence.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">about graham</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">git hints</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="git_philosophy.html">git philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="best_practices.html">General best practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="confusion.html">git Annoyances – common points of confusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shortcuts_and_conf.html">Shortcuts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shortcuts_and_conf.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_workflows.html">git Workflows – how to organize branching</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Repository histories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html">Big list o’ resources – links to external sites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unsorted.html">Unsorted git</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html">working with sphinx</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="resources.html" title="Big list o’ resources – links to external sites"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="git_workflows.html" title="git Workflows – how to organize branching"
+             >previous</a> |</li>
+    <li><a href="https://grahamlopez.org">grahamlopez.org</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >git hints</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, M. Graham Lopez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

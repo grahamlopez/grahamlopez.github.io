@@ -1,0 +1,113 @@
+---
+title: unsorted git
+type: docs
+---
+
+
+# Unsorted
+These are things worth remembering, but don't yet have a home in the organized
+information on other pages.
+
+git branch -avv  
+@{upstream} or @{u}  
+git add -p  
+git status -s  
+git commit -v  
+git log -Sstring  
+Git log with file name  
+git blame  
+git log -L 1,1:some-file.txt  
+https://github.com/github/hub  
+git pull -X theirs  
+git reset --hard origin/mybranch (and friends - see e.g.: http://stackoverflow.com/questions/9301782/need-to-reset-git-branch-to-origin-version)  
+
+Fetch a group of remotes
+```
+$ git config remotes.default 'origin bob staging' 
+$ git remote update 
+# fetches remotes "origin", "bob", and "staging"
+```
+
+Delete a branch here, and everywhere
+```
+$ git branch -d mybranch  (deletes locally)
+$ git push origin :mybranch (uses "git push <remote> <localbranch>:<remotebranch>" syntax to delete remote branch)
+$ git fetch --all --prune (use this on other machines to propagate the changes and get rid of "obsolete tracking branches") 
+```
+It’s often helpful to get a review of all the commits that are in this branch
+but that aren’t in your master branch. You can exclude commits in the master
+branch by adding the --not option before the branch name. This does the same
+thing as the master..contrib format that we used earlier. For example, if your
+contributor sends you two patches and you create a branch called contrib and
+applied those patches there, you can run this:
+
+```
+$ git log contrib --not master
+commit 5b6235bd297351589efc4d73316f0a68d484f118
+Author: Scott Chacon <schacon@gmail.com>
+Date: Fri Oct 24 09:53:59 2008 -0700
+```
+
+seeing if this helps the gem
+```
+commit 7482e0d16d04bea79d0dba8988cc78df655f16a0
+Author: Scott Chacon <schacon@gmail.com>
+Date: Mon Oct 22 19:38:36 2008 -0700
+```
+
+updated the gemspec to hopefully work better
+To see what changes each commit introduces, remember that you can pass the -p
+option to git log and it will append the diff introduced to each commit.
+
+To see a full diff of what would happen if you were to merge this topic branch
+with another branch, you may have to use a weird trick to get the correct
+results. You may think to run this:
+
+`$ git diff master`  
+
+This command gives you a diff, but it may be misleading. If your master branch
+has moved forward since you created the topic branch from it, then you’ll get
+seemingly strange results. This happens because Git directly compares the
+snapshots of the last commit of the topic branch you’re on and the snapshot of
+the last commit on the master branch. For example, if you’ve added a line in a
+file on the master branch, a direct comparison of the snapshots will look like
+the topic branch is going to remove that line.
+
+If master is a direct ancestor of your topic branch, this isn’t a problem; but
+if the two histories have diverged, the diff will look like you’re adding all
+the new stuff in your topic branch and removing everything unique to the master
+branch.
+
+What you really want to see are the changes added to the topic branch – the
+work you’ll introduce if you merge this branch with master. You do that by
+having Git compare the last commit on your topic branch with the first common
+ancestor it has with the master branch.
+
+Technically, you can do that by explicitly figuring out the common ancestor and
+then running your diff on it:
+
+```
+$ git merge-base contrib master
+36c7dba2c95e6bbb78dfa822519ecfec6e1ca649
+$ git diff 36c7db
+```
+However, that isn’t convenient, so Git provides another shorthand for doing the
+same thing: the triple-dot syntax. In the context of the diff command, you can
+put three periods after another branch to do a diff between the last commit of
+the branch you’re on and its common ancestor with another branch:
+
+`$ git diff master...contrib`  
+This command shows you only the work your current topic branch has introduced
+since its common ancestor with master. That is a very useful syntax to
+remember.
+
+Next, try to make each commit a logically separate changeset. If you can, try
+to make your changes digestible
+
+The Git project provides a document that lays out a number of good tips for
+creating commits from which to submit patches – you can read it in the Git
+source code in the Documentation/SubmittingPatches file.
+
+First, you don’t want to submit any whitespace errors. Git provides an easy way
+to check for this – before you commit, run `git diff --check`, which identifies
+possible whitespace errors and lists them for you.

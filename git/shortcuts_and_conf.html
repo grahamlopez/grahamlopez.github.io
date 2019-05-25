@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Shortcuts &#8212; grahamlopez.org  documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="git Workflows – how to organize branching" href="git_workflows.html" />
+    <link rel="prev" title="git Annoyances – common points of confusion" href="confusion.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="git_workflows.html" title="git Workflows – how to organize branching"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="confusion.html" title="git Annoyances – common points of confusion"
+             accesskey="P">previous</a> |</li>
+    <li><a href="https://grahamlopez.org">grahamlopez.org</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">git hints</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="shortcuts">
+<h1>Shortcuts<a class="headerlink" href="#shortcuts" title="Permalink to this headline">¶</a></h1>
+<p>Some cheatsheets, tips, tricks, and shortcuts</p>
+<p>To quickly check the contents of a single file, from a single commit, without
+having to checkout, stash dirty working copy, etc. This is equivalent to “svn
+cat.”:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">show</span> <span class="n">rev</span><span class="p">:</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">file</span>
+</pre></div>
+</div>
+<p>For quickly committing all changed (tracked) files, skip the index/staging, and
+only a one-line log message that doesn’t open an editor (don’t make this a habit
+- see best practices for how to write good log messages):</p>
+<p>gi  t commit -am ‘one-line log message’</p>
+<p>To fix the most recent commit without creating a new one.  I use this to fix up
+the log message, or if I catch a minor typo in the content of the latest
+commit.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">--</span><span class="n">amend</span>
+</pre></div>
+</div>
+<p>BEWARE: don’t use this after a commit has been pushed to a remote repository.</p>
+</div>
+<div class="section" id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<p>Some configuration hints</p>
+<p>Using your username in clone url saves typing at every server interaction (pull,
+push, fetch, etc.).:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">username</span><span class="nd">@code</span><span class="o">.</span><span class="n">ornl</span><span class="o">.</span><span class="n">gov</span><span class="o">/</span><span class="n">username</span><span class="o">/</span><span class="n">repo_name</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>Setting up ssh keys saves more typing at every server interaction. Also, see the
+page on [git credentials](./git_credentials) for more options about safely
+storing your git passwords.</p>
+<p>Here is my <code class="docutils literal notranslate"><span class="pre">.gitconfig</span></code>. It sets up some nice conveniences for day-to-day
+working with git. Colors when diffing code and looking at branching graphs helps
+me quickly understand output that is otherwise too busy.  Aliases save me a lot
+of typing, and mean I don’t have to remember complex combinations of options.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">user</span><span class="p">]</span>
+  <span class="n">name</span> <span class="o">=</span> <span class="n">Graham</span> <span class="n">Lopez</span>
+  <span class="n">email</span> <span class="o">=</span> <span class="n">email</span><span class="nd">@domain</span><span class="o">.</span><span class="n">com</span>
+
+<span class="p">[</span><span class="n">color</span><span class="p">]</span>
+    <span class="n">ui</span> <span class="o">=</span> <span class="n">auto</span>
+<span class="p">[</span><span class="n">color</span> <span class="s2">&quot;branch&quot;</span><span class="p">]</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="n">yellow</span> <span class="n">reverse</span>
+    <span class="n">local</span> <span class="o">=</span> <span class="n">yellow</span>
+    <span class="n">remote</span> <span class="o">=</span> <span class="n">green</span>
+<span class="p">[</span><span class="n">color</span> <span class="s2">&quot;diff&quot;</span><span class="p">]</span>
+    <span class="n">meta</span> <span class="o">=</span> <span class="n">yellow</span> <span class="n">bold</span>
+    <span class="n">frag</span> <span class="o">=</span> <span class="n">magenta</span> <span class="n">bold</span>
+    <span class="n">old</span> <span class="o">=</span> <span class="n">red</span> <span class="n">bold</span>
+    <span class="n">new</span> <span class="o">=</span> <span class="n">green</span> <span class="n">bold</span>
+<span class="p">[</span><span class="n">color</span> <span class="s2">&quot;status&quot;</span><span class="p">]</span>
+    <span class="n">added</span> <span class="o">=</span> <span class="n">yellow</span>
+    <span class="n">changed</span> <span class="o">=</span> <span class="n">green</span>
+    <span class="n">untracked</span> <span class="o">=</span> <span class="n">cyan</span>
+
+<span class="p">[</span><span class="n">core</span><span class="p">]</span>
+    <span class="n">whitespace</span><span class="o">=</span><span class="n">fix</span><span class="p">,</span><span class="o">-</span><span class="n">indent</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">non</span><span class="o">-</span><span class="n">tab</span><span class="p">,</span><span class="n">trailing</span><span class="o">-</span><span class="n">space</span><span class="p">,</span><span class="n">cr</span><span class="o">-</span><span class="n">at</span><span class="o">-</span><span class="n">eol</span>
+    <span class="n">pager</span> <span class="o">=</span> <span class="n">less</span> <span class="o">-</span><span class="n">RMFX</span>
+        <span class="n">excludesfile</span> <span class="o">=</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">graham</span><span class="o">/.</span><span class="n">gitignore</span>
+
+<span class="p">[</span><span class="n">alias</span><span class="p">]</span>
+    <span class="n">st</span> <span class="o">=</span> <span class="n">status</span>
+    <span class="n">ci</span> <span class="o">=</span> <span class="n">commit</span>
+    <span class="n">co</span> <span class="o">=</span> <span class="n">checkout</span>
+    <span class="n">br</span> <span class="o">=</span> <span class="n">branch</span>
+    <span class="n">logfiles</span> <span class="o">=</span> <span class="n">log</span> <span class="o">--</span><span class="n">name</span><span class="o">-</span><span class="n">status</span>
+    <span class="n">logdiff</span> <span class="o">=</span> <span class="n">log</span> <span class="o">-</span><span class="n">p</span> <span class="o">--</span><span class="n">stat</span>
+    <span class="n">lot</span> <span class="o">=</span> <span class="n">log</span> <span class="o">--</span><span class="n">graph</span> <span class="o">--</span><span class="n">decorate</span> <span class="o">--</span><span class="n">oneline</span> <span class="o">--</span><span class="n">date</span><span class="o">-</span><span class="n">order</span> <span class="o">--</span><span class="nb">all</span>
+    <span class="n">lo</span> <span class="o">=</span> <span class="n">log</span> <span class="o">--</span><span class="n">graph</span> <span class="o">--</span><span class="n">decorate</span> <span class="o">--</span><span class="n">oneline</span> <span class="o">--</span><span class="nb">all</span>
+    <span class="n">lt</span> <span class="o">=</span> <span class="n">log</span> <span class="o">--</span><span class="n">graph</span> <span class="o">--</span><span class="n">decorate</span> <span class="o">--</span><span class="n">oneline</span> <span class="o">--</span><span class="n">date</span><span class="o">-</span><span class="n">order</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">log</span> <span class="o">--</span><span class="n">graph</span> <span class="o">--</span><span class="n">decorate</span> <span class="o">--</span><span class="n">oneline</span>
+    <span class="n">ls</span> <span class="o">=</span> <span class="n">ls</span><span class="o">-</span><span class="n">files</span>
+<span class="p">[</span><span class="n">push</span><span class="p">]</span>
+    <span class="n">default</span> <span class="o">=</span> <span class="n">simple</span>
+</pre></div>
+</div>
+<p>If you looked at the code, you’ll notice there are several very similar aliases
+for viewing logs. The differences, “–date-order” and “–all” respectively
+change the default log graph output to be ordered strictly by commit date, and
+toggle whether to show all branches, or only those branches who have some
+history in common with the current branch.  I keep all of these variants because
+sometimes logs and branching get messy, and different output might be cleaner
+than another. Compare git lo vs. git lot aliases on the resulting history from
+the script that is attached at the bottom of this page. When I am focused on
+development in a single branch, the git l alias is the one I use 90% of the
+time.</p>
+<p>Here are a couple of other git log aliases that people have found useful:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">alias</span><span class="p">]</span>
+  <span class="n">lg1</span> <span class="o">=</span> <span class="n">log</span> <span class="o">--</span><span class="n">graph</span> <span class="o">--</span><span class="n">abbrev</span><span class="o">-</span><span class="n">commit</span> <span class="o">--</span><span class="n">decorate</span> <span class="o">--</span><span class="n">date</span><span class="o">=</span><span class="n">relative</span> <span class="o">--</span><span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">:</span><span class="s1">&#39;%C(bold blue)</span><span class="si">%h%</span><span class="s1">C(reset) - %C(bold green)(</span><span class="si">%a</span><span class="s1">r)%C(reset) %C(white)</span><span class="si">%s</span><span class="s1">%C(reset)%C(dim white)- </span><span class="si">%a</span><span class="s1">n%C(reset)%C(auto)</span><span class="si">%d</span><span class="s1">%C(reset)&#39;</span> <span class="o">--</span><span class="nb">all</span>
+  <span class="n">lg2</span> <span class="o">=</span> <span class="n">log</span> <span class="o">--</span><span class="n">graph</span> <span class="o">--</span><span class="n">abbrev</span><span class="o">-</span><span class="n">commit</span> <span class="o">--</span><span class="n">decorate</span> <span class="o">--</span><span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">:</span><span class="s1">&#39;%C(bold blue)</span><span class="si">%h%</span><span class="s1">C(reset) - %C(bold cyan)</span><span class="si">%a</span><span class="s1">D%C(reset) %C(bold green (</span><span class="si">%a</span><span class="s1">r)%C(reset)%C(auto)</span><span class="si">%d</span><span class="s1">%C(reset)%n&#39;&#39; </span><span class="si">%%</span><span class="s1">C(white)</span><span class="si">%s</span><span class="s1">%C(reset) %C(dim white)- </span><span class="si">%a</span><span class="s1">n%C(reset)&#39;</span> <span class="o">--</span><span class="nb">all</span>
+</pre></div>
+</div>
+<p>You can see information about the current branch and state of a repository
+directly in a Bash or Zsh prompt using “git prompt”
+(<a class="reference external" href="https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh" target="_blank">https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh</a>).  It
+only adds the git-related information to the prompt when the current directory
+is part of a git repository.  This is the excerpt from my .zshrc that configures
+the prompt:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">~/.</span><span class="n">git</span><span class="o">-</span><span class="n">prompt</span><span class="o">.</span><span class="n">sh</span>
+<span class="n">setopt</span> <span class="n">prompt_subst</span>
+
+<span class="n">export</span> <span class="n">GIT_PS1_SHOWDIRTYSTATE</span><span class="o">=</span><span class="n">true</span>
+<span class="n">export</span> <span class="n">GIT_PS1_SHOWUNTRACKEDFILES</span><span class="o">=</span><span class="n">true</span>
+<span class="n">export</span> <span class="n">GIT_PS1_SHOWUPSTREAM</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span>
+<span class="n">export</span> <span class="n">GIT_PS1_SHOWCOLORHINTS</span><span class="o">=</span><span class="n">true</span>
+
+<span class="n">PROMPT</span><span class="o">=</span><span class="s1">&#39;$WHITE%m$CYAN:$CYAN%3~$YELLOW$(__git_ps1 &quot;(</span><span class="si">%s</span><span class="s1">)&quot;)$CYAN-| $NOCOLOR&#39;</span>
+<span class="n">RPROMPT</span><span class="o">=</span><span class="s1">&#39;$RED%(?..[%?]) $CYAN|$WHITE%*$NOCOLOR&#39;</span>
+</pre></div>
+</div>
+<p>This configuration will cause the left side prompt to show the current branch
+name, if there are untracked files in the repository, if there are uncommitted
+changes in the repository, and whether the local branch is behind or ahead of
+the remote tracking branch.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">about graham</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">git hints</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="git_philosophy.html">git philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="best_practices.html">General best practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="confusion.html">git Annoyances – common points of confusion</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Shortcuts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_workflows.html">git Workflows – how to organize branching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="repo_histories.html">Repository histories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html">Big list o’ resources – links to external sites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unsorted.html">Unsorted git</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html">working with sphinx</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="git_workflows.html" title="git Workflows – how to organize branching"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="confusion.html" title="git Annoyances – common points of confusion"
+             >previous</a> |</li>
+    <li><a href="https://grahamlopez.org">grahamlopez.org</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >git hints</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, M. Graham Lopez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

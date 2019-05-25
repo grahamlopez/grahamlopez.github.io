@@ -1,0 +1,41 @@
+Setup
+------
+```
+git init --bare $HOME/.mglcfg
+alias config='git --git-dir=$HOME/.mglcfg/ --work-tree=$HOME'
+config config status.showUntrackedFiles no
+```
+
+Usage
+------
+Now any files in $HOME can be versioned as usual with things like:
+```
+config status
+config add .vimrc
+config commit -m 'add vimrc'
+config push
+```
+
+To see what files are being tracked:
+`config ls-tree --full-tree -r HEAD`
+
+Install the dotfiles onto a new system
+---------------------------------------
+```
+git clone --bare https://gitlab.com/grahamlopez/mglcfg.git $HOME/.mglcfg
+config checkout
+```
+if there are already dotfiles present, then need to back them up and move out of
+the way:
+```
+mkdir -p .config-backup
+config checkout 2>&1 | egrep "\s+\." | awk {`print $1`} | xargs -l{} mv {} .config-backup/{}
+```
+and rerun `config checkout`
+
+Another way might be:
+```
+git clone --separate-git-dir=$HOME/.my-dotfiles https://github.com/Siilwyn/my-dotfiles.git my-dotfiles-tmp
+rsync --recursive --verbose --exclude '.git' my-dotfiles-tmp/ $HOME/
+rm --recursive my-dotfiles-tmp
+```

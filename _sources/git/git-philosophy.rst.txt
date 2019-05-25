@@ -1,0 +1,73 @@
+---
+title: git philosophy
+type: docs
+---
+
+
+Summary:
+
+1. Snapshots, not deltas
+2. History is only for humans
+3. Branching is free
+4. Ignore the index
+5. There are no server repositories
+
+
+## 1) "Snapshots, not deltas"
+At each commit, git stores a snapshot of the entire repository state. It is more
+like cd'ing out of the source code directory, tar'ing it up, renaming the
+tarball to source.tar.backup1, and cd'ing back into the source directory.
+Whereas with other VCS implementations like SVN, at each commit, they store the
+changes made from the previous state. To reconstruct the current state of the
+repository, git needs the information from that commit, whereas SVN needs the
+information for that commit and the entire history leading to it.
+
+Even in the case of git operations that use diffs
+(e.g. `git cherrypick`, `git rebase`, etc.), git finds the relevant snapshots
+and calculates the deltas on the fly.
+
+## 2) "History is only for humans"
+To git, the contents of the repository are more or less just a pile of data.
+There is no explicit dependency between commits since each one is a stand-alone
+snapshot of the repository (see point #1 above). The history is just provided as
+a way for the user to navigate the commits that git has collected over time.
+
+## 3) "Branching is free"
+This is technically not true, but branching is so cheap that it should be
+thought of as free. So branch for everything.
+
+## 4) "Ignore the index"
+It IS useful, but only once you know why you need it (hint: not all the time!)
+For example, some instances where one might want to use the index cleverly:
+
+- staging helps you split up one large change into multiple commits
+- staging helps in reviewing change
+- staging helps when a merge has conflicts
+- staging helps you keep extra local files hanging around
+
+Besides these kinds of specific situations, feel free to skip the index.
+
+## 5) "There are no server repositories"
+A lot of the time we designate and use certain repositories like an SVN server,
+but this is an analogy at best, and taking it too far can lead to confusion
+later on -- especially concerning expected behavior with branches.
+
+The most common times we think of git in a client-server model is when cloning
+from a repository that is hosted on a server somewhere, like Github, Gitlab, or
+otherwise. In some ways, this "cloned-from" repository does get a little bit of
+special treatment by default (but it can be turned off), and as a result it
+typically gets named "origin" by default. However, git is designed to be
+distributed, and its behavior is centered around the assumption that you want
+the local repository to interact with multiple other repositories, not just the
+one that was cloned from. Git's behavior is very configurable, but the defaults
+are usually conservative and try to make fewer assumptions about what you want.
+
+So to think like git does, always start off by thinking of all branches and
+repositories as being equal regardless of their locations or any other
+pre-existing special relationships that may or may not apply to the present case
+(branch) that you are working with. Starting from this point, it is easier to
+understand branching and remote operations and how other previously-defined
+relationships (like "origin," "upstream," etc.) might modify the general
+behavior.  Usually these "modified behaviors" consist of git setting up
+conveniences, like the case where you can just say `git push` instead of `git
+push src-branch dst-branch`.

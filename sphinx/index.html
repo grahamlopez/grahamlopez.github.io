@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>working with sphinx &#8212; grahamlopez.org  documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Unsorted git" href="../git/unsorted.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../git/unsorted.html" title="Unsorted git"
+             accesskey="P">previous</a> |</li>
+    <li><a href="https://grahamlopez.org">grahamlopez.org</a> &raquo;</li>
+ 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="working-with-sphinx">
+<h1>working with sphinx<a class="headerlink" href="#working-with-sphinx" title="Permalink to this headline">¶</a></h1>
+<p>The “relbar” is the bar at the top and/or bottom that has the link to home as
+well as possibly “next | prev”. To change the text/link of the home, add the
+following to <code class="docutils literal notranslate"><span class="pre">_templates/layout</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">extends</span> <span class="s2">&quot;!layout.html&quot;</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">block</span> <span class="n">rootrellink</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;localhost:8080&quot;</span><span class="o">&gt;</span><span class="n">grahamlopez</span><span class="o">.</span><span class="n">org</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">raquo</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endblock</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>or you can even disable it completely with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">extends</span> <span class="s2">&quot;!layout.html&quot;</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">block</span> <span class="n">relbar1</span> <span class="o">%</span><span class="p">}{</span><span class="o">%</span> <span class="n">endblock</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">block</span> <span class="n">relbar2</span> <span class="o">%</span><span class="p">}{</span><span class="o">%</span> <span class="n">endblock</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>To change how the sidebar is rendered, these settings are in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">html_sidebars</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s1">&#39;**&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;globaltoc.html&#39;</span><span class="p">,</span> <span class="s1">&#39;searchbox.html&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>see for example <a class="reference external" href="http://www.sphinx-doc.org/en/master/usage/configuration.html#confval-html_sidebars" target="_blank">the sphinx docs</a></p>
+<p>For opening external links in new tabs
+<a class="reference external" href="http://jack.rosenth.al/hacking-docutils.html#sphinx-hacks" target="_blank">http://jack.rosenth.al/hacking-docutils.html#sphinx-hacks</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sphinx.writers.html</span> <span class="k">import</span> <span class="n">HTMLTranslator</span>
+<span class="k">class</span> <span class="nc">PatchedHTMLTranslator</span><span class="p">(</span><span class="n">HTMLTranslator</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">visit_reference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;newtab&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;internal&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="s1">&#39;refuri&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">node</span><span class="p">):</span>
+            <span class="n">node</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;_blank&#39;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">visit_reference</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">set_translator</span><span class="p">(</span><span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="n">PatchedHTMLTranslator</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">about graham</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/index.html">git hints</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">working with sphinx</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../git/unsorted.html" title="Unsorted git"
+             >previous</a> |</li>
+    <li><a href="https://grahamlopez.org">grahamlopez.org</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, M. Graham Lopez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

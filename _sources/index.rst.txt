@@ -1,0 +1,44 @@
+.. grahamlopez.org documentation master file, created by
+   sphinx-quickstart on Wed May 22 00:17:02 2019.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+#####
+Home
+#####
+
+I am an HPC Engineer in the National Center for Computational Sciences at Oak
+Ridge National Laboratory where I work with users and applications to run at
+scale on current and upcoming leadership-class computing facilities. In addition
+to my direct engagement with facility users, I have published research in the
+areas of computational materials science, application acceleration and
+benchmarking on heterogeneous systems, low-level communication APIs, and
+programming models. Prior to joining ORNL, I was a research scientist at Georgia
+Institute of Technology where I worked on application and numerical algorithm
+optimizations for accelerators. I earned his M.S. in Computer science and Ph.D.
+in Physics from Wake forest University.
+
+Site contents
+-----------------
+
+.. toctree::
+   :maxdepth: 2
+
+   about/index
+   git/index
+   sphinx/index
+   unsorted/index
+
+
+Yes, this site is made with `Sphinx <https://www.sphinx-doc.org>`_, so it isn't
+the most visually creative. I'm not a webdev, nor am I familiar with the common
+technologies, so when I set out to make it look nice, it ended up preventing me
+from getting the content up. But a lot of this content is documentation-like
+anyway, so I'm going with it for now until I can figure something nicer out.
+
+.. Indices and tables
+.. ==================
+..
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`

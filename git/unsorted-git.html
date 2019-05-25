@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>&lt;no title&gt; &#8212; grahamlopez.org  documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">grahamlopez.org  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p>—
+title: unsorted git
+type: docs
+—</p>
+<p># Unsorted
+These are things worth remembering, but don’t yet have a home in the organized
+information on other pages.</p>
+<p>git branch -avv
+&#64;{upstream} or &#64;{u}
+git add -p
+git status -s
+git commit -v
+git log -Sstring
+Git log with file name
+git blame
+git log -L 1,1:some-file.txt
+<a class="reference external" href="https://github.com/github/hub">https://github.com/github/hub</a>
+git pull -X theirs
+git reset –hard origin/mybranch (and friends - see e.g.: <a class="reference external" href="http://stackoverflow.com/questions/9301782/need-to-reset-git-branch-to-origin-version">http://stackoverflow.com/questions/9301782/need-to-reset-git-branch-to-origin-version</a>)</p>
+<p>Fetch a group of remotes
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">$</span> <span class="pre">git</span> <span class="pre">config</span> <span class="pre">remotes.default</span> <span class="pre">'origin</span> <span class="pre">bob</span> <span class="pre">staging'</span>
+<span class="pre">$</span> <span class="pre">git</span> <span class="pre">remote</span> <span class="pre">update</span>
+<span class="pre">#</span> <span class="pre">fetches</span> <span class="pre">remotes</span> <span class="pre">&quot;origin&quot;,</span> <span class="pre">&quot;bob&quot;,</span> <span class="pre">and</span> <span class="pre">&quot;staging&quot;</span>
+<span class="pre">`</span></code></p>
+<p>Delete a branch here, and everywhere
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">$</span> <span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-d</span> <span class="pre">mybranch</span>&#160; <span class="pre">(deletes</span> <span class="pre">locally)</span>
+<span class="pre">$</span> <span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">:mybranch</span> <span class="pre">(uses</span> <span class="pre">&quot;git</span> <span class="pre">push</span> <span class="pre">&lt;remote&gt;</span> <span class="pre">&lt;localbranch&gt;:&lt;remotebranch&gt;&quot;</span> <span class="pre">syntax</span> <span class="pre">to</span> <span class="pre">delete</span> <span class="pre">remote</span> <span class="pre">branch)</span>
+<span class="pre">$</span> <span class="pre">git</span> <span class="pre">fetch</span> <span class="pre">--all</span> <span class="pre">--prune</span> <span class="pre">(use</span> <span class="pre">this</span> <span class="pre">on</span> <span class="pre">other</span> <span class="pre">machines</span> <span class="pre">to</span> <span class="pre">propagate</span> <span class="pre">the</span> <span class="pre">changes</span> <span class="pre">and</span> <span class="pre">get</span> <span class="pre">rid</span> <span class="pre">of</span> <span class="pre">&quot;obsolete</span> <span class="pre">tracking</span> <span class="pre">branches&quot;)</span>
+<span class="pre">`</span></code>
+It’s often helpful to get a review of all the commits that are in this branch
+but that aren’t in your master branch. You can exclude commits in the master
+branch by adding the –not option before the branch name. This does the same
+thing as the master..contrib format that we used earlier. For example, if your
+contributor sends you two patches and you create a branch called contrib and
+applied those patches there, you can run this:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">$</span> <span class="pre">git</span> <span class="pre">log</span> <span class="pre">contrib</span> <span class="pre">--not</span> <span class="pre">master</span>
+<span class="pre">commit</span> <span class="pre">5b6235bd297351589efc4d73316f0a68d484f118</span>
+<span class="pre">Author:</span> <span class="pre">Scott</span> <span class="pre">Chacon</span> <span class="pre">&lt;schacon&#64;gmail.com&gt;</span>
+<span class="pre">Date:</span> <span class="pre">Fri</span> <span class="pre">Oct</span> <span class="pre">24</span> <span class="pre">09:53:59</span> <span class="pre">2008</span> <span class="pre">-0700</span>
+<span class="pre">`</span></code></p>
+<p>seeing if this helps the gem
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">commit</span> <span class="pre">7482e0d16d04bea79d0dba8988cc78df655f16a0</span>
+<span class="pre">Author:</span> <span class="pre">Scott</span> <span class="pre">Chacon</span> <span class="pre">&lt;schacon&#64;gmail.com&gt;</span>
+<span class="pre">Date:</span> <span class="pre">Mon</span> <span class="pre">Oct</span> <span class="pre">22</span> <span class="pre">19:38:36</span> <span class="pre">2008</span> <span class="pre">-0700</span>
+<span class="pre">`</span></code></p>
+<p>updated the gemspec to hopefully work better
+To see what changes each commit introduces, remember that you can pass the -p
+option to git log and it will append the diff introduced to each commit.</p>
+<p>To see a full diff of what would happen if you were to merge this topic branch
+with another branch, you may have to use a weird trick to get the correct
+results. You may think to run this:</p>
+<p><cite>$ git diff master</cite></p>
+<p>This command gives you a diff, but it may be misleading. If your master branch
+has moved forward since you created the topic branch from it, then you’ll get
+seemingly strange results. This happens because Git directly compares the
+snapshots of the last commit of the topic branch you’re on and the snapshot of
+the last commit on the master branch. For example, if you’ve added a line in a
+file on the master branch, a direct comparison of the snapshots will look like
+the topic branch is going to remove that line.</p>
+<p>If master is a direct ancestor of your topic branch, this isn’t a problem; but
+if the two histories have diverged, the diff will look like you’re adding all
+the new stuff in your topic branch and removing everything unique to the master
+branch.</p>
+<p>What you really want to see are the changes added to the topic branch – the
+work you’ll introduce if you merge this branch with master. You do that by
+having Git compare the last commit on your topic branch with the first common
+ancestor it has with the master branch.</p>
+<p>Technically, you can do that by explicitly figuring out the common ancestor and
+then running your diff on it:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">$</span> <span class="pre">git</span> <span class="pre">merge-base</span> <span class="pre">contrib</span> <span class="pre">master</span>
+<span class="pre">36c7dba2c95e6bbb78dfa822519ecfec6e1ca649</span>
+<span class="pre">$</span> <span class="pre">git</span> <span class="pre">diff</span> <span class="pre">36c7db</span>
+<span class="pre">`</span></code>
+However, that isn’t convenient, so Git provides another shorthand for doing the
+same thing: the triple-dot syntax. In the context of the diff command, you can
+put three periods after another branch to do a diff between the last commit of
+the branch you’re on and its common ancestor with another branch:</p>
+<p><cite>$ git diff master…contrib</cite>
+This command shows you only the work your current topic branch has introduced
+since its common ancestor with master. That is a very useful syntax to
+remember.</p>
+<p>Next, try to make each commit a logically separate changeset. If you can, try
+to make your changes digestible</p>
+<p>The Git project provides a document that lays out a number of good tips for
+creating commits from which to submit patches – you can read it in the Git
+source code in the Documentation/SubmittingPatches file.</p>
+<p>First, you don’t want to submit any whitespace errors. Git provides an easy way
+to check for this – before you commit, run <cite>git diff –check</cite>, which identifies
+possible whitespace errors and lists them for you.</p>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/git/unsorted-git.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">grahamlopez.org  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, M. Graham Lopez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

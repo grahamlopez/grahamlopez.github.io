@@ -1,0 +1,80 @@
+
+**********************
+General best practices
+**********************
+
+1. Write good log messages
+
+  * first line: "what this commit does" is <= 80 characters (to be compatible with log analysis tools)
+  * blank line
+  * multiline: "why this commit is necessary or desired"
+
+2. Don't track derived files
+
+  * don't track: binaries, object files, logs, .pdf, .aux, .bbl, .avi, etc.
+
+3. Don't track large files
+
+  * git doesn't handle them well - makes repo large and harder to work with
+  * can use other tools: git annex or LFS (large file storage) module
+
+4. Don't alter public history
+
+  * no --amend, rebase, reset on commits that have been pushed to a public server
+  * similarly, never push to any non-bare repository
+
+5. Public repos (including forked) should be bare
+6. Every repo needs 4 files
+
+  * LICENSE:  http://choosealicense.com,  http://tldrlegal.com
+  * README
+
+    * short description
+    * quickstart guide
+    * how to contribute
+    * TODO list
+
+  * CITATION
+  * INSTALL
+
+7. No merge commits in pull requests
+
+  * makes code review easier
+  * keeps project history clean
+
+8. Use amend/rebase (squash) for small changes when iterating on pull requests
+9. Use topic (e.g. "foo") or fix (e.g. "fix/bar") for pull requests
+10. Make code cite-able with a DOI:  https://guides.github.com/activities/citable-code/
+11. Use semantic versioning (http://semver.org) for release branches and tags
+
+  * but keep in mind that SemVer [has
+    issues](http://akkartik.name/post/versioning) and some [serious
+    issues](https://youtu.be/tlSy7EJQPzl)
+
+And some best practices for public collaboration on git repository services
+(e.g. Github, Gitlab, etc.)
+
+1. Protect the master branch (no push)
+2. Fork developer repos, not clone
+3. Use issue tracking
+
+ * Not just for bug tracking
+ * reference code, pull requests, developers, assignees, etc.
+ * labels for filtering
+ * milestones
+
+4. Use automated services
+
+ * continuous integration (CI): jenkins, travis-ci, gitlab built-in
+ * code coverage: codecov.io
+ * doc generation: sphinx-doc.org, readthedocs.org
+ * code lint (formatting standards)
+
+5. Treat github as social media
+
+ * curate personal information carefully
+ * follow/watch projects
+ * potential employers/followers can watch your activity
+ * pages: jekyllrb.com, getbootstrap.com, disqus.com
+ * chat: gitter.im, slack.io
+ * gist

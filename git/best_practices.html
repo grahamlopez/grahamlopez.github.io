@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>General best practices &#8212; grahamlopez.org  documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="git Annoyances – common points of confusion" href="confusion.html" />
+    <link rel="prev" title="git philosophy" href="git_philosophy.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="confusion.html" title="git Annoyances – common points of confusion"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="git_philosophy.html" title="git philosophy"
+             accesskey="P">previous</a> |</li>
+    <li><a href="https://grahamlopez.org">grahamlopez.org</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">git hints</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="general-best-practices">
+<h1>General best practices<a class="headerlink" href="#general-best-practices" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic simple">
+<li>Write good log messages</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>first line: “what this commit does” is &lt;= 80 characters (to be compatible with log analysis tools)</li>
+<li>blank line</li>
+<li>multiline: “why this commit is necessary or desired”</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>Don’t track derived files</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>don’t track: binaries, object files, logs, .pdf, .aux, .bbl, .avi, etc.</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li>Don’t track large files</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>git doesn’t handle them well - makes repo large and harder to work with</li>
+<li>can use other tools: git annex or LFS (large file storage) module</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li>Don’t alter public history</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>no –amend, rebase, reset on commits that have been pushed to a public server</li>
+<li>similarly, never push to any non-bare repository</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li>Public repos (including forked) should be bare</li>
+<li>Every repo needs 4 files</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>LICENSE:  <a class="reference external" href="http://choosealicense.com" target="_blank">http://choosealicense.com</a>,  <a class="reference external" href="http://tldrlegal.com" target="_blank">http://tldrlegal.com</a></li>
+<li>README<ul>
+<li>short description</li>
+<li>quickstart guide</li>
+<li>how to contribute</li>
+<li>TODO list</li>
+</ul>
+</li>
+<li>CITATION</li>
+<li>INSTALL</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="7">
+<li>No merge commits in pull requests</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>makes code review easier</li>
+<li>keeps project history clean</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="8">
+<li>Use amend/rebase (squash) for small changes when iterating on pull requests</li>
+<li>Use topic (e.g. “foo”) or fix (e.g. “fix/bar”) for pull requests</li>
+<li>Make code cite-able with a DOI:  <a class="reference external" href="https://guides.github.com/activities/citable-code/" target="_blank">https://guides.github.com/activities/citable-code/</a></li>
+<li>Use semantic versioning (<a class="reference external" href="http://semver.org" target="_blank">http://semver.org</a>) for release branches and tags</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>but keep in mind that SemVer [has
+issues](<a class="reference external" href="http://akkartik.name/post/versioning" target="_blank">http://akkartik.name/post/versioning</a>) and some [serious
+issues](<a class="reference external" href="https://youtu.be/tlSy7EJQPzl" target="_blank">https://youtu.be/tlSy7EJQPzl</a>)</li>
+</ul>
+</div></blockquote>
+<p>And some best practices for public collaboration on git repository services
+(e.g. Github, Gitlab, etc.)</p>
+<ol class="arabic simple">
+<li>Protect the master branch (no push)</li>
+<li>Fork developer repos, not clone</li>
+<li>Use issue tracking</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Not just for bug tracking</li>
+<li>reference code, pull requests, developers, assignees, etc.</li>
+<li>labels for filtering</li>
+<li>milestones</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li>Use automated services</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>continuous integration (CI): jenkins, travis-ci, gitlab built-in</li>
+<li>code coverage: codecov.io</li>
+<li>doc generation: sphinx-doc.org, readthedocs.org</li>
+<li>code lint (formatting standards)</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li>Treat github as social media</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>curate personal information carefully</li>
+<li>follow/watch projects</li>
+<li>potential employers/followers can watch your activity</li>
+<li>pages: jekyllrb.com, getbootstrap.com, disqus.com</li>
+<li>chat: gitter.im, slack.io</li>
+<li>gist</li>
+</ul>
+</div></blockquote>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">about graham</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">git hints</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="git_philosophy.html">git philosophy</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">General best practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="confusion.html">git Annoyances – common points of confusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shortcuts_and_conf.html">Shortcuts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shortcuts_and_conf.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_workflows.html">git Workflows – how to organize branching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="repo_histories.html">Repository histories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html">Big list o’ resources – links to external sites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unsorted.html">Unsorted git</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html">working with sphinx</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="confusion.html" title="git Annoyances – common points of confusion"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="git_philosophy.html" title="git philosophy"
+             >previous</a> |</li>
+    <li><a href="https://grahamlopez.org">grahamlopez.org</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >git hints</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, M. Graham Lopez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>
