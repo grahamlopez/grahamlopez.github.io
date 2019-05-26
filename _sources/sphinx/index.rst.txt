@@ -1,7 +1,7 @@
 
-####################
-working with sphinx
-####################
+#########
+sphinx
+#########
 
 These are mostly out of date and useful notes to myself about how to make
 various changes to the way sphinx renders things. I typically just have to

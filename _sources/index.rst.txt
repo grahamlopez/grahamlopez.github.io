@@ -34,7 +34,8 @@ they ask me questions about these things.
 .. toctree::
    :maxdepth: 2
 
-   about/index
+   contact
+   cv
    git/index
    blog/index
    unsorted/index
