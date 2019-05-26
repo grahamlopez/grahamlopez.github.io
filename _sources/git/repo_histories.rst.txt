@@ -13,8 +13,7 @@ So if you adopt the `Gitflow workflow <http://nvie.com/posts/a-successful-git-br
 below shows what it will look like in practice. This repository was generated
 with `this script <https://gitlab.com/grahamlopez/mgl_configs/uploads/3ffd72450352f16d96ec6d4eeeff6a20/gitflow_history.sh>`_
 
-Click the image for a larger view.
-`gitflow combined <images/gitflow_combined.png>`_
+.. image:: /git/gitflow_combined.png
 
 The figure on the left is the main image from the original Gitflow post (Author:
 Vincent Driessen.  Original post:
@@ -54,8 +53,7 @@ to date with "develop," while the repo on the right used ``git rebase`` in place
 of ``git merge``.  When the feature branches were finished and brought back into
 "develop," ``git merge`` was used in both repositories.
 
-Click the image for a larger view.
-`gitflow lot <images/git_lot.png>`_
+.. image:: /git/git_lot.png
 
 Here we can start to see the different sides of the argument. On the left, it is
 clear from reading the history exactly how and when each commit got to its
@@ -87,8 +85,7 @@ next screenshot shows
 These are the same repositories as in the previous screenshot: the merging
 history is on the left again, and the rebasing history is on the right.
 
-Click the image for a larger view.
-`gitflow log <images/git_log.png>`_
+.. image:: /git/git_log.png
 
 A viable policy
 ================
@@ -137,7 +134,7 @@ working in their topic branch, ``develop`` advances, and they want to pull in
 those new developments into their topic branch while they are working.
 
 These merge commits will show up in the PR on Github, as shown below:
-!`github starting situation <images/github_starting_situation.png>`_
+.. image:: /git/github_starting_situation.png
 
 
 There are a few options for dealing with this situation, which I will try to

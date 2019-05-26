@@ -64,7 +64,8 @@ At the backbone of the project are the **maste**r and the **develop** branches.
 Supporting branches are all **features**, **releases**, and **hotfixes**. The
 figure and table below summarize how all of these branches work together.
 
-!`Author: Vincent Driessen.  Original post: nvie.com/posts/a-successful-git-branching-model/  License: Creative Commons BY-SA <images/git-model2x.png>`_
+.. image:: /git/git-model2x.png
+
 (Author: Vincent Driessen.  Original post: nvie.com/posts/a-successful-git-branching-model/  License: Creative Commons BY-SA)
 
 | naming convention | May branch off from | Must merge back into | Purpose |

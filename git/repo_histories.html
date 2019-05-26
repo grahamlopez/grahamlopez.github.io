@@ -53,8 +53,7 @@ they are each a complete, stand-alone snapshot of the repository.</p>
 <p>So if you adopt the <a class="reference external" href="http://nvie.com/posts/a-successful-git-branching-model/" target="_blank">Gitflow workflow</a>, the figure
 below shows what it will look like in practice. This repository was generated
 with <a class="reference external" href="https://gitlab.com/grahamlopez/mgl_configs/uploads/3ffd72450352f16d96ec6d4eeeff6a20/gitflow_history.sh" target="_blank">this script</a></p>
-<p>Click the image for a larger view.
-<a class="reference external" href="images/gitflow_combined.png" target="_blank">gitflow combined</a></p>
+<img alt="../_images/gitflow_combined.png" src="../_images/gitflow_combined.png" />
 <p>The figure on the left is the main image from the original Gitflow post (Author:
 Vincent Driessen.  Original post:
 nvie.com/posts/a-successful-git-branching-model/  License: Creative Commons
@@ -89,8 +88,7 @@ the left used <code class="docutils literal notranslate"><span class="pre">git</
 to date with “develop,” while the repo on the right used <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code> in place
 of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code>.  When the feature branches were finished and brought back into
 “develop,” <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> was used in both repositories.</p>
-<p>Click the image for a larger view.
-<a class="reference external" href="images/git_lot.png" target="_blank">gitflow lot</a></p>
+<img alt="../_images/git_lot.png" src="../_images/git_lot.png" />
 <p>Here we can start to see the different sides of the argument. On the left, it is
 clear from reading the history exactly how and when each commit got to its
 state, showing the divergences and mergings that led to the current repository
@@ -119,8 +117,7 @@ dropping the <code class="docutils literal notranslate"><span class="pre">--firs
 </ol>
 <p>These are the same repositories as in the previous screenshot: the merging
 history is on the left again, and the rebasing history is on the right.</p>
-<p>Click the image for a larger view.
-<a class="reference external" href="images/git_log.png" target="_blank">gitflow log</a></p>
+<img alt="../_images/git_log.png" src="../_images/git_log.png" />
 </div>
 <div class="section" id="a-viable-policy">
 <h2>A viable policy<a class="headerlink" href="#a-viable-policy" title="Permalink to this headline">¶</a></h2>
@@ -161,7 +158,7 @@ workflow is merge commits in pull requests. This happens when somebody is
 working in their topic branch, <code class="docutils literal notranslate"><span class="pre">develop</span></code> advances, and they want to pull in
 those new developments into their topic branch while they are working.</p>
 <p>These merge commits will show up in the PR on Github, as shown below:
-!`github starting situation &lt;images/github_starting_situation.png&gt;`_</p>
+.. image:: /git/github_starting_situation.png</p>
 <p>There are a few options for dealing with this situation, which I will try to
 outline here. First, let’s set up a toy repository so that we can see how the
 resulting history changes based on the option we pick. The starting situation on
