@@ -7,6 +7,10 @@
 Home
 #####
 
+.. image:: _static/L2400880-200k.jpg
+    :height: 200px
+    :align: right
+
 I am an HPC Engineer in the National Center for Computational Sciences at Oak
 Ridge National Laboratory where I work with users and applications to run at
 scale on current and upcoming leadership-class computing facilities. In addition
@@ -18,8 +22,14 @@ Institute of Technology where I worked on application and numerical algorithm
 optimizations for accelerators. I earned an M.S. in Computer science and Ph.D.
 in Physics from Wake forest University.
 
+
 Site contents
 -----------------
+
+There isn't really a strong theme to this site; it is mostly about technical
+things that I learn and use for my job. This is where I put stuff that I want to
+have available for personal reference, but I also sometimes point others to when
+they ask me questions about these things.
 
 .. toctree::
    :maxdepth: 2
