@@ -36,8 +36,9 @@ they ask me questions about these things.
 
    about/index
    git/index
-   sphinx/index
+   blog/index
    unsorted/index
+   sphinx/index
 
 
 Yes, this site is made with `Sphinx <https://www.sphinx-doc.org>`_, so it isn't

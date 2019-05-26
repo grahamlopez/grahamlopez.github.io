@@ -1,0 +1,13 @@
+
+##########
+blog(ish)
+##########
+
+These pages are one-off blog-like content, rather than the more curated type of
+reference material that is most of the rest of this site. However, you will
+notice that these things aren't tagged, or frequent, or anything else that
+typically makes blogs good.
+
+.. toctree::
+   :maxdepth: 2
+

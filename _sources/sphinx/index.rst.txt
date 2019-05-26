@@ -3,6 +3,46 @@
 working with sphinx
 ####################
 
+These are mostly out of date and useful notes to myself about how to make
+various changes to the way sphinx renders things. I typically just have to
+google around until I find cut-and-paste solutions because I've never bothered
+to learn how CSS and everything else actually hangs together.
+
+general
+========
+
+configuration: http://www.sphinx-doc.org/en/master/usage/configuration.html#
+
+* To change how the sidebar is rendered, these settings are in ``conf.py``::
+
+    html_sidebars = {
+       '**': ['globaltoc.html', 'searchbox.html'],
+    }
+
+  see for example `the sphinx docs
+  <http://www.sphinx-doc.org/en/master/usage/configuration.html#confval-html_sidebars>`_
+
+* For opening external links in new tabs
+  http://jack.rosenth.al/hacking-docutils.html#sphinx-hacks::
+
+    from sphinx.writers.html import HTMLTranslator
+    class PatchedHTMLTranslator(HTMLTranslator):
+        def visit_reference(self, node):
+            if node.get('newtab') or not (node.get('target') or node.get('internal') or 'refuri' not in node):
+                node['target'] = '_blank'
+            super().visit_reference(node)
+
+    def setup(app):
+        app.set_translator('html', PatchedHTMLTranslator)
+
+* If using this with github pages, we'll need a ``.nojekyll`` file in the root
+  of the pages repo.
+
+classic theme
+=============
+
+(possibly only relevant to the classic theme)
+
 The "relbar" is the bar at the top and/or bottom that has the link to home as
 well as possibly "next | prev". To change the text/link of the home, add the
 following to ``_templates/layout``::
@@ -18,26 +58,11 @@ or you can even disable it completely with::
     {% block relbar1 %}{% endblock %}
     {% block relbar2 %}{% endblock %}
 
-To change how the sidebar is rendered, these settings are in ``conf.py``::
+alabaster theme
+===============
 
-    html_sidebars = {
-       '**': ['globaltoc.html', 'searchbox.html'],
-    }
+docs at https://alabaster.readthedocs.io/en/latest/customization.html
 
-see for example `the sphinx docs <http://www.sphinx-doc.org/en/master/usage/configuration.html#confval-html_sidebars>`_
+(possibly only relevant to the classic theme)
 
-For opening external links in new tabs
-http://jack.rosenth.al/hacking-docutils.html#sphinx-hacks::
-
-    from sphinx.writers.html import HTMLTranslator
-    class PatchedHTMLTranslator(HTMLTranslator):
-        def visit_reference(self, node):
-            if node.get('newtab') or not (node.get('target') or node.get('internal') or 'refuri' not in node):
-                node['target'] = '_blank'
-            super().visit_reference(node)
-
-    def setup(app):
-        app.set_translator('html', PatchedHTMLTranslator)
-
-If using this with github pages, we'll need a ``.nojekyll`` file in the root of
-the pages repo.
+override css from the ``alabaster.css_t`` template in ``_static/custom.css``.
