@@ -48,11 +48,16 @@ order to examine the impact of negative space on protein allostery.
 Experience
 ==========
 
-**2018--present** HPC Systems Engineer at Oak Ridge National Laboratory - Oak Ridge, TN
+| **2018--present** HPC Systems Engineer at Oak Ridge National Laboratory - Oak Ridge, TN
+| *Leadership system support and C++ application development*
 
-**2016--2018** Computer Scientist at Oak Ridge National Laboratory - Oak Ridge, TN
-*Application readiness and programming model co-design for upcoming
-high-performance computing architectures*
+- Provide system support for Summit supercomputer and all other HPC resources at
+  the Oak Ridge Leadership Computing Facility
+- Focused software engineering for two HPC applications in ab-initio materials
+  and fusion energy domains
+
+| **2016--2018** Computer Scientist at Oak Ridge National Laboratory - Oak Ridge, TN
+| *Application readiness and programming model co-design for upcoming high-performance computing architectures*
 
 - Implemented new algorithms for petascale quantum materials application
 - Built static-anlaysis tool for applications to inform programming model design
@@ -64,9 +69,8 @@ high-performance computing architectures*
 ..   scientific applications
 
 
-**2014--2016** Postdoctoral Researcher at Oak Ridge National Laboratory - Oak Ridge, TN
-*Researching programming models and preparing facility programming environments
-for the CORAL architecture*
+| **2014--2016** Postdoctoral Researcher at Oak Ridge National Laboratory - Oak Ridge, TN
+| *Researching programming models and preparing facility programming environments for the CORAL architecture*
 
 - Studied performance portability of upcoming programming models for heterogeneous architectures
 - Organized multiple workshops resulting in published research proceedings
@@ -75,16 +79,16 @@ for the CORAL architecture*
 
 .. - Built validation suites and application analysis tools
 
-**2012--2014** Research Scientist at Georgia Institute of Technology and ORNL - Oak Ridge, TN
-*Advanced user and applications support for the Keeneland project*
+| **2012--2014** Research Scientist at Georgia Institute of Technology / ORNL - Oak Ridge, TN
+| *Advanced user and applications support for the Keeneland project*
 
 - Optimized numerical algorithms for GPU-specific science applications
 - Implemented accelerator kernels for the SHOC HPC benchmark suite
 - Addressed user issues with installed applications on Keeneland coming from
   multiple scientific domains
 
-**2012** Intern at National Institute of Computational Sciences (NICS) - Oak Ridge, TN
-*GPU-specific benchmarking and developer documentation for the Keeneland System*
+| **2012** Intern at National Institute of Computational Sciences (NICS) - Oak Ridge, TN
+| *GPU-specific benchmarking and developer documentation for the Keeneland System*
 
 - Developed example GPU code for SGEMM kernel using Cuda, OpenCL, Cublas, Magma,
   MPI
