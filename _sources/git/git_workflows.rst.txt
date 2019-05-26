@@ -77,8 +77,8 @@ figure and table below summarize how all of these branches work together.
 | `hotfix-*` 	    | ``master`` 	          | ``develop``, ``develop`` | <ul> <li>creates an unplanned bump in release version number on master to fix a critical bug that is in production</li> </ul> |
 
 To experiment with this workflow and practice merging, rebasing, branching,
-etc., the script attached at the bottom of this page will generate a repository
-with the exact history shown in the figure above.
+etc., the :ref:`gitflow-script` will generate a repository with the exact
+history shown in the figure above.
 
 4) Forking (any workflow + forking for collaboration)
 ======================================================

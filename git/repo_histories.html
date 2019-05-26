@@ -54,8 +54,9 @@
 <li class="toctree-l2"><a class="reference internal" href="unsorted.html">Unsorted git</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html">working with sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../blog/index.html">blog(ish)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../unsorted/index.html">unsorted</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html">working with sphinx</a></li>
 </ul>
 
 <div class="relations">
@@ -120,7 +121,7 @@ they are each a complete, stand-alone snapshot of the repository.</p>
 <h2>Gitflow History<a class="headerlink" href="#gitflow-history" title="Permalink to this headline">¶</a></h2>
 <p>So if you adopt the <a class="reference external" href="http://nvie.com/posts/a-successful-git-branching-model/" target="_blank">Gitflow workflow</a>, the figure
 below shows what it will look like in practice. This repository was generated
-with <a class="reference external" href="https://gitlab.com/grahamlopez/mgl_configs/uploads/3ffd72450352f16d96ec6d4eeeff6a20/gitflow_history.sh" target="_blank">this script</a></p>
+with the <a class="reference internal" href="#gitflow-script"><span class="std std-ref">gitflow_history.sh</span></a>.</p>
 <img alt="../_images/gitflow_combined.png" src="../_images/gitflow_combined.png" />
 <p>The figure on the left is the main image from the original Gitflow post (Author:
 Vincent Driessen.  Original post:
@@ -355,6 +356,89 @@ happened directly on master.</p>
 <p>Note that in the rebase scenarios, even though <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> will still show the
 correct commit times, the <code class="docutils literal notranslate"><span class="pre">--date-order</span></code> option does not seem to help in actually
 displaying these in the correct sequence.</p>
+</div>
+</div>
+<div class="section" id="gitflow-history-sh">
+<span id="gitflow-script"></span><h2>gitflow_history.sh<a class="headerlink" href="#gitflow-history-sh" title="Permalink to this headline">¶</a></h2>
+<p>This is a script that will generate the history shown above:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+
+counter=1
+
+commit () {
+    git checkout $1
+    if [ -e &quot;${1}_log&quot; ]
+    then
+        echo &quot;$commit #$counter from [$1]&quot; &gt;&gt; ${1}_log
+        git add ${1}_log
+    else
+        echo &quot;$commit #$counter from [$1]&quot; &gt;&gt; ${1}_log
+    fi
+    git commit -a --allow-empty -m &quot;[$1] $counter&quot;
+    counter=$((counter+1))
+    sleep 1
+}
+
+new_branch () {
+    git checkout $1
+    git checkout -b $2
+}
+
+merge () {
+    git checkout $1
+    git merge --no-ff --no-edit $2
+    counter=$((counter+1))
+    sleep 1
+}
+
+rebase () {
+    git rebase --keep-empty $1 $2
+    counter=$((counter+1))
+    sleep 1
+}
+
+git init
+echo &quot;started master_log at commit #$counter&quot; &gt;&gt; master_log
+git add master_log
+
+commit master
+new_branch master develop
+commit develop
+commit develop
+commit develop
+new_branch develop feature-1
+commit feature-1
+commit develop
+new_branch develop feature-2
+commit feature-2
+new_branch master hotfixes
+commit hotfixes
+merge master hotfixes
+commit feature-1
+commit feature-2
+merge develop hotfixes
+commit feature-2
+merge develop feature-2
+new_branch develop release-1
+commit release-1
+commit release-1
+merge develop release-1
+commit feature-1
+commit release-1
+new_branch develop feature-3
+commit feature-3
+commit release-1
+commit feature-3
+merge develop release-1
+merge master release-1
+commit feature-3
+commit feature-1
+merge develop feature-3
+merge develop feature-1
+new_branch develop release-2
+merge develop release-2
+merge master release-2
+</pre></div>
 </div>
 </div>
 </div>

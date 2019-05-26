@@ -54,8 +54,9 @@
 <li class="toctree-l2"><a class="reference internal" href="unsorted.html">Unsorted git</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html">working with sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../blog/index.html">blog(ish)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../unsorted/index.html">unsorted</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html">working with sphinx</a></li>
 </ul>
 
 <div class="relations">
@@ -196,9 +197,9 @@ toggle whether to show all branches, or only those branches who have some
 history in common with the current branch.  I keep all of these variants because
 sometimes logs and branching get messy, and different output might be cleaner
 than another. Compare git lo vs. git lot aliases on the resulting history from
-the script that is attached at the bottom of this page. When I am focused on
-development in a single branch, the git l alias is the one I use 90% of the
-time.</p>
+the script that is attached at the bottom of the repo histories page (see
+<a class="reference internal" href="repo_histories.html#gitflow-script"><span class="std std-ref">gitflow_history.sh</span></a>). When I am focused on development in a single branch, the git l
+alias is the one I use 90% of the time.</p>
 <p>Here are a couple of other git log aliases that people have found useful:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">alias</span><span class="p">]</span>
   <span class="n">lg1</span> <span class="o">=</span> <span class="n">log</span> <span class="o">--</span><span class="n">graph</span> <span class="o">--</span><span class="n">abbrev</span><span class="o">-</span><span class="n">commit</span> <span class="o">--</span><span class="n">decorate</span> <span class="o">--</span><span class="n">date</span><span class="o">=</span><span class="n">relative</span> <span class="o">--</span><span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">:</span><span class="s1">&#39;%C(bold blue)</span><span class="si">%h%</span><span class="s1">C(reset) - %C(bold green)(</span><span class="si">%a</span><span class="s1">r)%C(reset) %C(white)</span><span class="si">%s</span><span class="s1">%C(reset)%C(dim white)- </span><span class="si">%a</span><span class="s1">n%C(reset)%C(auto)</span><span class="si">%d</span><span class="s1">%C(reset)&#39;</span> <span class="o">--</span><span class="nb">all</span>
