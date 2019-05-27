@@ -3,15 +3,13 @@
 sphinx
 #########
 
-These are mostly out of date and useful notes to myself about how to make
-various changes to the way sphinx renders things. I typically just have to
-google around until I find cut-and-paste solutions because I've never bothered
-to learn how CSS and everything else actually hangs together.
+These are mostly out-dated notes to myself about how to make various changes
+to the way sphinx renders things. I typically just have to google around until I
+find cut-and-paste solutions because I've never bothered to learn how CSS and
+everything else actually hangs together.
 
 general
 ========
-
-configuration: http://www.sphinx-doc.org/en/master/usage/configuration.html#
 
 * To change how the sidebar is rendered, these settings are in ``conf.py``::
 
@@ -61,8 +59,15 @@ or you can even disable it completely with::
 alabaster theme
 ===============
 
-docs at https://alabaster.readthedocs.io/en/latest/customization.html
-
-(possibly only relevant to the classic theme)
+(possibly only relevant to the alabaster theme)
 
 override css from the ``alabaster.css_t`` template in ``_static/custom.css``.
+
+links
+======
+
+| reStructuredText docs: http://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html
+| reStructuredText Directives reference: http://docutils.sourceforge.net/docs/ref/rst/directives.html
+| sphinx configuration: http://www.sphinx-doc.org/en/master/usage/configuration.html#
+| alabaster customization: https://alabaster.readthedocs.io/en/latest/customization.html
+| this guy's sphinx hacks: http://jack.rosenth.al/hacking-docutils.html#sphinx-hacks::
