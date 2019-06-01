@@ -3,6 +3,9 @@
 Docker
 **********
 
+(Update: for most of my uses, I currently prefer :ref:`lxc_lxd`, and so haven't
+used Docker in quite some time.)
+
 Right now, this is just notes and a cheatsheet as I learn more about Docker.
 Again, most of this stuff can be found elsewhere, and I tried to list in the
 Resources section all of the places from which I took content and ideas.
