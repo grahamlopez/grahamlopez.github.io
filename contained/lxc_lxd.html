@@ -1,0 +1,382 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>LXC and LXD &#8212; graham lopez  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Docker" href="docker.html" />
+    <link rel="prev" title="Containers / VPS" href="index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">graham lopez</a></h1>
+
+
+
+<p class="blurb">Notes by/for, and a little bit about M. Graham Lopez</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../contact.html">Contact me</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cv.html">Curriculum Vitae</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/index.html">git hints</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Containers / VPS</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">LXC and LXD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#lxd-getting-started">LXD getting started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lxc-cheatsheet">LXC cheatsheet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hints-and-gotchas">hints and gotchas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#external-networking">External networking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lxc-storage">LXC storage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpu-passthrough">GPU passthrough</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html">Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vps_hosting.html">VPS hosting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../blog/index.html">blog(ish)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsorted/index.html">unsorted</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html">sphinx</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Containers / VPS</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Containers / VPS</a></li>
+      <li>Next: <a href="docker.html" title="next chapter">Docker</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="index.html" title="Previous document">Containers / VPS</a>
+        </li>
+        <li>
+          <a href="docker.html" title="Next document">Docker</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="lxc-and-lxd">
+<h1>LXC and LXD<a class="headerlink" href="#lxc-and-lxd" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://linuxcontainers.org" target="_blank">Linux containers</a> are so much better than Docker
+for my typical uses that I haven’t used Docker for at least 1.5 years now. From
+linuxcontainers.org, Linux containers are “containers which offer an environment
+as close as possible as the one you’d get from a VM but without the overhead
+that comes with running a separate kernel and simulating all the hardware.”
+Sounds pretty great to me.</p>
+<p>Docker is really meant for wrapping up a single process, and things can get a
+little funky when you start trying to use them interactively with multiple
+processes, backgrounding, etc. LXC really does feel much closer to a complete
+user space.</p>
+<div class="section" id="lxd-getting-started">
+<h2>LXD getting started<a class="headerlink" href="#lxd-getting-started" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://linuxcontainers.org/lxd/getting-started-cli/" target="_blank">LXD getting started - CLI</a></p>
+<ol class="arabic simple">
+<li>install with <code class="docutils literal notranslate"><span class="pre">apt</span> <span class="pre">install</span> <span class="pre">lxd</span> <span class="pre">lxd-client</span></code></li>
+<li>configure with <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">lxd</span> <span class="pre">init</span></code></li>
+<li>join the group: <code class="docutils literal notranslate"><span class="pre">newgrp</span> <span class="pre">lxd</span></code></li>
+<li>create container with <code class="docutils literal notranslate"><span class="pre">lxc</span> <span class="pre">launch</span> <span class="pre">ubuntu:18.04</span> <span class="pre">first</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">lxc</span> <span class="pre">list</span></code></li>
+<li>enter container with <code class="docutils literal notranslate"><span class="pre">lxc</span> <span class="pre">exec</span> <span class="pre">first</span> <span class="pre">--</span> <span class="pre">/bin/bash</span></code></li>
+</ol>
+</div>
+<div class="section" id="lxc-cheatsheet">
+<h2>LXC cheatsheet<a class="headerlink" href="#lxc-cheatsheet" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils align-center">
+<colgroup>
+<col width="48%" />
+<col width="52%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">lxc command</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">remote</span> <span class="pre">list</span></code></td>
+<td>show available remotes</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">image</span> <span class="pre">list</span> <span class="pre">[remote]:[pattern]</span></code></td>
+<td>list images at remote matching optional pattern</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">launch</span> <span class="pre">[remote]:name:[version]</span></code></td>
+<td>build and start a new container</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">exec</span> <span class="pre">name</span> <span class="pre">--</span> <span class="pre">command</span></code></td>
+<td>execute command in container “name”</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">exec</span> <span class="pre">name</span> <span class="pre">--</span> <span class="pre">sudo</span> <span class="pre">--login</span> <span class="pre">--user</span> <span class="pre">ubuntu</span></code></td>
+<td>login to name as built-in ubuntu user</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">exec</span> <span class="pre">name</span> <span class="pre">--</span> <span class="pre">su</span> <span class="pre">--login</span> <span class="pre">username</span></code></td>
+<td>login to name as username</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">file</span> <span class="pre">pull/push</span> <span class="pre">src</span> <span class="pre">dest</span></code></td>
+<td>transfer files to/from container</td>
+</tr>
+</tbody>
+</table>
+<p>You’re probably going to want a shell function or similar for entering
+containers. I use a <a class="reference external" href="https://stackoverflow.com/questions/28573145/how-can-i-move-the-cursor-after-a-zsh-abbreviation" target="_blank">zsh magic abbreviation</a>.</p>
+</div>
+<div class="section" id="hints-and-gotchas">
+<h2>hints and gotchas<a class="headerlink" href="#hints-and-gotchas" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><a class="reference external" href="https://github.com/lxc/lxd/issues/3218" target="_blank">there is no proper terminal</a></p>
+<blockquote>
+<div><ul class="simple">
+<li>e.g. <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tty</span></code> will return “No tty”</li>
+<li>must use loopback pinentry with gpg</li>
+<li>simply using tmux is a workaround for some things</li>
+<li>setting a root password might be troublesome</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><a class="reference external" href="https://lutostag.wordpress.com/2017/01/31/3-quick-tips-for-lxd/" target="_blank">zsh autocompletions</a></p>
+<blockquote>
+<div><p>put these in your <code class="docutils literal notranslate"><span class="pre">~/.zshrc</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>autoload bashcompinit
+bashcompinit
+export -f _have() { which $@ &gt;/dev/null }
+source /usr/share/bash-completion/completions/lxc
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first"><a class="reference external" href="https://lutostag.wordpress.com/2017/01/31/3-quick-tips-for-lxd/" target="_blank">enter with tmux</a></p>
+</li>
+<li><p class="first">to reset and re init lxd, need to</p>
+<blockquote>
+<div><ul>
+<li><p class="first">reset the default profile (push an empty one in its place): <a class="reference external" href="https://discuss.linuxcontainers.org/t/error-the-default-profile-cannot-be-deleted/3972" target="_blank">https://discuss.linuxcontainers.org/t/error-the-default-profile-cannot-be-deleted/3972</a></p>
+</li>
+<li><p class="first">delete the default storage pool: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">lxc</span> <span class="pre">storage</span> <span class="pre">delete</span> <span class="pre">default</span></code></p>
+</li>
+<li><p class="first">delete the network bridge: (possibly only need <code class="docutils literal notranslate"><span class="pre">lxc</span> <span class="pre">network</span> <span class="pre">delete</span> <span class="pre">lxdbr0</span></code>)</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">bridge-utils</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">ip</span> <span class="pre">link</span> <span class="pre">set</span> <span class="pre">lxdbr0</span> <span class="pre">down</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">brctl</span> <span class="pre">delbr</span> <span class="pre">kxdbr0</span></code></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="external-networking">
+<h2>External networking<a class="headerlink" href="#external-networking" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">set up port forwarding: <a class="reference external" href="https://discuss.linuxcontainers.org/t/forward-port-79-and-443-from-wan-to-container/2042" target="_blank">https://discuss.linuxcontainers.org/t/forward-port-79-and-443-from-wan-to-container/2042</a></p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">lxc</span> <span class="pre">config</span> <span class="pre">device</span> <span class="pre">add</span> <span class="pre">mycontainer</span> <span class="pre">myport8080</span> <span class="pre">proxy</span> <span class="pre">listen=tcp:0.0.0.0:8080</span> <span class="pre">connect=tcp:localhost:8080</span></code></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">can test by installing nginx and editing <code class="docutils literal notranslate"><span class="pre">/var/www/html/index.nginx-debian.html</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li>change nginx port in <code class="docutils literal notranslate"><span class="pre">/etc/nginx/sites-enabled/default</span></code> (and <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">service</span> <span class="pre">nginx</span> <span class="pre">restart</span></code>)</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">can also test with any directory as html document root with e.g.</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">http.server</span> <span class="pre">8088</span></code> (from inside the document root)</li>
+<li><code class="docutils literal notranslate"><span class="pre">busybox</span> <span class="pre">httpd</span> <span class="pre">-p</span> <span class="pre">127.0.0.1:8088</span> <span class="pre">-h</span> <span class="pre">/path/to/doc/root</span></code></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>Right now, this only seems to work with the ‘listen’ (container) port and the
+‘connect’ (exposed on host) port are the same. Tested with nginx on both port 80
+and 8088</p>
+<p>These methods didn’t work</p>
+<ul class="simple">
+<li>to connect from outside, try <a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-and-use-lxd-on-ubuntu-16-04#step-5-%E2%80%94-forwarding-incoming-connections-to-the-nginx-container" target="_blank">this DigitalOcean article</a></li>
+<li>another method: <a class="reference external" href="https://www.supportblog.ch/setup-lxc-container-with-gitlab/" target="_blank">https://www.supportblog.ch/setup-lxc-container-with-gitlab/</a></li>
+<li>another method: <a class="reference external" href="http://slightlybetter.eu/category/devops/lxc/" target="_blank">http://slightlybetter.eu/category/devops/lxc/</a></li>
+</ul>
+<p>working with iptables</p>
+<ul>
+<li><p class="first">list rules as they were specified during creation</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">iptables</span> <span class="pre">-S</span></code></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">list rules for one of five tables: filter, nat, mangle, raw, security</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">iptables</span> <span class="pre">-t</span> <span class="pre">nat</span> <span class="pre">-L</span></code></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">delete rules</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">iptables</span> <span class="pre">-t</span> <span class="pre">nat</span> <span class="pre">-L</span> <span class="pre">--line-numbers</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">iptables</span> <span class="pre">-t</span> <span class="pre">nat</span> <span class="pre">-D</span> <span class="pre">[CHAIN]</span> <span class="pre">[line-number]</span></code></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>(refer to here
+<a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-list-and-delete-iptables-firewall-rules" target="_blank">https://www.digitalocean.com/community/tutorials/how-to-list-and-delete-iptables-firewall-rules</a>)</p>
+</div>
+<div class="section" id="lxc-storage">
+<h2>LXC storage<a class="headerlink" href="#lxc-storage" title="Permalink to this headline">¶</a></h2>
+<p>Coming soon.</p>
+</div>
+<div class="section" id="gpu-passthrough">
+<h2>GPU passthrough<a class="headerlink" href="#gpu-passthrough" title="Permalink to this headline">¶</a></h2>
+<p>install cuda inside lxc on fusiont5 (roughly following
+<a class="reference external" href="https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#ubuntu-installation" target="_blank">https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#ubuntu-installation</a>)</p>
+<p>from nvidia repo</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">wget</span> <span class="pre">http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_10.0.130-1_amd64.deb</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">dpkg</span> <span class="pre">-i</span> <span class="pre">cuda-repo-ubuntu1604_10.0.130-1_amd64.deb</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">apt-key</span> <span class="pre">adv</span> <span class="pre">--fetch-keys</span>&#160; <span class="pre">https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">apt</span> <span class="pre">update</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">apt</span> <span class="pre">install</span> <span class="pre">cuda-demo-suite-10-0</span> <span class="pre">--no-install-recommends</span></code></li>
+<li>if dpkg errors about overwriting libs, answer with <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">-o</span> <span class="pre">Dpkg::Options::=&quot;--force-overwrite&quot;</span> <span class="pre">install</span> <span class="pre">--fix-broken</span></code></li>
+</ul>
+<p>from ubuntu’s graphics ppa</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">add-apt-repository</span> <span class="pre">ppa:graphics-drivers/ppa</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">apt</span> <span class="pre">update</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">apt</span> <span class="pre">install</span> <span class="pre">nvidia-headless-410</span></code></li>
+</ul>
+<p>install cuda from runfile</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">wget</span> <span class="pre">https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda_10.0.130_410.48_linux</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">./cuda_10.0.130_410.48_linux</span></code></li>
+<li>yes to everything except driver install</li>
+<li>test with <code class="docutils literal notranslate"><span class="pre">/usr/local/cuda/extras/demo_suite/bandwidthTest</span></code> (will fail if no passthrough setup yet)</li>
+</ul>
+<p>enable gpu passthrough for lxd (roughly following <a class="reference external" href="https://stgraber.org/2017/03/21/cuda-in-lxd/" target="_blank">https://stgraber.org/2017/03/21/cuda-in-lxd/</a>)</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">lxc</span> <span class="pre">config</span> <span class="pre">device</span> <span class="pre">add</span> <span class="pre">container-name</span> <span class="pre">gpu</span> <span class="pre">gpu</span></code> for all gpus</li>
+<li><code class="docutils literal notranslate"><span class="pre">lxc</span> <span class="pre">config</span> <span class="pre">device</span> <span class="pre">add</span> <span class="pre">container-name</span> <span class="pre">gpu</span> <span class="pre">gpu</span> <span class="pre">id=0</span></code> to pick the first gpu</li>
+</ul>
+<div class="section" id="note-about-lxd-api-extensions">
+<h3>note about lxd api extensions<a class="headerlink" href="#note-about-lxd-api-extensions" title="Permalink to this headline">¶</a></h3>
+<p>There seem to be “gpu_devices” and “nvidia_runtime” API extensions listed at
+<a class="reference external" href="https://lxd.readthedocs.io/en/latest/api-extensions/#api-extensions" target="_blank">https://lxd.readthedocs.io/en/latest/api-extensions/#api-extensions</a> and
+<a class="reference external" href="https://github.com/lxc/lxd/blob/master/doc/containers.md" target="_blank">https://github.com/lxc/lxd/blob/master/doc/containers.md</a> I’m not sure yet what
+these mean</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="index.html" title="Previous document">Containers / VPS</a>
+        </li>
+        <li>
+          <a href="docker.html" title="Next document">Docker</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2019, M. Graham Lopez.
+      
+    </div>
+
+    
+
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-140879797-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    
+  </body>
+</html>

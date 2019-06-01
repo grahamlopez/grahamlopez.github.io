@@ -39,11 +39,12 @@ However, while some of these pages are fairly polished, a lot of it is very much
 a work-in-progress as I continue to learn.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    contact
    cv
    git/index
+   contained/index
    blog/index
    unsorted/index
    sphinx/index

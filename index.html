@@ -42,6 +42,7 @@
 <li class="toctree-l1"><a class="reference internal" href="contact.html">Contact me</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cv.html">Curriculum Vitae</a></li>
 <li class="toctree-l1"><a class="reference internal" href="git/index.html">git hints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contained/index.html">Containers / VPS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="blog/index.html">blog(ish)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="unsorted/index.html">unsorted</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sphinx/index.html">sphinx</a></li>
@@ -128,24 +129,110 @@ a work-in-progress as I continue to learn.</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="git/index.html">git hints</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="git/git_philosophy.html">git philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git/git_philosophy.html">git philosophy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="git/git_philosophy.html#snapshots-not-deltas">1) “Snapshots, not deltas”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/git_philosophy.html#history-is-only-for-humans">2) “History is only for humans”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/git_philosophy.html#branching-is-free">3) “Branching is free”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/git_philosophy.html#ignore-the-index">4) “Ignore the index”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/git_philosophy.html#there-are-no-server-repositories">5) “There are no server repositories”</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="git/best_practices.html">General best practices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="git/confusion.html">git Annoyances – common points of confusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git/confusion.html">git Annoyances – common points of confusion</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="git/confusion.html#fetch-vs-pull">fetch vs. pull</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/confusion.html#fork-vs-clone">fork vs. clone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/confusion.html#merge-vs-rebase-vs-cherrypick">merge vs. rebase vs. cherrypick</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/confusion.html#checkout-vs-revert-vs-reset">checkout vs. revert vs. reset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/confusion.html#when-to-use-git-stash">when to use git stash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/confusion.html#origin-vs-upstream">origin vs. upstream</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/confusion.html#local-vs-remote-branches">local vs. remote branches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/confusion.html#nesting-git-repos">Nesting git repos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/confusion.html#how-to-delete-a-file-from-git-completely">How to delete a file from git completely</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/confusion.html#how-to-deal-with-large-files-in-git-repos">How to deal with large files in git repos</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="git/shortcuts_and_conf.html">Shortcuts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="git/shortcuts_and_conf.html#configuration">Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="git/git_credentials.html">git credentials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="git/git_workflows.html">git Workflows – how to organize branching</a></li>
-<li class="toctree-l2"><a class="reference internal" href="git/repo_histories.html">Repository histories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="git/resources.html">Big list o’ resources – links to external sites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git/git_credentials.html">git credentials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="git/git_credentials.html#username">username</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/git_credentials.html#on-disk-file-storage-encrypted">On-disk file storage (encrypted)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/git_credentials.html#in-memory-password-caching">In-memory password caching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/git_credentials.html#keychain-based-password-caching">Keychain-based password caching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/git_credentials.html#resources">Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="git/git_workflows.html">git Workflows – how to organize branching</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="git/git_workflows.html#centralized-svn-like">1) Centralized (SVN-like)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/git_workflows.html#feature-branch-centralized-branching">2) Feature branch (centralized + branching)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/git_workflows.html#gitflow-feature-branch-organization-and-conventions">3) Gitflow (Feature branch + organization and conventions)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/git_workflows.html#forking-any-workflow-forking-for-collaboration">4) Forking (any workflow + forking for collaboration)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="git/repo_histories.html">Repository histories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="git/repo_histories.html#gitflow-history">Gitflow History</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/repo_histories.html#merge-vs-rebase-effects-on-repo-history">Merge vs. Rebase - effects on repo history</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/repo_histories.html#a-viable-policy">A viable policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/repo_histories.html#merge-commits-in-pull-requests">Merge commits in pull requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/repo_histories.html#gitflow-history-sh">gitflow_history.sh</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="git/resources.html">Big list o’ resources – links to external sites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="git/resources.html#general-reference-tutorials-cheatsheets">general reference, tutorials, cheatsheets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/resources.html#branching-forking-remotes">branching, forking, remotes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/resources.html#best-practices">best practices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/resources.html#workflows-and-history-cleaning-for-prs">workflows and history cleaning for PRs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git/resources.html#miscellaneous-non-git-resources">miscellaneous non-git resources</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="git/unsorted.html">Unsorted git</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contained/index.html">Containers / VPS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contained/lxc_lxd.html">LXC and LXD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contained/lxc_lxd.html#lxd-getting-started">LXD getting started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contained/lxc_lxd.html#lxc-cheatsheet">LXC cheatsheet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contained/lxc_lxd.html#hints-and-gotchas">hints and gotchas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contained/lxc_lxd.html#external-networking">External networking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contained/lxc_lxd.html#lxc-storage">LXC storage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contained/lxc_lxd.html#gpu-passthrough">GPU passthrough</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="contained/docker.html">Docker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contained/docker.html#some-of-my-example-dockerfiles">some of my example dockerfiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contained/docker.html#usage">usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contained/docker.html#utilities">utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contained/docker.html#advice-and-best-practices">advice and best practices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contained/docker.html#docker-and-persistent-data">Docker and persistent data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contained/docker.html#installing-docker-on-ubuntu-18-04">installing docker on ubuntu 18.04</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contained/docker.html#installing-docker-on-rhel7-4-and-centos">installing docker on rhel7.4 and centos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contained/docker.html#installing-docker-on-gentoo">installing docker on gentoo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contained/docker.html#problems-solutions">Problems / Solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contained/docker.html#resources">Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contained/docker.html#todo">Todo</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="contained/vps_hosting.html">VPS hosting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contained/vps_hosting.html#vultr">Vultr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contained/vps_hosting.html#digitalocean">DigitalOcean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contained/vps_hosting.html#misc-for-vps-hosting">misc for vps hosting</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="blog/index.html">blog(ish)</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="unsorted/index.html">unsorted</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="unsorted/bare_repo_dotfiles.html">bare git repo dotfiles</a></li>
-<li class="toctree-l2"><a class="reference internal" href="unsorted/signing_code.html">signing code with git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unsorted/bare_repo_dotfiles.html">bare git repo dotfiles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="unsorted/bare_repo_dotfiles.html#setup">Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unsorted/bare_repo_dotfiles.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unsorted/bare_repo_dotfiles.html#install-onto-a-new-system">Install onto a new system</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="unsorted/signing_code.html">signing code with git</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="unsorted/signing_code.html#resources">Resources</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="sphinx/index.html">sphinx</a><ul>

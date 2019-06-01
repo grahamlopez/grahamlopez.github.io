@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>unsorted &#8212; graham lopez  documentation</title>
+    <title>VPS hosting &#8212; graham lopez  documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -14,8 +14,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="bare git repo dotfiles" href="bare_repo_dotfiles.html" />
-    <link rel="prev" title="blog(ish)" href="../blog/index.html" />
+    <link rel="next" title="blog(ish)" href="../blog/index.html" />
+    <link rel="prev" title="Docker" href="docker.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -43,13 +43,19 @@
 <li class="toctree-l1"><a class="reference internal" href="../contact.html">Contact me</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cv.html">Curriculum Vitae</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../git/index.html">git hints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../contained/index.html">Containers / VPS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../blog/index.html">blog(ish)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">unsorted</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="bare_repo_dotfiles.html">bare git repo dotfiles</a></li>
-<li class="toctree-l2"><a class="reference internal" href="signing_code.html">signing code with git</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Containers / VPS</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="lxc_lxd.html">LXC and LXD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html">Docker</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">VPS hosting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vultr">Vultr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#digitalocean">DigitalOcean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#misc-for-vps-hosting">misc for vps hosting</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../blog/index.html">blog(ish)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsorted/index.html">unsorted</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html">sphinx</a></li>
 </ul>
 
@@ -57,8 +63,10 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="../blog/index.html" title="previous chapter">blog(ish)</a></li>
-      <li>Next: <a href="bare_repo_dotfiles.html" title="next chapter">bare git repo dotfiles</a></li>
+  <li><a href="index.html">Containers / VPS</a><ul>
+      <li>Previous: <a href="docker.html" title="previous chapter">Docker</a></li>
+      <li>Next: <a href="../blog/index.html" title="next chapter">blog(ish)</a></li>
+  </ul></li>
   </ul></li>
 </ul>
 </div>
@@ -90,10 +98,10 @@
     <ul>
         <li>
           &larr;
-          <a href="../blog/index.html" title="Previous document">blog(ish)</a>
+          <a href="docker.html" title="Previous document">Docker</a>
         </li>
         <li>
-          <a href="bare_repo_dotfiles.html" title="Next document">bare git repo dotfiles</a>
+          <a href="../blog/index.html" title="Next document">blog(ish)</a>
           &rarr;
         </li>
     </ul>
@@ -103,21 +111,47 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="unsorted">
-<h1>unsorted<a class="headerlink" href="#unsorted" title="Permalink to this headline">¶</a></h1>
-<p>These are some things that don’t yet have a better home, but hopefully I get
-them sorted soon. Because everyone likes a better home.</p>
-<div class="toctree-wrapper compound">
+  <div class="section" id="vps-hosting">
+<h1>VPS hosting<a class="headerlink" href="#vps-hosting" title="Permalink to this headline">¶</a></h1>
+<p>Sometimes it is nice to get a remote system of some kind, or a lightweight
+throw-away instance. This is where virtual private servers come in. Note that
+you don’t have to run containers on them, but this is a common thing to do.</p>
+<p>AWS is the most obvious choice, and while it is super powerful, I find it super
+complicated as well. There are other, smaller VPS hosting companies that are
+sometimes cheaper than AWS, still have developer-friendly features, and are
+overall a bit simpler to use at the possible expense of automation features
+targeted at enterprise/production applications.</p>
+<p>I actually only use these services intermittently, so this is a place to keep
+some reminders to myself about how to use them, etc.</p>
+<div class="section" id="vultr">
+<h2>Vultr<a class="headerlink" href="#vultr" title="Permalink to this headline">¶</a></h2>
+<p>Coming soon.</p>
+</div>
+<div class="section" id="digitalocean">
+<h2>DigitalOcean<a class="headerlink" href="#digitalocean" title="Permalink to this headline">¶</a></h2>
+<p>Coming soon.</p>
+</div>
+<div class="section" id="misc-for-vps-hosting">
+<h2>misc for vps hosting<a class="headerlink" href="#misc-for-vps-hosting" title="Permalink to this headline">¶</a></h2>
+<p>to point DNS at a VPS:</p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="bare_repo_dotfiles.html">bare git repo dotfiles</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="bare_repo_dotfiles.html#setup">Setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bare_repo_dotfiles.html#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bare_repo_dotfiles.html#install-onto-a-new-system">Install onto a new system</a></li>
+<li><p class="first">login to domain registrar and change the nameservers for the domain</p>
+<blockquote>
+<div><ul class="simple">
+<li>ns1,ns2.vultr.com</li>
+<li>ns1,ns2,ns3.digitalocean.com</li>
 </ul>
+</div></blockquote>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="signing_code.html">signing code with git</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="signing_code.html#resources">Resources</a></li>
+<li><p class="first">go to the DNS dashboard of the VPS provider and add the entries</p>
+<blockquote>
+<div><ul class="simple">
+<li>just set the “default domain” to some IP of a VPS (this will make the A
+record for the domain)</li>
+<li>then add additional A records to make the hostname point to the right
+place</li>
 </ul>
+</div></blockquote>
 </li>
 </ul>
 </div>
@@ -131,10 +165,10 @@ them sorted soon. Because everyone likes a better home.</p>
     <ul>
         <li>
           &larr;
-          <a href="../blog/index.html" title="Previous document">blog(ish)</a>
+          <a href="docker.html" title="Previous document">Docker</a>
         </li>
         <li>
-          <a href="bare_repo_dotfiles.html" title="Next document">bare git repo dotfiles</a>
+          <a href="../blog/index.html" title="Next document">blog(ish)</a>
           &rarr;
         </li>
     </ul>

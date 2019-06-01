@@ -1,0 +1,361 @@
+
+**********
+Docker
+**********
+
+Right now, this is just notes and a cheatsheet as I learn more about Docker.
+Again, most of this stuff can be found elsewhere, and I tried to list in the
+Resources section all of the places from which I took content and ideas.
+
+some of my example dockerfiles
+===============================
+
+* :download:`centos gcc plugin development <./centos7_gcc_dockerfile>`
+* :download:`centos qmcpack (old) <./centos_qmcpack_dockerfile>`
+
+usage
+======
+
+`here's a more thorough cheatsheet <https://github.com/wsargent/docker-cheat-sheet>`_
+
++---------------------------------------------+-------------------------------------------------------+
+| images                                      | description                                           |
++=============================================+=======================================================+
+| ``images``                                  | list local images                                     |
++---------------------------------------------+-------------------------------------------------------+
+| ``run -ti --name <name> <image> <command>`` | run image (i.e. create container with optional name)  |
+|                                             | with command interactively (-i) and allocate a pseudo |
+|                                             | tty (-t)                                              |
++---------------------------------------------+-------------------------------------------------------+
+| ``build -t namespace/repo:tag .``           | use Dockerfile in current directory to build          |
+|                                             | image named tagname                                   |
++---------------------------------------------+-------------------------------------------------------+
+| ``rmi -f <image>``                          | delete a local image                                  |
++---------------------------------------------+-------------------------------------------------------+
+| ``tag <hash> namespace/repo:tag``           | tag an image for upload to docker hub under           |
+|                                             | namespace (hub account)                               |
++---------------------------------------------+-------------------------------------------------------+
+| ``login``                                   | login to docker hub                                   |
++---------------------------------------------+-------------------------------------------------------+
+| ``push <user>/<imagename>``                 | push image to docker hub                              |
++---------------------------------------------+-------------------------------------------------------+
+| ``commit``                                  | save changes made in a container                      |
++---------------------------------------------+-------------------------------------------------------+
+
++---------------------------------------------+-------------------------------------------------------+
+| containers                                  | description                                           |
++=============================================+=======================================================+
+| ``run -ti --name <name> <image> <command>`` | run image (i.e. create container with optional name)  |
+|                                             | with command interactively (-i) and allocate a        |
+|                                             | pseudo tty (-t)                                       |
++---------------------------------------------+-------------------------------------------------------+
+| ``start -ai <container>``                   | start an existing container (e.g. previously          |
+|                                             | created from image with 'run' command)                |
++---------------------------------------------+-------------------------------------------------------+
+| ``ps -a``                                   | show all containers, running or stopped               |
++---------------------------------------------+-------------------------------------------------------+
+| ``rm <container>``                          | delete a container                                    |
++---------------------------------------------+-------------------------------------------------------+
+| ``run --rm``                                | remove the container on exit                          |
++---------------------------------------------+-------------------------------------------------------+
+
++---------------------------------------------+-------------------------------------------------------+
+| data volumes                                | description                                           |
++=============================================+=======================================================+
+| ``run -ti -v /mount_pt <image> <command>``  | create container with a persistent, unnamed volume    |
+|                                             | at mountpt                                            |
++---------------------------------------------+-------------------------------------------------------+
+| ``run -ti -v name:/mount_pt``               |                                                       |
+|                       ``<image> <command>`` | create container with a persistent volume named name  |
++---------------------------------------------+-------------------------------------------------------+
+| ``run -ti -v /abs/host/path:/mount_pt``     |                                                       |
+| ``<image> <command>``                       | create container with a host path mounted at mountpt  |
++---------------------------------------------+-------------------------------------------------------+
+| ``run -ti --volumes-from <containername>``  | create container and attach volumes                   |
+| ``<image> <command>``                       | from container-name                                   |
++---------------------------------------------+-------------------------------------------------------+
+
+utilities
+==========
+
+a shell function I `found on stackoverflow
+<http://stackoverflow.com/questions/32723111/how-to-remove-old-and-unused-docker-images>`_
+to help with cleanup::
+
+  dcleanup() {
+      docker rm -v $(docker ps --filter status=exited -q 2>/dev/null) 2>/dev/null
+      docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null
+  }
+
+probably can now use ``docker system prune -a`` for this
+
+advice and best practices
+==========================
+
+ENTRYPOINT vs. CMD
+------------------
+
+`ENTRYPOINT vs. CMD <https://www.ctl.io/developers/blog/post/dockerfile-entrypoint-vs-cmd/>`_
+In summary, for a container called 'demo':
+
+
++----------------------------+-------------------------------------------+------------------------------+
+|                            | ENTRYPOINT                                | CMD                          |
++============================+===========================================+==============================+
+| overriding default command | ``docker run --entrypoint hostname demo`` | ``docker run demo hostname`` |
++----------------------------+-------------------------------------------+------------------------------+
+| setting up default flags   | holds the hard-coded command and flags    | flags get overwritten by     |
+|                            |                                           | ``docker run demo flags``    |
+|                            |                                           | command line                 |
++----------------------------+-------------------------------------------+------------------------------+
+
+Always use the "exec form" instead of the "shell form" for both CMD and
+ENTRYPOINT. E.g. ``CMD ["executable","param1","param2"]`` so that:
+
+* our command gets PID 1 and we can send posix signals to it, etc. With the
+  shell form, a shell gets PID 1 to execute the command, and won't forward
+  signals.
+* combining ENTRYPOINT and CMD together works as expected
+
+`Here's how to properly override with --entrypoint
+<https://medium.com/@oprearocks/how-to-properly-override-the-entrypoint-using-docker-run-2e081e5feb9d>`_
+
+Users and mapping
+-----------------
+
+`Understanding how uid and gid work
+<https://medium.com/@mccode/understanding-how-uid-and-gid-work-in-docker-containers-c37a01d01cf>`_
+
+Docker and locales
+------------------
+
+`Docker and locales <http://jaredmarkell.com/docker-and-locales/>`_
+
+Best practices
+---------------
+
+`best practices for writing Dockerfiles
+<https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/>`_
+
+Docker usage; a philosophy
+1. One process per container
+2. Keep image files short (strictly less than 127 layers)
+3. containers vs. images vs. dockerfiles
+
+    1. containers: how you run your application
+    2. images: how you store your application
+    3. dockerfile: tells docker how to create the container for your application
+
+        1. lives beside your source code
+        2. "glorified bash script with a few extra commands"
+
+4. Use docker compose for realistic development stacks
+
+Docker and persistent data
+===========================
+
+https://docs.docker.com/engine/tutorials/dockervolumes/
+This is the standard Docker documentation about data volumes.  At the time of
+this writing, it is a little bit sparse and outdated from best practices.
+
+https://boxboat.com/2016/06/18/docker-data-containers-and-named-volumes/
+This is an excellent tutorial with some more background about how data volumes
+relate to the Docker filesystem, and which to choose when.
+
+http://crosbymichael.com/advanced-docker-volumes.html
+Another good article with some depth about volumes
+
+https://github.com/docker/docker/issues/17798#issuecomment-154815207
+Some comments about deprecating the use of data containers
+
+.. |ss| raw:: html
+
+   <strike>
+
+.. |se| raw:: html
+
+   </strike>
+
+Now that we've read/reviewed the links above, we see that there are a few
+options to consider when working with persistent data and Docker.  To
+summarize:
+
+1. |ss| data volume container |se|: deprecated in favor of named volumes - not
+   going to discuss this one since I don't use it.
+2. data volume:  these have several modes of usage that should cover all
+   situations now
+
+    1. "bare" data volume - unlabeled, usually only used to persist data in a
+       single container.  labelled with a hash and lives in
+       (/var/lib/docker/volumes).
+    2. named data volume - label chosen at volume creation time. This is like a
+       bare volume, but easier to manage.  another way to look at it: a host
+       directory volume, but managed by the docker tools instead of the host
+       user, lives in a location in the host filesystem that is decided by
+       Docker, etc..
+    3. host directory data volume - labeled by an existing directory/file in
+       the host filesystem. this directory/file gets mounted inside the
+       container when it is created/started.
+
+There are two ways to create a data volume: either by itself or at the same
+time as container creation.
+
+stand-alone volume creation
+----------------------------
+
+Use ``docker volume create`` to a bare volume::
+
+  $ docker volume create
+  6a7b1bc554a43534a34659af12b0ec4e088a595c5fc05e716c31ce91380ee615
+  $ docker volume ls
+  DRIVER              VOLUME NAME
+  local               b441fb44bfe8ee3b1de4e2bf157b2560c3ccae5096ab734d972902e6dc2bac73
+
+
+or add a named volume::
+
+  $ docker volume create --name test-volume
+  test-volume
+  $ docker volume ls
+  DRIVER              VOLUME NAME
+  local               b441fb44bfe8ee3b1de4e2bf157b2560c3ccae5096ab734d972902e6dc2bac73
+  local               test-volume
+
+
+volume creation at container creation time
+-------------------------------------------
+
+To create a bare volume at container creation time and mount it inside the
+container at ``/data_dir``::
+
+  $ docker run -t -i -v /data_dir some-repo/some-container:tag /bin/bash
+  [exit container]
+  $ docker volume ls
+  DRIVER              VOLUME NAME
+  local               b288739dff62212d67c5b7dc4bc5dd2f2b40685fd3b6731994daf2466aa86b06
+  local               b441fb44bfe8ee3b1de4e2bf157b2560c3ccae5096ab734d972902e6dc2bac73
+  local               test-vol
+
+or a named volume (named 'persist', mounted at ``/data_dir``) using the same
+method::
+
+  $ docker run -t -i -v persist:/data_dir grahamican/centos-dev:gcc /bin/bash
+  [exit container]
+  $ docker volume ls
+  DRIVER              VOLUME NAME
+  local               b288739dff62212d67c5b7dc4bc5dd2f2b40685fd3b6731994daf2466aa86b06
+  local               b441fb44bfe8ee3b1de4e2bf157b2560c3ccae5096ab734d972902e6dc2bac73
+  local               persist
+  local               test-vol
+
+mount a host directory inside a container
+-----------------------------------------
+
+::
+  $ docker run -t -i -v /Users/graham/develop/gcc-6.2.0:/gcc_source grahamican/centos-dev:gcc /bin/bash
+  [in a different shell]
+  $ docker volume ls
+  DRIVER              VOLUME NAME
+  local               b288739dff62212d67c5b7dc4bc5dd2f2b40685fd3b6731994daf2466aa86b06
+  local               b441fb44bfe8ee3b1de4e2bf157b2560c3ccae5096ab734d972902e6dc2bac73
+  local               persist
+  local               test-vol
+
+notice that the host directory volumes don't show up with ``docker volume``
+commands, because docker isn't helping to manage them (e.g. you can't docker rm
+a host directory)
+
+So now we can deduce some rules about creating/naming volumes (as given on the
+Docker volume documentation page) when using
+``docker run -v volume_name:/path/to/mount`` ...:
+
+1. if ``volume_name`` is not an absolute path, use a named volume
+
+    1. if the name already exists, mount it in the new container
+    (``docker run --volumes-from container-name`` can be used as a shortcut here)
+    2. if it doesn't exist, create it and mount it
+
+2. if ``volume_name`` is an absolute path, mount the host directory/file at that path
+
+Finally, these things can be done in a Dockerfile with the `VOLUME
+<https://docs.docker.com/engine/reference/builder/#/volume>`_ command.  Note
+that volumes cannot be mounted into a pre-existing container.  (One must commit
+the changes to the existing container to create a new image, then create a new
+container with the volume mount(s)).
+
+installing docker on ubuntu 18.04
+==================================
+
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
+
+installing docker on rhel7.4 and centos
+=======================================
+
+* ``yum install docker-latest``
+* ``usermod -aG docker bgl``
+* ``systemctl start docker-latest``
+* ``systemctl enable docker-latest``
+* increase available size
+
+    * vim /etc/sysconfig/docker-latest
+    * add ``-g /path/to/runtime/storage``
+    * and ``--storage-opt dm.basesize=50G`` to ``OPTIONS=``
+
+installing docker on gentoo
+============================
+
+The `gentoo wiki page on docker <https://wiki.gentoo.org/wiki/Docker>`_ is quite
+good.
+
+Problems / Solutions
+=====================
+
+* if there is no network connection during build/run (I've seen this on ion
+  when trying to e.g. ``apt update``), can use ``docker build --network host``
+  and ``docker run --network host``
+* can use tmpfs inside a container at a mount point with ``docker run --tmpfs
+  /tmp:rw,exec``
+
+Resources
+=========
+
+https://github.com/wsargent/docker-cheat-sheet
+a nice general cheatsheet
+
+https://youtu.be/Q5POuMHxW-0
+dotCloud/Docker founder Solomon Hykes explains motivation and reasoning behind
+Docker
+
+https://youtu.be/q1qEYM_SESI
+some overview and rules of thumb
+
+`Docker and the PID 1 zombie reaping problem
+<https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/>`_
+
+`Ensuing discussion on reddit
+<https://www.reddit.com/r/docker/comments/2t1lzp/docker_and_the_pid_1_zombie_reaping_problem/>`_
+a little bit about the "one process per container" rule of thumb
+
+`Where are Docker images stored? <http://blog.thoward37.me/articles/where-are-docker-images-stored/>`_
+
+
+Todo
+====
+
+* best practices and motivation
+* architecture (e.g. unionfs, etc.)
+* nvidia docker and gpu development
+
+    * https://github.com/NVIDIA/nvidia-docker/wiki
+    * https://devblogs.nvidia.com/parallelforall/nvidia-docker-gpu-server-application-deployment-made-easy/
+
+* multiple container dockerfile example: chat = bitlbee + znc + weechat
+* use case walkthroughs
+* security and other considerations
+
+    * e.g. http://link.springer.com/chapter/10.1007/978-3-319-46079-6_48 and others
+
+* ``--cap-add sys_ptrace``, ``--privileged`` and friends to get debugging  to work
+  inside a container
+* shifter and nextplatform article, and singularity and an admin-magazine
+  article, etc.
