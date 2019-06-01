@@ -6,40 +6,61 @@ bare git repo dotfiles
 Setup
 =======
 
-::
-  git init --bare $HOME/.mglcfg
-  alias config='git --git-dir=$HOME/.mglcfg/ --work-tree=$HOME'
-  config config status.showUntrackedFiles no
+The simplest, aliased-based way is to use the following::
 
+  git init --bare $HOME/.dots-git
+  alias dotconfig='git --git-dir=$HOME/.dots-git/ --work-tree=$HOME'
 
-## Usage
+However, I made a slightly more sophisticated (complicated) shell function to
+allow me to just use ``git`` in ``$HOME``::
+
+  function git() {
+    # for config file management
+    if [[ $(pwd) == ${HOME} ]] ; then
+      command git --git-dir=$HOME/.dots-git/ --work-tree=$HOME "$@"
+    else
+      command git "$@"
+    fi
+  }
+
+This function comes with a caveat: when you need to clone a new repo into
+``$HOME``, you need to use ``/usr/bin/git``. I don't put any repos directly in
+my ``$HOME``, so it hasn't been too big of a deal for me in practice.
+
+Usage
+=====
 Now any files in $HOME can be versioned as usual with things like::
 
-  config status
-  config add .vimrc
-  config commit -m 'add vimrc'
-  config push
+  dotconfig status
+  dotconfig add .vimrc
+  dotconfig commit -m 'add vimrc'
+  dotconfig push
+
+Or just using ``git`` as usual if the above shell function was installed.
 
 To see what files are being tracked::
 
-  ``config ls-tree --full-tree -r HEAD``
+  dotconfig ls-tree --full-tree -r HEAD
 
-## Install the dotfiles onto a new system
+Install onto a new system
+==========================
 
 ::
-  git clone --bare https://gitlab.com/grahamlopez/mglcfg.git $HOME/.mglcfg
-  config checkout
 
-if there are already dotfiles present, then need to back them up and move out of
+  /usr/bin/git clone --bare https://myrepourl $HOME/.path/used/in/alias
+  [git|mailconfig|...] checkout
+
+If there are already dotfiles present, then need to back them up and move out of
 the way::
 
   mkdir -p .config-backup
-  config checkout 2>&1 | egrep "\s+\." | awk {`print $1`} | xargs -l{} mv {} .config-backup/{}
 
-and rerun ``config checkout``
+and rerun ``git checkout``
 
-Another way might be::
+We'll also want the following settings for the repo::
 
-  git clone --separate-git-dir=$HOME/.my-dotfiles https://github.com/Siilwyn/my-dotfiles.git my-dotfiles-tmp
-  rsync --recursive --verbose --exclude '.git' my-dotfiles-tmp/ $HOME/
-  rm --recursive my-dotfiles-tmp
+  [remote "origin"]
+          url = https://grahamlopez@github.com/grahamlopez/dots.git
+          fetch = +refs/heads/*:refs/remotes/origin/*
+  [status]
+          showUntrackedFiles = no

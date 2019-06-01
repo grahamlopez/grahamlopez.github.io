@@ -92,7 +92,7 @@ A viable policy
 
 ::
 
-  ``git config [--global] pull.rebase true``
+  git config [--global] pull.rebase true
 
 So which do I personally choose, ``git merge`` or ``git rebase``?
 
