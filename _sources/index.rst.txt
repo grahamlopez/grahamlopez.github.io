@@ -38,23 +38,34 @@ benefit and to encourage me to keep the quality of my notes a little bit higher.
 However, while some of these pages are fairly polished, a lot of it is very much
 a work-in-progress as I continue to learn.
 
-.. toctree::
-   :maxdepth: 3
+.. container:: leftcol
 
-   contact
-   cv
-   git/index
-   contained/index
-   blog/index
-   unsorted/index
-   sphinx/index
+   .. toctree::
+      :maxdepth: 2
 
+      contact
+      cv
+      git/index
 
-Yes, this site is made with `Sphinx <https://www.sphinx-doc.org>`_, so it isn't
-the most visually creative. I'm not a webdev, nor am I familiar with the common
-technologies, so when I set out to make it look nice, it ended up preventing me
-from getting the content up. But a lot of this content is documentation-like
-anyway, so I'm going with it for now until I can figure something nicer out.
+.. container:: rightcol
+
+   .. toctree::
+      :maxdepth: 2
+
+      contained/index
+      blog/index
+      unsorted/index
+      sphinx/index
+
+.. container:: endcols
+
+   Yes, this site is made with `Sphinx <https://www.sphinx-doc.org>`_, so it isn't
+   the most visually creative. I'm not a webdev, nor am I familiar with the common
+   technologies, so when I set out to make it look nice, it ended up preventing me
+   from getting the content up. But a lot of this content is documentation-like
+   anyway, so I'm going with it for now until I can figure something nicer out.
+
+Read on and :ref:`contact` if you have comments, questions, or suggestions.
 
 .. Indices and tables
 .. ==================

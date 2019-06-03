@@ -5,3 +5,18 @@ div.body h4 { font-size: 110%; }
 div.body h5 { font-size: 100%; }
 div.body h6 { font-size: 100%; }
 
+div.leftcol {
+    width: 50%;
+    float: left;
+    padding: 0px 20px 00px 00px;
+}
+
+div.rightcol {
+    margin-left: 50%;
+    padding: 0px 00px 20px 00px;
+}
+
+div.endcols {
+    content: "";
+    clear: both;
+}
