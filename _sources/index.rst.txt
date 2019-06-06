@@ -53,6 +53,7 @@ a work-in-progress as I continue to learn.
       :maxdepth: 2
 
       contained/index
+      cli_tools/index
       blog/index
       unsorted/index
       sphinx/index

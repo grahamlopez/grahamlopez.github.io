@@ -8,6 +8,8 @@ reference material that is most of the rest of this site. However, you will
 notice that these things aren't tagged, or frequent, or anything else that
 typically makes blogs good.
 
+Coming soon.
+
 .. toctree::
    :maxdepth: 2
 
