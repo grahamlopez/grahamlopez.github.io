@@ -1,7 +1,7 @@
 
-#############
-about graham
-#############
+#################
+contact/about me
+#################
 
 some info about me
 
