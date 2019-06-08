@@ -1,4 +1,8 @@
 
+******************************
+Shortcuts and configuration
+******************************
+
 Shortcuts
 ==========
 Some cheatsheets, tips, tricks, and shortcuts
@@ -23,7 +27,8 @@ commit.::
 
   git commit --amend
 
-BEWARE: don't use this after a commit has been pushed to a remote repository.
+BEWARE: This changes history, so be aware when using this after a commit has
+been pushed to a remote repository.
 
 Configuration
 ==============

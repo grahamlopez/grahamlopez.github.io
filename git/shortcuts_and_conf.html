@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Shortcuts &#8212; graham lopez  documentation</title>
+    <title>Shortcuts and configuration &#8212; graham lopez  documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -46,8 +46,7 @@
 <li class="toctree-l2"><a class="reference internal" href="git_philosophy.html">git philosophy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="best_practices.html">General best practices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="confusion.html">git Annoyances – common points of confusion</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Shortcuts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Shortcuts and configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="git_credentials.html">git credentials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="git_workflows.html">git Workflows – how to organize branching</a></li>
 <li class="toctree-l2"><a class="reference internal" href="repo_histories.html">Repository histories</a></li>
@@ -114,8 +113,10 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="shortcuts">
-<h1>Shortcuts<a class="headerlink" href="#shortcuts" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="shortcuts-and-configuration">
+<h1>Shortcuts and configuration<a class="headerlink" href="#shortcuts-and-configuration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="shortcuts">
+<h2>Shortcuts<a class="headerlink" href="#shortcuts" title="Permalink to this headline">¶</a></h2>
 <p>Some cheatsheets, tips, tricks, and shortcuts</p>
 <p>To quickly check the contents of a single file, from a single commit, without
 having to checkout, stash dirty working copy, etc. This is equivalent to “svn
@@ -135,10 +136,11 @@ commit.:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">--</span><span class="n">amend</span>
 </pre></div>
 </div>
-<p>BEWARE: don’t use this after a commit has been pushed to a remote repository.</p>
+<p>BEWARE: This changes history, so be aware when using this after a commit has
+been pushed to a remote repository.</p>
 </div>
 <div class="section" id="configuration">
-<h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
 <p>Some configuration hints</p>
 <p>Using your username in clone url saves typing at every server interaction (pull,
 push, fetch, etc.).:</p>
@@ -231,6 +233,7 @@ the prompt:</p>
 name, if there are untracked files in the repository, if there are uncommitted
 changes in the repository, and whether the local branch is behind or ahead of
 the remote tracking branch.</p>
+</div>
 </div>
 
 
