@@ -280,9 +280,106 @@ and 8088</p>
 <p>(refer to here
 <a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-list-and-delete-iptables-firewall-rules" target="_blank">https://www.digitalocean.com/community/tutorials/how-to-list-and-delete-iptables-firewall-rules</a>)</p>
 </div>
+<div class="section" id="x11-applications-in-lxc">
+<h2>X11 Applications in LXC<a class="headerlink" href="#x11-applications-in-lxc" title="Permalink to this headline">¶</a></h2>
+<p>The following is just for graphical use right now, but audio can be made to work
+as well. The references given for each section also explain audio, but I’m not
+using it right now.</p>
+<div class="section" id="manual-setup">
+<h3>manual setup<a class="headerlink" href="#manual-setup" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://blog.simos.info/how-to-run-graphics-accelerated-gui-apps-in-lxd-containers-on-your-ubuntu-desktop/" target="_blank">https://blog.simos.info/how-to-run-graphics-accelerated-gui-apps-in-lxd-containers-on-your-ubuntu-desktop/</a></p>
+<ol class="arabic">
+<li><p class="first">(one time on host) allow root to remap our host’s userID inside a container:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ echo &quot;root:$UID:1&quot; | sudo tee -a /etc/subuid /etc/subgid
+</pre></div>
+</div>
+</li>
+<li><p class="first">(for each gui app container) configure the remapping for the container. Use
+the uid/gid of the container user:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ lxc config set mycontainer raw.idmap &quot;both $UID 1001&quot;
+$ lxc restart mycontainer
+</pre></div>
+</div>
+</li>
+<li><p class="first">(for each gui app container) give access to the host’s Xserver socket and
+Xauthority file for ssh forwarding:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ lxc config device add mycontainer X0 disk path=/tmp/.X11-unix/X0 source=/tmp/.X11-unix/X0
+$ lxc config device add mycontainer Xauthority disk path=/home/ubuntu/.Xauthority source=${XAUTHORITY}
+</pre></div>
+</div>
+</li>
+<li><p class="first">(for each gui app container) create gpu devices for graphics acceleration. Use
+the uid/gid of the container user:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ lxc config device add mycontainer mygpu gpu
+$ lxc config device set mycontainer mygpu uid 1001
+$ lxc config device set mycontainer mygpu gid 1001
+</pre></div>
+</div>
+</li>
+<li><p class="first">(inside the container) be sure to set the <code class="docutils literal notranslate"><span class="pre">$DISPLAY</span></code> variable to match the
+host’s display (usually <code class="docutils literal notranslate"><span class="pre">:0</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export DISPLAY=:0
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="launching-gui-containers-with-lxd">
+<h3>launching gui containers with LXD<a class="headerlink" href="#launching-gui-containers-with-lxd" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://blog.simos.info/how-to-easily-run-graphics-accelerated-gui-apps-in-lxd-containers-on-your-ubuntu-desktop/" target="_blank">https://blog.simos.info/how-to-easily-run-graphics-accelerated-gui-apps-in-lxd-containers-on-your-ubuntu-desktop/</a></p>
+<ol class="arabic">
+<li><p class="first">allow root to remap our host’s userID inside a container:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ echo &quot;root:$UID:1&quot; | sudo tee -a /etc/subuid /etc/subgid
+</pre></div>
+</div>
+</li>
+<li><p class="first">save the following file to something like <code class="docutils literal notranslate"><span class="pre">lxd_gui_profile.txt</span></code>. Adjust for
+the correct host and container UIDs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">config</span><span class="p">:</span>
+  <span class="n">environment</span><span class="o">.</span><span class="n">DISPLAY</span><span class="p">:</span> <span class="p">:</span><span class="mi">0</span>
+  <span class="n">raw</span><span class="o">.</span><span class="n">idmap</span><span class="p">:</span> <span class="n">both</span> <span class="mi">1000</span> <span class="mi">1001</span>
+<span class="n">description</span><span class="p">:</span> <span class="n">GUI</span> <span class="n">LXD</span> <span class="n">profile</span>
+<span class="n">devices</span><span class="p">:</span>
+  <span class="n">X0</span><span class="p">:</span>
+    <span class="n">path</span><span class="p">:</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/.</span><span class="n">X11</span><span class="o">-</span><span class="n">unix</span><span class="o">/</span><span class="n">X0</span>
+    <span class="n">source</span><span class="p">:</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/.</span><span class="n">X11</span><span class="o">-</span><span class="n">unix</span><span class="o">/</span><span class="n">X0</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="n">disk</span>
+  <span class="n">mygpu</span><span class="p">:</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="n">gpu</span>
+<span class="n">name</span><span class="p">:</span> <span class="n">gui</span>
+<span class="n">used_by</span><span class="p">:</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">create the lxd “gui” profile:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ lxc profile create gui
+$ cat lxd_gui_profile.txt | lxc profile edit gui
+$ lxd profile list
+</pre></div>
+</div>
+</li>
+<li><p class="first">launch containers with the “gui” profile applied:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ lxd launch --profile default --profile gui ubuntu:18.04 mycontainer
+</pre></div>
+</div>
+</li>
+<li><p class="first">test graphics and audio inside container:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ glxgears (from mesa-utils - installed by gui profile)
+$ pactl info
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="complete-x11-inside-lxc">
+<h3>complete x11 inside LXC<a class="headerlink" href="#complete-x11-inside-lxc" title="Permalink to this headline">¶</a></h3>
+<p>I haven’t tried this yet, but <a class="reference external" href="https://unix.stackexchange.com/a/21607" target="_blank">this answer</a> claims to have it working.</p>
+</div>
+</div>
 <div class="section" id="lxc-storage">
 <h2>LXC storage<a class="headerlink" href="#lxc-storage" title="Permalink to this headline">¶</a></h2>
 <p>Coming soon.</p>
+<p><a class="reference external" href="https://tribaal.io/nicer-mounting-home-in-lxd.html" target="_blank">mounting host /home read-write</a></p>
 </div>
 <div class="section" id="gpu-passthrough">
 <h2>GPU passthrough<a class="headerlink" href="#gpu-passthrough" title="Permalink to this headline">¶</a></h2>

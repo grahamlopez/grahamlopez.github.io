@@ -131,11 +131,98 @@ working with iptables
 https://www.digitalocean.com/community/tutorials/how-to-list-and-delete-iptables-firewall-rules)
 
 
+X11 Applications in LXC
+========================
+
+The following is just for graphical use right now, but audio can be made to work
+as well. The references given for each section also explain audio, but I'm not
+using it right now.
+
+manual setup
+-------------
+
+https://blog.simos.info/how-to-run-graphics-accelerated-gui-apps-in-lxd-containers-on-your-ubuntu-desktop/
+
+1. (one time on host) allow root to remap our host's userID inside a container::
+
+    $ echo "root:$UID:1" | sudo tee -a /etc/subuid /etc/subgid
+
+2. (for each gui app container) configure the remapping for the container. Use
+   the uid/gid of the container user::
+
+    $ lxc config set mycontainer raw.idmap "both $UID 1001"
+    $ lxc restart mycontainer
+
+3. (for each gui app container) give access to the host's Xserver socket and
+   Xauthority file for ssh forwarding::
+
+    $ lxc config device add mycontainer X0 disk path=/tmp/.X11-unix/X0 source=/tmp/.X11-unix/X0
+    $ lxc config device add mycontainer Xauthority disk path=/home/ubuntu/.Xauthority source=${XAUTHORITY}
+
+4. (for each gui app container) create gpu devices for graphics acceleration. Use
+   the uid/gid of the container user::
+
+    $ lxc config device add mycontainer mygpu gpu
+    $ lxc config device set mycontainer mygpu uid 1001
+    $ lxc config device set mycontainer mygpu gid 1001
+
+5. (inside the container) be sure to set the ``$DISPLAY`` variable to match the
+   host's display (usually ``:0``)::
+
+    $ export DISPLAY=:0
+
+launching gui containers with LXD
+---------------------------------
+
+https://blog.simos.info/how-to-easily-run-graphics-accelerated-gui-apps-in-lxd-containers-on-your-ubuntu-desktop/
+
+1. allow root to remap our host's userID inside a container::
+
+    $ echo "root:$UID:1" | sudo tee -a /etc/subuid /etc/subgid
+
+2. save the following file to something like ``lxd_gui_profile.txt``. Adjust for
+   the correct host and container UIDs::
+
+    config:
+      environment.DISPLAY: :0
+      raw.idmap: both 1000 1001
+    description: GUI LXD profile
+    devices:
+      X0:
+        path: /tmp/.X11-unix/X0
+        source: /tmp/.X11-unix/X0
+        type: disk
+      mygpu:
+        type: gpu
+    name: gui
+    used_by:
+
+3. create the lxd "gui" profile::
+
+    $ lxc profile create gui
+    $ cat lxd_gui_profile.txt | lxc profile edit gui
+    $ lxd profile list
+
+4. launch containers with the "gui" profile applied::
+
+    $ lxd launch --profile default --profile gui ubuntu:18.04 mycontainer
+
+5. test graphics and audio inside container::
+
+    $ glxgears (from mesa-utils - installed by gui profile)
+    $ pactl info
+
+complete x11 inside LXC
+------------------------
+
+I haven't tried this yet, but `this answer <https://unix.stackexchange.com/a/21607>`_ claims to have it working.
 
 LXC storage
 ============
 
 Coming soon.
+
+`mounting host /home read-write <https://tribaal.io/nicer-mounting-home-in-lxd.html>`_
 
 GPU passthrough
 ================
