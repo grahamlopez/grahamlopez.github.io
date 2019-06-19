@@ -46,6 +46,7 @@ a work-in-progress as I continue to learn.
       contact
       cv
       git/index
+      privacy_security/index
 
 .. container:: rightcol
 
