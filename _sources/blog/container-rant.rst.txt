@@ -198,6 +198,3 @@ A summary
       performance-critical)
     - job isolation (specific to an environment's requirements, so not portable)
     - (not HPC application portability)
-
-container_rant.md
-Displaying container_rant.md.
