@@ -1,0 +1,28 @@
+
+####################
+Containers / VPS
+####################
+
+These pages lump together both the use of containers, as well as cloud computing
+and virtual private servers (VPS).
+
+.. toctree::
+   :maxdepth: 3
+
+   lxc_lxd
+   docker
+   vps_hosting
+
+Exploratory containers
+
+* clear containers (https://lwn.net/Articles/644675/)
+* lightvm (http://cnp.neclab.eu/projects/lightvm/)
+
+    * https://news.ycombinator.com/item?id=15610155
+    * https://news.ycombinator.com/item?id=15600596
+
+* https://hypercontainer.io
+* https://hyper.sh
+* `charliecloud <https://github.com/hpc/charliecloud/blob/master/README.rst>`_
+* `singularity <http://singularity.lbl.gov/>`_
+* `shifter <https://github.com/NERSC/shifter>`_

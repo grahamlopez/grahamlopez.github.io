@@ -1,0 +1,289 @@
+
+********************************************
+git Annoyances -- common points of confusion
+********************************************
+
+
+fetch vs. pull
+==============
+
+``git fetch [remote-repo]`` brings commits (and the branches that label them)
+from a remote repository to the local one, without integrating these into any
+local branches.  So ``git fetch remote-repo`` might result in::
+
+    git branch -r
+    # remote-repo/master
+    # remote-repo/develop
+    # remote-repo/some-feature
+
+These branches can be explored and used just like local branches with
+``git checkout`` and ``git log``. To synchronize your local branch with a remote
+branch, you can merge it just like any other local branch. E.g.
+``git checkout master`` to switch back to your local master, and then
+``git merge remote-repo/master`` to bring in the changes from the remote branch.
+
+``git pull [remote-repo]`` automates the fetch+merge process. It is equivalent to
+running ``git fetch remote-repo`` immediately followed by ``git merge`` for the current
+branch (default for git 2.0+) or multiple branches, depending on your
+configuration.
+
+If you don't specify the "remote-repo" argument by name, git will use whatever
+is configured for the current branch to be "tracking" -- a lot of times this is
+a remote repository named "origin" from which the local repo was cloned.
+
+fork vs. clone
+===============
+
+These are actually the same operation as far as git is concerned, but
+conceptually they are a little bit different depending on the context.
+Usually, when people say "fork" around git, they mean a server-side git clone.
+Github/Gitlab/et al. make this server-side cloning easy with a GUI button that
+says "fork."  After forking on Github, then one does a ``git clone`` to get a
+local working copy of the repository to code in.
+
+merge vs. rebase vs. cherrypick
+================================
+
+This is really a fundamental issue to the way that git is storing history
+involving multiple branches, so a tutorial about branching is probably in order
+here (see the Resources list at the bottom of the page). To keep with the
+quickref nature of this page, here is the generalization:
+
+* ``git merge`` adds a commit to the current branch (called a "merge commit") that
+  has two parents, instead of the usual one. The second parent being added comes
+  from the branch being merged.
+* ``git rebase`` redefines the parent of a chosen commit. This has many uses, but
+  when used in place of ``git merge``, one can move commits to another branch as if
+  they had originally been started there.
+* ``git cherrypick`` can now handle multiple commits, so its function can be
+  similar to ``git rebase``. However, one key distinction is that the commits being
+  moved are left in their original place with git cherrypick, whereas with
+  ``git rebase``, they only exist at the destination after the operation.
+
+Another point of potential confusion: what exactly is meant by "moving commits"
+or "applying commits" or "replaying commits" as you will often see in the
+explanations of ``git rebase`` and ``git cherrypick``. This sounds suspiciously like
+git is applying deltas, but we know that commits are snapshots. In fact, git is
+calculating diffs between adjacent commits, and applying those as patches to
+the new commits. So in this case, it is using deltas to perform the requested
+operation, but the commits before and after the procedure are still full
+snapshots.
+
+`This link <https://medium.com/@porteneuve/getting-solid-at-git-rebase-vs-merge-4fa1a48c53aa>`_
+as listed in the "Workflows..." subsection of the Resources at the
+bottom of this page goes into detail about when to use rebase vs. merge from a
+subjective (but IMO, reasonable) best-practices point of view.
+
+Finally, there is some more information about the effects of rebase vs. merge
+on repo histories, merge commits, etc. in the :doc:`workflows page </git/git_workflows>`.
+
+checkout vs. revert vs. reset
+==============================
+
+All three of these commands relate to "undoing" changes in the repository.
+`This Atlassian tutorial <https://www.atlassian.com/git/tutorials/resetting-checking-out-and-reverting>`_
+explains things fairly well, but here is the summary for commit-level
+operation:
+
+* ``git checkout`` moves HEAD to a new commit, usually labelled with a branch
+  name, and updates the working directory to match (hence being required to
+  commit or stash before moving).
+* ``git revert`` figures out the changes due to the specified commit, and creates
+  a new commit with those changes undone. This is safe for pushed changes.
+* ``git reset`` (beware! rewrites history) moves the current location of a branch
+  label (the branch tip) to a new commit. You can move the tip back which
+  discards the newer commits, effectively undoing their changes. There are three
+  modes for ``git reset``:
+
+  * ``--soft``: all changes made after this commit show up as staged
+  * ``--mixed``: all changes made after this commit show up as modified in the
+    working directory
+  * ``--hard``: all changes made after this commit are gone
+
+Note that ``git reset`` and ``git checkout`` can be given filepath arguments,
+instead of commit arguments.  In these cases:
+
+* ``git checkout`` updates the working directory file with the version from the
+  commit specified. If this file is committed, it has the effect of a ``git
+  revert``, except here all subsequent changes were discarded, not just the ones
+  from the commit specified in a ``git revert``.
+* ``git reset`` updates the index with the file from the specified commit.
+
+when to use git stash
+=====================
+
+Most simply, stashing lets you clean a "dirty" working copy without committing
+the changes or losing your work. You might want to do this if you want to
+change branches or explore other commits on the current branch. Git won't let
+you change branches with uncommitted changes, but if you just want to quickly
+check something out 'over there' and then come back, you can ``git stash`` your
+in-progress work and then ``git stash pop`` when you return to pick up where you
+left off.
+
+origin vs. upstream
+===================
+
+These are both terms referring to remote repositories. "origin" is the default
+name given to the repository from which the current one was cloned. In the
+Github context, "upstream" means the third party repository that was forked on
+the server-side; "upstream" on Github is forked to create "origin" on Github
+which is cloned to create the local repository where work takes place.
+
+However, the git documentation will also use "upstream" to refer to any remote
+repository that a branch is "tracking," that is, the remote branch that will be
+updated by ``git push`` or merged from by ``git pull``.
+
+(These two stackoverflow answers explain this with a diagram:
+http://stackoverflow.com/a/6286877 and http://stackoverflow.com/a/9257901)
+
+local vs. remote branches
+=========================
+
+Sometimes experience with using SVN branches and then local git branches can
+cause confusion about what is going on when git branches need to live in two
+different repositories (e.g. local and remote). Remember to try to think of all
+branches, regardless of location, as being the same kind of entity.
+
+Some FAQs related to these issues:
+
+Q) Why is a merge is necessary after a commit is pushed to origin, and then
+amended locally in my private repository? I know that there hasn't been any
+change on the remote branch.
+
+A) Let's say that you push the current local HEAD commit 675f4d4 to origin.
+Next, you run ``git commit --amend``, which changes the local commit 675f4d4 to
+7b48f8c, while 675f4d4 still exists on origin. Now, when you try to push your
+amend, the local branch and remote branch differ because their HEAD's are each
+pointing at two different commit hashes. Git doesn't know the intended
+relationship between these different hashes, so a pull+merge is necessary to
+specify it.
+
+Q) When I use ``git checkout -b branchname``, then make changes and commit, git
+push says "Everything up-to-date" instead of creating the branch back at github
+and pushing my changes there.
+
+A) When you create a new branch locally, there is no way for git to know that
+it should also be sent to a remote repository, or even if it should, which
+remote to send it to. Since there is no intrinsically special relationship
+between any two repositories (unlike the SVN client-server model), you have to
+specify where you want new objects to exist.
+
+In fact, you don't even have to make local changes and a new commit before
+pushing the new branch to a remote. Since a branch is just a label pointing at a
+commit, it is perfectly okay to ``git push -u remote_name feature_branch_name``
+which will send the newly created label pointing at the already existing commit.
+
+Q)  When I'm working on a branch and try to push the changes, git says "failed
+to push some refs" and tells me to pull before pushing again, but when I try to
+pull, it fails.  What is happening here?
+
+A) In short, there is another branch that is out of date, and git is configured
+(by default for git <2.0, or via ``push.default = matching``) to push all tracking
+branches when no branchname argument is supplied to ``git push``. The is to change
+your configuration (possibly by upgrading your git installation), or specify the
+branchname when you push.
+
+It might be easier to walk through an example step by step. Here, we are trying
+to push updates to the ``new_format`` branch of the ``gitstuff`` repository whose
+configured ``origin`` is being hosted on Github::
+
+    eos:~/gitstuff>> git push
+    --snip-snip--
+    To git@github.com:gitstuff
+    e3970b0..5a0a658 new_format -> new_format
+    ! [rejected] master -> master (non-fast-forward)
+    error: failed to push some refs to 'git@github.com:new_format'
+    To prevent you from losing history, non-fast-forward updates were rejected
+    Merge the remote changes (e.g. 'git pull') before pushing again. See the
+    'Note about fast-forwards' section of 'git push --help' for details.
+
+Next, you try to pull like it says, but nothing happens::
+    eos:~/gitstuff>> git pull
+    Already up-to-date.
+
+... but pushing still gives you the same error?::
+
+    eos:~/gitstuff>> git push
+    --snip-snip--
+    error: failed to push some refs to 'git@github.com:gitstuff'
+    To prevent you from losing history,
+    --snip-snip--
+
+Reading the first error message more closely, we see that it was the master
+branch that was rejected on the push. So checkout master, pull, and switch back
+to your branch::
+
+    eos:~/gitstuff>> git checkout master
+    Switched to branch 'master'
+    Your branch is behind 'origin/master' by 32 commits, and can be fast-forwarded.
+
+    eos:~/gitstuff>> git pull
+    Updating e8556c2..3e3596a
+    Fast-forward
+    --- snip snip lots of changes snip snip ---
+
+    eos:~/gitstuff>> git checkout new_format
+    Switched to branch 'new_format'
+
+And now, no more errors.::
+
+    eos:~/gitstuff>> git push
+    Everything up-to-date
+
+Everything is up to date, because the ``new_format`` branch was pushed the first
+time (when we received the error about not being able to push to ``master``), and
+now ``master`` is up to date as well.
+
+Nesting git repos
+=================
+
+Sometimes it is desirable to have an independent git repository completely
+contained within another. An example might be a third-party developed library
+dependencies: you still want to track new changes and possibly send changes to
+the library developers, but you want to keep it bundled in a logical way within
+your development tree.  It turns out that git itself doesn't handle these
+situations very well out of the box, but alternatives of various kinds have been
+developed to try to make it easier:
+
+* `git submodule <https://git-scm.com/docs/git-submodule>`_
+  is the built-in git tool for handling separate but related repositories. It is
+  stronger in the situation where you do not control the sub projects.
+* `git subtree <https://git-scm.com/book/en/v1/Git-Tools-Subtree-Merging>`_
+  merging is actually a methodology of using normal git operations to work on
+  sub projects, and there is now also a contributed front-end for
+  semi-automation.
+* `gitslave <http://gitslave.sourceforge.net/>`_
+  is an external tool to control multiple related repositories together,
+  performing operations on them at the same time.
+
+How to delete a file from git completely
+========================================
+
+Git tries very hard to prevent any real data loss, as might be expected from a
+good VCS. However, there might be a situation where you want to actually remove
+data from the repository, such as if a large file gets accidentally added and
+tracked. Simply doing a ``git rm filename`` will stop git tracking, but the data is
+still present in previous commits.
+
+Removing a file from previous commits is rewriting history, and rewriting
+history that has already been made public is almost always a bad idea.  If you
+still want to do it, ``git filter-branch --tree-filter 'rm -f my_bad_file' HEAD``
+is likely the command you want, `as described here <https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History>`_.
+If you google this question, you will probably find that
+`Github recommends <https://help.github.com/articles/removing-files-from-a-repository-s-history/>`_
+a tool that attempts to make this process easier,
+`BFG Repo-Cleaner <https://rtyley.github.io/bfg-repo-cleaner/>`_.
+
+Note also that deleting or squashing the commits with the files to be removed is
+also not sufficient, even after a ``git rm filename`` as this only removes the
+references to those commits, but the blobs still exist in git's internal stores.
+This can be seen easily by comparing the size of the repo before and after
+removing commits with large files in them.
+
+How to deal with large files in git repos
+=========================================
+
+Since git is not suited for tracking and storing large files, there have been a
+few third-party projects that try to make this a more reasonable thing to do.
+Two of the more well-known projects are `git annex <https://git-annex.branchable.com/>`_
+and the `LFS (large file storage) module <https://git-lfs.github.com/>`_.

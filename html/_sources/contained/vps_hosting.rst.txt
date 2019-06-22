@@ -1,0 +1,44 @@
+
+***************
+VPS hosting
+***************
+
+Sometimes it is nice to get a remote system of some kind, or a lightweight
+throw-away instance. This is where virtual private servers come in. Note that
+you don't have to run containers on them, but this is a common thing to do.
+
+AWS is the most obvious choice, and while it is super powerful, I find it super
+complicated as well. There are other, smaller VPS hosting companies that are
+sometimes cheaper than AWS, still have developer-friendly features, and are
+overall a bit simpler to use at the possible expense of automation features
+targeted at enterprise/production applications.
+
+I actually only use these services intermittently, so this is a place to keep
+some reminders to myself about how to use them, etc.
+
+Vultr
+=====
+
+Coming soon.
+
+DigitalOcean
+============
+
+Coming soon.
+
+misc for vps hosting
+=====================
+
+to point DNS at a VPS:
+
+* login to domain registrar and change the nameservers for the domain
+
+    * ns1,ns2.vultr.com
+    * ns1,ns2,ns3.digitalocean.com
+
+* go to the DNS dashboard of the VPS provider and add the entries
+
+    * just set the "default domain" to some IP of a VPS (this will make the A
+      record for the domain)
+    * then add additional A records to make the hostname point to the right
+      place

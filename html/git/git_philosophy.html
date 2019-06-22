@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>git philosophy &#8212; graham lopez  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="General best practices" href="best_practices.html" />
+    <link rel="prev" title="git hints" href="index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">graham lopez</a></h1>
+
+
+
+<p class="blurb">Notes by/for, and a little bit about M. Graham Lopez</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../contact.html">Contact me</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cv.html">Curriculum Vitae</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">git hints</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">git philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="best_practices.html">General best practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="confusion.html">git Annoyances – common points of confusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shortcuts_and_conf.html">Shortcuts and configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_credentials.html">git credentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_workflows.html">git Workflows – how to organize branching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="repo_histories.html">Repository histories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html">Big list o’ resources – links to external sites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unsorted.html">Unsorted git</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../privacy_security/index.html">Privacy / Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contained/index.html">Containers / VPS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli_tools/index.html">CLI Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../blog/index.html">blog(ish)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsorted/index.html">unsorted</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html">sphinx</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">git hints</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">git hints</a></li>
+      <li>Next: <a href="best_practices.html" title="next chapter">General best practices</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="index.html" title="Previous document">git hints</a>
+        </li>
+        <li>
+          <a href="best_practices.html" title="Next document">General best practices</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="git-philosophy">
+<h1>git philosophy<a class="headerlink" href="#git-philosophy" title="Permalink to this headline">¶</a></h1>
+<p>Summary:</p>
+<ol class="arabic simple">
+<li>Snapshots, not deltas</li>
+<li>History is only for humans</li>
+<li>Branching is free</li>
+<li>Ignore the index</li>
+<li>There are no server repositories</li>
+</ol>
+<div class="section" id="snapshots-not-deltas">
+<h2>1) “Snapshots, not deltas”<a class="headerlink" href="#snapshots-not-deltas" title="Permalink to this headline">¶</a></h2>
+<p>At each commit, git stores a snapshot of the entire repository state. It is more
+like cd’ing out of the source code directory, tar’ing it up, renaming the
+tarball to source.tar.backup1, and cd’ing back into the source directory.
+Whereas with other VCS implementations like SVN, at each commit, they store the
+changes made from the previous state. To reconstruct the current state of the
+repository, git needs the information from that commit, whereas SVN needs the
+information for that commit and the entire history leading to it.</p>
+<p>Even in the case of git operations that use diffs
+(e.g. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">cherrypick</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code>, etc.), git finds the relevant snapshots
+and calculates the deltas on the fly.</p>
+</div>
+<div class="section" id="history-is-only-for-humans">
+<h2>2) “History is only for humans”<a class="headerlink" href="#history-is-only-for-humans" title="Permalink to this headline">¶</a></h2>
+<p>To git, the contents of the repository are more or less just a pile of data.
+There is no explicit dependency between commits since each one is a stand-alone
+snapshot of the repository (see point #1 above). The history is just provided as
+a way for the user to navigate the commits that git has collected over time.</p>
+</div>
+<div class="section" id="branching-is-free">
+<h2>3) “Branching is free”<a class="headerlink" href="#branching-is-free" title="Permalink to this headline">¶</a></h2>
+<p>This is technically not true, but branching is so cheap that it should be
+thought of as free. So branch for everything.</p>
+</div>
+<div class="section" id="ignore-the-index">
+<h2>4) “Ignore the index”<a class="headerlink" href="#ignore-the-index" title="Permalink to this headline">¶</a></h2>
+<p>It IS useful, but only once you know why you need it (hint: not all the time!)
+For example, some instances where one might want to use the index cleverly:</p>
+<ul class="simple">
+<li>staging helps you split up one large change into multiple commits</li>
+<li>staging helps in reviewing change</li>
+<li>staging helps when a merge has conflicts</li>
+<li>staging helps you keep extra local files hanging around</li>
+</ul>
+<p>Besides these kinds of specific situations, feel free to skip the index.</p>
+</div>
+<div class="section" id="there-are-no-server-repositories">
+<h2>5) “There are no server repositories”<a class="headerlink" href="#there-are-no-server-repositories" title="Permalink to this headline">¶</a></h2>
+<p>A lot of the time we designate and use certain repositories like an SVN server,
+but this is an analogy at best, and taking it too far can lead to confusion
+later on – especially concerning expected behavior with branches.</p>
+<p>The most common times we think of git in a client-server model is when cloning
+from a repository that is hosted on a server somewhere, like Github, Gitlab, or
+otherwise. In some ways, this “cloned-from” repository does get a little bit of
+special treatment by default (but it can be turned off), and as a result it
+typically gets named “origin” by default. However, git is designed to be
+distributed, and its behavior is centered around the assumption that you want
+the local repository to interact with multiple other repositories, not just the
+one that was cloned from. Git’s behavior is very configurable, but the defaults
+are usually conservative and try to make fewer assumptions about what you want.</p>
+<p>So to think like git does, always start off by thinking of all branches and
+repositories as being equal regardless of their locations or any other
+pre-existing special relationships that may or may not apply to the present case
+(branch) that you are working with. Starting from this point, it is easier to
+understand branching and remote operations and how other previously-defined
+relationships (like “origin,” “upstream,” etc.) might modify the general
+behavior.  Usually these “modified behaviors” consist of git setting up
+conveniences, like the case where you can just say <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> instead of <code class="docutils literal notranslate"><span class="pre">git</span>
+<span class="pre">push</span> <span class="pre">src-branch</span> <span class="pre">dst-branch</span></code>.</p>
+</div>
+</div>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="index.html" title="Previous document">git hints</a>
+        </li>
+        <li>
+          <a href="best_practices.html" title="Next document">General best practices</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2019, M. Graham Lopez.
+      
+    </div>
+
+    
+
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-140879797-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    
+  </body>
+</html>

@@ -1,0 +1,289 @@
+
+****************************
+tmux - terminal multiplexer
+****************************
+
+Right after Vim, (and obviously a shell), tmux is easily the CLI tool that I use
+most. I use it for two major (and mostly separate) purposes: terminal
+management, and session management.
+
+Tmux is a direct replacement for GNU Screen, and should be unequivocally
+preferred. There are a few rare exceptions to this, namely when Screen is
+installed and Tmux is not.
+
+Note that the "key binding"s as listed in the following tables are the ones
+using my own config. However, I have also listed the tmux command that produces
+the behavior, so that you can rebind them if you want to (without having to
+search for the name of the command to get a certain result).
+
+Rebinding is done like this in your ``~/.tmux.conf``::
+
+    unbind h
+    bind-key -r h select-pane -L
+
+All ``bind-key`` commands in tmux assumed to have the ``<prefix>`` in front.
+
+If your ``<prefix>`` key (ctrl-b by default, ctrl-a in my config) contains
+control, any time you see a ``bind-key`` like ``c-a``, this means "control and
+'a' at the same time, after the ``<prefix>`` key." To do this, you can just keep
+ctrl held down to execute something like ``<prefix> c-a``.
+
+Tmux does a ton, and I don't use a lot of it. The rest of this page is a summary
+of the things that I use regularly and find most useful. The Tmux man page is
+above average good, so spend some time with it when you want to know more.
+
+Terminal management
+======================
+
+By terminal management, I mean that if I am working on anything (e.g. coding
+project, note taking, multiple containers or remote hosts, etc.) where I will
+likely want to have more than one terminal open at once, I will always choose
+tmux to handle this over opening multiple [x|a|gnome]terms on the same desktop.
+
+Windows
+--------
+
+Windows correspond to the area that you can see at any given time. When you
+start tmux, you are presented with a single window that contains a single
+terminal. You can open multiple windows and switch between them at will, but you
+can only ever see one at time.
+
++----------------------+-------------------------+----------------------------+
+| key binding          | tmux command            | behavior                   |
++======================+=========================+============================+
+| <prefix> c           | new-window              | open a new window          |
++----------------------+-------------------------+----------------------------+
+| (exit the last shell)|                         | close the window           |
++----------------------+-------------------------+----------------------------+
+| <prefix> n           | next-window             | switch to next window      |
++----------------------+-------------------------+----------------------------+
+| <prefix> p           | previous-window         | switch to previous window  |
++----------------------+-------------------------+----------------------------+
+| <prefix> [number]    | select-window -t        | switch to [number] window  |
+|                      | :=[number]              |                            |
++----------------------+-------------------------+----------------------------+
+| <prefix> , (comma)   | command-prompt -I "#W"  | rename the window          |
+|                      | "rename-window '%%'"    |                            |
++----------------------+-------------------------+----------------------------+
+
+
+Panes
+------
+
+Panes are what let you see multiple terminals/shells at a time. As you add
+panes, they divide up the available space of their containing window. Panes are
+also sometimes called splits, and existing windows and panes can be split both
+horizontally and vertically.
+
+I try to make my tmux pane management/navigation match vim's window
+management/navigation as much as possible.
+
++-----------------------+-----------------------------+------------------------+
+| key binding           | tmux command                | behavior               |
++=======================+=============================+========================+
+| <prefix> " (also, 's')| split-window                | split pane horizontally|
++-----------------------+-----------------------------+------------------------+
+| <prefix> % (also, 'v')| split-window -h             | split pane vertically  |
++-----------------------+-----------------------------+------------------------+
+| <prefix> [h,j,k,l]    | select-pane [-L,-D,-U,-R]   | goto pane              |
+|                       |                             | left,down,up,right     |
++-----------------------+-----------------------------+------------------------+
+| <prefix> ctrl-a       | last-pane                   | goto last selected pane|
++-----------------------+-----------------------------+------------------------+
+| <prefix> [<,-,+,>]    | resize-pane [-L,-D,-U,-R] 5 | resize pane by 5       |
+|                       |                             | left,down,up,right     |
++-----------------------+-----------------------------+------------------------+
+
+Note, as stated above, I map the split keys (``"`` and ``%``) to ``s`` and
+``v``, respectively, to match the way that vim splits its windows (just with a
+different prefix).
+
+You can also do things like rearrange the panes, swap them out with each other,
+and change the orientations of the splits. I haven't gone into all of that here,
+but I do use it sometime, and you might want to know that these things are
+available.
+
+Copy mode
+----------------
+The other miscellaneous thing to know about is copy mode. This lets you
+scroll back in the terminal and select/copy text and then paste it, although I
+rarely use it for that. I use it almost every day for scroll back and search.
+
+I use copy-mode-vi, so that the navigation is vim-like. Don't ask me how to use
+vanilla copy-mode.
+
++----------------------+-------------------+----------------------------------+
+| key binding          | command           | behavior                         |
++======================+===================+==================================+
+| <prefix> [           | copy-mode         | enter copy mode                  |
++----------------------+-------------------+----------------------------------+
+| <prefix> ]           | paste buffer      | paste the contents of the buffer |
++----------------------+-------------------+----------------------------------+
+| (vim navigation keys)| (various)         | move around within the buffer    |
++----------------------+-------------------+----------------------------------+
+| space                | send-keys -X      | begin selection mode to copy     |
+|                      | begin-selection   | buffer                           |
++----------------------+-------------------+----------------------------------+
+
+Session management
+====================
+
+By session management, I mean the ability to set up a complex terminal-based
+workspace and then return to it later, even across login/logouts (but
+unfortunately not reboots). All of your window/pane layout will remain, as well
+as the processes that are running inside of them.
+
++------------------------------+-----------------------------------------------+
+| command                      | behavior                                      |
++==============================+===============================================+
+| ``tmux``                     | create new session named "1", then "2", ...   |
++------------------------------+-----------------------------------------------+
+| ``tmux new -s <name>``       | create new session with "<name>"              |
++------------------------------+-----------------------------------------------+
+| (keypress) ``<prefix> d``    | detach from session (leave it running)        |
++------------------------------+-----------------------------------------------+
+| ``tmux ls``                  | list the running sessions                     |
++------------------------------+-----------------------------------------------+
+| ``tmux at -dt <name>``       | attach to session (detaching first if needed) |
++------------------------------+-----------------------------------------------+
+| (exit all shells in session) | destroy the session                           |
++------------------------------+-----------------------------------------------+
+
+
+Other useful tmux commands
+===========================
+
++----------------------+------------------------+----------------------------+
+| key binding          | tmux command           | behavior                   |
++======================+========================+============================+
+| <prefix> ?           | list-keys              | display all available      |
+|                      |                        | key bindings               |
++----------------------+------------------------+----------------------------+
+| <prefix> w           | choose-tree -w         | show menu switcher for     |
+|                      |                        | sessions, windows, panes   |
++----------------------+------------------------+----------------------------+
+
+
+My ~/.tmux.conf
+================
+
+This (as of June 2019) is my personal ``~/.tmux.conf`` that I use everyday. It
+has been refined over the past 5-8 years, and is pretty stable these days. The
+biggest modifications that I do here are:
+
+- set up the visuals, including the status line and how the split dividers look.
+- some settings to help with modern, color-supporting terminals.
+- change copy/paste mode to have vi-like keys
+- a few key-bindings, mostly to be more consistent with Vim window behavior
+- change the prefix to ``ctrl+a`` because it is how I learned GNU screen, and it
+  is easier to reach/use than ``ctrl+b``.
+
+Okay, here's the file::
+
+    # .tmux.conf by graham lopez
+    #
+    # set time for which status line messages are displayed in ms
+    set -g display-time 2000
+    # set time for which pane selections are displayed in ms
+    set -g display-panes-time 4000
+    # number of lines to keep in the history
+    set -g history-limit 10000
+    # update the status bar every interval seconds
+    set -g status-interval 15
+    # show message if monitoring a window
+    set -g visual-activity on
+
+    # working on colors (these don't seem to work as well as tmux -2)
+    set -g default-terminal screen-256color
+    # from man page in 'terminal-overrides' description
+    set -g terminal-overrides "*88col*:colors=88,*256col*:colors=256,xterm*:XT"
+
+    # try to set window name to be currently running command
+    set-window-option -g automatic-rename on
+    # try to set xterm window titles
+    set-option -g set-titles on
+
+    # set copy/paste mode keybindings to be vi like
+    set-window-option -g mode-keys vi
+    set -g status-keys vi
+    # make start selection in copy mode from (space)->v
+    bind-key -t vi-copy v begin-selection
+
+    # help with certain keys in Vim
+    # see http://superuser.com/questions/401926/how-to-get-shiftarrows-and-ctrlarrows-working-in-vim-in-tmux
+    set-window-option -g xterm-keys on
+
+    # set right status bar blank (until better use for it found)
+    set -g status-right ""
+    # default statusbar colors
+    set -g status-fg white
+    set -g status-bg default
+    set -g status-attr default
+
+    # some default dimensions
+    set -g main-pane-width 90
+    bind-key m select-layout main-vertical
+
+    # active pane has a blue border
+    set-option -g pane-active-border-fg blue
+
+    # # default window title colors
+    set-window-option -g window-status-fg cyan
+    set-window-option -g window-status-bg default
+    set-window-option -g window-status-attr dim
+
+    # # active window title colors
+    set-window-option -g window-status-current-fg white
+    set-window-option -g window-status-current-bg default
+    set-window-option -g window-status-current-attr bright
+
+    # # command/message line colors
+    set -g message-fg white
+    set -g message-bg black
+    set -g message-attr bright
+
+    unbind O
+    bind O command-prompt -p "select pane:"  "select-pane -t ':.%%'"
+    bind-key @ command-prompt -p "create pane from:"  "join-pane -hs ':%%'"
+    unbind S
+    bind S command-prompt -p "swap with window:"  "swap-window -s ':%%'"
+    unbind '#'
+    bind-key '#' command-prompt -p "swap pane with:"  "break-pane ; last-window ; join-pane -hs ':%%'"
+
+    # to be a little vim-like getting around panes ("windows" in vim)
+    bind-key -r h select-pane -L
+    bind-key -r j select-pane -D
+    bind-key -r k select-pane -U
+    bind-key -r l select-pane -R
+    bind-key -r J swap-pane -D
+    bind-key -r K swap-pane -U
+    bind-key -r - resize-pane -D 5
+    bind-key -r + resize-pane -U 5
+    bind-key -r < resize-pane -L 5
+    bind-key -r > resize-pane -R 5
+    bind-key s split-window
+    bind-key v split-window -h
+
+    # some other bindings
+    unbind '9'
+    bind-key 9 resize-pane -x 84
+
+    # This section sets things to be like gnu-screen
+    # (from examples/screen-keys.conf incl. w/source)
+    #
+    # Set the prefix to ^A like gnu screen
+    unbind C-b
+    set -g prefix ^A
+    ## last window
+    unbind ^A
+    bind ^A last-pane
+    #to get readline shortcut
+    bind a send-prefix
+
+    # for yosemite "LSOpenURLsWithRole() failed with error -10810 for the file"
+    #set -g default-command "reattach-to-user-namespace -l /bin/zsh"
+
+Other tmux hints
+=================
+
+- ``alias tmux="tmux -2"``

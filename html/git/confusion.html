@@ -1,0 +1,430 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>git Annoyances – common points of confusion &#8212; graham lopez  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Shortcuts and configuration" href="shortcuts_and_conf.html" />
+    <link rel="prev" title="General best practices" href="best_practices.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">graham lopez</a></h1>
+
+
+
+<p class="blurb">Notes by/for, and a little bit about M. Graham Lopez</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../contact.html">Contact me</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cv.html">Curriculum Vitae</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">git hints</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="git_philosophy.html">git philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="best_practices.html">General best practices</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">git Annoyances – common points of confusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shortcuts_and_conf.html">Shortcuts and configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_credentials.html">git credentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_workflows.html">git Workflows – how to organize branching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="repo_histories.html">Repository histories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html">Big list o’ resources – links to external sites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unsorted.html">Unsorted git</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../privacy_security/index.html">Privacy / Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contained/index.html">Containers / VPS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli_tools/index.html">CLI Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../blog/index.html">blog(ish)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsorted/index.html">unsorted</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html">sphinx</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">git hints</a><ul>
+      <li>Previous: <a href="best_practices.html" title="previous chapter">General best practices</a></li>
+      <li>Next: <a href="shortcuts_and_conf.html" title="next chapter">Shortcuts and configuration</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="best_practices.html" title="Previous document">General best practices</a>
+        </li>
+        <li>
+          <a href="shortcuts_and_conf.html" title="Next document">Shortcuts and configuration</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="git-annoyances-common-points-of-confusion">
+<h1>git Annoyances – common points of confusion<a class="headerlink" href="#git-annoyances-common-points-of-confusion" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="fetch-vs-pull">
+<h2>fetch vs. pull<a class="headerlink" href="#fetch-vs-pull" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span> <span class="pre">[remote-repo]</span></code> brings commits (and the branches that label them)
+from a remote repository to the local one, without integrating these into any
+local branches.  So <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span> <span class="pre">remote-repo</span></code> might result in:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">branch</span> <span class="o">-</span><span class="n">r</span>
+<span class="c1"># remote-repo/master</span>
+<span class="c1"># remote-repo/develop</span>
+<span class="c1"># remote-repo/some-feature</span>
+</pre></div>
+</div>
+<p>These branches can be explored and used just like local branches with
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>. To synchronize your local branch with a remote
+branch, you can merge it just like any other local branch. E.g.
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">master</span></code> to switch back to your local master, and then
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span> <span class="pre">remote-repo/master</span></code> to bring in the changes from the remote branch.</p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span> <span class="pre">[remote-repo]</span></code> automates the fetch+merge process. It is equivalent to
+running <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span> <span class="pre">remote-repo</span></code> immediately followed by <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> for the current
+branch (default for git 2.0+) or multiple branches, depending on your
+configuration.</p>
+<p>If you don’t specify the “remote-repo” argument by name, git will use whatever
+is configured for the current branch to be “tracking” – a lot of times this is
+a remote repository named “origin” from which the local repo was cloned.</p>
+</div>
+<div class="section" id="fork-vs-clone">
+<h2>fork vs. clone<a class="headerlink" href="#fork-vs-clone" title="Permalink to this headline">¶</a></h2>
+<p>These are actually the same operation as far as git is concerned, but
+conceptually they are a little bit different depending on the context.
+Usually, when people say “fork” around git, they mean a server-side git clone.
+Github/Gitlab/et al. make this server-side cloning easy with a GUI button that
+says “fork.”  After forking on Github, then one does a <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> to get a
+local working copy of the repository to code in.</p>
+</div>
+<div class="section" id="merge-vs-rebase-vs-cherrypick">
+<h2>merge vs. rebase vs. cherrypick<a class="headerlink" href="#merge-vs-rebase-vs-cherrypick" title="Permalink to this headline">¶</a></h2>
+<p>This is really a fundamental issue to the way that git is storing history
+involving multiple branches, so a tutorial about branching is probably in order
+here (see the Resources list at the bottom of the page). To keep with the
+quickref nature of this page, here is the generalization:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> adds a commit to the current branch (called a “merge commit”) that
+has two parents, instead of the usual one. The second parent being added comes
+from the branch being merged.</li>
+<li><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code> redefines the parent of a chosen commit. This has many uses, but
+when used in place of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code>, one can move commits to another branch as if
+they had originally been started there.</li>
+<li><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">cherrypick</span></code> can now handle multiple commits, so its function can be
+similar to <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code>. However, one key distinction is that the commits being
+moved are left in their original place with git cherrypick, whereas with
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code>, they only exist at the destination after the operation.</li>
+</ul>
+<p>Another point of potential confusion: what exactly is meant by “moving commits”
+or “applying commits” or “replaying commits” as you will often see in the
+explanations of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">cherrypick</span></code>. This sounds suspiciously like
+git is applying deltas, but we know that commits are snapshots. In fact, git is
+calculating diffs between adjacent commits, and applying those as patches to
+the new commits. So in this case, it is using deltas to perform the requested
+operation, but the commits before and after the procedure are still full
+snapshots.</p>
+<p><a class="reference external" href="https://medium.com/&#64;porteneuve/getting-solid-at-git-rebase-vs-merge-4fa1a48c53aa" target="_blank">This link</a>
+as listed in the “Workflows…” subsection of the Resources at the
+bottom of this page goes into detail about when to use rebase vs. merge from a
+subjective (but IMO, reasonable) best-practices point of view.</p>
+<p>Finally, there is some more information about the effects of rebase vs. merge
+on repo histories, merge commits, etc. in the <a class="reference internal" href="git_workflows.html"><span class="doc">workflows page</span></a>.</p>
+</div>
+<div class="section" id="checkout-vs-revert-vs-reset">
+<h2>checkout vs. revert vs. reset<a class="headerlink" href="#checkout-vs-revert-vs-reset" title="Permalink to this headline">¶</a></h2>
+<p>All three of these commands relate to “undoing” changes in the repository.
+<a class="reference external" href="https://www.atlassian.com/git/tutorials/resetting-checking-out-and-reverting" target="_blank">This Atlassian tutorial</a>
+explains things fairly well, but here is the summary for commit-level
+operation:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span></code> moves HEAD to a new commit, usually labelled with a branch
+name, and updates the working directory to match (hence being required to
+commit or stash before moving).</li>
+<li><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">revert</span></code> figures out the changes due to the specified commit, and creates
+a new commit with those changes undone. This is safe for pushed changes.</li>
+<li><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span></code> (beware! rewrites history) moves the current location of a branch
+label (the branch tip) to a new commit. You can move the tip back which
+discards the newer commits, effectively undoing their changes. There are three
+modes for <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span></code>:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">--soft</span></code>: all changes made after this commit show up as staged</li>
+<li><code class="docutils literal notranslate"><span class="pre">--mixed</span></code>: all changes made after this commit show up as modified in the
+working directory</li>
+<li><code class="docutils literal notranslate"><span class="pre">--hard</span></code>: all changes made after this commit are gone</li>
+</ul>
+</li>
+</ul>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span></code> can be given filepath arguments,
+instead of commit arguments.  In these cases:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span></code> updates the working directory file with the version from the
+commit specified. If this file is committed, it has the effect of a <code class="docutils literal notranslate"><span class="pre">git</span>
+<span class="pre">revert</span></code>, except here all subsequent changes were discarded, not just the ones
+from the commit specified in a <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">revert</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span></code> updates the index with the file from the specified commit.</li>
+</ul>
+</div>
+<div class="section" id="when-to-use-git-stash">
+<h2>when to use git stash<a class="headerlink" href="#when-to-use-git-stash" title="Permalink to this headline">¶</a></h2>
+<p>Most simply, stashing lets you clean a “dirty” working copy without committing
+the changes or losing your work. You might want to do this if you want to
+change branches or explore other commits on the current branch. Git won’t let
+you change branches with uncommitted changes, but if you just want to quickly
+check something out ‘over there’ and then come back, you can <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">stash</span></code> your
+in-progress work and then <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">stash</span> <span class="pre">pop</span></code> when you return to pick up where you
+left off.</p>
+</div>
+<div class="section" id="origin-vs-upstream">
+<h2>origin vs. upstream<a class="headerlink" href="#origin-vs-upstream" title="Permalink to this headline">¶</a></h2>
+<p>These are both terms referring to remote repositories. “origin” is the default
+name given to the repository from which the current one was cloned. In the
+Github context, “upstream” means the third party repository that was forked on
+the server-side; “upstream” on Github is forked to create “origin” on Github
+which is cloned to create the local repository where work takes place.</p>
+<p>However, the git documentation will also use “upstream” to refer to any remote
+repository that a branch is “tracking,” that is, the remote branch that will be
+updated by <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> or merged from by <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>.</p>
+<p>(These two stackoverflow answers explain this with a diagram:
+<a class="reference external" href="http://stackoverflow.com/a/6286877" target="_blank">http://stackoverflow.com/a/6286877</a> and <a class="reference external" href="http://stackoverflow.com/a/9257901" target="_blank">http://stackoverflow.com/a/9257901</a>)</p>
+</div>
+<div class="section" id="local-vs-remote-branches">
+<h2>local vs. remote branches<a class="headerlink" href="#local-vs-remote-branches" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes experience with using SVN branches and then local git branches can
+cause confusion about what is going on when git branches need to live in two
+different repositories (e.g. local and remote). Remember to try to think of all
+branches, regardless of location, as being the same kind of entity.</p>
+<p>Some FAQs related to these issues:</p>
+<p>Q) Why is a merge is necessary after a commit is pushed to origin, and then
+amended locally in my private repository? I know that there hasn’t been any
+change on the remote branch.</p>
+<p>A) Let’s say that you push the current local HEAD commit 675f4d4 to origin.
+Next, you run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">--amend</span></code>, which changes the local commit 675f4d4 to
+7b48f8c, while 675f4d4 still exists on origin. Now, when you try to push your
+amend, the local branch and remote branch differ because their HEAD’s are each
+pointing at two different commit hashes. Git doesn’t know the intended
+relationship between these different hashes, so a pull+merge is necessary to
+specify it.</p>
+<p>Q) When I use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span> <span class="pre">branchname</span></code>, then make changes and commit, git
+push says “Everything up-to-date” instead of creating the branch back at github
+and pushing my changes there.</p>
+<p>A) When you create a new branch locally, there is no way for git to know that
+it should also be sent to a remote repository, or even if it should, which
+remote to send it to. Since there is no intrinsically special relationship
+between any two repositories (unlike the SVN client-server model), you have to
+specify where you want new objects to exist.</p>
+<p>In fact, you don’t even have to make local changes and a new commit before
+pushing the new branch to a remote. Since a branch is just a label pointing at a
+commit, it is perfectly okay to <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">-u</span> <span class="pre">remote_name</span> <span class="pre">feature_branch_name</span></code>
+which will send the newly created label pointing at the already existing commit.</p>
+<p>Q)  When I’m working on a branch and try to push the changes, git says “failed
+to push some refs” and tells me to pull before pushing again, but when I try to
+pull, it fails.  What is happening here?</p>
+<p>A) In short, there is another branch that is out of date, and git is configured
+(by default for git &lt;2.0, or via <code class="docutils literal notranslate"><span class="pre">push.default</span> <span class="pre">=</span> <span class="pre">matching</span></code>) to push all tracking
+branches when no branchname argument is supplied to <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code>. The is to change
+your configuration (possibly by upgrading your git installation), or specify the
+branchname when you push.</p>
+<p>It might be easier to walk through an example step by step. Here, we are trying
+to push updates to the <code class="docutils literal notranslate"><span class="pre">new_format</span></code> branch of the <code class="docutils literal notranslate"><span class="pre">gitstuff</span></code> repository whose
+configured <code class="docutils literal notranslate"><span class="pre">origin</span></code> is being hosted on Github:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>eos:~/gitstuff&gt;&gt; git push
+--snip-snip--
+To git@github.com:gitstuff
+e3970b0..5a0a658 new_format -&gt; new_format
+! [rejected] master -&gt; master (non-fast-forward)
+error: failed to push some refs to &#39;git@github.com:new_format&#39;
+To prevent you from losing history, non-fast-forward updates were rejected
+Merge the remote changes (e.g. &#39;git pull&#39;) before pushing again. See the
+&#39;Note about fast-forwards&#39; section of &#39;git push --help&#39; for details.
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Next, you try to pull like it says, but nothing happens::</dt><dd>eos:~/gitstuff&gt;&gt; git pull
+Already up-to-date.</dd>
+</dl>
+<p>… but pushing still gives you the same error?:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">eos</span><span class="p">:</span><span class="o">~/</span><span class="n">gitstuff</span><span class="o">&gt;&gt;</span> <span class="n">git</span> <span class="n">push</span>
+<span class="o">--</span><span class="n">snip</span><span class="o">-</span><span class="n">snip</span><span class="o">--</span>
+<span class="n">error</span><span class="p">:</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">push</span> <span class="n">some</span> <span class="n">refs</span> <span class="n">to</span> <span class="s1">&#39;git@github.com:gitstuff&#39;</span>
+<span class="n">To</span> <span class="n">prevent</span> <span class="n">you</span> <span class="kn">from</span> <span class="nn">losing</span> <span class="n">history</span><span class="p">,</span>
+<span class="o">--</span><span class="n">snip</span><span class="o">-</span><span class="n">snip</span><span class="o">--</span>
+</pre></div>
+</div>
+<p>Reading the first error message more closely, we see that it was the master
+branch that was rejected on the push. So checkout master, pull, and switch back
+to your branch:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">eos</span><span class="p">:</span><span class="o">~/</span><span class="n">gitstuff</span><span class="o">&gt;&gt;</span> <span class="n">git</span> <span class="n">checkout</span> <span class="n">master</span>
+<span class="n">Switched</span> <span class="n">to</span> <span class="n">branch</span> <span class="s1">&#39;master&#39;</span>
+<span class="n">Your</span> <span class="n">branch</span> <span class="ow">is</span> <span class="n">behind</span> <span class="s1">&#39;origin/master&#39;</span> <span class="n">by</span> <span class="mi">32</span> <span class="n">commits</span><span class="p">,</span> <span class="ow">and</span> <span class="n">can</span> <span class="n">be</span> <span class="n">fast</span><span class="o">-</span><span class="n">forwarded</span><span class="o">.</span>
+
+<span class="n">eos</span><span class="p">:</span><span class="o">~/</span><span class="n">gitstuff</span><span class="o">&gt;&gt;</span> <span class="n">git</span> <span class="n">pull</span>
+<span class="n">Updating</span> <span class="n">e8556c2</span><span class="o">..</span><span class="mf">3e3596</span><span class="n">a</span>
+<span class="n">Fast</span><span class="o">-</span><span class="n">forward</span>
+<span class="o">---</span> <span class="n">snip</span> <span class="n">snip</span> <span class="n">lots</span> <span class="n">of</span> <span class="n">changes</span> <span class="n">snip</span> <span class="n">snip</span> <span class="o">---</span>
+
+<span class="n">eos</span><span class="p">:</span><span class="o">~/</span><span class="n">gitstuff</span><span class="o">&gt;&gt;</span> <span class="n">git</span> <span class="n">checkout</span> <span class="n">new_format</span>
+<span class="n">Switched</span> <span class="n">to</span> <span class="n">branch</span> <span class="s1">&#39;new_format&#39;</span>
+</pre></div>
+</div>
+<p>And now, no more errors.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">eos</span><span class="p">:</span><span class="o">~/</span><span class="n">gitstuff</span><span class="o">&gt;&gt;</span> <span class="n">git</span> <span class="n">push</span>
+<span class="n">Everything</span> <span class="n">up</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">date</span>
+</pre></div>
+</div>
+<p>Everything is up to date, because the <code class="docutils literal notranslate"><span class="pre">new_format</span></code> branch was pushed the first
+time (when we received the error about not being able to push to <code class="docutils literal notranslate"><span class="pre">master</span></code>), and
+now <code class="docutils literal notranslate"><span class="pre">master</span></code> is up to date as well.</p>
+</div>
+<div class="section" id="nesting-git-repos">
+<h2>Nesting git repos<a class="headerlink" href="#nesting-git-repos" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes it is desirable to have an independent git repository completely
+contained within another. An example might be a third-party developed library
+dependencies: you still want to track new changes and possibly send changes to
+the library developers, but you want to keep it bundled in a logical way within
+your development tree.  It turns out that git itself doesn’t handle these
+situations very well out of the box, but alternatives of various kinds have been
+developed to try to make it easier:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://git-scm.com/docs/git-submodule" target="_blank">git submodule</a>
+is the built-in git tool for handling separate but related repositories. It is
+stronger in the situation where you do not control the sub projects.</li>
+<li><a class="reference external" href="https://git-scm.com/book/en/v1/Git-Tools-Subtree-Merging" target="_blank">git subtree</a>
+merging is actually a methodology of using normal git operations to work on
+sub projects, and there is now also a contributed front-end for
+semi-automation.</li>
+<li><a class="reference external" href="http://gitslave.sourceforge.net/" target="_blank">gitslave</a>
+is an external tool to control multiple related repositories together,
+performing operations on them at the same time.</li>
+</ul>
+</div>
+<div class="section" id="how-to-delete-a-file-from-git-completely">
+<h2>How to delete a file from git completely<a class="headerlink" href="#how-to-delete-a-file-from-git-completely" title="Permalink to this headline">¶</a></h2>
+<p>Git tries very hard to prevent any real data loss, as might be expected from a
+good VCS. However, there might be a situation where you want to actually remove
+data from the repository, such as if a large file gets accidentally added and
+tracked. Simply doing a <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span> <span class="pre">filename</span></code> will stop git tracking, but the data is
+still present in previous commits.</p>
+<p>Removing a file from previous commits is rewriting history, and rewriting
+history that has already been made public is almost always a bad idea.  If you
+still want to do it, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">filter-branch</span> <span class="pre">--tree-filter</span> <span class="pre">'rm</span> <span class="pre">-f</span> <span class="pre">my_bad_file'</span> <span class="pre">HEAD</span></code>
+is likely the command you want, <a class="reference external" href="https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History" target="_blank">as described here</a>.
+If you google this question, you will probably find that
+<a class="reference external" href="https://help.github.com/articles/removing-files-from-a-repository-s-history/" target="_blank">Github recommends</a>
+a tool that attempts to make this process easier,
+<a class="reference external" href="https://rtyley.github.io/bfg-repo-cleaner/" target="_blank">BFG Repo-Cleaner</a>.</p>
+<p>Note also that deleting or squashing the commits with the files to be removed is
+also not sufficient, even after a <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span> <span class="pre">filename</span></code> as this only removes the
+references to those commits, but the blobs still exist in git’s internal stores.
+This can be seen easily by comparing the size of the repo before and after
+removing commits with large files in them.</p>
+</div>
+<div class="section" id="how-to-deal-with-large-files-in-git-repos">
+<h2>How to deal with large files in git repos<a class="headerlink" href="#how-to-deal-with-large-files-in-git-repos" title="Permalink to this headline">¶</a></h2>
+<p>Since git is not suited for tracking and storing large files, there have been a
+few third-party projects that try to make this a more reasonable thing to do.
+Two of the more well-known projects are <a class="reference external" href="https://git-annex.branchable.com/" target="_blank">git annex</a>
+and the <a class="reference external" href="https://git-lfs.github.com/" target="_blank">LFS (large file storage) module</a>.</p>
+</div>
+</div>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="best_practices.html" title="Previous document">General best practices</a>
+        </li>
+        <li>
+          <a href="shortcuts_and_conf.html" title="Next document">Shortcuts and configuration</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2019, M. Graham Lopez.
+      
+    </div>
+
+    
+
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-140879797-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    
+  </body>
+</html>

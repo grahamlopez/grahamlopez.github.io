@@ -1,0 +1,327 @@
+
+################
+Curriculum Vitae
+################
+
+Education
+================
+
+| **Doctor of Philosophy**, Physics, Wake Forest University, Winston Salem, NC. (2013)
+| *Related Course Work*
+| Quantum Mechanics, Continuum Mechanics, Solid State Physics, Electromagnetism,
+| Statistical Mechanics, Group Theory
+
+.. Cumulative GPA: 3.76
+
+| **Master of Science**, Computer Science, Wake Forest University, Winston Salem, NC.  (2008)
+| *Related Course Work*
+| Numerical Nonlinear Optimization, Parallel Algorithms, Bioinformatics, Database
+| Systems
+
+.. Cumulative GPA: 3.88
+
+| **Bachelor of Science**, Computer Science, University of Tennessee, Knoxville, TN.  (2006)
+| *Related Course Work*
+| Mathematical Modeling, Systems Programming, Graphics Programming, Software
+| Engineering
+
+.. Cumulative GPA: 3.79, Summa Cum Laude, University Honors Program
+
+| Ph.D. Research
+| *Calculating Magnetic Properties in Condensed Matter Systems*
+
+This work expanded and utilized ab initio computational techniques for
+calculating magnetic properties such as the orbital magnetization and nuclear
+magnetic resonance chemical shielding of infinitely periodic systems. It
+included development of the necessary extensions to the current theoretical
+methods, the code that implements these methods, and calculations on materials
+of interest using the techniques.
+
+| M.S. Research
+| *A Computational Method to Explore the Time Evolution of Protein Cavities*
+
+This thesis presented a tool for analyzing molecular dynamics simulations by
+tracking and visualizing protein cavity evolution through time. This was done in
+order to examine the impact of negative space on protein allostery.
+
+
+Experience
+==========
+
+| **2018--present** HPC Systems Engineer at Oak Ridge National Laboratory - Oak Ridge, TN
+| *Leadership system support and C++ application development*
+
+- Provide system support for Summit supercomputer and all other HPC resources at
+  the Oak Ridge Leadership Computing Facility
+- Focused software engineering for two HPC applications in ab-initio materials
+  and fusion energy domains
+
+| **2016--2018** Computer Scientist at Oak Ridge National Laboratory - Oak Ridge, TN
+| *Application readiness and programming model co-design for upcoming high-performance computing architectures*
+
+- Implemented new algorithms for petascale quantum materials application
+- Built static-anlaysis tool for applications to inform programming model design
+
+..  developed training, software council, iso c++
+.. - Established new software engineering strategies and tools to improve
+..   application scientific productivity
+.. - Integrated next-generation C++ programming models for massive parallelism into
+..   scientific applications
+
+
+| **2014--2016** Postdoctoral Researcher at Oak Ridge National Laboratory - Oak Ridge, TN
+| *Researching programming models and preparing facility programming environments for the CORAL architecture*
+
+- Studied performance portability of upcoming programming models for heterogeneous architectures
+- Organized multiple workshops resulting in published research proceedings
+- Managed community activity and development of the OpenSHMEM specification
+- Developed HPC strategy for quantum computing simulator
+
+.. - Built validation suites and application analysis tools
+
+| **2012--2014** Research Scientist at Georgia Institute of Technology / ORNL - Oak Ridge, TN
+| *Advanced user and applications support for the Keeneland project*
+
+- Optimized numerical algorithms for GPU-specific science applications
+- Implemented accelerator kernels for the SHOC HPC benchmark suite
+- Addressed user issues with installed applications on Keeneland coming from
+  multiple scientific domains
+
+| **2012** Intern at National Institute of Computational Sciences (NICS) - Oak Ridge, TN
+| *GPU-specific benchmarking and developer documentation for the Keeneland System*
+
+- Developed example GPU code for SGEMM kernel using Cuda, OpenCL, Cublas, Magma,
+  MPI
+- Demonstrated simple performance analyses to be considered when using
+  GPU-acceleration
+- Produced documentation resources for using and scaling scientific codes on a
+  GPU compute cluster
+
+**2008--2012** Research Assistant at Wake Forest University - Winston Salem, NC
+
+- Implemented and applied new methods for calculating materials properties in
+  quantum mechanics code
+- Created molecular dynamics simulation analysis and visualization tool
+
+**2006--2008** Teaching Assistant at Wake Forest University - Winston Salem, NC
+
+- Evaluated student progress and delivered final grades for weekly homework and
+  lab assignments
+- Prepared, tested, and presented lectures for weekly programming labs
+- Conducted tutorial sessions for large groups and class sections
+
+**2003--2006** Unix Systems Administrator at Dept. of Computer Science,
+University of Tennessee - Knoxville, TN
+
+- Responsible for maintaining high availability (HA) of disk and authentication
+  LDAP services with load balancing and automatic failover
+- Deployed and maintained network and compute infrastructure using technologies
+  like LDAP, CfEngine, Postfix, Nagios, SSL, Apache, MySQL, Courier IMAP
+- Installed and maintained hardware for department servers, labs, and clusters;
+  provided primary support for faculty and researchers; wrote internal and
+  external system documentation
+
+.. - Deployed and maintained network monitoring, automatic configuration,
+..     backups, email, file servers, authentication services, web servers, end
+..     user software.  Technologies used include LDAP, CfEngine, Postfix, Nagios,
+..     SSL, Apache, MySQL, Courier IMAP
+.. - Installed and maintained hardware - department servers, labs, and
+..     clusters; made hardware/software purchasing decision recommendations;
+..     provided primary support for faculty and researchers; wrote internal and
+..     external system documentation
+
+
+
+Publications and Presentations
+===============================
+
+`http://orcid.org/0000-0002-5375-2105 <http://orcid.org/0000-0002-5375-2105>`_
+
+.. 2018
+
+| **MemBrain: Automated Application Guidance for Hybrid Memory Systems**
+| *M. B. Olson, T. Zhou, M. R. Jantz, K. A. Doshi, M. G. Lopez, and O. Hernandez*
+| 2018 IEEE International Conference on Networking, Architecture and Storage (NAS)
+
+| **Compile-Time Library Call Detection Using CAASCADE and XALT**
+| *Jisheng Zhao, Oscar Hernandez, Reuben Budiardja M. Graham Lopez, Vivek Sarkar and Jack C. Wells*
+| 2018 International Workshop on OpenPOWER for HPC (IWOPH 2018)
+
+| **QMCPACK: An open source ab initio Quantum Monte Carlo package for the electronic structure of atoms, molecules, and solids**
+| *J. K A Baczewski, et al.*
+| 2018 Journal of Physics: Condensed Matter
+
+| **Using CAASCADE and CrayPAT for analysis of HPC applications**
+| *Reuben D. Budiardja, M. Graham Lopez, Jisheng Zhao, Oscar Hernandez, Vivek Sarkar, and Jack C. Wells*
+| 2018 Proceedings of Cray User Group
+
+| **Sparse Grid Methods for Solving Vlasov-Poisson and Vlasov-Maxwell Systems**
+| *L. Mu, D. Green, E. D'Azevedo, T. Wang, W. Elwasif, T. McDaniel, and M. G. Lopez*
+| 2018 APS Meeting Abstracts
+
+.. 2017
+
+| **CAASCADE: A system for static analysis of HPC software application portfolios**
+| *M. Graham Lopez, Oscar Hernandez, Reuben D. Budiardja, and Jack C. Wells*
+| 2017 Workshop on Extreme-Scale Programming Tools
+
+| **Evaluation of Directive-based Performance Portable Programming Models**
+| *M. Graham Lopez, Wayne Joubert, Ver\'onica Vergara Larrea, et al.*
+| 2017 International Journal of High Performance Computing and Networks
+
+.. Oscar Hernandez, Azzam Haidar Stanimire Tomov, and Jack Dongara
+
+| **Enabling One-Sided Communication Semantics on ARM**
+| *Pavel Shamis, M. Graham Lopez, Gilad Shainer*
+| 2017 Parallel and Distributed Processing ymposium Workshops}
+
+| **Challenges of OpenACC Performance Portability**
+| *M. Graham Lopez and Oscar Hernandez*
+| 2017 OpenACC for Programmers - Concepts and Strategies (book chapter)
+
+| **OpenACC 2.5 Validation Testsuite Targeting Multiple Architectures**
+| *Kyle Friedline, Sunita Chandrasekaran, M. Graham Lopez, Oscar Hernandz*
+| 2017 Second Workshop on Performance Portable Programming Models for Accelerators
+
+| **Supporting Distributed and Heterogeneous Programming Models in ISO C++**
+| *M. Graham Lopez, Michael Wong, Gordon Brown*
+| 2017 Distributed and Heterogeneous Programming in C and C++ (abstract/presentation)
+
+| **Effective Vectorization with OpenMP 4.5**
+| *Joseph N. Huber, Oscar Hernandez, and M. Graham Lopez*
+| 2017 Oak Ridge National Laboratory (technical report)
+
+.. 2016
+
+| **Towards Achieving Performance Portability Using Directives for Accelerators**
+| *M. Graham Lopez, Ver\'onica Vergara Larrea, Wayne Joubert, et al.*
+| 2016 Third Workshop on Accelerator Programming Using Directives
+
+.. Oscar Hernandez, Azzam Haidar Stanimire Tomov, and Jack Dongarra
+
+| **Using C++ AMP to Accelerate HPC Applications on Multiple Platforms**
+| *M. Graham Lopez, Christopher Bergstrom, Ying Wai Li, Wael Elwasif, and Oscar Hernandez*
+| 2016 First Workshop on Performance Portable Programming Models for Accelerators
+
+| **Early Experiences Writing Performance Portable OpenMP 4 Codes**
+| *Veronica Vergara Larrea, Wayne Joubert, M. Graham Lopez, and Oscar Hernandez*
+| 2016 Proc. Cray User Group
+
+| **Compiler-based software analysis toolkit for climate model development**
+| *Dali Wang, Oscar Hernandez, M. Graham Lopez, Frank Winkler, and Michael Wolfe*
+| 2016 Advanced X-cutting Ideas for Computational Climate Science
+
+.. 2015
+
+| **OpenSHMEM and Related Technologies. Experiences, Implementations, and Technologies**
+| *Manjunath Gorentla Venkata, Pavel Shamis, Neena Imam, and M. Graham Lopez*
+| 2015 Springer Verlag (proceedings)
+
+| **Examining recent many-core architectures and programming models using SHOC**
+| *M. Graham Lopez, Jeffrey Young, Jeremy S. Meredith, et al.*
+| 2015 Proceedings of the 6th International Workshop on Performance Modeling, Benchmarking, and Simulation of High Performance Computing Systems (PMBS'15)
+
+.. M. Graham Lopez, Jeffrey Young, Jeremy S. Meredith, Phillip C. Roth, Mitchel Horton, and Jeffrey S. Vetter
+
+| **UCX: An Open Source Framework for HPC Network APIs and Beyond**
+| *Pavel Shamis, M. Graham Lopez, Matthew B. Baker, et al.*
+| 2015 High-Performance Interconnects (HOTI'15)
+
+| **An Evaluation of OpenSHMEM Interfaces for the Variable-Length AlltoallV() Collective Operation**
+| *M. Graham Lopez, Pavel Shamis, and Manjunath Gorentla Venkata*
+| 2015 2nd Workshop on OpenSHMEM and Related Technologies
+
+| **Exploring OpenSHMEM Model to Program GPU-based Extreme-Scale Systems**
+| *Sreeram Potluri, Davide Rossetti, Donald Becker, et al.*
+| 2015 2nd Workshop on OpenSHMEM and Related Technologies
+
+.. 2014
+
+| **Large-scale Hydrodynamic Brownian Simulations on Multicore and GPU Architectures**
+| *M. Graham Lopez, Mitchel Horton, and Edmond Chow*
+| 2014 Proceedings of the 2014 Annual Conference on Extreme Science and Engineering Discovery Environment
+
+| **Advanced Application Support for Improved GPU Utilization on Keeneland**
+| *Jeffrey Young, M. Graham Lopez, Mitchel Horton, Richard Glassbrook, and Jeffrey S. Vetter*
+| 2014 The 3rd Conference of the Extreme Science and Engineering Discovery Environment (XSEDE '14)
+
+| **Batch Matrix Exponentiation**
+| *M. Graham Lopez and Mitchel D. Horton*
+| 2014 Numerical Computations with GPUs, Springer, New York (book chapter)
+
+.. 2013
+
+| **Using NMR to study small molecule adsorption in metal organic frameworks**
+| *M. G. Lopez, Pieremanuele Canepa, and T. Thonhauser*
+| 2013 American Physical Society Annual March Meeting (presentation)
+
+| **NMR Study of Small Molecule Adsorption in MOF-74-Mg**
+| *M. G. Lopez, Pieremanuele Canepa, and T. Thonhauser*
+| 2013 J. Chem. Phys. 138, 154704
+
+.. 2012
+
+| **A Quickstart Guide to Keeneland: Considerations for Effectively Incorporating GPUs**
+| *M. G. Lopez and Bruce Loftis*
+| 2012 The 1st Conference of the Extreme Science and Engineering Discovery Environment (XSEDE '12 - poster)
+
+| **Wannier-based calculation of the orbital magnetization in ferromagnets**
+| *M. G. Lopez, David Vanderbilt, T. Thonhauser, and Ivo Souza*
+| 2012 Phys. Rev. B 85, 014435
+
+| **Ab initio calculation of indirect spin-spin coupling constants**
+| *M. G. Lopez and T. Thonhauser*
+| 2012 Electronic Structure Workshop (poster)
+
+.. 2011
+
+| **Ab initio calculation of the orbital magnetization by Wannier interpolation**
+| *M. G. Lopez and T. Thonhauser*
+| 2011 American Physical Society Annual March Meeting (presentation)
+
+.. 2010
+
+| **Ab initio converse NMR approach for pseudopotentials**
+| *D. Ceresoli, N. Marzari, M. G. Lopez, and T. Thonhauser*
+| 2010 Phys. Rev. B 81, 184424
+
+| **Converse NMR with pseudopotentials**
+| *M. G. Lopez, D. Ceresoli, and T. Thonhauser*
+| 2010 American Physical Society Annual March Meeting (presentation)
+
+| **Converse NMR with pseudopotentials**
+| *M. G. Lopez and T. Thonhauser*
+| 2010 Wake Forest University Graduate Research Symposium (poster)
+
+.. 2008
+
+| **Procavo: a method for visualization of time dependence in protein cavities**
+| *M. G. Lopez and J. Fetrow*
+| 2008 Wake Forest University Graduate Research Symposium (poster)
+
+Service and Committees
+=======================
+
+| **2017-2019**: ISO C++ Standards Committee - Voting Representative
+| **2016-2018**: International Workshop on Performance Portable Programming Models for Accelerators (P3MA, co-located with ISC) - Co-Organizer/Program Co-Chair
+| **2016-2018**: International Workshop on OpenPOWER for HPC (IWOPH, co-located with ISC) - Program Committee Co-Chair
+| **2017-2018**: Distributed and Heterogeneous Programming in C and C++ (DHPCC++, co-located with IWOCL - Committee Member
+| **2018**: Supercomputing (SC) Panels Committee - Committee Member
+| **2018**: 23rd International Workshop on High-Level Parallel Programming Models and Supportive Environments - Committee Member
+| **2017**: IEEE International Parallel and Distributed Processing - Committee Member
+| **2017**: International Journal of Computer Science and Engineering - Guest Editor
+| **2016-2017**: Supercomputing (SC) Tutorials Committee - Committee Member
+| **2016**: 22nd International European Conference on Parallel and Distributed Computing (Euro-Par 2016) - Program Committee Member
+| **2015**: OpenSHMEM and Related Technologies Workshop (OpenSHMEM 2015) - Technical Program Chair
+
+Honors and Awards
+=================
+
+| **2016**: Oak Ridge National Laboratory Significant Achievement Award
+| **2012**: XSEDE Student Engagement Program Award
+| **2010-2011**: Graduate Alumni Travel Award
+| **2010**: Sigma Pi Sigma Physics Honor Society
+| **2009**: Upsilon Pi Epsilon Computer Science Honor Society
+| **2008**: Runner-up Best Poster Mathematical Sciences Category Graduate Research Day, WFU
+| **2006**: Outstanding CS Graduate Award College of Arts and Sciences, UTK
+| **2006**: Phi Beta Kappa Honor Society

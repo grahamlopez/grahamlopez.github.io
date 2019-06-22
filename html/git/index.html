@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>git hints &#8212; graham lopez  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="git philosophy" href="git_philosophy.html" />
+    <link rel="prev" title="Curriculum Vitae" href="../cv.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">graham lopez</a></h1>
+
+
+
+<p class="blurb">Notes by/for, and a little bit about M. Graham Lopez</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../contact.html">Contact me</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cv.html">Curriculum Vitae</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">git hints</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="git_philosophy.html">git philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="best_practices.html">General best practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="confusion.html">git Annoyances – common points of confusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shortcuts_and_conf.html">Shortcuts and configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_credentials.html">git credentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_workflows.html">git Workflows – how to organize branching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="repo_histories.html">Repository histories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html">Big list o’ resources – links to external sites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unsorted.html">Unsorted git</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../privacy_security/index.html">Privacy / Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contained/index.html">Containers / VPS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli_tools/index.html">CLI Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../blog/index.html">blog(ish)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsorted/index.html">unsorted</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html">sphinx</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../cv.html" title="previous chapter">Curriculum Vitae</a></li>
+      <li>Next: <a href="git_philosophy.html" title="next chapter">git philosophy</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="../cv.html" title="Previous document">Curriculum Vitae</a>
+        </li>
+        <li>
+          <a href="git_philosophy.html" title="Next document">git philosophy</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="git-hints">
+<h1>git hints<a class="headerlink" href="#git-hints" title="Permalink to this headline">¶</a></h1>
+<p>These pages attempt to provide a list of reminders about working with git. I
+view it as helping one go from being a beginning to intermediate git user. A few
+things to remember about using these pages:</p>
+<ol class="arabic simple">
+<li>There are many good and thorough resources on the web about all levels of
+git, so here we just have a quick(ish) reference with pointers to better
+resources for more in-depth study. (If one were to read through the list of
+resources at the end of this page, they would find that all of the content
+here is actually pulled directly from other places there.)</li>
+<li>Confusion can sometimes be reduced by remembering things in the general case,
+rather than a specific example that may not accurately transfer to new
+situations. Git seems to be fraught with commonly-used examples that show a
+behavior that people get used to, and then cause surprise when git does
+something different.</li>
+<li>Of course you don’t have to go through these pages in order, but some of the
+later ones do make references to concepts or points made in previous pages.
+So I DO suggest going through them in order. “Shortcuts and Configuration”
+can safely be skipped.</li>
+</ol>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="git_philosophy.html">git philosophy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="git_philosophy.html#snapshots-not-deltas">1) “Snapshots, not deltas”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_philosophy.html#history-is-only-for-humans">2) “History is only for humans”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_philosophy.html#branching-is-free">3) “Branching is free”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_philosophy.html#ignore-the-index">4) “Ignore the index”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_philosophy.html#there-are-no-server-repositories">5) “There are no server repositories”</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">General best practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="confusion.html">git Annoyances – common points of confusion</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="confusion.html#fetch-vs-pull">fetch vs. pull</a></li>
+<li class="toctree-l2"><a class="reference internal" href="confusion.html#fork-vs-clone">fork vs. clone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="confusion.html#merge-vs-rebase-vs-cherrypick">merge vs. rebase vs. cherrypick</a></li>
+<li class="toctree-l2"><a class="reference internal" href="confusion.html#checkout-vs-revert-vs-reset">checkout vs. revert vs. reset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="confusion.html#when-to-use-git-stash">when to use git stash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="confusion.html#origin-vs-upstream">origin vs. upstream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="confusion.html#local-vs-remote-branches">local vs. remote branches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="confusion.html#nesting-git-repos">Nesting git repos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="confusion.html#how-to-delete-a-file-from-git-completely">How to delete a file from git completely</a></li>
+<li class="toctree-l2"><a class="reference internal" href="confusion.html#how-to-deal-with-large-files-in-git-repos">How to deal with large files in git repos</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="shortcuts_and_conf.html">Shortcuts and configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="shortcuts_and_conf.html#shortcuts">Shortcuts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shortcuts_and_conf.html#configuration">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="git_credentials.html">git credentials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="git_credentials.html#username">username</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_credentials.html#on-disk-file-storage-encrypted">On-disk file storage (encrypted)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_credentials.html#in-memory-password-caching">In-memory password caching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_credentials.html#keychain-based-password-caching">Keychain-based password caching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_credentials.html#resources">Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="git_workflows.html">git Workflows – how to organize branching</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="git_workflows.html#centralized-svn-like">1) Centralized (SVN-like)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_workflows.html#feature-branch-centralized-branching">2) Feature branch (centralized + branching)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_workflows.html#gitflow-feature-branch-organization-and-conventions">3) Gitflow (Feature branch + organization and conventions)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_workflows.html#forking-any-workflow-forking-for-collaboration">4) Forking (any workflow + forking for collaboration)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="repo_histories.html">Repository histories</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="repo_histories.html#gitflow-history">Gitflow History</a></li>
+<li class="toctree-l2"><a class="reference internal" href="repo_histories.html#merge-vs-rebase-effects-on-repo-history">Merge vs. Rebase - effects on repo history</a></li>
+<li class="toctree-l2"><a class="reference internal" href="repo_histories.html#a-viable-policy">A viable policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="repo_histories.html#merge-commits-in-pull-requests">Merge commits in pull requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="repo_histories.html#gitflow-history-sh">gitflow_history.sh</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Big list o’ resources – links to external sites</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#general-reference-tutorials-cheatsheets">general reference, tutorials, cheatsheets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#branching-forking-remotes">branching, forking, remotes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#best-practices">best practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#workflows-and-history-cleaning-for-prs">workflows and history cleaning for PRs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#miscellaneous-non-git-resources">miscellaneous non-git resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="unsorted.html">Unsorted git</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="../cv.html" title="Previous document">Curriculum Vitae</a>
+        </li>
+        <li>
+          <a href="git_philosophy.html" title="Next document">git philosophy</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2019, M. Graham Lopez.
+      
+    </div>
+
+    
+
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-140879797-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    
+  </body>
+</html>

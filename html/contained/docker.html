@@ -1,0 +1,583 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Docker &#8212; graham lopez  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="VPS hosting" href="vps_hosting.html" />
+    <link rel="prev" title="LXC and LXD" href="lxc_lxd.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">graham lopez</a></h1>
+
+
+
+<p class="blurb">Notes by/for, and a little bit about M. Graham Lopez</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contact.html">Contact me</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cv.html">Curriculum Vitae</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/index.html">git hints</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../privacy_security/index.html">Privacy / Security</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Containers / VPS</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="lxc_lxd.html">LXC and LXD</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vps_hosting.html">VPS hosting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cli_tools/index.html">CLI Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../blog/index.html">blog(ish)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsorted/index.html">unsorted</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html">sphinx</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Containers / VPS</a><ul>
+      <li>Previous: <a href="lxc_lxd.html" title="previous chapter">LXC and LXD</a></li>
+      <li>Next: <a href="vps_hosting.html" title="next chapter">VPS hosting</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="lxc_lxd.html" title="Previous document">LXC and LXD</a>
+        </li>
+        <li>
+          <a href="vps_hosting.html" title="Next document">VPS hosting</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="docker">
+<h1>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h1>
+<p>(Update: for most of my uses, I currently prefer <a class="reference internal" href="lxc_lxd.html#lxc-lxd"><span class="std std-ref">LXC and LXD</span></a>, and so haven’t
+used Docker in quite some time.)</p>
+<p>Right now, this is just notes and a cheatsheet as I learn more about Docker.
+Again, most of this stuff can be found elsewhere, and I tried to list in the
+Resources section all of the places from which I took content and ideas.</p>
+<div class="section" id="some-of-my-example-dockerfiles">
+<h2>some of my example dockerfiles<a class="headerlink" href="#some-of-my-example-dockerfiles" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference download internal" download="" href="../_downloads/5e917ebccd42057a4010d1f90d8be8bf/centos7_gcc_dockerfile"><code class="xref download docutils literal notranslate"><span class="pre">centos</span> <span class="pre">gcc</span> <span class="pre">plugin</span> <span class="pre">development</span></code></a></li>
+<li><a class="reference download internal" download="" href="../_downloads/04cc9e9cf65f711cd726cc435d2154f4/centos_qmcpack_dockerfile"><code class="xref download docutils literal notranslate"><span class="pre">centos</span> <span class="pre">qmcpack</span> <span class="pre">(old)</span></code></a></li>
+</ul>
+</div>
+<div class="section" id="usage">
+<h2>usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/wsargent/docker-cheat-sheet" target="_blank">here’s a more thorough cheatsheet</a></p>
+<table border="1" class="docutils align-center">
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">images</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">images</span></code></td>
+<td>list local images</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">run</span> <span class="pre">-ti</span> <span class="pre">--name</span> <span class="pre">&lt;name&gt;</span> <span class="pre">&lt;image&gt;</span> <span class="pre">&lt;command&gt;</span></code></td>
+<td>run image (i.e. create container with optional name)
+with command interactively (-i) and allocate a pseudo
+tty (-t)</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">build</span> <span class="pre">-t</span> <span class="pre">namespace/repo:tag</span> <span class="pre">.</span></code></td>
+<td>use Dockerfile in current directory to build
+image named tagname</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">rmi</span> <span class="pre">-f</span> <span class="pre">&lt;image&gt;</span></code></td>
+<td>delete a local image</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">tag</span> <span class="pre">&lt;hash&gt;</span> <span class="pre">namespace/repo:tag</span></code></td>
+<td>tag an image for upload to docker hub under
+namespace (hub account)</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">login</span></code></td>
+<td>login to docker hub</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">push</span> <span class="pre">&lt;user&gt;/&lt;imagename&gt;</span></code></td>
+<td>push image to docker hub</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">commit</span></code></td>
+<td>save changes made in a container</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils align-center">
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">containers</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">run</span> <span class="pre">-ti</span> <span class="pre">--name</span> <span class="pre">&lt;name&gt;</span> <span class="pre">&lt;image&gt;</span> <span class="pre">&lt;command&gt;</span></code></td>
+<td>run image (i.e. create container with optional name)
+with command interactively (-i) and allocate a
+pseudo tty (-t)</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">start</span> <span class="pre">-ai</span> <span class="pre">&lt;container&gt;</span></code></td>
+<td>start an existing container (e.g. previously
+created from image with ‘run’ command)</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">ps</span> <span class="pre">-a</span></code></td>
+<td>show all containers, running or stopped</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">&lt;container&gt;</span></code></td>
+<td>delete a container</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">run</span> <span class="pre">--rm</span></code></td>
+<td>remove the container on exit</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils align-center">
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">data volumes</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">run</span> <span class="pre">-ti</span> <span class="pre">-v</span> <span class="pre">/mount_pt</span> <span class="pre">&lt;image&gt;</span> <span class="pre">&lt;command&gt;</span></code></td>
+<td>create container with a persistent, unnamed volume
+at mountpt</td>
+</tr>
+<tr class="row-odd"><td><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">run</span> <span class="pre">-ti</span> <span class="pre">-v</span> <span class="pre">name:/mount_pt</span></code></dt><dd><code class="docutils literal notranslate"><span class="pre">&lt;image&gt;</span> <span class="pre">&lt;command&gt;</span></code></dd>
+</dl>
+</td>
+<td>create container with a persistent volume named name</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">run</span> <span class="pre">-ti</span> <span class="pre">-v</span> <span class="pre">/abs/host/path:/mount_pt</span></code>
+<code class="docutils literal notranslate"><span class="pre">&lt;image&gt;</span> <span class="pre">&lt;command&gt;</span></code></td>
+<td>create container with a host path mounted at mountpt</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">run</span> <span class="pre">-ti</span> <span class="pre">--volumes-from</span> <span class="pre">&lt;containername&gt;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&lt;image&gt;</span> <span class="pre">&lt;command&gt;</span></code></td>
+<td>create container and attach volumes
+from container-name</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="utilities">
+<h2>utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
+<p>a shell function I <a class="reference external" href="http://stackoverflow.com/questions/32723111/how-to-remove-old-and-unused-docker-images" target="_blank">found on stackoverflow</a>
+to help with cleanup:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>dcleanup() {
+    docker rm -v $(docker ps --filter status=exited -q 2&gt;/dev/null) 2&gt;/dev/null
+    docker rmi $(docker images --filter dangling=true -q 2&gt;/dev/null) 2&gt;/dev/null
+}
+</pre></div>
+</div>
+<p>probably can now use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">system</span> <span class="pre">prune</span> <span class="pre">-a</span></code> for this</p>
+</div>
+<div class="section" id="advice-and-best-practices">
+<h2>advice and best practices<a class="headerlink" href="#advice-and-best-practices" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="entrypoint-vs-cmd">
+<h3>ENTRYPOINT vs. CMD<a class="headerlink" href="#entrypoint-vs-cmd" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://www.ctl.io/developers/blog/post/dockerfile-entrypoint-vs-cmd/" target="_blank">ENTRYPOINT vs. CMD</a>
+In summary, for a container called ‘demo’:</p>
+<table border="1" class="docutils align-center">
+<colgroup>
+<col width="28%" />
+<col width="43%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">&#160;</th>
+<th class="head">ENTRYPOINT</th>
+<th class="head">CMD</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>overriding default command</td>
+<td><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">--entrypoint</span> <span class="pre">hostname</span> <span class="pre">demo</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">demo</span> <span class="pre">hostname</span></code></td>
+</tr>
+<tr class="row-odd"><td>setting up default flags</td>
+<td>holds the hard-coded command and flags</td>
+<td>flags get overwritten by
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">demo</span> <span class="pre">flags</span></code>
+command line</td>
+</tr>
+</tbody>
+</table>
+<p>Always use the “exec form” instead of the “shell form” for both CMD and
+ENTRYPOINT. E.g. <code class="docutils literal notranslate"><span class="pre">CMD</span> <span class="pre">[&quot;executable&quot;,&quot;param1&quot;,&quot;param2&quot;]</span></code> so that:</p>
+<ul class="simple">
+<li>our command gets PID 1 and we can send posix signals to it, etc. With the
+shell form, a shell gets PID 1 to execute the command, and won’t forward
+signals.</li>
+<li>combining ENTRYPOINT and CMD together works as expected</li>
+</ul>
+<p><a class="reference external" href="https://medium.com/&#64;oprearocks/how-to-properly-override-the-entrypoint-using-docker-run-2e081e5feb9d" target="_blank">Here’s how to properly override with –entrypoint</a></p>
+</div>
+<div class="section" id="users-and-mapping">
+<h3>Users and mapping<a class="headerlink" href="#users-and-mapping" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://medium.com/&#64;mccode/understanding-how-uid-and-gid-work-in-docker-containers-c37a01d01cf" target="_blank">Understanding how uid and gid work</a></p>
+</div>
+<div class="section" id="docker-and-locales">
+<h3>Docker and locales<a class="headerlink" href="#docker-and-locales" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://jaredmarkell.com/docker-and-locales/" target="_blank">Docker and locales</a></p>
+</div>
+<div class="section" id="best-practices">
+<h3>Best practices<a class="headerlink" href="#best-practices" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/" target="_blank">best practices for writing Dockerfiles</a></p>
+<p>Docker usage; a philosophy
+1. One process per container
+2. Keep image files short (strictly less than 127 layers)
+3. containers vs. images vs. dockerfiles</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first">containers: how you run your application</p>
+</li>
+<li><p class="first">images: how you store your application</p>
+</li>
+<li><p class="first">dockerfile: tells docker how to create the container for your application</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>lives beside your source code</li>
+<li>“glorified bash script with a few extra commands”</li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li>Use docker compose for realistic development stacks</li>
+</ol>
+</div>
+</div>
+<div class="section" id="docker-and-persistent-data">
+<h2>Docker and persistent data<a class="headerlink" href="#docker-and-persistent-data" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://docs.docker.com/engine/tutorials/dockervolumes/" target="_blank">https://docs.docker.com/engine/tutorials/dockervolumes/</a>
+This is the standard Docker documentation about data volumes.  At the time of
+this writing, it is a little bit sparse and outdated from best practices.</p>
+<p><a class="reference external" href="https://boxboat.com/2016/06/18/docker-data-containers-and-named-volumes/" target="_blank">https://boxboat.com/2016/06/18/docker-data-containers-and-named-volumes/</a>
+This is an excellent tutorial with some more background about how data volumes
+relate to the Docker filesystem, and which to choose when.</p>
+<p><a class="reference external" href="http://crosbymichael.com/advanced-docker-volumes.html" target="_blank">http://crosbymichael.com/advanced-docker-volumes.html</a>
+Another good article with some depth about volumes</p>
+<p><a class="reference external" href="https://github.com/docker/docker/issues/17798#issuecomment-154815207" target="_blank">https://github.com/docker/docker/issues/17798#issuecomment-154815207</a>
+Some comments about deprecating the use of data containers</p>
+<p>Now that we’ve read/reviewed the links above, we see that there are a few
+options to consider when working with persistent data and Docker.  To
+summarize:</p>
+<ol class="arabic">
+<li><p class="first"><strike> data volume container </strike>: deprecated in favor of named volumes - not
+going to discuss this one since I don’t use it.</p>
+</li>
+<li><p class="first">data volume:  these have several modes of usage that should cover all
+situations now</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>“bare” data volume - unlabeled, usually only used to persist data in a
+single container.  labelled with a hash and lives in
+(/var/lib/docker/volumes).</li>
+<li>named data volume - label chosen at volume creation time. This is like a
+bare volume, but easier to manage.  another way to look at it: a host
+directory volume, but managed by the docker tools instead of the host
+user, lives in a location in the host filesystem that is decided by
+Docker, etc..</li>
+<li>host directory data volume - labeled by an existing directory/file in
+the host filesystem. this directory/file gets mounted inside the
+container when it is created/started.</li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+<p>There are two ways to create a data volume: either by itself or at the same
+time as container creation.</p>
+<div class="section" id="stand-alone-volume-creation">
+<h3>stand-alone volume creation<a class="headerlink" href="#stand-alone-volume-creation" title="Permalink to this headline">¶</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">volume</span> <span class="pre">create</span></code> to a bare volume:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker volume create
+6a7b1bc554a43534a34659af12b0ec4e088a595c5fc05e716c31ce91380ee615
+$ docker volume ls
+DRIVER              VOLUME NAME
+local               b441fb44bfe8ee3b1de4e2bf157b2560c3ccae5096ab734d972902e6dc2bac73
+</pre></div>
+</div>
+<p>or add a named volume:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker volume create --name test-volume
+test-volume
+$ docker volume ls
+DRIVER              VOLUME NAME
+local               b441fb44bfe8ee3b1de4e2bf157b2560c3ccae5096ab734d972902e6dc2bac73
+local               test-volume
+</pre></div>
+</div>
+</div>
+<div class="section" id="volume-creation-at-container-creation-time">
+<h3>volume creation at container creation time<a class="headerlink" href="#volume-creation-at-container-creation-time" title="Permalink to this headline">¶</a></h3>
+<p>To create a bare volume at container creation time and mount it inside the
+container at <code class="docutils literal notranslate"><span class="pre">/data_dir</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker run -t -i -v /data_dir some-repo/some-container:tag /bin/bash
+[exit container]
+$ docker volume ls
+DRIVER              VOLUME NAME
+local               b288739dff62212d67c5b7dc4bc5dd2f2b40685fd3b6731994daf2466aa86b06
+local               b441fb44bfe8ee3b1de4e2bf157b2560c3ccae5096ab734d972902e6dc2bac73
+local               test-vol
+</pre></div>
+</div>
+<p>or a named volume (named ‘persist’, mounted at <code class="docutils literal notranslate"><span class="pre">/data_dir</span></code>) using the same
+method:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker run -t -i -v persist:/data_dir grahamican/centos-dev:gcc /bin/bash
+[exit container]
+$ docker volume ls
+DRIVER              VOLUME NAME
+local               b288739dff62212d67c5b7dc4bc5dd2f2b40685fd3b6731994daf2466aa86b06
+local               b441fb44bfe8ee3b1de4e2bf157b2560c3ccae5096ab734d972902e6dc2bac73
+local               persist
+local               test-vol
+</pre></div>
+</div>
+</div>
+<div class="section" id="mount-a-host-directory-inside-a-container">
+<h3>mount a host directory inside a container<a class="headerlink" href="#mount-a-host-directory-inside-a-container" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>::</dt><dd>$ docker run -t -i -v /Users/graham/develop/gcc-6.2.0:/gcc_source grahamican/centos-dev:gcc /bin/bash
+[in a different shell]
+$ docker volume ls
+DRIVER              VOLUME NAME
+local               b288739dff62212d67c5b7dc4bc5dd2f2b40685fd3b6731994daf2466aa86b06
+local               b441fb44bfe8ee3b1de4e2bf157b2560c3ccae5096ab734d972902e6dc2bac73
+local               persist
+local               test-vol</dd>
+</dl>
+<p>notice that the host directory volumes don’t show up with <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">volume</span></code>
+commands, because docker isn’t helping to manage them (e.g. you can’t docker rm
+a host directory)</p>
+<p>So now we can deduce some rules about creating/naming volumes (as given on the
+Docker volume documentation page) when using
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">-v</span> <span class="pre">volume_name:/path/to/mount</span></code> …:</p>
+<ol class="arabic">
+<li><p class="first">if <code class="docutils literal notranslate"><span class="pre">volume_name</span></code> is not an absolute path, use a named volume</p>
+<blockquote>
+<div><p>1. if the name already exists, mount it in the new container
+(<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">--volumes-from</span> <span class="pre">container-name</span></code> can be used as a shortcut here)
+2. if it doesn’t exist, create it and mount it</p>
+</div></blockquote>
+</li>
+<li><p class="first">if <code class="docutils literal notranslate"><span class="pre">volume_name</span></code> is an absolute path, mount the host directory/file at that path</p>
+</li>
+</ol>
+<p>Finally, these things can be done in a Dockerfile with the <a class="reference external" href="https://docs.docker.com/engine/reference/builder/#/volume" target="_blank">VOLUME</a> command.  Note
+that volumes cannot be mounted into a pre-existing container.  (One must commit
+the changes to the existing container to create a new image, then create a new
+container with the volume mount(s)).</p>
+</div>
+</div>
+<div class="section" id="installing-docker-on-ubuntu-18-04">
+<h2>installing docker on ubuntu 18.04<a class="headerlink" href="#installing-docker-on-ubuntu-18-04" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04" target="_blank">https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04</a></p>
+</div>
+<div class="section" id="installing-docker-on-rhel7-4-and-centos">
+<h2>installing docker on rhel7.4 and centos<a class="headerlink" href="#installing-docker-on-rhel7-4-and-centos" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">yum</span> <span class="pre">install</span> <span class="pre">docker-latest</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">usermod</span> <span class="pre">-aG</span> <span class="pre">docker</span> <span class="pre">bgl</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">docker-latest</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">enable</span> <span class="pre">docker-latest</span></code></p>
+</li>
+<li><p class="first">increase available size</p>
+<blockquote>
+<div><ul class="simple">
+<li>vim /etc/sysconfig/docker-latest</li>
+<li>add <code class="docutils literal notranslate"><span class="pre">-g</span> <span class="pre">/path/to/runtime/storage</span></code></li>
+<li>and <code class="docutils literal notranslate"><span class="pre">--storage-opt</span> <span class="pre">dm.basesize=50G</span></code> to <code class="docutils literal notranslate"><span class="pre">OPTIONS=</span></code></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="installing-docker-on-gentoo">
+<h2>installing docker on gentoo<a class="headerlink" href="#installing-docker-on-gentoo" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://wiki.gentoo.org/wiki/Docker" target="_blank">gentoo wiki page on docker</a> is quite
+good.</p>
+</div>
+<div class="section" id="problems-solutions">
+<h2>Problems / Solutions<a class="headerlink" href="#problems-solutions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>if there is no network connection during build/run (I’ve seen this on ion
+when trying to e.g. <code class="docutils literal notranslate"><span class="pre">apt</span> <span class="pre">update</span></code>), can use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">build</span> <span class="pre">--network</span> <span class="pre">host</span></code>
+and <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">--network</span> <span class="pre">host</span></code></li>
+<li>can use tmpfs inside a container at a mount point with <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">--tmpfs</span>
+<span class="pre">/tmp:rw,exec</span></code></li>
+</ul>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/wsargent/docker-cheat-sheet" target="_blank">https://github.com/wsargent/docker-cheat-sheet</a>
+a nice general cheatsheet</p>
+<p><a class="reference external" href="https://youtu.be/Q5POuMHxW-0" target="_blank">https://youtu.be/Q5POuMHxW-0</a>
+dotCloud/Docker founder Solomon Hykes explains motivation and reasoning behind
+Docker</p>
+<p><a class="reference external" href="https://youtu.be/q1qEYM_SESI" target="_blank">https://youtu.be/q1qEYM_SESI</a>
+some overview and rules of thumb</p>
+<p><a class="reference external" href="https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/" target="_blank">Docker and the PID 1 zombie reaping problem</a></p>
+<p><a class="reference external" href="https://www.reddit.com/r/docker/comments/2t1lzp/docker_and_the_pid_1_zombie_reaping_problem/" target="_blank">Ensuing discussion on reddit</a>
+a little bit about the “one process per container” rule of thumb</p>
+<p><a class="reference external" href="http://blog.thoward37.me/articles/where-are-docker-images-stored/" target="_blank">Where are Docker images stored?</a></p>
+</div>
+<div class="section" id="todo">
+<h2>Todo<a class="headerlink" href="#todo" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">best practices and motivation</p>
+</li>
+<li><p class="first">architecture (e.g. unionfs, etc.)</p>
+</li>
+<li><p class="first">nvidia docker and gpu development</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://github.com/NVIDIA/nvidia-docker/wiki" target="_blank">https://github.com/NVIDIA/nvidia-docker/wiki</a></li>
+<li><a class="reference external" href="https://devblogs.nvidia.com/parallelforall/nvidia-docker-gpu-server-application-deployment-made-easy/" target="_blank">https://devblogs.nvidia.com/parallelforall/nvidia-docker-gpu-server-application-deployment-made-easy/</a></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">multiple container dockerfile example: chat = bitlbee + znc + weechat</p>
+</li>
+<li><p class="first">use case walkthroughs</p>
+</li>
+<li><p class="first">security and other considerations</p>
+<blockquote>
+<div><ul class="simple">
+<li>e.g. <a class="reference external" href="http://link.springer.com/chapter/10.1007/978-3-319-46079-6_48" target="_blank">http://link.springer.com/chapter/10.1007/978-3-319-46079-6_48</a> and others</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">--cap-add</span> <span class="pre">sys_ptrace</span></code>, <code class="docutils literal notranslate"><span class="pre">--privileged</span></code> and friends to get debugging  to work
+inside a container</p>
+</li>
+<li><p class="first">shifter and nextplatform article, and singularity and an admin-magazine
+article, etc.</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="lxc_lxd.html" title="Previous document">LXC and LXD</a>
+        </li>
+        <li>
+          <a href="vps_hosting.html" title="Next document">VPS hosting</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2019, M. Graham Lopez.
+      
+    </div>
+
+    
+
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-140879797-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    
+  </body>
+</html>

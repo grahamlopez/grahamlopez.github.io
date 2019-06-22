@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>git Workflows – how to organize branching &#8212; graham lopez  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Repository histories" href="repo_histories.html" />
+    <link rel="prev" title="git credentials" href="git_credentials.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">graham lopez</a></h1>
+
+
+
+<p class="blurb">Notes by/for, and a little bit about M. Graham Lopez</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../contact.html">Contact me</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cv.html">Curriculum Vitae</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">git hints</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="git_philosophy.html">git philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="best_practices.html">General best practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="confusion.html">git Annoyances – common points of confusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shortcuts_and_conf.html">Shortcuts and configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_credentials.html">git credentials</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">git Workflows – how to organize branching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="repo_histories.html">Repository histories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html">Big list o’ resources – links to external sites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unsorted.html">Unsorted git</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../privacy_security/index.html">Privacy / Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contained/index.html">Containers / VPS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli_tools/index.html">CLI Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../blog/index.html">blog(ish)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsorted/index.html">unsorted</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html">sphinx</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">git hints</a><ul>
+      <li>Previous: <a href="git_credentials.html" title="previous chapter">git credentials</a></li>
+      <li>Next: <a href="repo_histories.html" title="next chapter">Repository histories</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="git_credentials.html" title="Previous document">git credentials</a>
+        </li>
+        <li>
+          <a href="repo_histories.html" title="Next document">Repository histories</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="git-workflows-how-to-organize-branching">
+<h1>git Workflows – how to organize branching<a class="headerlink" href="#git-workflows-how-to-organize-branching" title="Permalink to this headline">¶</a></h1>
+<p>Summary:</p>
+<ol class="arabic simple">
+<li>Centralized</li>
+<li>Feature branch</li>
+<li>Gitflow</li>
+<li>Forking</li>
+</ol>
+<p>Most of this section comes from the <a class="reference external" href="https://www.atlassian.com/git/tutorials/comparing-workflows/" target="_blank">Atlassian workflow overview</a>, including the
+figures (under the <a class="reference external" href="https://creativecommons.org/licenses/by/2.5/au/)" target="_blank">CC-au license</a>. I like this presentation
+of git workflows, because it starts from the SVN-like model that many are
+comfortable with, and adds one new concept for each successive workflow. This
+way, one can partition their understanding and choose the level at which they
+wish to work.</p>
+<p>I’m only going to summarize the workflows here to serve as a reminder about
+their major points. If you are unfamiliar with them, go read the overview - it
+doesn’t take too long.</p>
+<div class="section" id="centralized-svn-like">
+<h2>1) Centralized (SVN-like)<a class="headerlink" href="#centralized-svn-like" title="Permalink to this headline">¶</a></h2>
+<p>The centralized workflow is using git like SVN, which means using the git
+“master” branch the same as SVN “trunk” and not really branching besides that –
+all changes from everybody get committed to master.</p>
+<p>Note also that in this model, rebase is probably more useful than merge, since
+rebase preserves a more linear history
+which looks more SVN-like.  So use things like <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span> <span class="pre">--rebase</span></code>.</p>
+</div>
+<div class="section" id="feature-branch-centralized-branching">
+<h2>2) Feature branch (centralized + branching)<a class="headerlink" href="#feature-branch-centralized-branching" title="Permalink to this headline">¶</a></h2>
+<p>This model uses branches other than master for all development work; a new
+branch is started for each feature or topic e.g. “cg_diagonalization” or
+“issue-#1024.”  Since no development work is done in master anymore, it can be
+curated to represent the official project history.  Feature branches get pushed
+to the central repository, where a pull request is created when the feature is
+ready to become part of the official code base or when the developer wishes to
+otherwise initiate discussion about the code.</p>
+<p>Some advantages of feature branching over the centralized workflow:</p>
+<ul class="simple">
+<li>the master branch will never contain broken code</li>
+<li>multiple developers can work on a single feature without disturbing the main
+code base, or other concurrent feature development</li>
+<li>using pull requests now makes sense (PRs make code review, automated
+integration testing, and many other positive things more convenient)</li>
+</ul>
+</div>
+<div class="section" id="gitflow-feature-branch-organization-and-conventions">
+<h2>3) Gitflow (Feature branch + organization and conventions)<a class="headerlink" href="#gitflow-feature-branch-organization-and-conventions" title="Permalink to this headline">¶</a></h2>
+<p>In the Gitflow workflow as introduced and covered in detail by Vincent Driessen,
+feature branching is used with some added ground rules for how branches are
+named, where they originate from, and where they get merged/rebased to.  The
+original post, [“A successful Git branching
+model,”](<a class="reference external" href="http://nvie.com/posts/a-successful-git-branching-model/" target="_blank">http://nvie.com/posts/a-successful-git-branching-model/</a>) is well worth
+a read.</p>
+<p>At the backbone of the project are the <strong>maste**r and the **develop</strong> branches.
+Supporting branches are all <strong>features</strong>, <strong>releases</strong>, and <strong>hotfixes</strong>. The
+figure and table below summarize how all of these branches work together.</p>
+<img alt="../_images/git-model2x.png" src="../_images/git-model2x.png" />
+<p>(Author: Vincent Driessen.  Original post: nvie.com/posts/a-successful-git-branching-model/  License: Creative Commons BY-SA)</p>
+<div class="line-block">
+<div class="line">naming convention | May branch off from | Must merge back into | Purpose |</div>
+<div class="line">—————– | ——————- | ——————– | ——- |</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">master</span></code>          | (none)              | (none)               |  &lt;ul&gt; &lt;li&gt;HEAD of origin/master is a production-ready state&lt;/li&gt; &lt;li&gt;This is the source of automatic nightly builds&lt;/li&gt; &lt;li&gt;Every merge into master represents a new production release by definition. Each commit in master is tagged with it’s corresponding release version number&lt;/li&gt; &lt;/ul&gt; |</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">develop</span></code>         | <code class="docutils literal notranslate"><span class="pre">release</span></code>           | <code class="docutils literal notranslate"><span class="pre">release</span></code>            | &lt;ul&gt; &lt;li&gt;serves as coordination point for planned development&lt;/li&gt; &lt;li&gt;features end up here when they are finished&lt;/li&gt; &lt;/ul&gt; |</div>
+<div class="line">(anything)        | <code class="docutils literal notranslate"><span class="pre">develop</span></code>         | <code class="docutils literal notranslate"><span class="pre">develop</span></code>            | &lt;ul&gt; &lt;li&gt;where all planned development actually takes place&lt;/li&gt; &lt;/ul&gt; |</div>
+<div class="line"><cite>release-*</cite>       | <code class="docutils literal notranslate"><span class="pre">develop</span></code>         | <code class="docutils literal notranslate"><span class="pre">develop</span></code>, <code class="docutils literal notranslate"><span class="pre">master</span></code>  | &lt;ul&gt; &lt;li&gt;created when develop contains all desired for new release&lt;/li&gt; &lt;li&gt; allows final preparation for new release (merge into master) while develop is cleared to start receiving new features for next release&lt;/li&gt; &lt;/ul&gt; |</div>
+<div class="line"><cite>hotfix-*</cite>        | <code class="docutils literal notranslate"><span class="pre">master</span></code>                  | <code class="docutils literal notranslate"><span class="pre">develop</span></code>, <code class="docutils literal notranslate"><span class="pre">develop</span></code> | &lt;ul&gt; &lt;li&gt;creates an unplanned bump in release version number on master to fix a critical bug that is in production&lt;/li&gt; &lt;/ul&gt; |</div>
+</div>
+<p>To experiment with this workflow and practice merging, rebasing, branching,
+etc., the <a class="reference internal" href="repo_histories.html#gitflow-script"><span class="std std-ref">gitflow_history.sh</span></a> will generate a repository with the exact
+history shown in the figure above.</p>
+</div>
+<div class="section" id="forking-any-workflow-forking-for-collaboration">
+<h2>4) Forking (any workflow + forking for collaboration)<a class="headerlink" href="#forking-any-workflow-forking-for-collaboration" title="Permalink to this headline">¶</a></h2>
+<p>Forking isn’t a new iteration on the previous workflows; it can be applied to
+any branching workflow. It is more for defining how developers interact with the
+project repository.  Here, nobody clones the main project repository, but rather
+forks their own copy.  This means that everybody pushes to their own copy, and
+pull requests originate from forks outside of the project repository, rather
+than from branches that live on the main project repository itself.</p>
+<p>Doing this allows at least a couple of advantages/conveniences:</p>
+<ul class="simple">
+<li>allows safe integration of new code, even from untrusted contributors (since
+they don’t need access to the project repository)</li>
+<li>even the project maintainers don’t need a working (non-bare) copy of the
+project repository</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="git_credentials.html" title="Previous document">git credentials</a>
+        </li>
+        <li>
+          <a href="repo_histories.html" title="Next document">Repository histories</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2019, M. Graham Lopez.
+      
+    </div>
+
+    
+
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-140879797-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    
+  </body>
+</html>

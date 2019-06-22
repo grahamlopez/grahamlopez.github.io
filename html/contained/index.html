@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Containers / VPS &#8212; graham lopez  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="LXC and LXD" href="lxc_lxd.html" />
+    <link rel="prev" title="Privacy / Security" href="../privacy_security/index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">graham lopez</a></h1>
+
+
+
+<p class="blurb">Notes by/for, and a little bit about M. Graham Lopez</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contact.html">Contact me</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cv.html">Curriculum Vitae</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/index.html">git hints</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../privacy_security/index.html">Privacy / Security</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Containers / VPS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lxc_lxd.html">LXC and LXD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html">Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vps_hosting.html">VPS hosting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cli_tools/index.html">CLI Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../blog/index.html">blog(ish)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsorted/index.html">unsorted</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html">sphinx</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../privacy_security/index.html" title="previous chapter">Privacy / Security</a></li>
+      <li>Next: <a href="lxc_lxd.html" title="next chapter">LXC and LXD</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="../privacy_security/index.html" title="Previous document">Privacy / Security</a>
+        </li>
+        <li>
+          <a href="lxc_lxd.html" title="Next document">LXC and LXD</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="containers-vps">
+<h1>Containers / VPS<a class="headerlink" href="#containers-vps" title="Permalink to this headline">¶</a></h1>
+<p>These pages lump together both the use of containers, as well as cloud computing
+and virtual private servers (VPS).</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="lxc_lxd.html">LXC and LXD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lxc_lxd.html#lxd-getting-started">LXD getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lxc_lxd.html#lxc-cheatsheet">LXC cheatsheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lxc_lxd.html#hints-and-gotchas">hints and gotchas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lxc_lxd.html#external-networking">External networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lxc_lxd.html#x11-applications-in-lxc">X11 Applications in LXC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lxc_lxd.html#manual-setup">manual setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lxc_lxd.html#launching-gui-containers-with-lxd">launching gui containers with LXD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lxc_lxd.html#complete-x11-inside-lxc">complete x11 inside LXC</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lxc_lxd.html#lxc-storage">LXC storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lxc_lxd.html#gpu-passthrough">GPU passthrough</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lxc_lxd.html#note-about-lxd-api-extensions">note about lxd api extensions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#some-of-my-example-dockerfiles">some of my example dockerfiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#usage">usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#utilities">utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#advice-and-best-practices">advice and best practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="docker.html#entrypoint-vs-cmd">ENTRYPOINT vs. CMD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker.html#users-and-mapping">Users and mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker.html#docker-and-locales">Docker and locales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker.html#best-practices">Best practices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#docker-and-persistent-data">Docker and persistent data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="docker.html#stand-alone-volume-creation">stand-alone volume creation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker.html#volume-creation-at-container-creation-time">volume creation at container creation time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker.html#mount-a-host-directory-inside-a-container">mount a host directory inside a container</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#installing-docker-on-ubuntu-18-04">installing docker on ubuntu 18.04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#installing-docker-on-rhel7-4-and-centos">installing docker on rhel7.4 and centos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#installing-docker-on-gentoo">installing docker on gentoo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#problems-solutions">Problems / Solutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#resources">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#todo">Todo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vps_hosting.html">VPS hosting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vps_hosting.html#vultr">Vultr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vps_hosting.html#digitalocean">DigitalOcean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vps_hosting.html#misc-for-vps-hosting">misc for vps hosting</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Exploratory containers</p>
+<ul>
+<li><p class="first">clear containers (<a class="reference external" href="https://lwn.net/Articles/644675/" target="_blank">https://lwn.net/Articles/644675/</a>)</p>
+</li>
+<li><p class="first">lightvm (<a class="reference external" href="http://cnp.neclab.eu/projects/lightvm/" target="_blank">http://cnp.neclab.eu/projects/lightvm/</a>)</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://news.ycombinator.com/item?id=15610155" target="_blank">https://news.ycombinator.com/item?id=15610155</a></li>
+<li><a class="reference external" href="https://news.ycombinator.com/item?id=15600596" target="_blank">https://news.ycombinator.com/item?id=15600596</a></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><a class="reference external" href="https://hypercontainer.io" target="_blank">https://hypercontainer.io</a></p>
+</li>
+<li><p class="first"><a class="reference external" href="https://hyper.sh" target="_blank">https://hyper.sh</a></p>
+</li>
+<li><p class="first"><a class="reference external" href="https://github.com/hpc/charliecloud/blob/master/README.rst" target="_blank">charliecloud</a></p>
+</li>
+<li><p class="first"><a class="reference external" href="http://singularity.lbl.gov/" target="_blank">singularity</a></p>
+</li>
+<li><p class="first"><a class="reference external" href="https://github.com/NERSC/shifter" target="_blank">shifter</a></p>
+</li>
+</ul>
+</div>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="../privacy_security/index.html" title="Previous document">Privacy / Security</a>
+        </li>
+        <li>
+          <a href="lxc_lxd.html" title="Next document">LXC and LXD</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2019, M. Graham Lopez.
+      
+    </div>
+
+    
+
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-140879797-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    
+  </body>
+</html>

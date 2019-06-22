@@ -120,8 +120,27 @@ Sounds pretty great to me.</p>
 little funky when you start trying to use them interactively with multiple
 processes, backgrounding, etc. LXC really does feel much closer to a complete
 user space.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#lxd-getting-started" id="id1">LXD getting started</a></li>
+<li><a class="reference internal" href="#lxc-cheatsheet" id="id2">LXC cheatsheet</a></li>
+<li><a class="reference internal" href="#hints-and-gotchas" id="id3">hints and gotchas</a></li>
+<li><a class="reference internal" href="#external-networking" id="id4">External networking</a></li>
+<li><a class="reference internal" href="#x11-applications-in-lxc" id="id5">X11 Applications in LXC</a><ul>
+<li><a class="reference internal" href="#manual-setup" id="id6">manual setup</a></li>
+<li><a class="reference internal" href="#launching-gui-containers-with-lxd" id="id7">launching gui containers with LXD</a></li>
+<li><a class="reference internal" href="#complete-x11-inside-lxc" id="id8">complete x11 inside LXC</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lxc-storage" id="id9">LXC storage</a></li>
+<li><a class="reference internal" href="#gpu-passthrough" id="id10">GPU passthrough</a><ul>
+<li><a class="reference internal" href="#note-about-lxd-api-extensions" id="id11">note about lxd api extensions</a></li>
+</ul>
+</li>
+</ul>
+</div>
 <div class="section" id="lxd-getting-started">
-<h2>LXD getting started<a class="headerlink" href="#lxd-getting-started" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id1">LXD getting started</a><a class="headerlink" href="#lxd-getting-started" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://linuxcontainers.org/lxd/getting-started-cli/" target="_blank">LXD getting started - CLI</a></p>
 <ol class="arabic simple">
 <li>install with <code class="docutils literal notranslate"><span class="pre">apt</span> <span class="pre">install</span> <span class="pre">lxd</span> <span class="pre">lxd-client</span></code></li>
@@ -133,7 +152,7 @@ user space.</p>
 </ol>
 </div>
 <div class="section" id="lxc-cheatsheet">
-<h2>LXC cheatsheet<a class="headerlink" href="#lxc-cheatsheet" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id2">LXC cheatsheet</a><a class="headerlink" href="#lxc-cheatsheet" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils align-center">
 <colgroup>
 <col width="48%" />
@@ -172,7 +191,7 @@ user space.</p>
 containers. I use a <a class="reference external" href="https://stackoverflow.com/questions/28573145/how-can-i-move-the-cursor-after-a-zsh-abbreviation" target="_blank">zsh magic abbreviation</a>.</p>
 </div>
 <div class="section" id="hints-and-gotchas">
-<h2>hints and gotchas<a class="headerlink" href="#hints-and-gotchas" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id3">hints and gotchas</a><a class="headerlink" href="#hints-and-gotchas" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p class="first"><a class="reference external" href="https://github.com/lxc/lxd/issues/3218" target="_blank">there is no proper terminal</a></p>
 <blockquote>
@@ -219,7 +238,7 @@ source /usr/share/bash-completion/completions/lxc
 </ul>
 </div>
 <div class="section" id="external-networking">
-<h2>External networking<a class="headerlink" href="#external-networking" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id4">External networking</a><a class="headerlink" href="#external-networking" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p class="first">set up port forwarding: <a class="reference external" href="https://discuss.linuxcontainers.org/t/forward-port-79-and-443-from-wan-to-container/2042" target="_blank">https://discuss.linuxcontainers.org/t/forward-port-79-and-443-from-wan-to-container/2042</a></p>
 <blockquote>
@@ -282,12 +301,12 @@ and 8088</p>
 <a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-list-and-delete-iptables-firewall-rules" target="_blank">https://www.digitalocean.com/community/tutorials/how-to-list-and-delete-iptables-firewall-rules</a>)</p>
 </div>
 <div class="section" id="x11-applications-in-lxc">
-<h2>X11 Applications in LXC<a class="headerlink" href="#x11-applications-in-lxc" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">X11 Applications in LXC</a><a class="headerlink" href="#x11-applications-in-lxc" title="Permalink to this headline">¶</a></h2>
 <p>The following is just for graphical use right now, but audio can be made to work
 as well. The references given for each section also explain audio, but I’m not
 using it right now.</p>
 <div class="section" id="manual-setup">
-<h3>manual setup<a class="headerlink" href="#manual-setup" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id6">manual setup</a><a class="headerlink" href="#manual-setup" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://blog.simos.info/how-to-run-graphics-accelerated-gui-apps-in-lxd-containers-on-your-ubuntu-desktop/" target="_blank">https://blog.simos.info/how-to-run-graphics-accelerated-gui-apps-in-lxd-containers-on-your-ubuntu-desktop/</a></p>
 <ol class="arabic">
 <li><p class="first">(one time on host) allow root to remap our host’s userID inside a container:</p>
@@ -326,7 +345,7 @@ host’s display (usually <code class="docutils literal notranslate"><span class
 </ol>
 </div>
 <div class="section" id="launching-gui-containers-with-lxd">
-<h3>launching gui containers with LXD<a class="headerlink" href="#launching-gui-containers-with-lxd" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id7">launching gui containers with LXD</a><a class="headerlink" href="#launching-gui-containers-with-lxd" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://blog.simos.info/how-to-easily-run-graphics-accelerated-gui-apps-in-lxd-containers-on-your-ubuntu-desktop/" target="_blank">https://blog.simos.info/how-to-easily-run-graphics-accelerated-gui-apps-in-lxd-containers-on-your-ubuntu-desktop/</a></p>
 <ol class="arabic">
 <li><p class="first">allow root to remap our host’s userID inside a container:</p>
@@ -373,17 +392,17 @@ $ pactl info
 </ol>
 </div>
 <div class="section" id="complete-x11-inside-lxc">
-<h3>complete x11 inside LXC<a class="headerlink" href="#complete-x11-inside-lxc" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id8">complete x11 inside LXC</a><a class="headerlink" href="#complete-x11-inside-lxc" title="Permalink to this headline">¶</a></h3>
 <p>I haven’t tried this yet, but <a class="reference external" href="https://unix.stackexchange.com/a/21607" target="_blank">this answer</a> claims to have it working.</p>
 </div>
 </div>
 <div class="section" id="lxc-storage">
-<h2>LXC storage<a class="headerlink" href="#lxc-storage" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id9">LXC storage</a><a class="headerlink" href="#lxc-storage" title="Permalink to this headline">¶</a></h2>
 <p>Coming soon.</p>
 <p><a class="reference external" href="https://tribaal.io/nicer-mounting-home-in-lxd.html" target="_blank">mounting host /home read-write</a></p>
 </div>
 <div class="section" id="gpu-passthrough">
-<h2>GPU passthrough<a class="headerlink" href="#gpu-passthrough" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id10">GPU passthrough</a><a class="headerlink" href="#gpu-passthrough" title="Permalink to this headline">¶</a></h2>
 <p>install cuda inside lxc on fusiont5 (roughly following
 <a class="reference external" href="https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#ubuntu-installation" target="_blank">https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#ubuntu-installation</a>)</p>
 <p>from nvidia repo</p>
@@ -414,7 +433,7 @@ $ pactl info
 <li><code class="docutils literal notranslate"><span class="pre">lxc</span> <span class="pre">config</span> <span class="pre">device</span> <span class="pre">add</span> <span class="pre">container-name</span> <span class="pre">gpu</span> <span class="pre">gpu</span> <span class="pre">id=0</span></code> to pick the first gpu</li>
 </ul>
 <div class="section" id="note-about-lxd-api-extensions">
-<h3>note about lxd api extensions<a class="headerlink" href="#note-about-lxd-api-extensions" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id11">note about lxd api extensions</a><a class="headerlink" href="#note-about-lxd-api-extensions" title="Permalink to this headline">¶</a></h3>
 <p>There seem to be “gpu_devices” and “nvidia_runtime” API extensions listed at
 <a class="reference external" href="https://lxd.readthedocs.io/en/latest/api-extensions/#api-extensions" target="_blank">https://lxd.readthedocs.io/en/latest/api-extensions/#api-extensions</a> and
 <a class="reference external" href="https://github.com/lxc/lxd/blob/master/doc/containers.md" target="_blank">https://github.com/lxc/lxd/blob/master/doc/containers.md</a> I’m not sure yet what

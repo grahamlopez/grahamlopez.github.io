@@ -17,6 +17,9 @@ little funky when you start trying to use them interactively with multiple
 processes, backgrounding, etc. LXC really does feel much closer to a complete
 user space.
 
+.. contents::
+   :local:
+
 LXD getting started
 ===================
 

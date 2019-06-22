@@ -1,0 +1,266 @@
+
+.. _lxc_lxd:
+
+***************
+LXC and LXD
+***************
+
+`Linux containers <https://linuxcontainers.org>`_ are so much better than Docker
+for my typical uses that I haven't used Docker for at least 1.5 years now. From
+linuxcontainers.org, Linux containers are "containers which offer an environment
+as close as possible as the one you'd get from a VM but without the overhead
+that comes with running a separate kernel and simulating all the hardware."
+Sounds pretty great to me.
+
+Docker is really meant for wrapping up a single process, and things can get a
+little funky when you start trying to use them interactively with multiple
+processes, backgrounding, etc. LXC really does feel much closer to a complete
+user space.
+
+LXD getting started
+===================
+
+`LXD getting started - CLI <https://linuxcontainers.org/lxd/getting-started-cli/>`_
+
+1. install with ``apt install lxd lxd-client``
+2. configure with ``sudo lxd init``
+3. join the group: ``newgrp lxd``
+4. create container with ``lxc launch ubuntu:18.04 first``
+5. ``lxc list``
+6. enter container with ``lxc exec first -- /bin/bash``
+
+
+LXC cheatsheet
+===============
+
++---------------------------------------------+-------------------------------------------------+
+| lxc command                                 | description                                     |
++=============================================+=================================================+
+| ``remote list``                             | show available remotes                          |
++---------------------------------------------+-------------------------------------------------+
+| ``image list [remote]:[pattern]``           | list images at remote matching optional pattern |
++---------------------------------------------+-------------------------------------------------+
+| ``launch [remote]:name:[version]``          | build and start a new container                 |
++---------------------------------------------+-------------------------------------------------+
+| ``exec name -- command``                    | execute command in container "name"             |
++---------------------------------------------+-------------------------------------------------+
+| ``exec name -- sudo --login --user ubuntu`` | login to name as built-in ubuntu user           |
++---------------------------------------------+-------------------------------------------------+
+| ``exec name -- su --login username``        | login to name as username                       |
++---------------------------------------------+-------------------------------------------------+
+| ``file pull/push src dest``                 | transfer files to/from container                |
++---------------------------------------------+-------------------------------------------------+
+
+You're probably going to want a shell function or similar for entering
+containers. I use a `zsh magic abbreviation
+<https://stackoverflow.com/questions/28573145/how-can-i-move-the-cursor-after-a-zsh-abbreviation>`_.
+
+
+hints and gotchas
+==================
+
+* `there is no proper terminal <https://github.com/lxc/lxd/issues/3218>`_
+
+    * e.g. ``$ tty`` will return "No tty"
+    * must use loopback pinentry with gpg
+    * simply using tmux is a workaround for some things
+    * setting a root password might be troublesome
+
+* `zsh autocompletions <https://lutostag.wordpress.com/2017/01/31/3-quick-tips-for-lxd/>`_
+
+   put these in your ``~/.zshrc``::
+
+      autoload bashcompinit
+      bashcompinit
+      export -f _have() { which $@ >/dev/null }
+      source /usr/share/bash-completion/completions/lxc
+
+* `enter with tmux <https://lutostag.wordpress.com/2017/01/31/3-quick-tips-for-lxd/>`_
+* to reset and re init lxd, need to
+
+    * reset the default profile (push an empty one in its place): https://discuss.linuxcontainers.org/t/error-the-default-profile-cannot-be-deleted/3972
+    * delete the default storage pool: ``sudo lxc storage delete default``
+    * delete the network bridge: (possibly only need ``lxc network delete lxdbr0``)
+
+        * ``sudo apt install bridge-utils``
+        * ``sudo ip link set lxdbr0 down``
+        * ``sudo brctl delbr kxdbr0``
+
+External networking
+====================
+
+* set up port forwarding: https://discuss.linuxcontainers.org/t/forward-port-79-and-443-from-wan-to-container/2042
+
+    * ``lxc config device add mycontainer myport8080 proxy listen=tcp:0.0.0.0:8080 connect=tcp:localhost:8080``
+
+* can test by installing nginx and editing ``/var/www/html/index.nginx-debian.html``
+
+    * change nginx port in ``/etc/nginx/sites-enabled/default`` (and ``sudo service nginx restart``)
+
+* can also test with any directory as html document root with e.g.
+
+    * ``python3 -m http.server 8088`` (from inside the document root)
+    * ``busybox httpd -p 127.0.0.1:8088 -h /path/to/doc/root``
+
+Right now, this only seems to work with the 'listen' (container) port and the
+'connect' (exposed on host) port are the same. Tested with nginx on both port 80
+and 8088
+
+These methods didn't work
+
+* to connect from outside, try `this DigitalOcean article <https://www.digitalocean.com/community/tutorials/how-to-set-up-and-use-lxd-on-ubuntu-16-04#step-5-%E2%80%94-forwarding-incoming-connections-to-the-nginx-container>`_
+* another method: https://www.supportblog.ch/setup-lxc-container-with-gitlab/
+* another method: http://slightlybetter.eu/category/devops/lxc/
+
+working with iptables
+
+* list rules as they were specified during creation
+
+    * ``sudo iptables -S``
+
+* list rules for one of five tables: filter, nat, mangle, raw, security
+
+    * ``sudo iptables -t nat -L``
+
+* delete rules
+
+    * ``sudo iptables -t nat -L --line-numbers``
+    * ``sudo iptables -t nat -D [CHAIN] [line-number]``
+
+(refer to here
+https://www.digitalocean.com/community/tutorials/how-to-list-and-delete-iptables-firewall-rules)
+
+
+X11 Applications in LXC
+========================
+
+The following is just for graphical use right now, but audio can be made to work
+as well. The references given for each section also explain audio, but I'm not
+using it right now.
+
+manual setup
+-------------
+
+https://blog.simos.info/how-to-run-graphics-accelerated-gui-apps-in-lxd-containers-on-your-ubuntu-desktop/
+
+1. (one time on host) allow root to remap our host's userID inside a container::
+
+    $ echo "root:$UID:1" | sudo tee -a /etc/subuid /etc/subgid
+
+2. (for each gui app container) configure the remapping for the container. Use
+   the uid/gid of the container user::
+
+    $ lxc config set mycontainer raw.idmap "both $UID 1001"
+    $ lxc restart mycontainer
+
+3. (for each gui app container) give access to the host's Xserver socket and
+   Xauthority file for ssh forwarding::
+
+    $ lxc config device add mycontainer X0 disk path=/tmp/.X11-unix/X0 source=/tmp/.X11-unix/X0
+    $ lxc config device add mycontainer Xauthority disk path=/home/ubuntu/.Xauthority source=${XAUTHORITY}
+
+4. (for each gui app container) create gpu devices for graphics acceleration. Use
+   the uid/gid of the container user::
+
+    $ lxc config device add mycontainer mygpu gpu
+    $ lxc config device set mycontainer mygpu uid 1001
+    $ lxc config device set mycontainer mygpu gid 1001
+
+5. (inside the container) be sure to set the ``$DISPLAY`` variable to match the
+   host's display (usually ``:0``)::
+
+    $ export DISPLAY=:0
+
+launching gui containers with LXD
+---------------------------------
+
+https://blog.simos.info/how-to-easily-run-graphics-accelerated-gui-apps-in-lxd-containers-on-your-ubuntu-desktop/
+
+1. allow root to remap our host's userID inside a container::
+
+    $ echo "root:$UID:1" | sudo tee -a /etc/subuid /etc/subgid
+
+2. save the following file to something like ``lxd_gui_profile.txt``. Adjust for
+   the correct host and container UIDs::
+
+    config:
+      environment.DISPLAY: :0
+      raw.idmap: both 1000 1001
+    description: GUI LXD profile
+    devices:
+      X0:
+        path: /tmp/.X11-unix/X0
+        source: /tmp/.X11-unix/X0
+        type: disk
+      mygpu:
+        type: gpu
+    name: gui
+    used_by:
+
+3. create the lxd "gui" profile::
+
+    $ lxc profile create gui
+    $ cat lxd_gui_profile.txt | lxc profile edit gui
+    $ lxd profile list
+
+4. launch containers with the "gui" profile applied::
+
+    $ lxd launch --profile default --profile gui ubuntu:18.04 mycontainer
+
+5. test graphics and audio inside container::
+
+    $ glxgears (from mesa-utils - installed by gui profile)
+    $ pactl info
+
+complete x11 inside LXC
+------------------------
+
+I haven't tried this yet, but `this answer <https://unix.stackexchange.com/a/21607>`_ claims to have it working.
+
+LXC storage
+============
+
+Coming soon.
+
+`mounting host /home read-write <https://tribaal.io/nicer-mounting-home-in-lxd.html>`_
+
+GPU passthrough
+================
+
+install cuda inside lxc on fusiont5 (roughly following
+https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#ubuntu-installation)
+
+from nvidia repo
+
+* ``wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_10.0.130-1_amd64.deb``
+* ``dpkg -i cuda-repo-ubuntu1604_10.0.130-1_amd64.deb``
+* ``apt-key adv --fetch-keys  https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub``
+* ``apt update``
+* ``apt install cuda-demo-suite-10-0 --no-install-recommends``
+* if dpkg errors about overwriting libs, answer with ``apt-get -o Dpkg::Options::="--force-overwrite" install --fix-broken``
+
+from ubuntu's graphics ppa
+
+* ``add-apt-repository ppa:graphics-drivers/ppa``
+* ``apt update``
+* ``apt install nvidia-headless-410``
+
+install cuda from runfile
+
+* ``wget https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda_10.0.130_410.48_linux``
+* ``./cuda_10.0.130_410.48_linux``
+* yes to everything except driver install
+* test with ``/usr/local/cuda/extras/demo_suite/bandwidthTest`` (will fail if no passthrough setup yet)
+
+enable gpu passthrough for lxd (roughly following https://stgraber.org/2017/03/21/cuda-in-lxd/)
+
+* ``lxc config device add container-name gpu gpu`` for all gpus
+* ``lxc config device add container-name gpu gpu id=0`` to pick the first gpu
+
+note about lxd api extensions
+------------------------------
+
+There seem to be "gpu_devices" and "nvidia_runtime" API extensions listed at
+https://lxd.readthedocs.io/en/latest/api-extensions/#api-extensions and
+https://github.com/lxc/lxd/blob/master/doc/containers.md I'm not sure yet what
+these mean

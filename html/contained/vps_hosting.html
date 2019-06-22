@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>VPS hosting &#8212; graham lopez  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="CLI Tools" href="../cli_tools/index.html" />
+    <link rel="prev" title="Docker" href="docker.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">graham lopez</a></h1>
+
+
+
+<p class="blurb">Notes by/for, and a little bit about M. Graham Lopez</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contact.html">Contact me</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cv.html">Curriculum Vitae</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/index.html">git hints</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../privacy_security/index.html">Privacy / Security</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Containers / VPS</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="lxc_lxd.html">LXC and LXD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html">Docker</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">VPS hosting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cli_tools/index.html">CLI Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../blog/index.html">blog(ish)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsorted/index.html">unsorted</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html">sphinx</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Containers / VPS</a><ul>
+      <li>Previous: <a href="docker.html" title="previous chapter">Docker</a></li>
+      <li>Next: <a href="../cli_tools/index.html" title="next chapter">CLI Tools</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="docker.html" title="Previous document">Docker</a>
+        </li>
+        <li>
+          <a href="../cli_tools/index.html" title="Next document">CLI Tools</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="vps-hosting">
+<h1>VPS hosting<a class="headerlink" href="#vps-hosting" title="Permalink to this headline">¶</a></h1>
+<p>Sometimes it is nice to get a remote system of some kind, or a lightweight
+throw-away instance. This is where virtual private servers come in. Note that
+you don’t have to run containers on them, but this is a common thing to do.</p>
+<p>AWS is the most obvious choice, and while it is super powerful, I find it super
+complicated as well. There are other, smaller VPS hosting companies that are
+sometimes cheaper than AWS, still have developer-friendly features, and are
+overall a bit simpler to use at the possible expense of automation features
+targeted at enterprise/production applications.</p>
+<p>I actually only use these services intermittently, so this is a place to keep
+some reminders to myself about how to use them, etc.</p>
+<div class="section" id="vultr">
+<h2>Vultr<a class="headerlink" href="#vultr" title="Permalink to this headline">¶</a></h2>
+<p>Coming soon.</p>
+</div>
+<div class="section" id="digitalocean">
+<h2>DigitalOcean<a class="headerlink" href="#digitalocean" title="Permalink to this headline">¶</a></h2>
+<p>Coming soon.</p>
+</div>
+<div class="section" id="misc-for-vps-hosting">
+<h2>misc for vps hosting<a class="headerlink" href="#misc-for-vps-hosting" title="Permalink to this headline">¶</a></h2>
+<p>to point DNS at a VPS:</p>
+<ul>
+<li><p class="first">login to domain registrar and change the nameservers for the domain</p>
+<blockquote>
+<div><ul class="simple">
+<li>ns1,ns2.vultr.com</li>
+<li>ns1,ns2,ns3.digitalocean.com</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">go to the DNS dashboard of the VPS provider and add the entries</p>
+<blockquote>
+<div><ul class="simple">
+<li>just set the “default domain” to some IP of a VPS (this will make the A
+record for the domain)</li>
+<li>then add additional A records to make the hostname point to the right
+place</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="docker.html" title="Previous document">Docker</a>
+        </li>
+        <li>
+          <a href="../cli_tools/index.html" title="Next document">CLI Tools</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2019, M. Graham Lopez.
+      
+    </div>
+
+    
+
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-140879797-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    
+  </body>
+</html>
