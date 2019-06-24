@@ -32,7 +32,7 @@ Delete a branch here, and everywhere::
   $ git push origin :mybranch (uses "git push <remote> <localbranch>:<remotebranch>" syntax to delete remote branch)
   $ git fetch --all --prune (use this on other machines to propagate the changes and get rid of "obsolete tracking branches")
 
-Advanced diffing branches
+Advanced branch diffing
 ---------------------------
 It’s often helpful to get a review of all the commits that are in this branch
 but that aren’t in your master branch. You can exclude commits in the master
