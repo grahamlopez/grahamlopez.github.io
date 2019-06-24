@@ -1,0 +1,9 @@
+
+*****************
+Edit build debug
+*****************
+
+Coming soon.
+
+- makeprg
+- quickfix/location list

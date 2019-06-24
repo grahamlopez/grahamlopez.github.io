@@ -1,0 +1,9 @@
+
+**********
+Snippets
+**********
+
+- built-in snippets
+- ultisnips
+- use as reminders for defaults and best practices (e.g. doxygen comment fields,
+  rule of 5, etc.)

@@ -1,0 +1,14 @@
+
+******************
+git integration
+******************
+
+- vim-fugitive
+- history navigation
+- file comparisons
+- hunk staging
+- gutter display
+    - options
+    - personally don't use anymore
+        - check diff easily when necessary
+        - or just git diff on commandline

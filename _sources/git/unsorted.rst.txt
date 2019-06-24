@@ -18,6 +18,7 @@ information on other pages.::
 | https://github.com/github/hub
 | git pull -X theirs
 | git reset --hard origin/mybranch (and friends - see e.g.: http://stackoverflow.com/questions/9301782/need-to-reset-git-branch-to-origin-version)
+| advanced git staging and committing
 
 Fetch a group of remotes::
 
@@ -31,6 +32,8 @@ Delete a branch here, and everywhere::
   $ git push origin :mybranch (uses "git push <remote> <localbranch>:<remotebranch>" syntax to delete remote branch)
   $ git fetch --all --prune (use this on other machines to propagate the changes and get rid of "obsolete tracking branches")
 
+Advanced diffing branches
+---------------------------
 It’s often helpful to get a review of all the commits that are in this branch
 but that aren’t in your master branch. You can exclude commits in the master
 branch by adding the --not option before the branch name. This does the same
@@ -105,3 +108,47 @@ source code in the Documentation/SubmittingPatches file.
 First, you don’t want to submit any whitespace errors. Git provides an easy way
 to check for this – before you commit, run ``git diff --check``, which identifies
 possible whitespace errors and lists them for you.
+
+Repository status checks
+-------------------------
+
+Here's a small script to check the status of all my repositories so I know what
+I need to push, pull, etc. As can be seen, it could use some improvements, but
+it does a good enough job.::
+
+    #!/bin/bash
+
+    VERBOSE=false
+    if [[ $1 == "-v" ]] ; then
+      VERBOSE=true
+    fi
+
+    found_repos=$(find ${HOME} -type d -name ".git")
+
+    # FIXME for bare repos
+    #
+    # 1.
+    #    to get bare repos to see remote branches (git branch -r)
+    #    add the following to e.g. ${HOME}/.dots/config in the [remote "origin"]
+    #    section:
+    #       fetch = +refs/heads/*:refs/remotes/origin/*
+    #
+    # 2. for any bare repos, need to `mkdir .git` for this script to find it
+
+    for repo in ${found_repos}
+    do
+      repo=${repo%/*} # trim ".git" from path
+      [ $VERBOSE = 'true' ] && echo "fetching ${repo}"
+      cd ${repo}
+      result=$(git for-each-ref --format=" %(refname:short) %(push:track)" refs/heads \
+               | grep -e 'behind' -e 'ahead' \
+               | sed 's/\[\|\]//g' \
+               | sed 's/behind /</g' \
+               | sed 's/ahead />/g')
+      if [ ! -z "${result}" ]
+      then
+        # shorten the output
+        echo --${repo#${HOME}/}--
+        echo "${result}"
+      fi
+    done

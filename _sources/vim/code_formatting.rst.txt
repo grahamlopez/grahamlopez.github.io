@@ -1,0 +1,11 @@
+
+******************
+Code formatting
+******************
+
+- set up clang-format
+    - for keypress
+    - for file save
+    - as you type
+    - pointer to using hooks
+- filetype specific formatting

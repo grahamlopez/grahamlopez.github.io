@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Introductory material &#8212; graham lopez  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Basics and configuration" href="basics_and_configuration.html" />
+    <link rel="prev" title="Vim" href="index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">graham lopez</a></h1>
+
+
+
+<p class="blurb">Notes by/for, and a little bit about, M. Graham Lopez</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contact.html">Contact me</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cv.html">Curriculum Vitae</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/index.html">git hints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../privacy_security/index.html">Privacy / Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli_tools/index.html">CLI Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../blog/index.html">blog(ish)</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Vim</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Introductory material</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics_and_configuration.html">Basics and configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project_navigation.html">Project navigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buffers_windows_tabs.html">Buffers windows tabs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bulk_editing.html">Bulk editing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="session_management.html">Session management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_integration.html">git integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_formatting.html">Code formatting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snippets.html">Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="edit_build_debug.html">Edit build debug</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugger_integration.html">Debugger integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="completion.html">Completion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="semantic_language.html">Semantic language support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contained/index.html">Containers / VPS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsorted/index.html">unsorted</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html">sphinx</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Vim</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Vim</a></li>
+      <li>Next: <a href="basics_and_configuration.html" title="next chapter">Basics and configuration</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="index.html" title="Previous document">Vim</a>
+        </li>
+        <li>
+          <a href="basics_and_configuration.html" title="Next document">Basics and configuration</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="introductory-material">
+<h1>Introductory material<a class="headerlink" href="#introductory-material" title="Permalink to this headline">¶</a></h1>
+<p>For some possibly controversial material, I’ll try to lay out some of my
+opinions about using vim as they relate to these pages.</p>
+<div class="section" id="motivating-vim">
+<h2>Motivating vim<a class="headerlink" href="#motivating-vim" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>non-gui</dt><dd><ul>
+<li>ssh</li>
+<li>containers</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>fast</dt><dd><ul>
+<li>(non-gui) instant startup, suspend, exit</li>
+<li>anti-mouse (no inherent advantage, just personal preference)</li>
+<li>“working closer to the speed of thought” vs. “muscle memory is not
+productivity”</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>established</dt><dd><ul>
+<li>easy to build (especially neovim)</li>
+<li><dl class="first docutils">
+<dt>easy to find answers</dt><dd><ul>
+<li>been around forever</li>
+<li>despite being around forver, still lots of users out there</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="general-principles">
+<h2>General principles<a class="headerlink" href="#general-principles" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>prefer built-in capabilities whenever possible</dt><dd><ul>
+<li>fewer plugins (best support, less setup, more portable)</li>
+<li>fewer mappings (less setup, more portable)</li>
+<li>add capabilities and new workflows one at a time</li>
+<li>I actually can’t keep very much in my head, so gravitate towards fewer
+general methods that may be a few keystrokes longer than more rarely-used
+specialized equivalents</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="disadvantages-and-comparisons">
+<h2>Disadvantages and comparisons<a class="headerlink" href="#disadvantages-and-comparisons" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>it’s a text editor</dt><dd><ul>
+<li>advanced IDE-like stuff sometimes takes some work</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>vimscript is terrible</dt><dd><ul>
+<li>elisp is nice and emacs a better architecture</li>
+<li>neovim trying to address this, but compatibility concerns are holding it
+back</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>non-gui</dt><dd><ul>
+<li>terminal and font difficulties</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>questionable project management</dt><dd><ul>
+<li>code is difficult to motivate a serious fork</li>
+<li>it is now forked</li>
+<li>vim still is still under a BDFL</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="index.html" title="Previous document">Vim</a>
+        </li>
+        <li>
+          <a href="basics_and_configuration.html" title="Next document">Basics and configuration</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2019, M. Graham Lopez.
+      
+    </div>
+
+    
+
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-140879797-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    
+  </body>
+</html>

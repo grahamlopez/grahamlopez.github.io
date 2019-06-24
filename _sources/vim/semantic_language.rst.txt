@@ -1,0 +1,10 @@
+
+***************************
+Semantic language support
+***************************
+
+Coming soon.
+
+- linting
+- completion
+- navigation/jumping

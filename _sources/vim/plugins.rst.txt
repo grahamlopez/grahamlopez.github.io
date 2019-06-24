@@ -1,0 +1,9 @@
+
+************
+Plugins
+************
+
+- plugin managment
+    - built-in since v.8
+    - https://shapeshed.com/vim-packages/
+- plugin list

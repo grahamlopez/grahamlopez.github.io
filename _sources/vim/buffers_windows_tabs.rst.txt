@@ -1,0 +1,11 @@
+
+**********************
+Buffers windows tabs
+**********************
+
+- which to use, when
+- advantageous keybindings
+    - hint: keep similar to tmux
+- quickly navigating
+    - wildmode, wildmenu
+    - other fuzzy finders

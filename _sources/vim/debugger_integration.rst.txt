@@ -1,0 +1,11 @@
+
+*********************
+Debugger integration
+*********************
+
+Coming soon.
+
+- tmux alternative
+    - vim-tmux integration?
+- direct vim integration
+- gdb-dashboard

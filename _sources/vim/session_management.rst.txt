@@ -1,0 +1,7 @@
+
+*********************
+Session management
+*********************
+
+- built-in management
+- vim-obsession

@@ -1,0 +1,25 @@
+
+*************************
+Basics and configuration
+*************************
+
+Some of this is quite basic, but I regularly encounter people who have been
+using vim for 10+ years that don't know some of these tricks. This is one of the
+blessings/curses of vim, that there is almost always something new to learn even
+at the basic levels.
+
+- :help, :helptags, :helpgrep
+    - navigating help pages via tags
+- :map, :imap, etc.
+- set paste
+- insert mode shortcuts
+    - c-w,u, c-t/d, c-g, al. (:help ins-special-keys)
+- config walkthrough
+- ctrl-k (man pages, vim help when editing .vimrc)
+- wildmenu, wildmode
+- display
+    - set bg=dark
+        - colorschemes, :hi customization, etc.
+    - set nu and variants
+    - statusline
+    - folding

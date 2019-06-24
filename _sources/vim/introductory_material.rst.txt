@@ -1,0 +1,51 @@
+**********************
+Introductory material
+**********************
+
+For some possibly controversial material, I'll try to lay out some of my
+opinions about using vim as they relate to these pages.
+
+Motivating vim
+----------------
+
+- non-gui
+    - ssh
+    - containers
+- fast
+    - (non-gui) instant startup, suspend, exit
+    - anti-mouse (no inherent advantage, just personal preference)
+    - "working closer to the speed of thought" vs. "muscle memory is not
+      productivity"
+- established
+    - easy to build (especially neovim)
+    - easy to find answers
+        - been around forever
+        - despite being around forver, still lots of users out there
+
+
+General principles
+-------------------
+
+- prefer built-in capabilities whenever possible
+    - fewer plugins (best support, less setup, more portable)
+    - fewer mappings (less setup, more portable)
+    - add capabilities and new workflows one at a time
+    - I actually can't keep very much in my head, so gravitate towards fewer
+      general methods that may be a few keystrokes longer than more rarely-used
+      specialized equivalents
+
+Disadvantages and comparisons
+------------------------------
+
+- it's a text editor
+    - advanced IDE-like stuff sometimes takes some work
+- vimscript is terrible
+    - elisp is nice and emacs a better architecture
+    - neovim trying to address this, but compatibility concerns are holding it
+      back
+- non-gui
+    - terminal and font difficulties
+- questionable project management
+    - code is difficult to motivate a serious fork
+    - it is now forked
+    - vim still is still under a BDFL

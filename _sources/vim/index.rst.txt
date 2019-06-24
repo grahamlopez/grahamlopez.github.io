@@ -1,0 +1,41 @@
+
+####
+Vim
+####
+
+Similarly to the :ref:`git-pages`, this is not attempting to be a comprehensive
+tutorial on vim, since there are so many of those resources available already
+that would be better than anything I am willing to produce.
+
+Rather, these are some notes about intermediate to advanced ways that I
+generally use vim, as well as a place to collect things to make vim more
+IDE-like, and maybe some thoughts about my past and ongoing adventures with vim
+vs. other editors and IDEs. These pages are assuming at least a solid beginner
+level familiarity with vim.
+
+**General**
+
+.. toctree::
+   :maxdepth: 2
+
+   introductory_material
+   basics_and_configuration
+   plugins
+   project_navigation
+   buffers_windows_tabs
+   bulk_editing
+
+
+**vim IDE**
+
+.. toctree::
+   :maxdepth: 2
+
+   session_management
+   git_integration
+   code_formatting
+   snippets
+   edit_build_debug
+   debugger_integration
+   completion
+   semantic_language

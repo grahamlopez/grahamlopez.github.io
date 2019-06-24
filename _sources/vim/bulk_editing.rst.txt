@@ -1,0 +1,12 @@
+
+*****************
+Bulk editing
+*****************
+
+- search/replace sed usage
+    - patterns
+    - options (/gc)
+    - pattern memory (#1, etc.)
+- column editing
+- macros
+- multicursor editing https://medium.com/p/2c44117d51db

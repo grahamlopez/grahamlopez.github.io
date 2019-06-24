@@ -1,0 +1,16 @@
+
+*******************
+Project navigation
+*******************
+
+One of the defining features of vim is the modal editing, one of which is
+largely concerned with navigating within a buffer quickly. However, there is
+also the matter of multiple-file and project-wide navigation to consider.
+
+- built-ins
+    - location history, location list, marks, bookmarks
+    - :e, :ls/:b, :find, :argadd
+- tag jumping
+- nerdtree
+- vimgrep, ripgrep, fzf, ag
+- semantic jumping
