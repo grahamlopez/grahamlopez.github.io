@@ -1,0 +1,74 @@
+FROM centos:latest
+
+# reasonably up-to-date versions provided (zsh is at /usr/bin/zsh)
+# "Development Tools, perl-devel, curl-devel and zlib-devel" for installing
+# git from source because CentOS 7 still uses git 1.8.x
+# glibc-devel.i386 for multilib support in compiled gcc
+RUN yum update -y && yum groupinstall -y "Development Tools" \
+  && yum install -y \
+  curl-devel \
+  glibc-devel.i386 \
+  libstdc++-devel.i386 \
+  perl-devel \
+  sudo \
+  tmux \
+  vim \
+  wget \
+  zlib-devel \
+  zsh
+
+WORKDIR /root
+
+RUN curl -L https://github.com/git/git/archive/v2.10.0.tar.gz | tar xz \
+  && cd git-* \
+  && make configure \
+  && ./configure --prefix=/usr/local \
+  && make install \
+  && cd .. \
+  && rm -rf git-*
+
+# now install latest gcc
+COPY fortran_plugin_gcc_6.2.0.patch /root
+RUN curl -L http://mirrors.ibiblio.org/gnu/ftp/gnu/gcc/gcc-6.2.0/gcc-6.2.0.tar.bz2 | tar xj \
+  && patch -p0 < fortran_plugin_gcc_6.2.0.patch \
+  && mkdir build \
+  && cd gcc-6.2.0 \
+  && ./contrib/download_prerequisites \
+  && cd ../build \
+  && ../gcc-6.2.0/configure --prefix=/usr/local \
+                            --enable-languages=c,c++,fortran \
+                            --enable-checking --disable-multilib \
+  && make -j4 \
+  && make install \
+  && cd ../ \
+  && rm -rf build \
+  && rm -rf gcc-6.2.0
+
+# and gmp as well for compiling plugins
+RUN curl -L ftp://gcc.gnu.org/pub/gcc/infrastructure/gmp-4.3.2.tar.bz2 | tar xj \
+  && cd gmp-4.3.2 \
+  && ./configure --prefix=/usr/local \
+  && make -j4 \
+  && make install \
+  && cd ../ \
+  && rm -rf gmp-4.3.2 \
+  && rm -f gmp-4.3.2.tar.bz2
+
+# setup user and add confugs
+# assumes 'configs' directory is present Dockerfile directory at build time
+ARG user=graham
+RUN useradd $user -s /usr/bin/zsh
+COPY configs /home/$user/.mgl_configs
+RUN chown -R $user:$user /home/$user/.mgl_configs
+
+# to be able to su inside the container when necessary
+# remember to change using 'passwd'
+RUN echo "root:Changeme" | chpasswd
+
+# now that rootly stuff is done, run commands as user
+USER $user
+RUN /home/$user/.mgl_configs/utils/setup_links.sh
+
+# setup container execution
+WORKDIR /home/$user
+ENTRYPOINT ["/usr/bin/zsh"]

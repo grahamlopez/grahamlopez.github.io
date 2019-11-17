@@ -66,10 +66,10 @@
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -108,37 +108,37 @@
             
   <div class="section" id="containers-in-hpc">
 <h1>Containers in HPC<a class="headerlink" href="#containers-in-hpc" title="Permalink to this headline">¶</a></h1>
+<p>(Autumn, 2018)</p>
 <p>Some thoughts about containers in HPC</p>
 <p>I go to talks and meetings where self-identifying “HPC people” get together
 and talk about the shortcomings of containers and why they don’t work in HPC
-environments. I get a little bit frustrated at these meetings for a few
-reasons. Broadly speaking, it usually comes down to people in these meetings
-typically 1) don’t have a common understanding of what containers are and what
-they are for, and 2) don’t really know what problems they want to solve using
-containers.</p>
-<p>A lot of times this results in people saying the same words, but meaning
-different things. Coupled with misunderstandings of those terms, this leads to
-even more confusion and talking past each other.</p>
+environments. I get a little bit frustrated at these meetings for a few reasons.
+Broadly speaking, it usually comes down to people in these meetings 1) don’t
+share a common understanding of what containers are and what they are for, and
+2) don’t really know what problems they want to solve using containers.</p>
+<p>Many times, this results in people saying the same words but meaning different
+things. Coupled with misunderstandings of those terms, this leads to even more
+confusion and talking past each other.</p>
 <p>All of this isn’t to say that the problems discussed below couldn’t be solved
 or the current boundaries expanded. But when we criticize and lament about the
 current state of how broken containers are for HPC, it might be useful to keep
 in mind some of these inherent difficulties, and what exactly is or isn’t the
 right solution for a given problem.</p>
-<p>Some may not agree with some of the things I say below; that’s okay. That’s
-kind of my point. Tell me where I’m wrong so that the discussion can progress.</p>
+<p>Some may not agree with some of the things I say below, and that’s okay. That’s
+kind of my point; tell me where I’m wrong so that the discussion can progress.</p>
 <div class="section" id="containers-provide-two-way-abstraction-isolation">
 <h2>Containers provide two-way abstraction/isolation<a class="headerlink" href="#containers-provide-two-way-abstraction-isolation" title="Permalink to this headline">¶</a></h2>
-<p>If you go and <a class="reference external" href="https://youtu.be/Q5POuMHxW-0?t=5m35s" target="_blank">watch Solomon Hykes (Docker founder) talk</a> about how he conceptualizes Docker
-and what containers are for, he actually thinks of them as shipping
+<p>If you go and <a class="reference external" href="https://youtu.be/Q5POuMHxW-0?t=5m35s" target="_blank">watch Solomon Hykes’ (Docker founder) talk</a> about how he conceptualizes Docker and
+what containers are for, he says that he likes to think of them as shipping
 containers. Obviously, the shipping company handling the container can’t see
 inside of it or necessarily know what it contains. However, notice that the
 things inside of a shipping container also cannot know if they are on a truck,
 ship, train, etc.</p>
 <p>Software containers allow you to package up an application’s dependencies and
-deploy it anywhere and not care what the destination looks like. But in
-exchange, you also cannot know what the destination looks like. Once the
-contents of the container have a need to see outside of their box, that box is
-no longer a container. Software containers stop at the kernel. If the
+deploy it anywhere and not care what the destination looks like. But in exchange
+for this convenience, you also cannot know what the destination looks like. Once
+the contents of the container have a need to see outside of their box, that box
+is no longer a (good) container. Software containers stop at the kernel. If the
 application packed inside of the container needs to adapt to differences in
 kernel version, drivers, or hardware presence/absence, it is no longer a
 container. Virtual machines go lower and abstract the hardware; they are
@@ -159,10 +159,10 @@ interact with the system. There are very minimal exceptions like bind mounts
 and sockets, but these follow system-agnostic protocols as well.</p>
 <p>This would be a very good problem for the HPC community to solve: to define an
 interface by which applications could probe, discover, request, and use
-specialized features of an LCF machine, and the interface by which a machine
-could expose those features to applications. In fact, we have some of this
-already - an example would be MPI. But it is hard to do, as the history and
-effort behind MPI demonstrates.</p>
+specialized features of an LCF (leadership-class facility) machine, and the
+interface by which a machine could expose those features to applications. In
+fact, we have some of this already - an example would be MPI. But it is hard to
+do, as the history and effort behind MPI demonstrates.</p>
 <p>But this is not the problem that containers have been designed to solve; in
 fact, they sidestep it all together.</p>
 </div>
@@ -173,26 +173,26 @@ Most of the time, that cost is performance. It is possible to provide
 high-performance abstractions, but examples of this consist of some of the
 most complicated and successful software known. Compilers provide an
 incredible abstraction between high-level code and all types of processors and
-the corresponding instruction sets. Operating systems provide equally
+their corresponding instruction sets. Operating systems provide equally
 impressive abstractions of varying hardware components with as little overhead
-as possible. Both good compilers and good OSes have required more person-years
-of effort than most other software endeavors.</p>
+as possible. Of course both good compilers and good OSes have required more
+person-years of effort than most other software endeavors.</p>
 <p>Software containers provide an abstraction of the operating system to the
 application. In this case, it is a simple abstraction, and it comes at the cost
 of performance. But even if containers could run on all LCF machines without
 modification of the contents, the containerized application would still not be
-performant on the various systems. Let’s not forget that HPC applications have
-to be specialized to each system (whether or not they are containerized), or
-else themselves abstracted (at a cost of performance and/or development effort)
-independently of build or deployment issues.</p>
-<p>So what exactly does an HPC application want from a container. Usually, they
+performant on the various systems. Let’s not forget that performant HPC
+applications have to be specialized to each system (whether or not they are
+containerized), or else themselves abstracted (at a cost of performance and/or
+development effort) independently of build or deployment issues.</p>
+<p>So what exactly does an HPC application want from a container? Usually, they
 are looking for ease of deployment on varying destinations. This is yet
 another notoriously hard problem to solve. Containers solve this, and they do
 so by mandating complete agnosticism of the deployment destination. Package
-managers also try to solve this problem, and allow specialization based on the
-destination. But it can be inferred by the existence of multiple package
-managers, some 20+ years old and still no dominant solution, that this is a
-very old and very hard problem as well.</p>
+managers also try to solve this problem, and sometimes allow specialization
+based on the destination. But it can be inferred by the existence of multiple
+package managers, some 20+ years old (and still no dominant solution), that this
+is a very old and very hard problem as well.</p>
 </div>
 <div class="section" id="cloud-computing-is-not-hpc">
 <h2>Cloud computing is not HPC<a class="headerlink" href="#cloud-computing-is-not-hpc" title="Permalink to this headline">¶</a></h2>
@@ -220,16 +220,16 @@ sometimes confused or even equated with HPC in general. Also, a lot of tools
 used for big data are containerized and can run in the cloud. But this doesn’t
 necessarily mean that these applications should run, from their containers, on
 capability HPC systems. Of course there could be big data sitations that are
-capability, but there is nothing that exempts them from the usual challenges of
-a non “big data” capability application.</p>
+capability, but there is nothing that exempts them from the usual HPC challenges
+of a non “big data” capability application.</p>
 <p>I don’t think it is fair to claim that cloud computing is the same as
-(H)igh-(P)erformance (C)omputing; it would be fair to call both HPC and cloud
-“large-scale computing”, but that doesn’t make them interchangeable.</p>
+(H)igh-(P)erformance (C)omputing. I think it would be fair to call both HPC and
+cloud “large-scale computing,” but that doesn’t make them interchangeable.</p>
 </div>
 <div class="section" id="where-do-containers-fit-into-hpc">
 <h2>Where do containers fit into HPC?<a class="headerlink" href="#where-do-containers-fit-into-hpc" title="Permalink to this headline">¶</a></h2>
 <p>Software containers most likely could be useful to the HPC community. Given
-that they aren’t designed to be wrapping up the traditional, capability type
+that they weren’t designed to be wrapping up the traditional, capability type
 of HPC applications, where do they fit in?</p>
 <p>This is exactly the discussion that needs to be taking place instead of how to
 solve all of the “problems” about containers in HPC that containers are not
@@ -237,7 +237,8 @@ meant to solve. But some reasonable possibilities could be things like:</p>
 <ul class="simple">
 <li>Non performance-critical applications used in workflows that include HPC
 applications and resources. Containers could make these pieces easier to
-deploy (portable) at any HPC facility to work along-side the applications.</li>
+deploy (portable) at any HPC facility to work along beside the capability
+applications.</li>
 <li>Job isolation. Here, performance might become important again, but the
 reasons and scope of isolation would be specific to the environment, so the
 portability requirement is lifted.</li>
@@ -251,7 +252,7 @@ and what they are for, and about what problem(s) they want to solve using
 containers.</li>
 <li>Software containers are analogous to shipping containers, including
 (two-way!) opaque walls. If the contents of a container ask anything about
-where the container is sitting, it is no longer a container.</li>
+where the container is sitting, it is breaking the container contract.</li>
 <li>Interfaces are a very hard and very important problem to solve in all areas
 of software.</li>
 <li>Software containers solve the interface problem by essentially not providing
@@ -261,7 +262,7 @@ containers were not designed for this.</li>
 <li>Software containers provide abstractions. At a cost.</li>
 <li>High-performance abstractions are possible, but they comprise by far the most
 complicated and successful software projects yet undertaken (like compilers
-and operating systems.)</li>
+and operating systems).</li>
 <li>Usually, the abstraction sought by HPC applications from containers is closer
 to that provided by package management (but this is an old and hard problem
 as well).</li>
