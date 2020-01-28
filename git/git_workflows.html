@@ -172,15 +172,71 @@ Supporting branches are all <strong>features</strong>, <strong>releases</strong>
 figure and table below summarize how all of these branches work together.</p>
 <img alt="../_images/git-model2x.png" src="../_images/git-model2x.png" />
 <p>(Author: Vincent Driessen.  Original post: nvie.com/posts/a-successful-git-branching-model/  License: Creative Commons BY-SA)</p>
-<div class="line-block">
-<div class="line">naming convention | May branch off from | Must merge back into | Purpose |</div>
-<div class="line">—————– | ——————- | ——————– | ——- |</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">master</span></code>          | (none)              | (none)               |  &lt;ul&gt; &lt;li&gt;HEAD of origin/master is a production-ready state&lt;/li&gt; &lt;li&gt;This is the source of automatic nightly builds&lt;/li&gt; &lt;li&gt;Every merge into master represents a new production release by definition. Each commit in master is tagged with it’s corresponding release version number&lt;/li&gt; &lt;/ul&gt; |</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">develop</span></code>         | <code class="docutils literal notranslate"><span class="pre">release</span></code>           | <code class="docutils literal notranslate"><span class="pre">release</span></code>            | &lt;ul&gt; &lt;li&gt;serves as coordination point for planned development&lt;/li&gt; &lt;li&gt;features end up here when they are finished&lt;/li&gt; &lt;/ul&gt; |</div>
-<div class="line">(anything)        | <code class="docutils literal notranslate"><span class="pre">develop</span></code>         | <code class="docutils literal notranslate"><span class="pre">develop</span></code>            | &lt;ul&gt; &lt;li&gt;where all planned development actually takes place&lt;/li&gt; &lt;/ul&gt; |</div>
-<div class="line"><cite>release-*</cite>       | <code class="docutils literal notranslate"><span class="pre">develop</span></code>         | <code class="docutils literal notranslate"><span class="pre">develop</span></code>, <code class="docutils literal notranslate"><span class="pre">master</span></code>  | &lt;ul&gt; &lt;li&gt;created when develop contains all desired for new release&lt;/li&gt; &lt;li&gt; allows final preparation for new release (merge into master) while develop is cleared to start receiving new features for next release&lt;/li&gt; &lt;/ul&gt; |</div>
-<div class="line"><cite>hotfix-*</cite>        | <code class="docutils literal notranslate"><span class="pre">master</span></code>                  | <code class="docutils literal notranslate"><span class="pre">develop</span></code>, <code class="docutils literal notranslate"><span class="pre">develop</span></code> | &lt;ul&gt; &lt;li&gt;creates an unplanned bump in release version number on master to fix a critical bug that is in production&lt;/li&gt; &lt;/ul&gt; |</div>
-</div>
+<table border="1" class="docutils align-default">
+<colgroup>
+<col width="13%" />
+<col width="14%" />
+<col width="18%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">naming convention</th>
+<th class="head">May branch off from</th>
+<th class="head">Must merge back into</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">master</span></code></td>
+<td>(none)</td>
+<td>(none)</td>
+<td><ul class="first last simple">
+<li>HEAD of origin/master is a production-ready state</li>
+<li>This is the source of automatic nightly builds</li>
+<li>Every merge into master represents a new production release by definition.
+Each commit in master is tagged with it’s corresponding release version
+number</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">develop</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">release</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">release</span></code></td>
+<td><ul class="first last simple">
+<li>serves as coordination point for planned development</li>
+<li>features end up here when they are finished</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>(anything)</td>
+<td><code class="docutils literal notranslate"><span class="pre">develop</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">develop</span></code></td>
+<td><ul class="first last simple">
+<li>where all planned development actually takes place</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">release-*</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">develop</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">develop</span></code>, <code class="docutils literal notranslate"><span class="pre">master</span></code></td>
+<td><ul class="first last simple">
+<li>created when develop contains all desired for new release</li>
+<li>allows final preparation for new release (merge into master) while develop is
+cleared to start receiving new features for next release</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">hotfix-*</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">release</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">master</span></code>, <code class="docutils literal notranslate"><span class="pre">develop</span></code></td>
+<td><ul class="first last simple">
+<li>creates an unplanned bump in release version number on master to fix
+a critical bug that is in production</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <p>To experiment with this workflow and practice merging, rebasing, branching,
 etc., the <a class="reference internal" href="repo_histories.html#gitflow-script"><span class="std std-ref">gitflow_history.sh</span></a> will generate a repository with the exact
 history shown in the figure above.</p>

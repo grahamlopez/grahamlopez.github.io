@@ -68,13 +68,36 @@ figure and table below summarize how all of these branches work together.
 
 (Author: Vincent Driessen.  Original post: nvie.com/posts/a-successful-git-branching-model/  License: Creative Commons BY-SA)
 
-| naming convention | May branch off from | Must merge back into | Purpose |
-| ----------------- | ------------------- | -------------------- | ------- |
-| ``master``          | (none)              | (none)               |  <ul> <li>HEAD of origin/master is a production-ready state</li> <li>This is the source of automatic nightly builds</li> <li>Every merge into master represents a new production release by definition. Each commit in master is tagged with it's corresponding release version number</li> </ul> |
-| ``develop``         | ``release``           | ``release``            | <ul> <li>serves as coordination point for planned development</li> <li>features end up here when they are finished</li> </ul> |
-| (anything) 	    | ``develop`` 	  | ``develop``            | <ul> <li>where all planned development actually takes place</li> </ul> |
-| `release-*` 	    | ``develop`` 	  | ``develop``, ``master``  | <ul> <li>created when develop contains all desired for new release</li> <li> allows final preparation for new release (merge into master) while develop is cleared to start receiving new features for next release</li> </ul> |
-| `hotfix-*` 	    | ``master`` 	          | ``develop``, ``develop`` | <ul> <li>creates an unplanned bump in release version number on master to fix a critical bug that is in production</li> </ul> |
++-------------------+---------------------+--------------------------+---------------------------------------------------------------------------------+
+| naming convention | May branch off from | Must merge back into     | Purpose                                                                         |
++===================+=====================+==========================+=================================================================================+
+| ``master``        | (none)              | (none)                   |  - HEAD of origin/master is a production-ready state                            |
+|                   |                     |                          |  - This is the source of automatic nightly builds                               |
+|                   |                     |                          |  - Every merge into master represents a new production release by definition.   |
+|                   |                     |                          |    Each commit in master is tagged with it's corresponding release version      |
+|                   |                     |                          |    number                                                                       |
++-------------------+---------------------+--------------------------+---------------------------------------------------------------------------------+
+| ``develop``       | ``release``         | ``release``              | - serves as coordination point for planned development                          |
+|                   |                     |                          | - features end up here when they are finished                                   |
++-------------------+---------------------+--------------------------+---------------------------------------------------------------------------------+
+| (anything)        | ``develop``         | ``develop``              | - where all planned development actually takes place                            |
++-------------------+---------------------+--------------------------+---------------------------------------------------------------------------------+
+| ``release-*``     | ``develop``         | ``develop``, ``master``  | - created when develop contains all desired for new release                     |
+|                   |                     |                          | - allows final preparation for new release (merge into master) while develop is |
+|                   |                     |                          |   cleared to start receiving new features for next release                      |
++-------------------+---------------------+--------------------------+---------------------------------------------------------------------------------+
+|                   |                     |                          | - creates an unplanned bump in release version number on master to fix          |
+| ``hotfix-*``      | ``release``         | ``master``, ``develop``  |   a critical bug that is in production                                          |
++-------------------+---------------------+--------------------------+---------------------------------------------------------------------------------+
+
+
+
+
+
+
+
+
+
 
 To experiment with this workflow and practice merging, rebasing, branching,
 etc., the :ref:`gitflow-script` will generate a repository with the exact

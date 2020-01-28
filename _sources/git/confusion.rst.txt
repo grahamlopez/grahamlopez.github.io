@@ -75,7 +75,7 @@ bottom of this page goes into detail about when to use rebase vs. merge from a
 subjective (but IMO, reasonable) best-practices point of view.
 
 Finally, there is some more information about the effects of rebase vs. merge
-on repo histories, merge commits, etc. in the :doc:`workflows page </git/git_workflows>`.
+on repo histories, merge commits, etc. in the :doc:`repo histories page </git/repo_histories>`.
 
 checkout vs. revert vs. reset
 ==============================
