@@ -3,11 +3,60 @@
 git integration
 ******************
 
-- vim-fugitive
-- history navigation
-- file comparisons
-- hunk staging
-- gutter display
+There are probably several options, but Tim Pope's reputation is what it is for
+a reason, so just go with `vim-fugitive
+<https://github.com/tpope/vim-fugitive>`_. The rest of this page mostly deals
+with fugitive.
+
+If you followed the link above, you saw that (as of the time of this writing)
+several screencasts that explain a lot of the functionality. Most of this page
+is just a summary of what can be learned in those screencasts (about 8-10
+minutes each); so there's nothing really original here, just some notes for
+myself when I forget things that get used less often.
+
+Basic fugitive commands
+-------------------------
+
+All fugitive commands start with a capital ':G'.
+
+``:Gedit``
+    go back to the working copy version of the file from some other fugitive
+    version (navigating away from and back to the buffer also seems to work)
+
+``:G[status]``
+    show a window like ``git status`` where files can be un/staged. use ``g?``
+    for keybinding reminders
+
+``:Gcommit``
+    open a split to write a commit message. only useful if buffer-based
+    autocompletion is desired for writing the commit message
+
+History navigation
+-------------------
+
+``:Glog``
+    run ``git log`` and load the commits into the quickfix list. ``--`` argument
+    to get the entire repo history
+
+    Might like to use ``:Glog | copen<CR><CR>`` in a mapping
+
+
+File comparisons
+-----------------
+
+``:Gdiff [revision]``
+    diff the current file with its version from [revision]
+
+When using the quickfix list to navigate the history of a file, ``<CR>`` can
+open it from the quickfix window, or the normal ``:cnext`` et al. commands. But
+when some historical version is opened, then ``:Gdiff`` will diff it with the
+current index version.
+
+Hunk staging
+----------------
+
+Gutter display
+----------------
     - options
     - personally don't use anymore
         - check diff easily when necessary

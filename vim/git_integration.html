@@ -122,13 +122,52 @@
             
   <div class="section" id="git-integration">
 <h1>git integration<a class="headerlink" href="#git-integration" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li>vim-fugitive</li>
-<li>history navigation</li>
-<li>file comparisons</li>
-<li>hunk staging</li>
-<li><dl class="first docutils">
-<dt>gutter display</dt><dd><ul>
+<p>There are probably several options, but Tim Pope’s reputation is what it is for
+a reason, so just go with <a class="reference external" href="https://github.com/tpope/vim-fugitive" target="_blank">vim-fugitive</a>. The rest of this page mostly deals
+with fugitive.</p>
+<p>If you followed the link above, you saw that (as of the time of this writing)
+several screencasts that explain a lot of the functionality. Most of this page
+is just a summary of what can be learned in those screencasts (about 8-10
+minutes each); so there’s nothing really original here, just some notes for
+myself when I forget things that get used less often.</p>
+<div class="section" id="basic-fugitive-commands">
+<h2>Basic fugitive commands<a class="headerlink" href="#basic-fugitive-commands" title="Permalink to this headline">¶</a></h2>
+<p>All fugitive commands start with a capital ‘:G’.</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">:Gedit</span></code></dt><dd>go back to the working copy version of the file from some other fugitive
+version (navigating away from and back to the buffer also seems to work)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">:G[status]</span></code></dt><dd>show a window like <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> where files can be un/staged. use <code class="docutils literal notranslate"><span class="pre">g?</span></code>
+for keybinding reminders</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">:Gcommit</span></code></dt><dd>open a split to write a commit message. only useful if buffer-based
+autocompletion is desired for writing the commit message</dd>
+</dl>
+</div>
+<div class="section" id="history-navigation">
+<h2>History navigation<a class="headerlink" href="#history-navigation" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">:Glog</span></code></dt><dd><p>run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> and load the commits into the quickfix list. <code class="docutils literal notranslate"><span class="pre">--</span></code> argument
+to get the entire repo history</p>
+<p>Might like to use <code class="docutils literal notranslate"><span class="pre">:Glog</span> <span class="pre">|</span> <span class="pre">copen&lt;CR&gt;&lt;CR&gt;</span></code> in a mapping</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="file-comparisons">
+<h2>File comparisons<a class="headerlink" href="#file-comparisons" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">:Gdiff</span> <span class="pre">[revision]</span></code></dt><dd>diff the current file with its version from [revision]</dd>
+</dl>
+<p>When using the quickfix list to navigate the history of a file, <code class="docutils literal notranslate"><span class="pre">&lt;CR&gt;</span></code> can
+open it from the quickfix window, or the normal <code class="docutils literal notranslate"><span class="pre">:cnext</span></code> et al. commands. But
+when some historical version is opened, then <code class="docutils literal notranslate"><span class="pre">:Gdiff</span></code> will diff it with the
+current index version.</p>
+</div>
+<div class="section" id="hunk-staging">
+<h2>Hunk staging<a class="headerlink" href="#hunk-staging" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="gutter-display">
+<h2>Gutter display<a class="headerlink" href="#gutter-display" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
 <li>options</li>
 <li><dl class="first docutils">
 <dt>personally don’t use anymore</dt><dd><ul>
@@ -139,10 +178,8 @@
 </dl>
 </li>
 </ul>
-</dd>
-</dl>
-</li>
-</ul>
+</div></blockquote>
+</div>
 </div>
 
 

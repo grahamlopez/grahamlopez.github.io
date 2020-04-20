@@ -11,18 +11,22 @@ Home
     :height: 200px
     :align: right
 
-I am an HPC Engineer in the National Center for Computational Sciences at Oak
-Ridge National Laboratory where I work with users and applications to run at
-scale on current and upcoming leadership-class computing facilities. In addition
-to my direct engagement with facility users, I have published research in the
-areas of computational materials science, application acceleration and
-benchmarking on heterogeneous systems, low-level communication APIs, and
-programming models.
+I am a computing professional with a background in scientific and
+high-performance computing. Currently, I am a product manager for HPC
+compilers.
 
-Prior to joining ORNL, I was a research scientist at Georgia
-Institute of Technology where I worked on application and numerical algorithm
-optimizations for accelerators. I earned an M.S. in Computer science and Ph.D.
-in Physics from Wake forest University.
+Recently, I was an HPC Engineer in the National Center for Computational
+Sciences at Oak Ridge National Laboratory where I worked with users and
+applications to run at scale on current and upcoming leadership-class computing
+facilities. In addition to my direct engagement with facility users, I have
+published research in the areas of computational materials science, application
+acceleration and benchmarking on heterogeneous systems, low-level communication
+APIs, and programming models.
+
+Prior to joining ORNL, I was a research scientist at Georgia Institute of
+Technology where I worked on application and numerical algorithm optimizations
+for accelerators. I earned an M.S. in Computer science and Ph.D.  in Physics
+from Wake forest University.
 
 Test change
 
