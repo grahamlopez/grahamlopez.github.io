@@ -1,0 +1,407 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Gentoo &#8212; graham lopez  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="blog(ish)" href="../blog/index.html" />
+    <link rel="prev" title="Operating Systems" href="index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">graham lopez</a></h1>
+
+
+
+<p class="blurb">Notes by/for, and a little bit about M. Graham Lopez</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contact.html">Contact me</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cv.html">Curriculum Vitae</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/index.html">git hints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../privacy_security/index.html">Privacy / Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contained/index.html">Containers / VPS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli_tools/index.html">CLI Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Operating Systems</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Gentoo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../blog/index.html">blog(ish)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsorted/index.html">unsorted</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html">sphinx</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Operating Systems</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Operating Systems</a></li>
+      <li>Next: <a href="../blog/index.html" title="next chapter">blog(ish)</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="index.html" title="Previous document">Operating Systems</a>
+        </li>
+        <li>
+          <a href="../blog/index.html" title="Next document">blog(ish)</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="gentoo">
+<h1>Gentoo<a class="headerlink" href="#gentoo" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#installation-quicknotes" id="id1">Installation Quicknotes</a><ul>
+<li><a class="reference internal" href="#get-to-the-chroot" id="id2">Get to the chroot</a></li>
+<li><a class="reference internal" href="#configure-build-the-system" id="id3">Configure/build the system</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#more-installation-security" id="id4">More installation security</a></li>
+<li><a class="reference internal" href="#dual-booting-e-g-ubuntu" id="id5">Dual Booting (e.g. Ubuntu)</a></li>
+<li><a class="reference internal" href="#encrypted-drive" id="id6">Encrypted drive</a></li>
+<li><a class="reference internal" href="#uefi-boot-no-bootloader" id="id7">UEFI boot (no bootloader)</a></li>
+<li><a class="reference internal" href="#systemd-gnome-3-28" id="id8">Systemd / Gnome 3.28+</a></li>
+</ul>
+</div>
+<div class="section" id="installation-quicknotes">
+<h2><a class="toc-backref" href="#id1">Installation Quicknotes</a><a class="headerlink" href="#installation-quicknotes" title="Permalink to this headline">¶</a></h2>
+<p>Installation resources</p>
+<ul class="simple">
+<li><a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64" target="_blank">gentoo AMD64 handbook (sectioned)</a></li>
+<li><a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation" target="_blank">gentoo AMD64 handbook (installation - Full page)</a></li>
+<li><a class="reference external" href="https://wiki.gentoo.org/wiki/Systemd" target="_blank">systemd installation</a></li>
+<li><a class="reference external" href="https://wiki.gentoo.org/wiki/Full_Disk_Encryption_From_Scratch_Simplified" target="_blank">gentoo wiki - Full Disk Encryption From Scratch Simplified</a></li>
+<li><a class="reference external" href="https://wiki.gentoo.org/wiki/Sakaki%27s_EFI_Install_Guide" target="_blank">Sakaki’s EFI Install Guide</a></li>
+</ul>
+<div class="section" id="get-to-the-chroot">
+<h3><a class="toc-backref" href="#id2">Get to the chroot</a><a class="headerlink" href="#get-to-the-chroot" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Networking" target="_blank">Enable networking</a>:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">ifconfig</span> <span class="pre">-a</span></code></li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">net-setup</span> <span class="pre">wlp3s0</span></code></dt><dd>(details for <a class="reference external" href="https://wiki.gentoo.org/wiki/Sakaki%27s_EFI_Install_Guide/Setting_Up_Networking_and_Connecting_via_ssh" target="_blank">manual wifi setup at Sakaki’s guide</a>)</dd>
+</dl>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">ping</span> <span class="pre">google.com</span></code></li>
+</ul>
+<p><a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks" target="_blank">Preparing the disks</a>:</p>
+<ul>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">lsblk</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">parted</span> <span class="pre">-a</span> <span class="pre">optimal</span> <span class="pre">/dev/sda</span></code></p>
+</li>
+<li><p class="first">using parted (from <a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks#Default:_Using_parted_to_partition_the_disk" target="_blank">handbook</a>
+or <a class="reference external" href="https://wiki.gentoo.org/wiki/Sakaki%27s_EFI_Install_Guide/Preparing_the_LUKS-LVM_Filesystem_and_Boot_USB_Key" target="_blank">Sakaki’s guide with LVM, LUKS, EFI boot</a>)</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">print</span></code> or just <code class="docutils literal notranslate"><span class="pre">p</span></code> to print the current partition table</p>
+</li>
+<li><p class="first">make a new partition table (destroys entire disk):</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">mklabel</span> <span class="pre">gpt</span></code></p>
+</div></blockquote>
+</li>
+<li><p class="first">set units to work in with e.g. <code class="docutils literal notranslate"><span class="pre">unit</span> <span class="pre">mib</span></code>, <code class="docutils literal notranslate"><span class="pre">unit</span> <span class="pre">gib</span></code>, or <code class="docutils literal notranslate"><span class="pre">unit</span> <span class="pre">s</span></code>
+for sectors. Also need an <code class="docutils literal notranslate"><span class="pre">s</span></code> suffix on numbers for working with
+sectors.</p>
+</li>
+<li><dl class="first docutils">
+<dt>make partitions</dt><dd><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">mkpart</span> <span class="pre">primary</span> <span class="pre">START</span> <span class="pre">END</span></code> (in whatever units)</li>
+<li><code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">1</span> <span class="pre">grub</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">1</span> <span class="pre">boot</span> <span class="pre">on</span></code> (<a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks#Default_partitioning_scheme" target="_blank">see here</a>
+and <a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks#Creating_the_partitions" target="_blank">here</a>)</li>
+<li><code class="docutils literal notranslate"><span class="pre">mkfs.fat</span> <span class="pre">-F</span> <span class="pre">32</span> <span class="pre">/dev/sda1</span></code> (see <a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation#Using_UEFI" target="_blank">here in the handbook</a> about using EFI.)</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">if the installation media isn’t booted with EFI, then
+‘/sys/firmware/efi` will not be properly populated and confuse the grup
+installation later on.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">“For completeness, the BIOS boot partition is needed when a GPT
+partition layout is used with GRUB2 in PC/BIOS mode. It is not required when
+booting in EFI/UEFI mode.”</p>
+</div>
+</div></blockquote>
+</li>
+<li><dl class="first docutils">
+<dt>make the filesystems and mount:</dt><dd><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">mkfs.ext4</span> <span class="pre">/dev/sda4</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">-p</span> <span class="pre">/mnt/gentoo/boot</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">mount</span> <span class="pre">/dev/sda4</span> <span class="pre">/mnt/gentoo</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">mount</span> <span class="pre">/dev/sda1</span> <span class="pre">/mnt/gentoo/boot</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>install stage3</p>
+<ul>
+<li><p class="first">ensure that the system <a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Stage#Setting_the_date_and_time" target="_blank">time is correct</a>.
+It is okay if it is still in UTC - we’ll fix the timezone later.</p>
+</li>
+<li><dl class="first docutils">
+<dt>download the tarball:</dt><dd><ul>
+<li><p class="first"><a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Stage#Downloading_the_stage_tarball" target="_blank">browse to it with links</a>:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">links</span> <span class="pre">https://www.gentoo.org/downloads/mirrors</span></code></p>
+<p>releases –&gt; amd4 –&gt; autobuilds</p>
+</div></blockquote>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="https://wiki.gentoo.org/wiki/Sakaki%27s_EFI_Install_Guide/Installing_the_Gentoo_Stage_3_Files#Downloading.2C_Verifying_and_Unpacking_the_Gentoo_Stage_3_Tarball" target="_blank">or get it directly</a>:</dt><dd><ul class="simple">
+<li>get the release file name from <a class="reference external" href="http://distfiles.gentoo.org/releases/amd64/autobuilds/latest-stage3-amd64.txt" target="_blank">http://distfiles.gentoo.org/releases/amd64/autobuilds/latest-stage3-amd64.txt</a></li>
+<li><code class="docutils literal notranslate"><span class="pre">wget</span> <span class="pre">-c</span> <span class="pre">http://distfiles.gentoo.org/releases/amd64/autobuilds/YYYYMMDDThhmmssZ/stage3-amd64-YYYYMMDDThhmmssZ.tar.xz</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>and the verification signatures</dt><dd><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">wget</span> <span class="pre">-c</span> <span class="pre">http://distfiles.gentoo.org/releases/amd64/autobuilds/YYYYMMDDThhmmssZ/stage3-amd64-YYYYMMDDThhmmssZ.tar.xz.CONTENTS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">wget</span> <span class="pre">-c</span> <span class="pre">http://distfiles.gentoo.org/releases/amd64/autobuilds/YYYYMMDDThhmmssZ/stage3-amd64-YYYYMMDDThhmmssZ.tar.xz.DIGESTS.asc</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">unpack the tarball:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">tar</span> <span class="pre">xvpf</span> <span class="pre">stage3-*.tar.xz</span> <span class="pre">--xattrs-include='*.*'</span> <span class="pre">--numeric-owner</span></code></p>
+</div></blockquote>
+</li>
+</ul>
+<p>enter the chroot</p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt><a class="reference external" href="https://wiki.gentoo.org/wiki/Mirrorselect" target="_blank">preconfigure mirrors</a> for the new system</dt><dd><ul>
+<li><code class="docutils literal notranslate"><span class="pre">mirrorselect</span> <span class="pre">-i</span> <span class="pre">-o</span> <span class="pre">&gt;&gt;</span> <span class="pre">/mnt/gentoo/etc/portage/make.conf</span></code> (interactive selection)</li>
+<li><code class="docutils literal notranslate"><span class="pre">mirrorselect</span> <span class="pre">-c</span> <span class="pre">USA</span> <span class="pre">-s3</span> <span class="pre">-b10</span> <span class="pre">-D</span></code> (choose 3 fastest USA mirrors)</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>mount the filesystems</dt><dd><ul>
+<li><code class="docutils literal notranslate"><span class="pre">mount</span> <span class="pre">-t</span> <span class="pre">proc</span> <span class="pre">/proc</span> <span class="pre">/mnt/gentoo/proc</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">mount</span> <span class="pre">-R</span> <span class="pre">/sys</span> <span class="pre">/mnt/gentoo/sys</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">mount</span> <span class="pre">-R</span> <span class="pre">/dev</span> <span class="pre">/mnt/gentoo/dev</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">mount</span> <span class="pre">--make-rslave</span> <span class="pre">/mnt/gentoo/sys</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">mount</span> <span class="pre">--make-rslave</span> <span class="pre">/mnt/gentoo/dev</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">-L</span> <span class="pre">/etc/resolv.conf</span> <span class="pre">/mnt/gentoo/etc</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">chroot</span> <span class="pre">/mnt/gentoo</span> <span class="pre">/bin/bash</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">/etc/profile</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">PS1=&quot;(chroot)</span> <span class="pre">${PS1}&quot;</span></code></li>
+</ul>
+</div>
+<div class="section" id="configure-build-the-system">
+<h3><a class="toc-backref" href="#id3">Configure/build the system</a><a class="headerlink" href="#configure-build-the-system" title="Permalink to this headline">¶</a></h3>
+<p>configure the build options:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">-p</span> <span class="pre">/etc/portage/repos.conf</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">/usr/share/portage/config/repos.conf</span> <span class="pre">/etc/portage/repos.conf/gentoo.conf</span></code>
+to <a class="reference external" href="https://wiki.gentoo.org/wiki//etc/portage/repos.conf" target="_blank">set up the repositories</a>.</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">nano</span> <span class="pre">-w</span> <span class="pre">/mnt/gentoo/etc/portage/make.conf</span></code></dt><dd><ul>
+<li>remember <code class="docutils literal notranslate"><span class="pre">COMMON_FLAGS=&quot;-march=native</span> <span class="pre">-02</span> <span class="pre">-pipe</span></code> and <code class="docutils literal notranslate"><span class="pre">MAKEOPTS=&quot;-j2&quot;</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>install a snapshot and update:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">emerge-webrsync</span></code> to get the latest snapshot of the portage tree</li>
+<li><code class="docutils literal notranslate"><span class="pre">emerge</span> <span class="pre">--sync</span></code> to bring the portage tree up to date</li>
+</ul>
+<p>configure the build options for the system</p>
+<div class="admonition error">
+<p class="first admonition-title">Error</p>
+<p class="last">FIXME</p>
+</div>
+<ul class="simple">
+<li>set package options in /etc/portage/package.use/</li>
+</ul>
+<p>build the system</p>
+<ul>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">eslect</span> <span class="pre">profile</span> <span class="pre">list/set</span></code></p>
+<blockquote>
+<div><p>“A profile is a building block for any Gentoo system. Not only does it
+specify default values for USE, CFLAGS, and other important variables, it
+also locks the system to a certain range of package versions. These settings
+are all maintained by Gentoo’s Portage developers.”</p>
+<p><a class="reference external" href="https://wiki.gentoo.org/wiki/Profile_(Portage)" target="_blank">gentoo wiki on profiles</a></p>
+</div></blockquote>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">emerge</span> <span class="pre">--ask</span> <span class="pre">--verbose--update</span> <span class="pre">--deep</span> <span class="pre">--newuse</span> <span class="pre">&#64;world</span></code></p>
+</li>
+</ul>
+<div class="admonition error">
+<p class="first admonition-title">Error</p>
+<p>FIXME</p>
+<ul class="last simple">
+<li>echo “America/New_York” &gt; /etc/timezone</li>
+<li>emerge –ask sys-kernel/gentoo-sources</li>
+<li>cd /usr/src/linux</li>
+<li>make localyesconfig</li>
+<li>make menuconfig (enable gentoo –&gt; systemd if wanted)</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="more-installation-security">
+<h2><a class="toc-backref" href="#id4">More installation security</a><a class="headerlink" href="#more-installation-security" title="Permalink to this headline">¶</a></h2>
+<p>It is good to verify all of the downloads (stage3 snapshot, portage tree
+snapshot, and each package source download) to make sure that they haven’t been
+tampered with (as far as the signing author is concerned).</p>
+<ul class="simple">
+<li><a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Stage#Verifying_and_validating" target="_blank">https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Stage#Verifying_and_validating</a></li>
+</ul>
+</div>
+<div class="section" id="dual-booting-e-g-ubuntu">
+<h2><a class="toc-backref" href="#id5">Dual Booting (e.g. Ubuntu)</a><a class="headerlink" href="#dual-booting-e-g-ubuntu" title="Permalink to this headline">¶</a></h2>
+<p>(coming soon)</p>
+</div>
+<div class="section" id="encrypted-drive">
+<h2><a class="toc-backref" href="#id6">Encrypted drive</a><a class="headerlink" href="#encrypted-drive" title="Permalink to this headline">¶</a></h2>
+<p>This is done with <code class="docutils literal notranslate"><span class="pre">dm-crypt</span></code> and LUKS. Setting up the drives is
+straightforward. But then an initramfs is also needed so that the kernel can
+decrypt the root drive when booting.</p>
+<p>(coming soon)</p>
+</div>
+<div class="section" id="uefi-boot-no-bootloader">
+<h2><a class="toc-backref" href="#id7">UEFI boot (no bootloader)</a><a class="headerlink" href="#uefi-boot-no-bootloader" title="Permalink to this headline">¶</a></h2>
+<p>In fact, even though either <code class="docutils literal notranslate"><span class="pre">grub</span></code> or <code class="docutils literal notranslate"><span class="pre">efibootmgr</span></code> are typically used to
+boot EFI systems, it can be done straight from the bios as described in Sakaki’s
+guide.</p>
+<p>(coming soon)</p>
+</div>
+<div class="section" id="systemd-gnome-3-28">
+<h2><a class="toc-backref" href="#id8">Systemd / Gnome 3.28+</a><a class="headerlink" href="#systemd-gnome-3-28" title="Permalink to this headline">¶</a></h2>
+<p>This can be done as a conversion after the installation - really at any time.</p>
+<p>(coming soon)</p>
+</div>
+</div>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="index.html" title="Previous document">Operating Systems</a>
+        </li>
+        <li>
+          <a href="../blog/index.html" title="Next document">blog(ish)</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2019, M. Graham Lopez.
+      
+    </div>
+
+    
+
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-140879797-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    
+  </body>
+</html>

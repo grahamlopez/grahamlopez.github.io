@@ -178,7 +178,110 @@ biggest modifications that I do here are:
 - change the prefix to ``ctrl+a`` because it is how I learned GNU screen, and it
   is easier to reach/use than ``ctrl+b``.
 
-Okay, here's the file::
+Okay, here's the file (which is updated for newer tmuxes, but seems to be
+compatible back to at least 2.6)::
+
+    # .tmux.conf by graham lopez
+    #
+    # set time for which status line messages are displayed in ms
+    set -g display-time 2000
+    # set time for which pane selections are displayed in ms
+    set -g display-panes-time 4000
+    # number of lines to keep in the history
+    set -g history-limit 10000
+    # update the status bar every interval seconds
+    set -g status-interval 15
+    # show message if monitoring a window
+    set -g visual-activity on
+    # as advised: # https://github.com/neovim/neovim/wiki/FAQ#esc-in-tmux-or-gnu-screen-is-delayed
+    set -sg escape-time 10
+
+    # working on colors (these don't seem to work as well as tmux -2)
+    set -g default-terminal screen-256color
+    # from man page in 'terminal-overrides' description
+    set -g terminal-overrides "*88col*:colors=88,*256col*:colors=256,xterm*:XT"
+
+    # try to set window name to be currently running command
+    set-window-option -g automatic-rename on
+    # try to set xterm window titles
+    set-option -g set-titles on
+
+    # set copy/paste mode keybindings to be vi like
+    set-window-option -g mode-keys vi
+    set -g status-keys vi
+    # make start selection in copy mode from (space)->v
+    #bind-key -T copy-mode-vi v begin-selection
+
+    # not exactly sure what this option is doing, but I think it is good
+    # see http://superuser.com/questions/401926/how-to-get-shiftarrows-and-ctrlarrows-working-in-vim-in-tmux
+    set-window-option -g xterm-keys on
+
+    # set right status bar blank (until better use for it found)
+    set -g status-right ""
+    # default statusbar colors
+    set -g status-fg white
+    set -g status-bg default
+    set -g status-style default
+
+    # some default dimensions
+    set -g main-pane-width 90
+    bind-key m select-layout main-vertical
+
+    # active pane has a blue border
+    set-option -g pane-active-border-style fg=blue
+
+    # # default window title colors
+    set-window-option -g window-status-style fg=cyan,bg=default,dim
+
+    # # active window title colors
+    set-window-option -g window-status-current-style fg=white,bg=default,bright
+
+    # # command/message line colors
+    set -g message-style fg=white,bg=black,bright
+
+    unbind O
+    bind O command-prompt -p "select pane:"  "select-pane -t ':.%%'"
+    bind-key @ command-prompt -p "create pane from:"  "join-pane -hs ':%%'"
+    unbind S
+    bind S command-prompt -p "swap with window:"  "swap-window -s ':%%'"
+    unbind '#'
+    bind-key '#' command-prompt -p "swap pane with:"  "break-pane ; last-window ; join-pane -hs ':%%'"
+
+    # to be a little vim-like getting around panes ("windows" in vim)
+    bind-key -r h select-pane -L
+    bind-key -r j select-pane -D
+    bind-key -r k select-pane -U
+    bind-key -r l select-pane -R
+    bind-key -r J swap-pane -D
+    bind-key -r K swap-pane -U
+    bind-key -r - resize-pane -D 5
+    bind-key -r + resize-pane -U 5
+    bind-key -r < resize-pane -L 5
+    bind-key -r > resize-pane -R 5
+    bind-key s split-window
+    bind-key v split-window -h
+
+    # some other bindings
+    unbind '9'
+    bind-key 9 resize-pane -x 84
+
+    # This section sets things to be like gnu-screen
+    # (from examples/screen-keys.conf incl. w/source)
+    #
+    # Set the prefix to ^A like gnu screen
+    unbind C-b
+    set -g prefix ^A
+    ## last window
+    unbind ^A
+    bind ^A last-pane
+    # to get readline shortcut
+    bind a send-prefix
+
+    # for yosemite "LSOpenURLsWithRole() failed with error -10810 for the file"
+    #set -g default-command "reattach-to-user-namespace -l /bin/zsh"
+
+
+Here's the old (pre 2.9) file::
 
     # .tmux.conf by graham lopez
     #

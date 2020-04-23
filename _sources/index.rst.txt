@@ -60,6 +60,7 @@ a work-in-progress as I continue to learn.
       privacy_security/index
       contained/index
       cli_tools/index
+      oses/index
       blog/index
       unsorted/index
       sphinx/index

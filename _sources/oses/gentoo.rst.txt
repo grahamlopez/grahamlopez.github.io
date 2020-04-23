@@ -1,0 +1,198 @@
+
+*******
+Gentoo
+*******
+
+.. contents::
+   :local:
+
+Installation Quicknotes
+========================
+
+Installation resources
+
+- `gentoo AMD64 handbook (sectioned)
+  <https://wiki.gentoo.org/wiki/Handbook:AMD64>`_
+- `gentoo AMD64 handbook (installation - Full page)
+  <https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation>`_
+- `systemd installation <https://wiki.gentoo.org/wiki/Systemd>`_
+- `gentoo wiki - Full Disk Encryption From Scratch Simplified
+  <https://wiki.gentoo.org/wiki/Full_Disk_Encryption_From_Scratch_Simplified>`_
+- `Sakaki's EFI Install Guide
+  <https://wiki.gentoo.org/wiki/Sakaki%27s_EFI_Install_Guide>`_
+
+
+Get to the chroot
+------------------
+
+`Enable networking <https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Networking>`_:
+
+- ``ifconfig -a``
+- ``net-setup wlp3s0``
+    (details for `manual wifi setup at Sakaki's guide <https://wiki.gentoo.org/wiki/Sakaki%27s_EFI_Install_Guide/Setting_Up_Networking_and_Connecting_via_ssh>`_)
+- ``ping google.com``
+
+
+
+`Preparing the disks <https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks>`_:
+
+- ``lsblk``
+- ``parted -a optimal /dev/sda``
+
+- using parted (from `handbook <https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks#Default:_Using_parted_to_partition_the_disk>`_
+  or `Sakaki's guide with LVM, LUKS, EFI boot <https://wiki.gentoo.org/wiki/Sakaki%27s_EFI_Install_Guide/Preparing_the_LUKS-LVM_Filesystem_and_Boot_USB_Key>`_)
+
+    - ``print`` or just ``p`` to print the current partition table
+    - make a new partition table (destroys entire disk):
+
+        ``mklabel gpt``
+    - set units to work in with e.g. ``unit mib``, ``unit gib``, or ``unit s``
+      for sectors. Also need an ``s`` suffix on numbers for working with
+      sectors.
+    - make partitions
+        - ``mkpart primary START END`` (in whatever units)
+        - ``name 1 grub``
+        - ``set 1 boot on`` (`see here
+          <https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks#Default_partitioning_scheme>`_
+          and `here
+          <https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks#Creating_the_partitions>`_)
+        - ``mkfs.fat -F 32 /dev/sda1`` (see `here in the handbook <https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation#Using_UEFI>`_ about using EFI.)
+
+    .. caution:: if the installation media isn't booted with EFI, then
+                 '/sys/firmware/efi` will not be properly populated and confuse the grup
+                 installation later on.
+
+
+    .. note:: "For completeness, the BIOS boot partition is needed when a GPT
+              partition layout is used with GRUB2 in PC/BIOS mode. It is not required when
+              booting in EFI/UEFI mode."
+
+- make the filesystems and mount:
+    - ``mkfs.ext4 /dev/sda4``
+    - ``mkdir -p /mnt/gentoo/boot``
+    - ``mount /dev/sda4 /mnt/gentoo``
+    - ``mount /dev/sda1 /mnt/gentoo/boot``
+
+
+install stage3
+
+- ensure that the system `time is correct
+  <https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Stage#Setting_the_date_and_time>`_.
+  It is okay if it is still in UTC - we'll fix the timezone later.
+
+- download the tarball:
+    - `browse to it with links <https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Stage#Downloading_the_stage_tarball>`_:
+
+        ``links https://www.gentoo.org/downloads/mirrors``
+
+        releases --> amd4 --> autobuilds
+    - `or get it directly <https://wiki.gentoo.org/wiki/Sakaki%27s_EFI_Install_Guide/Installing_the_Gentoo_Stage_3_Files#Downloading.2C_Verifying_and_Unpacking_the_Gentoo_Stage_3_Tarball>`_:
+        - get the release file name from http://distfiles.gentoo.org/releases/amd64/autobuilds/latest-stage3-amd64.txt
+        - ``wget -c http://distfiles.gentoo.org/releases/amd64/autobuilds/YYYYMMDDThhmmssZ/stage3-amd64-YYYYMMDDThhmmssZ.tar.xz``
+    - and the verification signatures
+        - ``wget -c http://distfiles.gentoo.org/releases/amd64/autobuilds/YYYYMMDDThhmmssZ/stage3-amd64-YYYYMMDDThhmmssZ.tar.xz.CONTENTS``
+        - ``wget -c http://distfiles.gentoo.org/releases/amd64/autobuilds/YYYYMMDDThhmmssZ/stage3-amd64-YYYYMMDDThhmmssZ.tar.xz.DIGESTS.asc``
+
+
+- unpack the tarball:
+
+    ``tar xvpf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner``
+
+enter the chroot
+
+- `preconfigure mirrors <https://wiki.gentoo.org/wiki/Mirrorselect>`_ for the new system
+    - ``mirrorselect -i -o >> /mnt/gentoo/etc/portage/make.conf`` (interactive selection)
+    - ``mirrorselect -c USA -s3 -b10 -D`` (choose 3 fastest USA mirrors)
+- mount the filesystems
+    - ``mount -t proc /proc /mnt/gentoo/proc``
+    - ``mount -R /sys /mnt/gentoo/sys``
+    - ``mount -R /dev /mnt/gentoo/dev``
+    - ``mount --make-rslave /mnt/gentoo/sys``
+    - ``mount --make-rslave /mnt/gentoo/dev``
+- ``cp -L /etc/resolv.conf /mnt/gentoo/etc``
+- ``chroot /mnt/gentoo /bin/bash``
+- ``source /etc/profile``
+- ``export PS1="(chroot) ${PS1}"``
+
+Configure/build the system
+----------------------------
+
+configure the build options:
+
+- ``mkdir -p /etc/portage/repos.conf``
+- ``cp /usr/share/portage/config/repos.conf /etc/portage/repos.conf/gentoo.conf``
+  to `set up the repositories <https://wiki.gentoo.org/wiki//etc/portage/repos.conf>`_.
+- ``nano -w /mnt/gentoo/etc/portage/make.conf``
+    - remember ``COMMON_FLAGS="-march=native -02 -pipe`` and ``MAKEOPTS="-j2"``
+
+install a snapshot and update:
+
+- ``emerge-webrsync`` to get the latest snapshot of the portage tree
+- ``emerge --sync`` to bring the portage tree up to date
+
+configure the build options for the system
+
+.. error:: FIXME
+
+- set package options in /etc/portage/package.use/
+
+build the system
+
+- ``eslect profile list/set``
+
+    "A profile is a building block for any Gentoo system. Not only does it
+    specify default values for USE, CFLAGS, and other important variables, it
+    also locks the system to a certain range of package versions. These settings
+    are all maintained by Gentoo's Portage developers."
+
+    `gentoo wiki on profiles <https://wiki.gentoo.org/wiki/Profile_(Portage)>`_
+
+- ``emerge --ask --verbose--update --deep --newuse @world``
+
+
+.. error:: FIXME
+
+    - echo "America/New_York" > /etc/timezone
+    - emerge --ask sys-kernel/gentoo-sources
+    - cd /usr/src/linux
+    - make localyesconfig
+    - make menuconfig (enable gentoo --> systemd if wanted)
+
+More installation security
+===========================
+
+It is good to verify all of the downloads (stage3 snapshot, portage tree
+snapshot, and each package source download) to make sure that they haven't been
+tampered with (as far as the signing author is concerned).
+
+- https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Stage#Verifying_and_validating
+
+Dual Booting (e.g. Ubuntu)
+===========================
+
+(coming soon)
+
+Encrypted drive
+======================
+
+This is done with ``dm-crypt`` and LUKS. Setting up the drives is
+straightforward. But then an initramfs is also needed so that the kernel can
+decrypt the root drive when booting.
+
+(coming soon)
+
+UEFI boot (no bootloader)
+==========================
+
+In fact, even though either ``grub`` or ``efibootmgr`` are typically used to
+boot EFI systems, it can be done straight from the bios as described in Sakaki's
+guide.
+
+(coming soon)
+
+Systemd / Gnome 3.28+
+======================
+
+This can be done as a conversion after the installation - really at any time.
+
+(coming soon)

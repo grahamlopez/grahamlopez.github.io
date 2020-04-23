@@ -1,0 +1,13 @@
+
+####################
+Operating Systems
+####################
+
+.. toctree::
+   :maxdepth: 3
+
+   gentoo
+
+* windows10 (coming soon)
+* ubuntu 20.04 (coming soon)
+* qubes os (coming soon)

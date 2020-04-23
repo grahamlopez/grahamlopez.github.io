@@ -360,7 +360,109 @@ biggest modifications that I do here are:</p>
 <li>change the prefix to <code class="docutils literal notranslate"><span class="pre">ctrl+a</span></code> because it is how I learned GNU screen, and it
 is easier to reach/use than <code class="docutils literal notranslate"><span class="pre">ctrl+b</span></code>.</li>
 </ul>
-<p>Okay, here’s the file:</p>
+<p>Okay, here’s the file (which is updated for newer tmuxes, but seems to be
+compatible back to at least 2.6):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># .tmux.conf by graham lopez</span>
+<span class="c1">#</span>
+<span class="c1"># set time for which status line messages are displayed in ms</span>
+<span class="nb">set</span> <span class="o">-</span><span class="n">g</span> <span class="n">display</span><span class="o">-</span><span class="n">time</span> <span class="mi">2000</span>
+<span class="c1"># set time for which pane selections are displayed in ms</span>
+<span class="nb">set</span> <span class="o">-</span><span class="n">g</span> <span class="n">display</span><span class="o">-</span><span class="n">panes</span><span class="o">-</span><span class="n">time</span> <span class="mi">4000</span>
+<span class="c1"># number of lines to keep in the history</span>
+<span class="nb">set</span> <span class="o">-</span><span class="n">g</span> <span class="n">history</span><span class="o">-</span><span class="n">limit</span> <span class="mi">10000</span>
+<span class="c1"># update the status bar every interval seconds</span>
+<span class="nb">set</span> <span class="o">-</span><span class="n">g</span> <span class="n">status</span><span class="o">-</span><span class="n">interval</span> <span class="mi">15</span>
+<span class="c1"># show message if monitoring a window</span>
+<span class="nb">set</span> <span class="o">-</span><span class="n">g</span> <span class="n">visual</span><span class="o">-</span><span class="n">activity</span> <span class="n">on</span>
+<span class="c1"># as advised: # https://github.com/neovim/neovim/wiki/FAQ#esc-in-tmux-or-gnu-screen-is-delayed</span>
+<span class="nb">set</span> <span class="o">-</span><span class="n">sg</span> <span class="n">escape</span><span class="o">-</span><span class="n">time</span> <span class="mi">10</span>
+
+<span class="c1"># working on colors (these don&#39;t seem to work as well as tmux -2)</span>
+<span class="nb">set</span> <span class="o">-</span><span class="n">g</span> <span class="n">default</span><span class="o">-</span><span class="n">terminal</span> <span class="n">screen</span><span class="o">-</span><span class="mi">256</span><span class="n">color</span>
+<span class="c1"># from man page in &#39;terminal-overrides&#39; description</span>
+<span class="nb">set</span> <span class="o">-</span><span class="n">g</span> <span class="n">terminal</span><span class="o">-</span><span class="n">overrides</span> <span class="s2">&quot;*88col*:colors=88,*256col*:colors=256,xterm*:XT&quot;</span>
+
+<span class="c1"># try to set window name to be currently running command</span>
+<span class="nb">set</span><span class="o">-</span><span class="n">window</span><span class="o">-</span><span class="n">option</span> <span class="o">-</span><span class="n">g</span> <span class="n">automatic</span><span class="o">-</span><span class="n">rename</span> <span class="n">on</span>
+<span class="c1"># try to set xterm window titles</span>
+<span class="nb">set</span><span class="o">-</span><span class="n">option</span> <span class="o">-</span><span class="n">g</span> <span class="nb">set</span><span class="o">-</span><span class="n">titles</span> <span class="n">on</span>
+
+<span class="c1"># set copy/paste mode keybindings to be vi like</span>
+<span class="nb">set</span><span class="o">-</span><span class="n">window</span><span class="o">-</span><span class="n">option</span> <span class="o">-</span><span class="n">g</span> <span class="n">mode</span><span class="o">-</span><span class="n">keys</span> <span class="n">vi</span>
+<span class="nb">set</span> <span class="o">-</span><span class="n">g</span> <span class="n">status</span><span class="o">-</span><span class="n">keys</span> <span class="n">vi</span>
+<span class="c1"># make start selection in copy mode from (space)-&gt;v</span>
+<span class="c1">#bind-key -T copy-mode-vi v begin-selection</span>
+
+<span class="c1"># not exactly sure what this option is doing, but I think it is good</span>
+<span class="c1"># see http://superuser.com/questions/401926/how-to-get-shiftarrows-and-ctrlarrows-working-in-vim-in-tmux</span>
+<span class="nb">set</span><span class="o">-</span><span class="n">window</span><span class="o">-</span><span class="n">option</span> <span class="o">-</span><span class="n">g</span> <span class="n">xterm</span><span class="o">-</span><span class="n">keys</span> <span class="n">on</span>
+
+<span class="c1"># set right status bar blank (until better use for it found)</span>
+<span class="nb">set</span> <span class="o">-</span><span class="n">g</span> <span class="n">status</span><span class="o">-</span><span class="n">right</span> <span class="s2">&quot;&quot;</span>
+<span class="c1"># default statusbar colors</span>
+<span class="nb">set</span> <span class="o">-</span><span class="n">g</span> <span class="n">status</span><span class="o">-</span><span class="n">fg</span> <span class="n">white</span>
+<span class="nb">set</span> <span class="o">-</span><span class="n">g</span> <span class="n">status</span><span class="o">-</span><span class="n">bg</span> <span class="n">default</span>
+<span class="nb">set</span> <span class="o">-</span><span class="n">g</span> <span class="n">status</span><span class="o">-</span><span class="n">style</span> <span class="n">default</span>
+
+<span class="c1"># some default dimensions</span>
+<span class="nb">set</span> <span class="o">-</span><span class="n">g</span> <span class="n">main</span><span class="o">-</span><span class="n">pane</span><span class="o">-</span><span class="n">width</span> <span class="mi">90</span>
+<span class="n">bind</span><span class="o">-</span><span class="n">key</span> <span class="n">m</span> <span class="n">select</span><span class="o">-</span><span class="n">layout</span> <span class="n">main</span><span class="o">-</span><span class="n">vertical</span>
+
+<span class="c1"># active pane has a blue border</span>
+<span class="nb">set</span><span class="o">-</span><span class="n">option</span> <span class="o">-</span><span class="n">g</span> <span class="n">pane</span><span class="o">-</span><span class="n">active</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">style</span> <span class="n">fg</span><span class="o">=</span><span class="n">blue</span>
+
+<span class="c1"># # default window title colors</span>
+<span class="nb">set</span><span class="o">-</span><span class="n">window</span><span class="o">-</span><span class="n">option</span> <span class="o">-</span><span class="n">g</span> <span class="n">window</span><span class="o">-</span><span class="n">status</span><span class="o">-</span><span class="n">style</span> <span class="n">fg</span><span class="o">=</span><span class="n">cyan</span><span class="p">,</span><span class="n">bg</span><span class="o">=</span><span class="n">default</span><span class="p">,</span><span class="n">dim</span>
+
+<span class="c1"># # active window title colors</span>
+<span class="nb">set</span><span class="o">-</span><span class="n">window</span><span class="o">-</span><span class="n">option</span> <span class="o">-</span><span class="n">g</span> <span class="n">window</span><span class="o">-</span><span class="n">status</span><span class="o">-</span><span class="n">current</span><span class="o">-</span><span class="n">style</span> <span class="n">fg</span><span class="o">=</span><span class="n">white</span><span class="p">,</span><span class="n">bg</span><span class="o">=</span><span class="n">default</span><span class="p">,</span><span class="n">bright</span>
+
+<span class="c1"># # command/message line colors</span>
+<span class="nb">set</span> <span class="o">-</span><span class="n">g</span> <span class="n">message</span><span class="o">-</span><span class="n">style</span> <span class="n">fg</span><span class="o">=</span><span class="n">white</span><span class="p">,</span><span class="n">bg</span><span class="o">=</span><span class="n">black</span><span class="p">,</span><span class="n">bright</span>
+
+<span class="n">unbind</span> <span class="n">O</span>
+<span class="n">bind</span> <span class="n">O</span> <span class="n">command</span><span class="o">-</span><span class="n">prompt</span> <span class="o">-</span><span class="n">p</span> <span class="s2">&quot;select pane:&quot;</span>  <span class="s2">&quot;select-pane -t &#39;:.</span><span class="si">%%</span><span class="s2">&#39;&quot;</span>
+<span class="n">bind</span><span class="o">-</span><span class="n">key</span> <span class="o">@</span> <span class="n">command</span><span class="o">-</span><span class="n">prompt</span> <span class="o">-</span><span class="n">p</span> <span class="s2">&quot;create pane from:&quot;</span>  <span class="s2">&quot;join-pane -hs &#39;:</span><span class="si">%%</span><span class="s2">&#39;&quot;</span>
+<span class="n">unbind</span> <span class="n">S</span>
+<span class="n">bind</span> <span class="n">S</span> <span class="n">command</span><span class="o">-</span><span class="n">prompt</span> <span class="o">-</span><span class="n">p</span> <span class="s2">&quot;swap with window:&quot;</span>  <span class="s2">&quot;swap-window -s &#39;:</span><span class="si">%%</span><span class="s2">&#39;&quot;</span>
+<span class="n">unbind</span> <span class="s1">&#39;#&#39;</span>
+<span class="n">bind</span><span class="o">-</span><span class="n">key</span> <span class="s1">&#39;#&#39;</span> <span class="n">command</span><span class="o">-</span><span class="n">prompt</span> <span class="o">-</span><span class="n">p</span> <span class="s2">&quot;swap pane with:&quot;</span>  <span class="s2">&quot;break-pane ; last-window ; join-pane -hs &#39;:</span><span class="si">%%</span><span class="s2">&#39;&quot;</span>
+
+<span class="c1"># to be a little vim-like getting around panes (&quot;windows&quot; in vim)</span>
+<span class="n">bind</span><span class="o">-</span><span class="n">key</span> <span class="o">-</span><span class="n">r</span> <span class="n">h</span> <span class="n">select</span><span class="o">-</span><span class="n">pane</span> <span class="o">-</span><span class="n">L</span>
+<span class="n">bind</span><span class="o">-</span><span class="n">key</span> <span class="o">-</span><span class="n">r</span> <span class="n">j</span> <span class="n">select</span><span class="o">-</span><span class="n">pane</span> <span class="o">-</span><span class="n">D</span>
+<span class="n">bind</span><span class="o">-</span><span class="n">key</span> <span class="o">-</span><span class="n">r</span> <span class="n">k</span> <span class="n">select</span><span class="o">-</span><span class="n">pane</span> <span class="o">-</span><span class="n">U</span>
+<span class="n">bind</span><span class="o">-</span><span class="n">key</span> <span class="o">-</span><span class="n">r</span> <span class="n">l</span> <span class="n">select</span><span class="o">-</span><span class="n">pane</span> <span class="o">-</span><span class="n">R</span>
+<span class="n">bind</span><span class="o">-</span><span class="n">key</span> <span class="o">-</span><span class="n">r</span> <span class="n">J</span> <span class="n">swap</span><span class="o">-</span><span class="n">pane</span> <span class="o">-</span><span class="n">D</span>
+<span class="n">bind</span><span class="o">-</span><span class="n">key</span> <span class="o">-</span><span class="n">r</span> <span class="n">K</span> <span class="n">swap</span><span class="o">-</span><span class="n">pane</span> <span class="o">-</span><span class="n">U</span>
+<span class="n">bind</span><span class="o">-</span><span class="n">key</span> <span class="o">-</span><span class="n">r</span> <span class="o">-</span> <span class="n">resize</span><span class="o">-</span><span class="n">pane</span> <span class="o">-</span><span class="n">D</span> <span class="mi">5</span>
+<span class="n">bind</span><span class="o">-</span><span class="n">key</span> <span class="o">-</span><span class="n">r</span> <span class="o">+</span> <span class="n">resize</span><span class="o">-</span><span class="n">pane</span> <span class="o">-</span><span class="n">U</span> <span class="mi">5</span>
+<span class="n">bind</span><span class="o">-</span><span class="n">key</span> <span class="o">-</span><span class="n">r</span> <span class="o">&lt;</span> <span class="n">resize</span><span class="o">-</span><span class="n">pane</span> <span class="o">-</span><span class="n">L</span> <span class="mi">5</span>
+<span class="n">bind</span><span class="o">-</span><span class="n">key</span> <span class="o">-</span><span class="n">r</span> <span class="o">&gt;</span> <span class="n">resize</span><span class="o">-</span><span class="n">pane</span> <span class="o">-</span><span class="n">R</span> <span class="mi">5</span>
+<span class="n">bind</span><span class="o">-</span><span class="n">key</span> <span class="n">s</span> <span class="n">split</span><span class="o">-</span><span class="n">window</span>
+<span class="n">bind</span><span class="o">-</span><span class="n">key</span> <span class="n">v</span> <span class="n">split</span><span class="o">-</span><span class="n">window</span> <span class="o">-</span><span class="n">h</span>
+
+<span class="c1"># some other bindings</span>
+<span class="n">unbind</span> <span class="s1">&#39;9&#39;</span>
+<span class="n">bind</span><span class="o">-</span><span class="n">key</span> <span class="mi">9</span> <span class="n">resize</span><span class="o">-</span><span class="n">pane</span> <span class="o">-</span><span class="n">x</span> <span class="mi">84</span>
+
+<span class="c1"># This section sets things to be like gnu-screen</span>
+<span class="c1"># (from examples/screen-keys.conf incl. w/source)</span>
+<span class="c1">#</span>
+<span class="c1"># Set the prefix to ^A like gnu screen</span>
+<span class="n">unbind</span> <span class="n">C</span><span class="o">-</span><span class="n">b</span>
+<span class="nb">set</span> <span class="o">-</span><span class="n">g</span> <span class="n">prefix</span> <span class="o">^</span><span class="n">A</span>
+<span class="c1">## last window</span>
+<span class="n">unbind</span> <span class="o">^</span><span class="n">A</span>
+<span class="n">bind</span> <span class="o">^</span><span class="n">A</span> <span class="n">last</span><span class="o">-</span><span class="n">pane</span>
+<span class="c1"># to get readline shortcut</span>
+<span class="n">bind</span> <span class="n">a</span> <span class="n">send</span><span class="o">-</span><span class="n">prefix</span>
+
+<span class="c1"># for yosemite &quot;LSOpenURLsWithRole() failed with error -10810 for the file&quot;</span>
+<span class="c1">#set -g default-command &quot;reattach-to-user-namespace -l /bin/zsh&quot;</span>
+</pre></div>
+</div>
+<p>Here’s the old (pre 2.9) file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># .tmux.conf by graham lopez</span>
 <span class="c1">#</span>
 <span class="c1"># set time for which status line messages are displayed in ms</span>
