@@ -48,6 +48,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../cli_tools/index.html">CLI Tools</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Operating Systems</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="gentoo.html">Gentoo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#miscellaneous">Miscellaneous</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../blog/index.html">blog(ish)</a></li>
@@ -129,6 +130,13 @@
 <li>ubuntu 20.04 (coming soon)</li>
 <li>qubes os (coming soon)</li>
 </ul>
+<div class="section" id="miscellaneous">
+<h2>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes when trying to update bios images you might get a <code class="docutils literal notranslate"><span class="pre">.iso</span></code> image that,
+when written to a flash drive with e.g. <code class="docutils literal notranslate"><span class="pre">dd</span> <span class="pre">if=update.iso</span> <span class="pre">of=/dev/sda</span> <span class="pre">status=progress</span> <span class="pre">&amp;&amp;</span> <span class="pre">sync</span></code>,
+doesn’t boot. This is because you actually have to extract the image first with
+e.g. <code class="docutils literal notranslate"><span class="pre">geteltorito</span> <span class="pre">-o</span> <span class="pre">x230.img</span> <span class="pre">g2uj33us.iso</span></code> and then burn the <code class="docutils literal notranslate"><span class="pre">.img</span></code> file.</p>
+</div>
 </div>
 
 

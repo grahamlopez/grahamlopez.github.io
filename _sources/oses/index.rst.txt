@@ -11,3 +11,11 @@ Operating Systems
 * windows10 (coming soon)
 * ubuntu 20.04 (coming soon)
 * qubes os (coming soon)
+
+Miscellaneous
+==============
+
+Sometimes when trying to update bios images you might get a ``.iso`` image that,
+when written to a flash drive with e.g. ``dd if=update.iso of=/dev/sda status=progress && sync``,
+doesn't boot. This is because you actually have to extract the image first with
+e.g. ``geteltorito -o x230.img g2uj33us.iso`` and then burn the ``.img`` file.
