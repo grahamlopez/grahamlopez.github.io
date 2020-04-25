@@ -1,0 +1,446 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ubuntu 20.04 &#8212; graham lopez  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="blog(ish)" href="../blog/index.html" />
+    <link rel="prev" title="Gentoo" href="gentoo.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">graham lopez</a></h1>
+
+
+
+<p class="blurb">Notes by/for, and a little bit about M. Graham Lopez</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contact.html">Contact me</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cv.html">Curriculum Vitae</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/index.html">git hints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../privacy_security/index.html">Privacy / Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contained/index.html">Containers / VPS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli_tools/index.html">CLI Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Operating Systems</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="gentoo.html">Gentoo</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Ubuntu 20.04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../blog/index.html">blog(ish)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsorted/index.html">unsorted</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html">sphinx</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Operating Systems</a><ul>
+      <li>Previous: <a href="gentoo.html" title="previous chapter">Gentoo</a></li>
+      <li>Next: <a href="../blog/index.html" title="next chapter">blog(ish)</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="gentoo.html" title="Previous document">Gentoo</a>
+        </li>
+        <li>
+          <a href="../blog/index.html" title="Next document">blog(ish)</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="ubuntu-20-04">
+<h1>Ubuntu 20.04<a class="headerlink" href="#ubuntu-20-04" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#gnome-shell-setup" id="id1">gnome-shell setup</a></li>
+</ul>
+</div>
+<div class="section" id="gnome-shell-setup">
+<h2><a class="toc-backref" href="#id1">gnome-shell setup</a><a class="headerlink" href="#gnome-shell-setup" title="Permalink to this headline">¶</a></h2>
+<p>Here’s a script to do a lot of the configuration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+
+# install software
+
+sudo apt update
+
+sudo apt -y install                   \
+  gnome-shell-extensions              \
+  gnome-shell-extension-dash-to-panel \
+  gnome-tweaks
+
+# caps lock as ctrl
+# or dconf write /org/gnome/desktop/input-sources/xkb-options &quot;[&#39;ctrl:nocaps&#39;]&quot;
+
+gsettings set org.gnome.desktop.input-sources xkb-options &quot;[&#39;ctrl:nocaps&#39;]&quot;
+
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-down &quot;[&#39;&lt;Alt&gt;&lt;Super&gt;Page_Down&#39;]&quot;
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-up &quot;[&#39;&lt;Alt&gt;&lt;Super&gt;Page_Up&#39;]&quot;
+
+# set natural scrolling for mice and touchpad, areas click emulation
+
+gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll false
+gsettings set org.gnome.desktop.peripherals.mouse natural-scroll false
+gsettings set org.gnome.desktop.peripherals.touchpad click-method &quot;&#39;areas&#39;&quot;
+
+# window resize with super + right click and sloppy focus
+
+gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
+gsettings set org.gnome.desktop.wm.preferences focus-mode &quot;&#39;sloppy&#39;&quot;
+
+# show battery percentage and date in top bar
+
+gsettings set org.gnome.desktop.interface show-battery-percentage true
+gsettings set org.gnome.desktop.interface clock-show-date true
+
+# set up gnome terminal
+# FIXME don&#39;t know yet how to automatically set:
+# custom font &quot;monospace regular 9&quot;
+# no terminal bell
+# no scrollbar
+
+# dconf write /org/gnome/terminal/legacy/default-show-menubar false
+gsettings set org.gnome.Terminal.Legacy.Settings headerbar false
+
+# set up the themes
+
+gsettings set org.gnome.desktop.interface gtk-key-theme &quot;&#39;Default&#39;&quot;
+gsettings set org.gnome.desktop.screensaver primary-color &quot;&#39;#000000&#39;&quot;
+gsettings set org.gnome.desktop.screensaver secondary-color &quot;&#39;#000000&#39;&quot;
+gsettings set org.gnome.desktop.screensaver color-shading-type &quot;&#39;solid&#39;&quot;
+gsettings set org.gnome.desktop.screensaver picture-options &quot;&#39;wallpaper&#39;&quot;
+gsettings set org.gnome.desktop.screensaver picture-uri &quot;&#39;file:////usr/share/gnome-control-center/pixmaps/noise-texture-light.png&#39;&quot;
+
+# this adjusts the window titlebar heights for gtk3 apps
+cat &lt;&lt; EOF &gt; $HOME/.config/gtk-3.0/gtk.css
+headerbar entry,
+headerbar spinbutton,
+headerbar button,
+headerbar separator {
+    margin-top: 0px; /* same as headerbar side padding for nicer proportions */
+    margin-bottom: 0px;
+}
+
+headerbar {
+    min-height: 26px;
+    padding-left: 0px; /* same as children&#39;s vertical margins for nicer proportions */
+    padding-right: 0px;
+}
+
+.default-decoration {
+    min-height: 0; /* let the entry and button drive the titlebar size */
+    padding: 0px
+}
+
+.default-decoration .titlebutton {
+    min-height: 16px; /* tweak these two props to reduce button size */
+    min-width: 16px;
+}
+
+/*
+window.ssd headerbar.titlebar {
+   border: none;
+   background-image: linear-gradient(to bottom,
+   shade(@theme_bg_color, 1.05),
+   shade(@theme_bg_color, 0.99));
+   box-shadow: inset 0 1px shade(@theme_bg_color, 1.4);
+}
+*/
+EOF
+
+# set up gnome-shell extensions
+
+WORKSPACE_DIR=$HOME/.local/share/gnome-shell/extensions/workspace-switcher@tomha.github.com
+DASHTOPANEL_DIR=/usr/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com
+
+# install any that don&#39;t come with the system
+# workspace-switcher
+git clone https://github.com/tomha/gnome-shell-extension-workspace-switcher $WORKSPACE_DIR
+
+# enable the extensions
+gnome-extensions enable launch-new-instance@gnome-shell-extensions.gcampax.github.com
+gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
+gnome-extensions enable alternate-tab@gnome-shell-extensions.gcampax.github.com
+gnome-extensions enable dash-to-panel@jderose9.github.com
+gnome-extensions enable workspace-switcher@tomha.github.com
+
+# configure the extensions
+# working with gnome-shell extensions
+# - https://askubuntu.com/questions/490939/configure-gnome-shell-extensions-from-command-line
+
+# dash to panel settings
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel group-apps-label-font-color &quot;&#39;#dddddd&#39;&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel tray-padding 4
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel enter-peek-mode-timeout 500
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel isolate-workspaces false
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel dot-color-unfocused-different false
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-ctrl-hotkey-1 &quot;[&#39;&lt;Ctrl&gt;&lt;Super&gt;1&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-ctrl-hotkey-2 &quot;[&#39;&lt;Ctrl&gt;&lt;Super&gt;2&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-ctrl-hotkey-3 &quot;[&#39;&lt;Ctrl&gt;&lt;Super&gt;3&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-ctrl-hotkey-4 &quot;[&#39;&lt;Ctrl&gt;&lt;Super&gt;4&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-ctrl-hotkey-5 &quot;[&#39;&lt;Ctrl&gt;&lt;Super&gt;5&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel show-showdesktop-button true
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-ctrl-hotkey-6 &quot;[&#39;&lt;Ctrl&gt;&lt;Super&gt;6&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel hotkey-prefix-text &quot;&#39;Super&#39;&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-ctrl-hotkey-8 &quot;[&#39;&lt;Ctrl&gt;&lt;Super&gt;8&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-ctrl-hotkey-9 &quot;[&#39;&lt;Ctrl&gt;&lt;Super&gt;9&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-ctrl-hotkey-7 &quot;[&#39;&lt;Ctrl&gt;&lt;Super&gt;7&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel activate-single-window true
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel shortcut-text &quot;&#39;&lt;Super&gt;q&#39;&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel click-action &quot;&#39;LAUNCH&#39;&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel animate-window-launch true
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-shift-hotkey-10 &quot;[&#39;&lt;Shift&gt;&lt;Super&gt;0&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-shift-hotkey-kp-1 &quot;[&#39;&lt;Shift&gt;&lt;Super&gt;KP_1&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel show-activities-button false
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-shift-hotkey-kp-2 &quot;[&#39;&lt;Shift&gt;&lt;Super&gt;KP_2&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-shift-hotkey-kp-3 &quot;[&#39;&lt;Shift&gt;&lt;Super&gt;KP_3&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-shift-hotkey-kp-4 &quot;[&#39;&lt;Shift&gt;&lt;Super&gt;KP_4&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel dot-color-override false
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-shift-hotkey-kp-6 &quot;[&#39;&lt;Shift&gt;&lt;Super&gt;KP_6&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-shift-hotkey-kp-5 &quot;[&#39;&lt;Shift&gt;&lt;Super&gt;KP_5&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-shift-hotkey-kp-8 &quot;[&#39;&lt;Shift&gt;&lt;Super&gt;KP_8&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-shift-hotkey-kp-7 &quot;[&#39;&lt;Shift&gt;&lt;Super&gt;KP_7&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-hotkey-1 &quot;[&#39;&lt;Super&gt;1&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-shift-hotkey-kp-9 &quot;[&#39;&lt;Shift&gt;&lt;Super&gt;KP_9&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-hotkey-3 &quot;[&#39;&lt;Super&gt;3&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-hotkey-4 &quot;[&#39;&lt;Super&gt;4&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-hotkey-5 &quot;[&#39;&lt;Super&gt;5&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel group-apps true
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-hotkey-6 &quot;[&#39;&lt;Super&gt;6&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-hotkey-8 &quot;[&#39;&lt;Super&gt;8&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-hotkey-9 &quot;[&#39;&lt;Super&gt;9&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel location-clock &quot;&#39;STATUSLEFT&#39;&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-hotkey-2 &quot;[&#39;&lt;Super&gt;2&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-hotkey-7 &quot;[&#39;&lt;Super&gt;7&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel status-icon-padding 2
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-hotkey-kp-1 &quot;[&#39;&lt;Super&gt;KP_1&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel overlay-timeout 750
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-ctrl-hotkey-10 &quot;[&#39;&lt;Ctrl&gt;&lt;Super&gt;0&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-hotkey-kp-3 &quot;[&#39;&lt;Super&gt;KP_3&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-hotkey-kp-2 &quot;[&#39;&lt;Super&gt;KP_2&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-hotkey-kp-6 &quot;[&#39;&lt;Super&gt;KP_6&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-hotkey-kp-7 &quot;[&#39;&lt;Super&gt;KP_7&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-hotkey-kp-8 &quot;[&#39;&lt;Super&gt;KP_8&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-hotkey-kp-9 &quot;[&#39;&lt;Super&gt;KP_9&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-hotkey-kp-4 &quot;[&#39;&lt;Super&gt;KP_4&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel dot-color-1 &quot;&#39;#5294e2&#39;&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel dot-color-2 &quot;&#39;#5294e2&#39;&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel dot-color-3 &quot;&#39;#5294e2&#39;&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel dot-color-4 &quot;&#39;#5294e2&#39;&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-hotkey-kp-5 &quot;[&#39;&lt;Super&gt;KP_5&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel peek-mode-opacity 40
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel group-apps-label-font-size 14
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel focus-highlight-opacity 25
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel dot-style-focused &quot;&#39;METRO&#39;&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel group-apps-use-fixed-width true
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel tray-size 0
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel preview-middle-click-close true
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel show-window-previews-timeout 100
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel dot-color-unfocused-1 &quot;&#39;#5294e2&#39;&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel dot-color-unfocused-2 &quot;&#39;#5294e2&#39;&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel dot-color-unfocused-3 &quot;&#39;#5294e2&#39;&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel dot-color-unfocused-4 &quot;&#39;#5294e2&#39;&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel shift-middle-click-action &quot;&#39;LAUNCH&#39;&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel shortcut &quot;[&#39;&lt;Super&gt;q&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel middle-click-action &quot;&#39;LAUNCH&#39;&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel leave-timeout 100
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel show-window-previews true
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel leftbox-padding 0
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel panel-position &quot;&#39;TOP&#39;&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel showdesktop-button-width 10
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel shortcut-timeout 2000
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel focus-highlight true
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-hotkey-10 &quot;[&#39;&lt;Super&gt;0&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel show-show-apps-button true
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel animate-show-apps true
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel panel-size 18
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel secondarymenu-contains-appmenu true
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel focus-highlight-color &quot;&#39;#EEEEEE&#39;&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-shift-hotkey-kp-10 &quot;[&#39;&lt;Shift&gt;&lt;Super&gt;KP_0&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel appicon-margin 0
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel hotkeys-overlay-combo &quot;&#39;TEMPORARILY&#39;&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel group-apps-label-max-width 160
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-ctrl-hotkey-kp-1 &quot;[&#39;&lt;Ctrl&gt;&lt;Super&gt;KP_1&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-ctrl-hotkey-kp-2 &quot;[&#39;&lt;Ctrl&gt;&lt;Super&gt;KP_2&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-ctrl-hotkey-kp-3 &quot;[&#39;&lt;Ctrl&gt;&lt;Super&gt;KP_3&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-ctrl-hotkey-kp-4 &quot;[&#39;&lt;Ctrl&gt;&lt;Super&gt;KP_4&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-ctrl-hotkey-kp-5 &quot;[&#39;&lt;Ctrl&gt;&lt;Super&gt;KP_5&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-ctrl-hotkey-kp-6 &quot;[&#39;&lt;Ctrl&gt;&lt;Super&gt;KP_6&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-ctrl-hotkey-kp-7 &quot;[&#39;&lt;Ctrl&gt;&lt;Super&gt;KP_7&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel group-apps-use-launchers false
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-ctrl-hotkey-kp-8 &quot;[&#39;&lt;Ctrl&gt;&lt;Super&gt;KP_8&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-ctrl-hotkey-kp-9 &quot;[&#39;&lt;Ctrl&gt;&lt;Super&gt;KP_9&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel secondarymenu-contains-showdetails false
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-shift-hotkey-2 &quot;[&#39;&lt;Shift&gt;&lt;Super&gt;2&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel dot-position &quot;&#39;BOTTOM&#39;&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel dot-size 3
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-shift-hotkey-3 &quot;[&#39;&lt;Shift&gt;&lt;Super&gt;3&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel shift-click-action &quot;&#39;MINIMIZE&#39;&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-shift-hotkey-5 &quot;[&#39;&lt;Shift&gt;&lt;Super&gt;5&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-shift-hotkey-6 &quot;[&#39;&lt;Shift&gt;&lt;Super&gt;6&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-shift-hotkey-4 &quot;[&#39;&lt;Shift&gt;&lt;Super&gt;4&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel show-appmenu true
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-shift-hotkey-9 &quot;[&#39;&lt;Shift&gt;&lt;Super&gt;9&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel dot-style-unfocused &quot;&#39;DOTS&#39;&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-shift-hotkey-8 &quot;[&#39;&lt;Shift&gt;&lt;Super&gt;8&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel peek-mode true
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-shift-hotkey-1 &quot;[&#39;&lt;Shift&gt;&lt;Super&gt;1&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel animate-app-switch true
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-shift-hotkey-7 &quot;[&#39;&lt;Shift&gt;&lt;Super&gt;7&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel customize-click true
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-ctrl-hotkey-kp-10 &quot;[&#39;&lt;Ctrl&gt;&lt;Super&gt;KP_0&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel show-favorites true
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel group-apps-underline-unfocused true
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel leftbox-size 0
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel taskbar-position &quot;&#39;LEFTPANEL&#39;&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel hot-keys false
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel app-hotkey-kp-10 &quot;[&#39;&lt;Super&gt;KP_0&#39;]&quot;
+gsettings --schemadir $DASHTOPANEL_DIR/schemas set org.gnome.shell.extensions.dash-to-panel minimize-shift true
+
+# workspace switcher settings
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher mode &quot;&#39;ALL&#39;&quot;
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher font-colour-inactive &quot;&#39;#ccccccff&#39;&quot;
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher show-icon-text true
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher border-size-active 0
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher position &quot;&#39;RIGHT&#39;&quot;
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher border-locations &quot;[&#39;TOP&#39;, &#39;RIGHT&#39;, &#39;BOTTOM&#39;, &#39;LEFT&#39;]&quot;
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher font-inactive &quot;&#39;Sans 8&#39;&quot;
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher border-colour-inactive &quot;&#39;#ccccccff&#39;&quot;
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher min-width 0
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher invert-scrolling true
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher font-colour-use-custom-inactive true
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher vertical-display false
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher margin-vertical 0
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher border-colour-active &quot;&#39;#ccccccff&#39;&quot;
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher margin-horizontal 1
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher padding-vertical 0
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher min-height 0
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher index 0
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher show-total-num false
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher font-use-custom-inactive true
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher border-radius 12
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher font-colour-active &quot;&#39;#ccccccff&#39;&quot;
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher font-use-custom-active true
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher click-action &quot;&#39;ACTIVITIES&#39;&quot;
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher font-active &quot;&#39;Sans 8&#39;&quot;
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher show-names false
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher font-colour-use-custom-active true
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher border-size-inactive 0
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher background-colour-inactive &quot;&#39;#2e3436ff&#39;&quot;
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher cyclic-scrolling false
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher background-colour-active &quot;&#39;#729fcfff&#39;&quot;
+gsettings --schemadir $WORKSPACE_DIR/schema set org.gnome.shell.extensions.workspace-switcher padding-horizontal 6
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="gentoo.html" title="Previous document">Gentoo</a>
+        </li>
+        <li>
+          <a href="../blog/index.html" title="Next document">blog(ish)</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2019, M. Graham Lopez.
+      
+    </div>
+
+    
+
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-140879797-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    
+  </body>
+</html>

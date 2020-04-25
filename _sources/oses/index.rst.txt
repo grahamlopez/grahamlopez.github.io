@@ -7,9 +7,9 @@ Operating Systems
    :maxdepth: 3
 
    gentoo
+   ubuntu_20.04
 
 * windows10 (coming soon)
-* ubuntu 20.04 (coming soon)
 * qubes os (coming soon)
 
 Miscellaneous
