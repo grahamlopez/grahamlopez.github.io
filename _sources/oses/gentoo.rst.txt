@@ -51,26 +51,26 @@ Get to the chroot
       sectors.
     - make partitions
         - ``mkpart primary START END`` (in whatever units)
+        - ``mkpart primary fat32 1 1024`` (for an EFI boot partition)
         - ``name 1 grub``
         - ``set 1 boot on`` (`see here
           <https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks#Default_partitioning_scheme>`_
           and `here
           <https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks#Creating_the_partitions>`_)
-        - ``mkfs.fat -F 32 /dev/sda1`` (see `here in the handbook <https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation#Using_UEFI>`_ about using EFI.)
 
     .. caution:: if the installation media isn't booted with EFI, then
                  '/sys/firmware/efi` will not be properly populated and confuse the grup
                  installation later on.
-
 
     .. note:: "For completeness, the BIOS boot partition is needed when a GPT
               partition layout is used with GRUB2 in PC/BIOS mode. It is not required when
               booting in EFI/UEFI mode."
 
 - make the filesystems and mount:
-    - ``mkfs.ext4 /dev/sda4``
+    - ``mkfs.fat -F 32 /dev/sda1`` (see `here in the handbook <https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation#Using_UEFI>`_ about using EFI.)
+    - ``mkfs.ext4 /dev/sda3``
+    - ``mount /dev/sda3 /mnt/gentoo``
     - ``mkdir -p /mnt/gentoo/boot``
-    - ``mount /dev/sda4 /mnt/gentoo``
     - ``mount /dev/sda1 /mnt/gentoo/boot``
 
 
@@ -93,6 +93,7 @@ install stage3
         - ``wget -c http://distfiles.gentoo.org/releases/amd64/autobuilds/YYYYMMDDThhmmssZ/stage3-amd64-YYYYMMDDThhmmssZ.tar.xz.CONTENTS``
         - ``wget -c http://distfiles.gentoo.org/releases/amd64/autobuilds/YYYYMMDDThhmmssZ/stage3-amd64-YYYYMMDDThhmmssZ.tar.xz.DIGESTS.asc``
 
+- move the tarball to ``/mnt/gentoo``
 
 - unpack the tarball:
 
@@ -102,7 +103,7 @@ enter the chroot
 
 - `preconfigure mirrors <https://wiki.gentoo.org/wiki/Mirrorselect>`_ for the new system
     - ``mirrorselect -i -o >> /mnt/gentoo/etc/portage/make.conf`` (interactive selection)
-    - ``mirrorselect -c USA -s3 -b10 -D`` (choose 3 fastest USA mirrors)
+    - ``mirrorselect -c USA -s3 -b10 -D && cp /etc/portage/make.conf /mnt/gentoo/etc/portage`` (choose the 3 fastest USA mirrors)
 - mount the filesystems
     - ``mount -t proc /proc /mnt/gentoo/proc``
     - ``mount -R /sys /mnt/gentoo/sys``
@@ -122,7 +123,8 @@ configure the build options:
 - ``mkdir -p /etc/portage/repos.conf``
 - ``cp /usr/share/portage/config/repos.conf /etc/portage/repos.conf/gentoo.conf``
   to `set up the repositories <https://wiki.gentoo.org/wiki//etc/portage/repos.conf>`_.
-- ``nano -w /mnt/gentoo/etc/portage/make.conf``
+  (and see here for more about the `sync system <https://wiki.gentoo.org/wiki/Project:Portage/Sync>`_)
+- ``nano /etc/portage/make.conf``
     - remember ``COMMON_FLAGS="-march=native -02 -pipe`` and ``MAKEOPTS="-j2"``
 
 install a snapshot and update:
@@ -134,7 +136,8 @@ configure the build options for the system
 
 .. error:: FIXME
 
-- set package options in /etc/portage/package.use/
+           - `set the ACCEPT_LICENSE options <https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation#Optional:_Configuring_the_ACCEPT_LICENSE_variable>`_
+           - set package options in /etc/portage/package.use/
 
 build the system
 
@@ -149,14 +152,141 @@ build the system
 
 - ``emerge --ask --verbose--update --deep --newuse @world``
 
+- here, we can go ahead and install vim, tmux, zsh, git
 
-.. error:: FIXME
+initial system configuration
 
-    - echo "America/New_York" > /etc/timezone
-    - emerge --ask sys-kernel/gentoo-sources
-    - cd /usr/src/linux
-    - make localyesconfig
-    - make menuconfig (enable gentoo --> systemd if wanted)
+- set the timezone::
+
+    echo "America/New_York" > /etc/timezone
+    emerge --config sys-libs/timezone-data
+
+- configure locale (`localization guide
+  <https://wiki.gentoo.org/wiki/Localization/Guide>`_ and the `utf8 article
+  <https://wiki.gentoo.org/wiki/UTF-8>`_)::
+
+    vim /etc/locale.gen
+
+    en_US ISO-8859-1
+    en_US.UTF-8 UTF-8
+
+    locale-gen
+    eselect locale list/set
+    env-update && source /etc/profile
+
+configure/build the kernel
+---------------------------
+
+- ``emerge --ask sys-kernel/gentoo-sources``
+- ``cd /usr/src/linux``
+- ``make localyesconfig``
+- ``make && make modules_install``
+- ``make install``
+
+filesystem information
+-----------------------
+
+Edit ``/etc/fstab`` with either device names or UUIDs as given by the ``blkid``
+command. Note that the ``/boot`` partition doesn't necessarily have to be
+present/mounted.
+
+networking
+-----------
+
+Edit ``/etc/conf.d/hostname`` to set the hostname.
+
+- ``emerge -a --noreplace net-misc/netifrc``
+- ``emerge -a dhcpcd wpa_supplicant``
+- ``vim /etc/conf.d/net``
+- add hostname to ``/etc/hosts```
+- ``vim /etc/wpa_supplicant/wpa_supplicant.conf``::
+
+    # The below line not be changed otherwise wpa_supplicant refuses to work
+    ctrl_interface=/var/run/wpa_supplicant
+
+    # Ensure that only root can read the WPA configuration
+    ctrl_interface_group=0
+
+    # Let wpa_supplicant take care of scanning and AP selection
+    ap_scan=1
+
+    # Simple case: WPA-PSK, PSK as an ASCII passphrase, allow all valid ciphers
+    network={
+      ssid="simple"
+      psk="very secret passphrase"
+      # The higher the priority the sooner we are matched
+      priority=5
+    }
+
+- ``rc-update add wpa_supplicant default``
+
+see here for information on `wireless networking in gentoo
+<https://wiki.gentoo.org/wiki/Handbook:X86/Networking/Wireless>`_.
+
+probably also need `firmware for iwlwifi
+<https://wiki.gentoo.org/wiki/Iwlwifi>`_.
+
+- ``emerge linux-firmware``
+- and make the kernel options modules::
+
+	Device Drivers  --->
+
+	        [*] Network device support  --->
+
+	        --- Network device support
+	        [*]   Wireless LAN  --->
+
+	            --- Wireless LAN
+	            [ ]   mac80211-based legacy WDS support
+	            [ ]   ADMtek devices
+	            [ ]   Atheros/Qualcomm devices
+	            [ ]   Atmel devices
+	            [ ]   Broadcom devices
+	            [ ]   Cisco devices
+	            [*]   Intel devices
+	            < >     Intel PRO/Wireless 2100 Network Connection
+	            < >     Intel PRO/Wireless 2200BG and 2915ABG Network Connection
+	            < >     Intel Wireless WiFi 4965AGN (iwl4965)
+	            < >     Intel PRO/Wireless 3945ABG/BG Network Connection (iwl3945)
+	            <M>     Intel Wireless WiFi Next Gen AGN - Wireless-N/Advanced-N/Ultimate-N (iwlwifi)
+	            <M>       Intel Wireless WiFi DVM Firmware support
+	            <M>       Intel Wireless WiFi MVM Firmware support
+	                      Debugging Options  --->
+	            [ ]   Intersil devices
+
+
+install utilities
+------------------
+
+miscellaneous configuration
+
+- set the root password
+- check ``/etc/rc.conf``
+- check ``/etc/conf.d/hwclock``
+
+`install utilities
+<https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation#System_logger>`_
+
+- ``emerge syslog-ng logrotate cronie mlocate e2fsprogs dosfstools parted``
+- ``rc-update add syslog-ng default``
+- ``rc-update add cronie default``
+
+bootloader
+-----------
+
+the `default grub
+<https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation#Default:_GRUB2>`_
+from the handbook
+
+- ``emerge -av sys-boot/grub:2``
+- be sure that ``GRUB_PLATFORMS="efi-64"`` shows up in the output before
+  emerging. If not, then enable with ``echo 'GRUB_PLATFORMS="efi-64"' >> /etc/portage/make.conf``
+- mount the EFI system partion (has "esp" flag in ``parted -l /dev/sda`` output)
+- ``grub-install --target=x86_64-efi --efi-directory=/boot``
+- ``grub-mkconfig -o /boot/grub/grub.cfg``
+
+if there is only a single partition for root and everything, you might need to
+edit ``/boot/grub/grub.cfg`` to change the mount to not be read-only
 
 More installation security
 ===========================
@@ -172,6 +302,14 @@ Dual Booting (e.g. Ubuntu)
 
 (coming soon)
 
+for starters, see the tip box in the `grub configure
+<https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation#Configure>`_
+section.
+
+consider ``sys-boot/os-prober`` for Detect other operating systems
+(grub-mkconfig)
+
+
 Encrypted drive
 ======================
 
@@ -180,6 +318,13 @@ straightforward. But then an initramfs is also needed so that the kernel can
 decrypt the root drive when booting.
 
 (coming soon)
+
+Rescue partitions and media
+============================
+
+consider ``dev-libs/libisoburn`` for Create rescue media (grub-mkrescue)
+
+
 
 UEFI boot (no bootloader)
 ==========================
@@ -196,3 +341,24 @@ Systemd / Gnome 3.28+
 This can be done as a conversion after the installation - really at any time.
 
 (coming soon)
+
+Notes on Using Portage
+=======================
+
+https://wiki.gentoo.org/wiki/Portage
+
+tips and tricks
+----------------
+
+If you want to enable Portage completions and Gentoo prompt,
+``emerge app-shells/gentoo-zsh-completions`` and add::
+
+     autoload -U compinit promptinit
+     compinit
+     promptinit; prompt gentoo
+
+to your ``~/.zshrc``
+Also, if you want to enable cache for the completions, add
+``zstyle ':completion::complete:*' use-cache 1``
+to your ``~/.zshrc``
+
