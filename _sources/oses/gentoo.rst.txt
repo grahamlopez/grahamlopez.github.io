@@ -285,9 +285,6 @@ from the handbook
 - ``grub-install --target=x86_64-efi --efi-directory=/boot``
 - ``grub-mkconfig -o /boot/grub/grub.cfg``
 
-if there is only a single partition for root and everything, you might need to
-edit ``/boot/grub/grub.cfg`` to change the mount to not be read-only
-
 More installation security
 ===========================
 
