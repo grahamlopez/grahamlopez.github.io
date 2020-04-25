@@ -51,17 +51,17 @@ a work-in-progress as I continue to learn.
       contact
       cv
       git/index
+      privacy_security/index
+      blog/index
 
 .. container:: rightcol
 
    .. toctree::
       :maxdepth: 2
 
-      privacy_security/index
       contained/index
       cli_tools/index
       oses/index
-      blog/index
       unsorted/index
       sphinx/index
 
