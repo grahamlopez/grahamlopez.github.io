@@ -123,13 +123,19 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#more-installation-security" id="id10">More installation security</a></li>
-<li><a class="reference internal" href="#dual-booting-e-g-ubuntu" id="id11">Dual Booting (e.g. Ubuntu)</a></li>
-<li><a class="reference internal" href="#encrypted-drive" id="id12">Encrypted drive</a></li>
-<li><a class="reference internal" href="#rescue-partitions-and-media" id="id13">Rescue partitions and media</a></li>
-<li><a class="reference internal" href="#uefi-boot-no-bootloader" id="id14">UEFI boot (no bootloader)</a></li>
-<li><a class="reference internal" href="#systemd-gnome-3-28" id="id15">Systemd / Gnome 3.28+</a></li>
-<li><a class="reference internal" href="#notes-on-using-portage" id="id16">Notes on Using Portage</a><ul>
-<li><a class="reference internal" href="#tips-and-tricks" id="id17">tips and tricks</a></li>
+<li><a class="reference internal" href="#dual-booting-e-g-ubuntu" id="id11">Dual Booting (e.g. Ubuntu)</a><ul>
+<li><a class="reference internal" href="#ubuntu-20-04-after-gentoo" id="id12">Ubuntu 20.04 after Gentoo</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#encrypted-drive" id="id13">Encrypted drive</a></li>
+<li><a class="reference internal" href="#rescue-partitions-and-media" id="id14">Rescue partitions and media</a><ul>
+<li><a class="reference internal" href="#manual-backups" id="id15">manual backups</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#uefi-boot-no-bootloader" id="id16">UEFI boot (no bootloader)</a></li>
+<li><a class="reference internal" href="#systemd-gnome-3-28" id="id17">Systemd / Gnome 3.28+</a></li>
+<li><a class="reference internal" href="#notes-on-using-portage" id="id18">Notes on Using Portage</a><ul>
+<li><a class="reference internal" href="#tips-and-tricks" id="id19">tips and tricks</a></li>
 </ul>
 </li>
 </ul>
@@ -478,38 +484,106 @@ tampered with (as far as the signing author is concerned).</p>
 <h2><a class="toc-backref" href="#id11">Dual Booting (e.g. Ubuntu)</a><a class="headerlink" href="#dual-booting-e-g-ubuntu" title="Permalink to this headline">¶</a></h2>
 <p>(coming soon)</p>
 <p>for starters, see the tip box in the <a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation#Configure" target="_blank">grub configure</a>
-section.</p>
-<p>consider <code class="docutils literal notranslate"><span class="pre">sys-boot/os-prober</span></code> for Detect other operating systems
-(grub-mkconfig)</p>
+section. (grub-mkconfig)</p>
+<p>consider <code class="docutils literal notranslate"><span class="pre">sys-boot/os-prober</span></code> for Detect other operating systems</p>
+<div class="section" id="ubuntu-20-04-after-gentoo">
+<h3><a class="toc-backref" href="#id12">Ubuntu 20.04 after Gentoo</a><a class="headerlink" href="#ubuntu-20-04-after-gentoo" title="Permalink to this headline">¶</a></h3>
+<p>This was an odd experiment. I had super vanilla (no lvm, normal grub, etc)
+gentoo installed on <code class="docutils literal notranslate"><span class="pre">/dev/sda3</span></code>, with its <code class="docutils literal notranslate"><span class="pre">/boot</span></code> and ESP on <code class="docutils literal notranslate"><span class="pre">/dev/sda1</span></code>.
+I then <code class="docutils literal notranslate"><span class="pre">dd</span> <span class="pre">if=/dev/sda3</span> <span class="pre">of=/dev/sda4</span></code>, and copied the <code class="docutils literal notranslate"><span class="pre">/boot</span></code> from
+<code class="docutils literal notranslate"><span class="pre">/dev/sda1</span></code> to the <code class="docutils literal notranslate"><span class="pre">/boot</span></code> directory on <code class="docutils literal notranslate"><span class="pre">/dev/sda4</span></code>. This gave me two
+identical gentoos, even with the same UUIDs in <code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code> (since they come
+from the filesystem).</p>
+<p>The ubuntu installer asked me about installing beside multiple other oses, but
+the option it gave me for automatic drive formatting didn’t look reasonable. So
+I did the advanced setup myself. Here, I selected <code class="docutils literal notranslate"><span class="pre">/dev/sda5</span></code> as a physical
+lvm partition for encryption and set a passphrase. Then I place root on it as
+ext4. The installer complained that since it was encrypted, it needed a separate
+<code class="docutils literal notranslate"><span class="pre">/boot</span></code>, so I placed this on <code class="docutils literal notranslate"><span class="pre">/dev/sda2</span></code> as ext4.</p>
+<p>This resulted in ubuntu placing a new EFI entry first in the bios, and
+presenting a grub menu with ubuntu, and gentoo on <code class="docutils literal notranslate"><span class="pre">/dev/sda4</span></code>. Both of these
+boot fine. I can boot gentoo on <code class="docutils literal notranslate"><span class="pre">/dev/sda3</span></code> by entering the bios boot
+selection and picking the “gentoo” option, which is now second in the list.</p>
+<p>Suspicions</p>
+<ul>
+<li><p class="first">Ubuntu’s bootloader is booting sda4 gentoo because it can find the <code class="docutils literal notranslate"><span class="pre">/boot</span></code>
+easily, and it needs at least the kernel and maybe the efi info from it.</p>
+</li>
+<li><p class="first">Ubuntu can boot <code class="docutils literal notranslate"><span class="pre">/dev/sda4</span></code> gentoo because Ubuntu’s bootloader is ignoring
+the grub config in <code class="docutils literal notranslate"><span class="pre">/boot</span></code> of <code class="docutils literal notranslate"><span class="pre">/dev/sda4</span></code>.</p>
+</li>
+<li><p class="first">I’m not completely sure how other parts of the system are getting confused by
+the identical UUIDs, but presumably the device argument to the kernel at boot
+time is enough to settle this.</p>
+</li>
+<li><p class="first">There seem to be two ways to easily dual-boot these two (ubuntu/gentoo):</p>
+<blockquote>
+<div><ul class="simple">
+<li>The <code class="docutils literal notranslate"><span class="pre">os-prober</span></code> utility from within ubuntu finds both gentoos. However, the
+<code class="docutils literal notranslate"><span class="pre">30_os-prober</span></code> script is only generating an entry for <code class="docutils literal notranslate"><span class="pre">/dev/sda4</span></code> gentoo
+in <code class="docutils literal notranslate"><span class="pre">/boot/grub/grub.cfg</span></code> in ubuntu. Maybe I can also configure grub the grub
+config in ubuntu to include the <code class="docutils literal notranslate"><span class="pre">/dev/sda1,3</span></code> gentoo. The simplest way seems
+to be to use the <code class="docutils literal notranslate"><span class="pre">/etc/grub.d/40_custom</span></code> entry and then rerun something like
+<code class="docutils literal notranslate"><span class="pre">grub-mkconfig</span></code> - just copy the menu entries from the original gentoo’s
+<code class="docutils literal notranslate"><span class="pre">/boot/grub/grub.cfg</span></code>.</li>
+<li>One could just go ahead and let any OS install itself onto unused
+parition(s), and then use the bios EFI selector to order and pick. This
+also implies that partioning needs to include at least a separate boot/esp
+partition for each OS (especially if it is encrypted).</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
 </div>
 <div class="section" id="encrypted-drive">
-<h2><a class="toc-backref" href="#id12">Encrypted drive</a><a class="headerlink" href="#encrypted-drive" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id13">Encrypted drive</a><a class="headerlink" href="#encrypted-drive" title="Permalink to this headline">¶</a></h2>
 <p>This is done with <code class="docutils literal notranslate"><span class="pre">dm-crypt</span></code> and LUKS. Setting up the drives is
 straightforward. But then an initramfs is also needed so that the kernel can
 decrypt the root drive when booting.</p>
 <p>(coming soon)</p>
 </div>
 <div class="section" id="rescue-partitions-and-media">
-<h2><a class="toc-backref" href="#id13">Rescue partitions and media</a><a class="headerlink" href="#rescue-partitions-and-media" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id14">Rescue partitions and media</a><a class="headerlink" href="#rescue-partitions-and-media" title="Permalink to this headline">¶</a></h2>
 <p>consider <code class="docutils literal notranslate"><span class="pre">dev-libs/libisoburn</span></code> for Create rescue media (grub-mkrescue)</p>
+<div class="section" id="manual-backups">
+<h3><a class="toc-backref" href="#id15">manual backups</a><a class="headerlink" href="#manual-backups" title="Permalink to this headline">¶</a></h3>
+<p>One could use the following procedure:</p>
+<ol class="arabic">
+<li><p class="first">tar up the host sysem (from live media / not when it is booted)</p>
+</li>
+<li><p class="first">untar from live media onto a new partition as if it were a mega stage3</p>
+</li>
+<li><p class="first">change uuids as needed in <code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code>, etc.</p>
+</li>
+<li><p class="first">possibly reinstall/reconfigure the bootloader with e.g.</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">grub-install</span> <span class="pre">--target=x86_64-efi</span> <span class="pre">--efi-directory=/boot</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">grub-mkconfig</span> <span class="pre">-o</span> <span class="pre">/boot/grub/grub.cfg</span></code></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div>
 </div>
 <div class="section" id="uefi-boot-no-bootloader">
-<h2><a class="toc-backref" href="#id14">UEFI boot (no bootloader)</a><a class="headerlink" href="#uefi-boot-no-bootloader" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id16">UEFI boot (no bootloader)</a><a class="headerlink" href="#uefi-boot-no-bootloader" title="Permalink to this headline">¶</a></h2>
 <p>In fact, even though either <code class="docutils literal notranslate"><span class="pre">grub</span></code> or <code class="docutils literal notranslate"><span class="pre">efibootmgr</span></code> are typically used to
 boot EFI systems, it can be done straight from the bios as described in Sakaki’s
 guide.</p>
 <p>(coming soon)</p>
 </div>
 <div class="section" id="systemd-gnome-3-28">
-<h2><a class="toc-backref" href="#id15">Systemd / Gnome 3.28+</a><a class="headerlink" href="#systemd-gnome-3-28" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id17">Systemd / Gnome 3.28+</a><a class="headerlink" href="#systemd-gnome-3-28" title="Permalink to this headline">¶</a></h2>
 <p>This can be done as a conversion after the installation - really at any time.</p>
 <p>(coming soon)</p>
 </div>
 <div class="section" id="notes-on-using-portage">
-<h2><a class="toc-backref" href="#id16">Notes on Using Portage</a><a class="headerlink" href="#notes-on-using-portage" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id18">Notes on Using Portage</a><a class="headerlink" href="#notes-on-using-portage" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://wiki.gentoo.org/wiki/Portage" target="_blank">https://wiki.gentoo.org/wiki/Portage</a></p>
 <div class="section" id="tips-and-tricks">
-<h3><a class="toc-backref" href="#id17">tips and tricks</a><a class="headerlink" href="#tips-and-tricks" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id19">tips and tricks</a><a class="headerlink" href="#tips-and-tricks" title="Permalink to this headline">¶</a></h3>
 <p>If you want to enable Portage completions and Gentoo prompt,
 <code class="docutils literal notranslate"><span class="pre">emerge</span> <span class="pre">app-shells/gentoo-zsh-completions</span></code> and add:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">autoload</span> <span class="o">-</span><span class="n">U</span> <span class="n">compinit</span> <span class="n">promptinit</span>

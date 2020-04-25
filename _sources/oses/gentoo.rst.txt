@@ -301,11 +301,55 @@ Dual Booting (e.g. Ubuntu)
 
 for starters, see the tip box in the `grub configure
 <https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation#Configure>`_
-section.
+section. (grub-mkconfig)
 
 consider ``sys-boot/os-prober`` for Detect other operating systems
-(grub-mkconfig)
 
+
+Ubuntu 20.04 after Gentoo
+---------------------------
+
+This was an odd experiment. I had super vanilla (no lvm, normal grub, etc)
+gentoo installed on ``/dev/sda3``, with its ``/boot`` and ESP on ``/dev/sda1``.
+I then ``dd if=/dev/sda3 of=/dev/sda4``, and copied the ``/boot`` from
+``/dev/sda1`` to the ``/boot`` directory on ``/dev/sda4``. This gave me two
+identical gentoos, even with the same UUIDs in ``/etc/fstab`` (since they come
+from the filesystem).
+
+The ubuntu installer asked me about installing beside multiple other oses, but
+the option it gave me for automatic drive formatting didn't look reasonable. So
+I did the advanced setup myself. Here, I selected ``/dev/sda5`` as a physical
+lvm partition for encryption and set a passphrase. Then I place root on it as
+ext4. The installer complained that since it was encrypted, it needed a separate
+``/boot``, so I placed this on ``/dev/sda2`` as ext4.
+
+This resulted in ubuntu placing a new EFI entry first in the bios, and
+presenting a grub menu with ubuntu, and gentoo on ``/dev/sda4``. Both of these
+boot fine. I can boot gentoo on ``/dev/sda3`` by entering the bios boot
+selection and picking the "gentoo" option, which is now second in the list.
+
+Suspicions
+
+- Ubuntu's bootloader is booting sda4 gentoo because it can find the ``/boot``
+  easily, and it needs at least the kernel and maybe the efi info from it.
+- Ubuntu can boot ``/dev/sda4`` gentoo because Ubuntu's bootloader is ignoring
+  the grub config in ``/boot`` of ``/dev/sda4``.
+- I'm not completely sure how other parts of the system are getting confused by
+  the identical UUIDs, but presumably the device argument to the kernel at boot
+  time is enough to settle this.
+- There seem to be two ways to easily dual-boot these two (ubuntu/gentoo):
+
+    - The ``os-prober`` utility from within ubuntu finds both gentoos. However, the
+      ``30_os-prober`` script is only generating an entry for ``/dev/sda4`` gentoo
+      in ``/boot/grub/grub.cfg`` in ubuntu. Maybe I can also configure grub the grub
+      config in ubuntu to include the ``/dev/sda1,3`` gentoo. The simplest way seems
+      to be to use the ``/etc/grub.d/40_custom`` entry and then rerun something like
+      ``grub-mkconfig`` - just copy the menu entries from the original gentoo's
+      ``/boot/grub/grub.cfg``.
+    - One could just go ahead and let any OS install itself onto unused
+      parition(s), and then use the bios EFI selector to order and pick. This
+      also implies that partioning needs to include at least a separate boot/esp
+      partition for each OS (especially if it is encrypted).
 
 Encrypted drive
 ======================
@@ -321,7 +365,18 @@ Rescue partitions and media
 
 consider ``dev-libs/libisoburn`` for Create rescue media (grub-mkrescue)
 
+manual backups
+---------------
 
+One could use the following procedure:
+
+1. tar up the host sysem (from live media / not when it is booted)
+2. untar from live media onto a new partition as if it were a mega stage3
+3. change uuids as needed in ``/etc/fstab``, etc.
+4. possibly reinstall/reconfigure the bootloader with e.g.
+
+    - ``grub-install --target=x86_64-efi --efi-directory=/boot``
+    - ``grub-mkconfig -o /boot/grub/grub.cfg``
 
 UEFI boot (no bootloader)
 ==========================
