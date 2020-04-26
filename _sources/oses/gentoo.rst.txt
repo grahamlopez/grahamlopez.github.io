@@ -129,6 +129,9 @@ configure the build options:
     - ``MAKEOPTS="-j2"``
     - ``PORTAGE_TMPDIR="/dev/shm"``
     - ``PORTAGE_TMPFS="/dev/shm"``
+- might also have to add ``none   /dev/shm    tmpfs   rw,nosuid,nodev,relatime 0 0``
+  to ``/etc/fstab`` to remove the ``noexec`` option to allow portage to work
+  in the tmpfs.
 
 install a snapshot and update:
 

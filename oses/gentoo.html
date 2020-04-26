@@ -309,6 +309,9 @@ to <a class="reference external" href="https://wiki.gentoo.org/wiki//etc/portage
 </dd>
 </dl>
 </li>
+<li>might also have to add <code class="docutils literal notranslate"><span class="pre">none</span>&#160;&#160; <span class="pre">/dev/shm</span>&#160;&#160;&#160; <span class="pre">tmpfs</span>&#160;&#160; <span class="pre">rw,nosuid,nodev,relatime</span> <span class="pre">0</span> <span class="pre">0</span></code>
+to <code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code> to remove the <code class="docutils literal notranslate"><span class="pre">noexec</span></code> option to allow portage to work
+in the tmpfs.</li>
 </ul>
 <p>install a snapshot and update:</p>
 <ul class="simple">
