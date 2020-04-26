@@ -6,11 +6,36 @@ Ubuntu 20.04
 .. contents::
    :local:
 
+power savings
+==============
+
+Doing the following dropped the idling power usage on my XPS 9560 from around 12
+watts to around 3.5 watts.
+
+- open nvidia settings and switch to intel driver
+- reboot
+- then, create a file ``etc/systemd/system/powertop.service``::
+
+    [Unit]
+    Description=PowerTOP auto tune
+
+    [Service]
+    Type=idle
+    Environment="TERM=dumb"
+    ExecStart=/usr/sbin/powertop --auto-tune
+
+    [Install]
+    WantedBy=multi-user.target
+
+- systemctl daemon-reload
+- systemctl enable powertop.service
+- reboot
+
 
 gnome-shell setup
 ==================
 
-Here's a script to do a lot of the configuration::
+Here's a script to do a lot of the initial gnome configuration configuration::
 
     #!/bin/bash
 

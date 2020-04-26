@@ -1,17 +1,17 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>Docker &#8212; graham lopez  documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="VPS hosting" href="vps_hosting.html" />
@@ -44,6 +44,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../cv.html">Curriculum Vitae</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../git/index.html">git hints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../privacy_security/index.html">Privacy / Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../blog/index.html">blog(ish)</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Containers / VPS</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="lxc_lxd.html">LXC and LXD</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Docker</a></li>
@@ -52,7 +53,6 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../cli_tools/index.html">CLI Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oses/index.html">Operating Systems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../blog/index.html">blog(ish)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../unsorted/index.html">unsorted</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html">sphinx</a></li>
 </ul>
@@ -69,15 +69,15 @@
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -119,14 +119,14 @@ Resources section all of the places from which I took content and ideas.</p>
 <div class="section" id="some-of-my-example-dockerfiles">
 <h2>some of my example dockerfiles<a class="headerlink" href="#some-of-my-example-dockerfiles" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><a class="reference download internal" download="" href="../_downloads/5e917ebccd42057a4010d1f90d8be8bf/centos7_gcc_dockerfile"><code class="xref download docutils literal notranslate"><span class="pre">centos</span> <span class="pre">gcc</span> <span class="pre">plugin</span> <span class="pre">development</span></code></a></li>
-<li><a class="reference download internal" download="" href="../_downloads/04cc9e9cf65f711cd726cc435d2154f4/centos_qmcpack_dockerfile"><code class="xref download docutils literal notranslate"><span class="pre">centos</span> <span class="pre">qmcpack</span> <span class="pre">(old)</span></code></a></li>
+<li><a class="reference download internal" download="" href="../_downloads/2baae18eaceb99d10eb7ff35a8c07ef6/centos7_gcc_dockerfile"><code class="xref download docutils literal notranslate"><span class="pre">centos</span> <span class="pre">gcc</span> <span class="pre">plugin</span> <span class="pre">development</span></code></a></li>
+<li><a class="reference download internal" download="" href="../_downloads/f48a2b03357d739e3239f93a57fee676/centos_qmcpack_dockerfile"><code class="xref download docutils literal notranslate"><span class="pre">centos</span> <span class="pre">qmcpack</span> <span class="pre">(old)</span></code></a></li>
 </ul>
 </div>
 <div class="section" id="usage">
 <h2>usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://github.com/wsargent/docker-cheat-sheet" target="_blank">here’s a more thorough cheatsheet</a></p>
-<table border="1" class="docutils align-center">
+<table border="1" class="docutils align-default">
 <colgroup>
 <col width="45%" />
 <col width="55%" />
@@ -167,7 +167,7 @@ namespace (hub account)</td>
 </tr>
 </tbody>
 </table>
-<table border="1" class="docutils align-center">
+<table border="1" class="docutils align-default">
 <colgroup>
 <col width="45%" />
 <col width="55%" />
@@ -198,7 +198,7 @@ created from image with ‘run’ command)</td>
 </tr>
 </tbody>
 </table>
-<table border="1" class="docutils align-center">
+<table border="1" class="docutils align-default">
 <colgroup>
 <col width="45%" />
 <col width="55%" />
@@ -249,7 +249,7 @@ to help with cleanup:</p>
 <h3>ENTRYPOINT vs. CMD<a class="headerlink" href="#entrypoint-vs-cmd" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://www.ctl.io/developers/blog/post/dockerfile-entrypoint-vs-cmd/" target="_blank">ENTRYPOINT vs. CMD</a>
 In summary, for a container called ‘demo’:</p>
-<table border="1" class="docutils align-center">
+<table border="1" class="docutils align-default">
 <colgroup>
 <col width="28%" />
 <col width="43%" />

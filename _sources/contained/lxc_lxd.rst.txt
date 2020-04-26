@@ -25,10 +25,10 @@ LXD getting started
 
 `LXD getting started - CLI <https://linuxcontainers.org/lxd/getting-started-cli/>`_
 
-1. install with ``apt install lxd lxd-client``
-2. configure with ``sudo lxd init``
-3. join the group: ``newgrp lxd``
-4. create container with ``lxc launch ubuntu:18.04 first``
+1. install with ``apt install lxd``
+2. reboot as instructed by snap
+3. configure with ``sudo lxd init``
+4. create container with ``lxc launch ubuntu:20.04 first``
 5. ``lxc list``
 6. enter container with ``lxc exec first -- /bin/bash``
 
@@ -94,7 +94,7 @@ External networking
 
 * set up port forwarding: https://discuss.linuxcontainers.org/t/forward-port-79-and-443-from-wan-to-container/2042
 
-    * ``lxc config device add mycontainer myport8080 proxy listen=tcp:0.0.0.0:8080 connect=tcp:localhost:8080``
+    * ``lxc config device add mycontainer myport8080 proxy listen=tcp:0.0.0.0:8080 connect=tcp:127.0.0.1:8080``
 
 * can test by installing nginx and editing ``/var/www/html/index.nginx-debian.html``
 
@@ -102,12 +102,12 @@ External networking
 
 * can also test with any directory as html document root with e.g.
 
-    * ``python3 -m http.server 8088`` (from inside the document root)
-    * ``busybox httpd -p 127.0.0.1:8088 -h /path/to/doc/root``
+    * ``python3 -m http.server 8080`` (from inside the document root)
+    * ``busybox httpd -p 127.0.0.1:8080 -h /path/to/doc/root``
 
 Right now, this only seems to work with the 'listen' (container) port and the
 'connect' (exposed on host) port are the same. Tested with nginx on both port 80
-and 8088
+and 8080
 
 These methods didn't work
 
