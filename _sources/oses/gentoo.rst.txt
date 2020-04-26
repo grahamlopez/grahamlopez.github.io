@@ -288,6 +288,30 @@ from the handbook
 - ``grub-install --target=x86_64-efi --efi-directory=/boot``
 - ``grub-mkconfig -o /boot/grub/grub.cfg``
 
+final configuration
+--------------------
+
+`add a user <https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation#Adding_a_user_for_daily_use>`_
+
+- ``useradd -m -G users,wheel,audio,video -s /bin/zsh larry``
+- ``passwd larry``
+
+`set up the console keymap <https://wiki.gentoo.org/wiki/Keyboard_layout_switching>`_
+
+- use ``showkey`` to get the keycode numbers of the key(s) of interest
+- edit/copy whatever keymap in ``/usr/share/keymaps[/i386/qwerty]``
+- OpenRC:
+    - make sure that ``/etc/conf.d/keymaps`` points at the file with the desired map
+    - ``/etc/init.d/keymaps`` restart
+- systemd:
+    - edit ``/etc/vconsole.conf`` to point at the map
+    - FIXME presumably restart some service
+
+set the console resolution
+
+- enter the grub shell and use ``videoinfo`` to get the supported modes
+- set e.g. ``GRUB_GFXMODE=1366x768`` in ``/etc/default/grub`` and reboot
+
 More installation security
 ===========================
 
@@ -388,6 +412,12 @@ One could use the following procedure:
 
     - to update the UUIDs etc. in the grub config: ``grub-mkconfig -o /boot/grub/grub.cfg``
     - to update the UEFI entry for this OS: ``grub-install --target=x86_64-efi --efi-directory=/boot``
+
+5. on the thinkpad, there is no option in the bios to manually add UEFI boot
+   entries, but the ``grub-install`` seems to have populated it (and put it
+   first). On the dell, the UEFI entry was not present even after the
+   ``grub-install``, so I added it manually (it even let me browse to the efi
+   file on the two detected ESPs) in the bios setup and it booted just fine.
 
 UEFI boot (no bootloader)
 ==========================

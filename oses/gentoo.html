@@ -122,22 +122,23 @@
 <li><a class="reference internal" href="#networking" id="id7">networking</a></li>
 <li><a class="reference internal" href="#install-utilities" id="id8">install utilities</a></li>
 <li><a class="reference internal" href="#bootloader" id="id9">bootloader</a></li>
+<li><a class="reference internal" href="#final-configuration" id="id10">final configuration</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#more-installation-security" id="id10">More installation security</a></li>
-<li><a class="reference internal" href="#dual-booting-e-g-ubuntu" id="id11">Dual Booting (e.g. Ubuntu)</a><ul>
-<li><a class="reference internal" href="#ubuntu-20-04-after-gentoo" id="id12">Ubuntu 20.04 after Gentoo</a></li>
+<li><a class="reference internal" href="#more-installation-security" id="id11">More installation security</a></li>
+<li><a class="reference internal" href="#dual-booting-e-g-ubuntu" id="id12">Dual Booting (e.g. Ubuntu)</a><ul>
+<li><a class="reference internal" href="#ubuntu-20-04-after-gentoo" id="id13">Ubuntu 20.04 after Gentoo</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#encrypted-drive" id="id13">Encrypted drive</a></li>
-<li><a class="reference internal" href="#rescue-partitions-and-media" id="id14">Rescue partitions and media</a><ul>
-<li><a class="reference internal" href="#manual-backups" id="id15">manual backups</a></li>
+<li><a class="reference internal" href="#encrypted-drive" id="id14">Encrypted drive</a></li>
+<li><a class="reference internal" href="#rescue-partitions-and-media" id="id15">Rescue partitions and media</a><ul>
+<li><a class="reference internal" href="#manual-backups" id="id16">manual backups</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#uefi-boot-no-bootloader" id="id16">UEFI boot (no bootloader)</a></li>
-<li><a class="reference internal" href="#systemd-gnome-3-28" id="id17">Systemd / Gnome 3.28+</a></li>
-<li><a class="reference internal" href="#notes-on-using-portage" id="id18">Notes on Using Portage</a><ul>
-<li><a class="reference internal" href="#tips-and-tricks" id="id19">tips and tricks</a></li>
+<li><a class="reference internal" href="#uefi-boot-no-bootloader" id="id17">UEFI boot (no bootloader)</a></li>
+<li><a class="reference internal" href="#systemd-gnome-3-28" id="id18">Systemd / Gnome 3.28+</a></li>
+<li><a class="reference internal" href="#notes-on-using-portage" id="id19">Notes on Using Portage</a><ul>
+<li><a class="reference internal" href="#tips-and-tricks" id="id20">tips and tricks</a></li>
 </ul>
 </li>
 </ul>
@@ -475,9 +476,43 @@ emerging. If not, then enable with <code class="docutils literal notranslate"><s
 <li><code class="docutils literal notranslate"><span class="pre">grub-mkconfig</span> <span class="pre">-o</span> <span class="pre">/boot/grub/grub.cfg</span></code></li>
 </ul>
 </div>
+<div class="section" id="final-configuration">
+<h3><a class="toc-backref" href="#id10">final configuration</a><a class="headerlink" href="#final-configuration" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation#Adding_a_user_for_daily_use" target="_blank">add a user</a></p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">useradd</span> <span class="pre">-m</span> <span class="pre">-G</span> <span class="pre">users,wheel,audio,video</span> <span class="pre">-s</span> <span class="pre">/bin/zsh</span> <span class="pre">larry</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">passwd</span> <span class="pre">larry</span></code></li>
+</ul>
+<p><a class="reference external" href="https://wiki.gentoo.org/wiki/Keyboard_layout_switching" target="_blank">set up the console keymap</a></p>
+<ul class="simple">
+<li>use <code class="docutils literal notranslate"><span class="pre">showkey</span></code> to get the keycode numbers of the key(s) of interest</li>
+<li>edit/copy whatever keymap in <code class="docutils literal notranslate"><span class="pre">/usr/share/keymaps[/i386/qwerty]</span></code></li>
+<li><dl class="first docutils">
+<dt>OpenRC:</dt><dd><ul>
+<li>make sure that <code class="docutils literal notranslate"><span class="pre">/etc/conf.d/keymaps</span></code> points at the file with the desired map</li>
+<li><code class="docutils literal notranslate"><span class="pre">/etc/init.d/keymaps</span></code> restart</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>systemd:</dt><dd><ul>
+<li>edit <code class="docutils literal notranslate"><span class="pre">/etc/vconsole.conf</span></code> to point at the map</li>
+<li>FIXME presumably restart some service</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>set the console resolution</p>
+<ul class="simple">
+<li>enter the grub shell and use <code class="docutils literal notranslate"><span class="pre">videoinfo</span></code> to get the supported modes</li>
+<li>set e.g. <code class="docutils literal notranslate"><span class="pre">GRUB_GFXMODE=1366x768</span></code> in <code class="docutils literal notranslate"><span class="pre">/etc/default/grub</span></code> and reboot</li>
+</ul>
+</div>
 </div>
 <div class="section" id="more-installation-security">
-<h2><a class="toc-backref" href="#id10">More installation security</a><a class="headerlink" href="#more-installation-security" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id11">More installation security</a><a class="headerlink" href="#more-installation-security" title="Permalink to this headline">¶</a></h2>
 <p>It is good to verify all of the downloads (stage3 snapshot, portage tree
 snapshot, and each package source download) to make sure that they haven’t been
 tampered with (as far as the signing author is concerned).</p>
@@ -486,13 +521,13 @@ tampered with (as far as the signing author is concerned).</p>
 </ul>
 </div>
 <div class="section" id="dual-booting-e-g-ubuntu">
-<h2><a class="toc-backref" href="#id11">Dual Booting (e.g. Ubuntu)</a><a class="headerlink" href="#dual-booting-e-g-ubuntu" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id12">Dual Booting (e.g. Ubuntu)</a><a class="headerlink" href="#dual-booting-e-g-ubuntu" title="Permalink to this headline">¶</a></h2>
 <p>(coming soon)</p>
 <p>for starters, see the tip box in the <a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation#Configure" target="_blank">grub configure</a>
 section. (grub-mkconfig)</p>
 <p>consider <code class="docutils literal notranslate"><span class="pre">sys-boot/os-prober</span></code> for Detect other operating systems</p>
 <div class="section" id="ubuntu-20-04-after-gentoo">
-<h3><a class="toc-backref" href="#id12">Ubuntu 20.04 after Gentoo</a><a class="headerlink" href="#ubuntu-20-04-after-gentoo" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id13">Ubuntu 20.04 after Gentoo</a><a class="headerlink" href="#ubuntu-20-04-after-gentoo" title="Permalink to this headline">¶</a></h3>
 <p>This was an odd experiment. I had super vanilla (no lvm, normal grub, etc)
 gentoo installed on <code class="docutils literal notranslate"><span class="pre">/dev/sda3</span></code>, with its <code class="docutils literal notranslate"><span class="pre">/boot</span></code> and ESP on <code class="docutils literal notranslate"><span class="pre">/dev/sda1</span></code>.
 I then <code class="docutils literal notranslate"><span class="pre">dd</span> <span class="pre">if=/dev/sda3</span> <span class="pre">of=/dev/sda4</span></code>, and copied the <code class="docutils literal notranslate"><span class="pre">/boot</span></code> from
@@ -548,17 +583,17 @@ partition for each OS (especially if it is encrypted).</li>
 </div>
 </div>
 <div class="section" id="encrypted-drive">
-<h2><a class="toc-backref" href="#id13">Encrypted drive</a><a class="headerlink" href="#encrypted-drive" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id14">Encrypted drive</a><a class="headerlink" href="#encrypted-drive" title="Permalink to this headline">¶</a></h2>
 <p>This is done with <code class="docutils literal notranslate"><span class="pre">dm-crypt</span></code> and LUKS. Setting up the drives is
 straightforward. But then an initramfs is also needed so that the kernel can
 decrypt the root drive when booting.</p>
 <p>(coming soon)</p>
 </div>
 <div class="section" id="rescue-partitions-and-media">
-<h2><a class="toc-backref" href="#id14">Rescue partitions and media</a><a class="headerlink" href="#rescue-partitions-and-media" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id15">Rescue partitions and media</a><a class="headerlink" href="#rescue-partitions-and-media" title="Permalink to this headline">¶</a></h2>
 <p>consider <code class="docutils literal notranslate"><span class="pre">dev-libs/libisoburn</span></code> for Create rescue media (grub-mkrescue)</p>
 <div class="section" id="manual-backups">
-<h3><a class="toc-backref" href="#id15">manual backups</a><a class="headerlink" href="#manual-backups" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id16">manual backups</a><a class="headerlink" href="#manual-backups" title="Permalink to this headline">¶</a></h3>
 <p>One could use the following procedure:</p>
 <ol class="arabic">
 <li><p class="first">tar up the host sysem (from live media / not when it is booted)</p>
@@ -580,26 +615,32 @@ decrypt the root drive when booting.</p>
 </ul>
 </div></blockquote>
 </li>
+<li><p class="first">on the thinkpad, there is no option in the bios to manually add UEFI boot
+entries, but the <code class="docutils literal notranslate"><span class="pre">grub-install</span></code> seems to have populated it (and put it
+first). On the dell, the UEFI entry was not present even after the
+<code class="docutils literal notranslate"><span class="pre">grub-install</span></code>, so I added it manually (it even let me browse to the efi
+file on the two detected ESPs) in the bios setup and it booted just fine.</p>
+</li>
 </ol>
 </div>
 </div>
 <div class="section" id="uefi-boot-no-bootloader">
-<h2><a class="toc-backref" href="#id16">UEFI boot (no bootloader)</a><a class="headerlink" href="#uefi-boot-no-bootloader" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id17">UEFI boot (no bootloader)</a><a class="headerlink" href="#uefi-boot-no-bootloader" title="Permalink to this headline">¶</a></h2>
 <p>In fact, even though either <code class="docutils literal notranslate"><span class="pre">grub</span></code> or <code class="docutils literal notranslate"><span class="pre">efibootmgr</span></code> are typically used to
 boot EFI systems, it can be done straight from the bios as described in Sakaki’s
 guide.</p>
 <p>(coming soon)</p>
 </div>
 <div class="section" id="systemd-gnome-3-28">
-<h2><a class="toc-backref" href="#id17">Systemd / Gnome 3.28+</a><a class="headerlink" href="#systemd-gnome-3-28" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id18">Systemd / Gnome 3.28+</a><a class="headerlink" href="#systemd-gnome-3-28" title="Permalink to this headline">¶</a></h2>
 <p>This can be done as a conversion after the installation - really at any time.</p>
 <p>(coming soon)</p>
 </div>
 <div class="section" id="notes-on-using-portage">
-<h2><a class="toc-backref" href="#id18">Notes on Using Portage</a><a class="headerlink" href="#notes-on-using-portage" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id19">Notes on Using Portage</a><a class="headerlink" href="#notes-on-using-portage" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://wiki.gentoo.org/wiki/Portage" target="_blank">https://wiki.gentoo.org/wiki/Portage</a></p>
 <div class="section" id="tips-and-tricks">
-<h3><a class="toc-backref" href="#id19">tips and tricks</a><a class="headerlink" href="#tips-and-tricks" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id20">tips and tricks</a><a class="headerlink" href="#tips-and-tricks" title="Permalink to this headline">¶</a></h3>
 <p>If you want to enable Portage completions and Gentoo prompt,
 <code class="docutils literal notranslate"><span class="pre">emerge</span> <span class="pre">app-shells/gentoo-zsh-completions</span></code> and add:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">autoload</span> <span class="o">-</span><span class="n">U</span> <span class="n">compinit</span> <span class="n">promptinit</span>
