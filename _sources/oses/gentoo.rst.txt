@@ -324,6 +324,12 @@ tampered with (as far as the signing author is concerned).
 
 - https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Stage#Verifying_and_validating
 
+- https://wiki.gentoo.org/wiki/Handbook:Parts/Working/Features#Validated_Gentoo_repository_snapshots
+
+- https://wiki.gentoo.org/wiki/Sakaki%27s_EFI_Install_Guide/Installing_the_Gentoo_Stage_3_Files
+
+- https://wiki.gentoo.org/wiki/Sakaki%27s_EFI_Install_Guide/Building_the_Gentoo_Base_System_Minus_Kernel
+
 Dual Booting (e.g. Ubuntu)
 ===========================
 
@@ -411,7 +417,8 @@ One could use the following procedure:
     - remember to use ``tar xvpjf backup.tar.bz2 --xattrs-include='*.*' --numeric-owner``
 
 3. change uuids as needed in ``/etc/fstab``, etc.
-4. possibly reinstall/reconfigure the bootloader with e.g.
+3. change options (like GRUB_GFXMODE) in ``/etc/default/grub``
+4. reconfigure/reinstall the bootloader with e.g.
 
     - to update the UUIDs etc. in the grub config: ``grub-mkconfig -o /boot/grub/grub.cfg``
     - to update the UEFI entry for this OS: ``grub-install --target=x86_64-efi --efi-directory=/boot``

@@ -521,6 +521,9 @@ snapshot, and each package source download) to make sure that they haven’t bee
 tampered with (as far as the signing author is concerned).</p>
 <ul class="simple">
 <li><a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Stage#Verifying_and_validating" target="_blank">https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Stage#Verifying_and_validating</a></li>
+<li><a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:Parts/Working/Features#Validated_Gentoo_repository_snapshots" target="_blank">https://wiki.gentoo.org/wiki/Handbook:Parts/Working/Features#Validated_Gentoo_repository_snapshots</a></li>
+<li><a class="reference external" href="https://wiki.gentoo.org/wiki/Sakaki%27s_EFI_Install_Guide/Installing_the_Gentoo_Stage_3_Files" target="_blank">https://wiki.gentoo.org/wiki/Sakaki%27s_EFI_Install_Guide/Installing_the_Gentoo_Stage_3_Files</a></li>
+<li><a class="reference external" href="https://wiki.gentoo.org/wiki/Sakaki%27s_EFI_Install_Guide/Building_the_Gentoo_Base_System_Minus_Kernel" target="_blank">https://wiki.gentoo.org/wiki/Sakaki%27s_EFI_Install_Guide/Building_the_Gentoo_Base_System_Minus_Kernel</a></li>
 </ul>
 </div>
 <div class="section" id="dual-booting-e-g-ubuntu">
@@ -608,22 +611,22 @@ decrypt the root drive when booting.</p>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">change uuids as needed in <code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code>, etc.</p>
-</li>
-<li><p class="first">possibly reinstall/reconfigure the bootloader with e.g.</p>
+</ol>
+<p>3. change uuids as needed in <code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code>, etc.
+3. change options (like GRUB_GFXMODE) in <code class="docutils literal notranslate"><span class="pre">/etc/default/grub</span></code>
+4. reconfigure/reinstall the bootloader with e.g.</p>
 <blockquote>
 <div><ul class="simple">
 <li>to update the UUIDs etc. in the grub config: <code class="docutils literal notranslate"><span class="pre">grub-mkconfig</span> <span class="pre">-o</span> <span class="pre">/boot/grub/grub.cfg</span></code></li>
 <li>to update the UEFI entry for this OS: <code class="docutils literal notranslate"><span class="pre">grub-install</span> <span class="pre">--target=x86_64-efi</span> <span class="pre">--efi-directory=/boot</span></code></li>
 </ul>
 </div></blockquote>
-</li>
-<li><p class="first">on the thinkpad, there is no option in the bios to manually add UEFI boot
+<ol class="arabic simple" start="5">
+<li>on the thinkpad, there is no option in the bios to manually add UEFI boot
 entries, but the <code class="docutils literal notranslate"><span class="pre">grub-install</span></code> seems to have populated it (and put it
 first). On the dell, the UEFI entry was not present even after the
 <code class="docutils literal notranslate"><span class="pre">grub-install</span></code>, so I added it manually (it even let me browse to the efi
-file on the two detected ESPs) in the bios setup and it booted just fine.</p>
-</li>
+file on the two detected ESPs) in the bios setup and it booted just fine.</li>
 </ol>
 </div>
 </div>

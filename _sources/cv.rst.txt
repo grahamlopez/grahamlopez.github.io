@@ -48,7 +48,14 @@ order to examine the impact of negative space on protein allostery.
 Experience
 ==========
 
-| **2018--present** HPC Systems Engineer at Oak Ridge National Laboratory - Oak Ridge, TN
+| **2020--present** HPC Compilers Product Manager at NVIDIA - Hillsboro, OR
+| *HPC compiler and developer productivity*
+
+- Set roadmaps for HPC compiler products
+- Increase scientific productivity by developing programming model strategies
+  with implementers and customers
+
+| **2018--2020** HPC Systems Engineer at Oak Ridge National Laboratory - Oak Ridge, TN
 | *Leadership system support and C++ application development*
 
 - Provide system support for Summit supercomputer and all other HPC resources at

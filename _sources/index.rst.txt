@@ -13,7 +13,7 @@ Home
 
 I am a computing professional with a background in scientific and
 high-performance computing. Currently, I am a product manager for HPC
-compilers.
+compilers at NVIDIA.
 
 Recently, I was an HPC Engineer in the National Center for Computational
 Sciences at Oak Ridge National Laboratory where I worked with users and
