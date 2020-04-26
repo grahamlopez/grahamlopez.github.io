@@ -125,7 +125,10 @@ configure the build options:
   to `set up the repositories <https://wiki.gentoo.org/wiki//etc/portage/repos.conf>`_.
   (and see here for more about the `sync system <https://wiki.gentoo.org/wiki/Project:Portage/Sync>`_)
 - ``nano /etc/portage/make.conf``
-    - remember ``COMMON_FLAGS="-march=native -02 -pipe`` and ``MAKEOPTS="-j2"``
+    - ``COMMON_FLAGS="-march=native -02 -pipe``
+    - ``MAKEOPTS="-j2"``
+    - ``PORTAGE_TMPDIR="/dev/shm"``
+    - ``PORTAGE_TMPFS="/dev/shm"``
 
 install a snapshot and update:
 
@@ -330,6 +333,11 @@ selection and picking the "gentoo" option, which is now second in the list.
 
 Suspicions
 
+- Based on another experiment, the ubuntu installer insisted on having a
+  separate EFI system partition from ``/boot`` (even though this isn't required
+  when you're not PC/BIOS booting GPT), so even though I gave it a separate
+  ``/boot`` parition, it used one of the other gentoo ``/boot`` partitions that
+  was marked for both boot and ESP - it wrote to the ``/boot/EFI`` directory.
 - Ubuntu's bootloader is booting sda4 gentoo because it can find the ``/boot``
   easily, and it needs at least the kernel and maybe the efi info from it.
 - Ubuntu can boot ``/dev/sda4`` gentoo because Ubuntu's bootloader is ignoring
@@ -372,11 +380,14 @@ One could use the following procedure:
 
 1. tar up the host sysem (from live media / not when it is booted)
 2. untar from live media onto a new partition as if it were a mega stage3
+
+    - remember to use ``tar xvpjf backup.tar.bz2 --xattrs-include='*.*' --numeric-owner``
+
 3. change uuids as needed in ``/etc/fstab``, etc.
 4. possibly reinstall/reconfigure the bootloader with e.g.
 
-    - ``grub-install --target=x86_64-efi --efi-directory=/boot``
-    - ``grub-mkconfig -o /boot/grub/grub.cfg``
+    - to update the UUIDs etc. in the grub config: ``grub-mkconfig -o /boot/grub/grub.cfg``
+    - to update the UEFI entry for this OS: ``grub-install --target=x86_64-efi --efi-directory=/boot``
 
 UEFI boot (no bootloader)
 ==========================

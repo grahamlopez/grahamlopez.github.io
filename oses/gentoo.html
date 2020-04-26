@@ -50,6 +50,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Operating Systems</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Gentoo</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ubuntu_20.04.html">Ubuntu 20.04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#partitioning">Partitioning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#miscellaneous">Miscellaneous</a></li>
 </ul>
 </li>
@@ -299,7 +300,10 @@ to <a class="reference external" href="https://wiki.gentoo.org/wiki//etc/portage
 (and see here for more about the <a class="reference external" href="https://wiki.gentoo.org/wiki/Project:Portage/Sync" target="_blank">sync system</a>)</li>
 <li><dl class="first docutils">
 <dt><code class="docutils literal notranslate"><span class="pre">nano</span> <span class="pre">/etc/portage/make.conf</span></code></dt><dd><ul>
-<li>remember <code class="docutils literal notranslate"><span class="pre">COMMON_FLAGS=&quot;-march=native</span> <span class="pre">-02</span> <span class="pre">-pipe</span></code> and <code class="docutils literal notranslate"><span class="pre">MAKEOPTS=&quot;-j2&quot;</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">COMMON_FLAGS=&quot;-march=native</span> <span class="pre">-02</span> <span class="pre">-pipe</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">MAKEOPTS=&quot;-j2&quot;</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PORTAGE_TMPDIR=&quot;/dev/shm&quot;</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PORTAGE_TMPFS=&quot;/dev/shm&quot;</span></code></li>
 </ul>
 </dd>
 </dl>
@@ -507,6 +511,12 @@ boot fine. I can boot gentoo on <code class="docutils literal notranslate"><span
 selection and picking the “gentoo” option, which is now second in the list.</p>
 <p>Suspicions</p>
 <ul>
+<li><p class="first">Based on another experiment, the ubuntu installer insisted on having a
+separate EFI system partition from <code class="docutils literal notranslate"><span class="pre">/boot</span></code> (even though this isn’t required
+when you’re not PC/BIOS booting GPT), so even though I gave it a separate
+<code class="docutils literal notranslate"><span class="pre">/boot</span></code> parition, it used one of the other gentoo <code class="docutils literal notranslate"><span class="pre">/boot</span></code> partitions that
+was marked for both boot and ESP - it wrote to the <code class="docutils literal notranslate"><span class="pre">/boot/EFI</span></code> directory.</p>
+</li>
 <li><p class="first">Ubuntu’s bootloader is booting sda4 gentoo because it can find the <code class="docutils literal notranslate"><span class="pre">/boot</span></code>
 easily, and it needs at least the kernel and maybe the efi info from it.</p>
 </li>
@@ -554,14 +564,19 @@ decrypt the root drive when booting.</p>
 <li><p class="first">tar up the host sysem (from live media / not when it is booted)</p>
 </li>
 <li><p class="first">untar from live media onto a new partition as if it were a mega stage3</p>
+<blockquote>
+<div><ul class="simple">
+<li>remember to use <code class="docutils literal notranslate"><span class="pre">tar</span> <span class="pre">xvpjf</span> <span class="pre">backup.tar.bz2</span> <span class="pre">--xattrs-include='*.*'</span> <span class="pre">--numeric-owner</span></code></li>
+</ul>
+</div></blockquote>
 </li>
 <li><p class="first">change uuids as needed in <code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code>, etc.</p>
 </li>
 <li><p class="first">possibly reinstall/reconfigure the bootloader with e.g.</p>
 <blockquote>
 <div><ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">grub-install</span> <span class="pre">--target=x86_64-efi</span> <span class="pre">--efi-directory=/boot</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">grub-mkconfig</span> <span class="pre">-o</span> <span class="pre">/boot/grub/grub.cfg</span></code></li>
+<li>to update the UUIDs etc. in the grub config: <code class="docutils literal notranslate"><span class="pre">grub-mkconfig</span> <span class="pre">-o</span> <span class="pre">/boot/grub/grub.cfg</span></code></li>
+<li>to update the UEFI entry for this OS: <code class="docutils literal notranslate"><span class="pre">grub-install</span> <span class="pre">--target=x86_64-efi</span> <span class="pre">--efi-directory=/boot</span></code></li>
 </ul>
 </div></blockquote>
 </li>

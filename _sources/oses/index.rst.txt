@@ -12,6 +12,15 @@ Operating Systems
 * windows10 (coming soon)
 * qubes os (coming soon)
 
+Partitioning
+=============
+
+Here's how I'm partitioning for now. Note that with GPT, we can have as many
+primary partitions as we want - no more need for extended/logical. Also remember
+to make the combined boot/esp paritions FAT32.
+
+.. error:: FIXME insert the table
+
 Miscellaneous
 ==============
 
