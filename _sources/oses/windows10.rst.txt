@@ -29,9 +29,7 @@ Terminals
 ==========
 
 https://blog.ropnop.com/configuring-a-pretty-and-usable-terminal-emulator-for-wsl/
-- Alacritty config goes in
-  ``Users/[user]/AppData/Roaming/alacritty/alacritty.yml`` (download example
-  yaml from the releases page in github)
+- Alacritty config goes in ``Users/[user]/AppData/Roaming/alacritty/alacritty.yml`` (download example yaml from the releases page in github)
 - One can always try setting the legacy mintty backend for a different feel -
 - Cmder setup: https://gingter.org/2016/11/16/running-windows-10-ubuntu-bash-in-cmder/
 - Terminus is too slow to be usable, but it looks nice.
@@ -55,9 +53,7 @@ https://docs.microsoft.com/en-us/windows/wsl/install-win10
 
 The procedure I used:
 
-- Control Panel > Programs > Turn Windows Features On Or Off. Enable the
-  “Windows Subsystem for Linux” option in the list, and then click the “OK”
-  button.
+- Control Panel > Programs > Turn Windows Features On Or Off. Enable the “Windows Subsystem for Linux” option in the list, and then click the “OK” button.
 - Click “Restart now” when you’re prompted to restart your computer. The feature
   won’t work until you reboot.
 - Install Ubuntu 18.04 from the Microsoft store (online/in a browser)
@@ -66,9 +62,10 @@ The procedure I used:
 Configuration
 --------------
 
-Turn off terminal beep: uncomment `set bell-style none` in `/etc/inputrc`
-- Doesn't work for zsh, so put `unsetopt BEEP` in `~/.zshrc`
+Turn off terminal beep: uncomment ``set bell-style none`` in ``/etc/inputrc``
+- Doesn't work for zsh, so put ``unsetopt BEEP`` in ``~/.zshrc``
 - Better: just change "Critical Stop" in Sound Scheme (control panel) to
+
     - "Windows Navigation Start.wav"
     - "Windows Menu Command.wav"
     - but setting to (None) doesn't work hashtagangryface

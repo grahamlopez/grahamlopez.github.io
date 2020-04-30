@@ -147,15 +147,10 @@
 <div class="section" id="terminals">
 <h2><a class="toc-backref" href="#id2">Terminals</a><a class="headerlink" href="#terminals" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://blog.ropnop.com/configuring-a-pretty-and-usable-terminal-emulator-for-wsl/" target="_blank">https://blog.ropnop.com/configuring-a-pretty-and-usable-terminal-emulator-for-wsl/</a>
-- Alacritty config goes in</p>
-<blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">Users/[user]/AppData/Roaming/alacritty/alacritty.yml</span></code> (download example
-yaml from the releases page in github)</div></blockquote>
-<ul class="simple">
-<li>One can always try setting the legacy mintty backend for a different feel -</li>
-<li>Cmder setup: <a class="reference external" href="https://gingter.org/2016/11/16/running-windows-10-ubuntu-bash-in-cmder/" target="_blank">https://gingter.org/2016/11/16/running-windows-10-ubuntu-bash-in-cmder/</a></li>
-<li>Terminus is too slow to be usable, but it looks nice.</li>
-</ul>
+- Alacritty config goes in <code class="docutils literal notranslate"><span class="pre">Users/[user]/AppData/Roaming/alacritty/alacritty.yml</span></code> (download example yaml from the releases page in github)
+- One can always try setting the legacy mintty backend for a different feel -
+- Cmder setup: <a class="reference external" href="https://gingter.org/2016/11/16/running-windows-10-ubuntu-bash-in-cmder/" target="_blank">https://gingter.org/2016/11/16/running-windows-10-ubuntu-bash-in-cmder/</a>
+- Terminus is too slow to be usable, but it looks nice.</p>
 <p>I ended up going with Alacritty. It isn’t bulletproof, but it is good
 enough(TM).</p>
 </div>
@@ -168,9 +163,7 @@ enough(TM).</p>
 <p><a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/install-win10" target="_blank">https://docs.microsoft.com/en-us/windows/wsl/install-win10</a></p>
 <p>The procedure I used:</p>
 <ul class="simple">
-<li>Control Panel &gt; Programs &gt; Turn Windows Features On Or Off. Enable the
-“Windows Subsystem for Linux” option in the list, and then click the “OK”
-button.</li>
+<li>Control Panel &gt; Programs &gt; Turn Windows Features On Or Off. Enable the “Windows Subsystem for Linux” option in the list, and then click the “OK” button.</li>
 <li>Click “Restart now” when you’re prompted to restart your computer. The feature
 won’t work until you reboot.</li>
 <li>Install Ubuntu 18.04 from the Microsoft store (online/in a browser)</li>
@@ -179,8 +172,8 @@ won’t work until you reboot.</li>
 </div>
 <div class="section" id="configuration">
 <h3><a class="toc-backref" href="#id5">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
-<p>Turn off terminal beep: uncomment <cite>set bell-style none</cite> in <cite>/etc/inputrc</cite>
-- Doesn’t work for zsh, so put <cite>unsetopt BEEP</cite> in <cite>~/.zshrc</cite>
+<p>Turn off terminal beep: uncomment <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">bell-style</span> <span class="pre">none</span></code> in <code class="docutils literal notranslate"><span class="pre">/etc/inputrc</span></code>
+- Doesn’t work for zsh, so put <code class="docutils literal notranslate"><span class="pre">unsetopt</span> <span class="pre">BEEP</span></code> in <code class="docutils literal notranslate"><span class="pre">~/.zshrc</span></code>
 - Better: just change “Critical Stop” in Sound Scheme (control panel) to</p>
 <blockquote>
 <div><ul class="simple">
