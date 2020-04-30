@@ -441,6 +441,9 @@ guide.
 Systemd / Gnome 3.28+
 ======================
 
+- `arch's wiki page <https://wiki.archlinux.org/index.php/systemd>`_ is quite
+  good.
+
 This can be done as a conversion after the installation - really at any time.
 
 (coming soon)
@@ -465,3 +468,9 @@ Also, if you want to enable cache for the completions, add
 ``zstyle ':completion::complete:*' use-cache 1``
 to your ``~/.zshrc``
 
+
+Unsorted
+=========
+
+if ``/bin/ping`` gives an "Operation not permitted" when run by an unpriviledged
+user (but works as root), then ``setcap cap_net_raw=ep /bin/ping``.

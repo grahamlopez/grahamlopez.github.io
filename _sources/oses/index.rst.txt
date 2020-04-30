@@ -8,8 +8,8 @@ Operating Systems
 
    gentoo
    ubuntu_20.04
+   windows10
 
-* windows10 (coming soon)
 * qubes os (coming soon)
 
 Partitioning

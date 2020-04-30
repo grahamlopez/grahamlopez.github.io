@@ -31,6 +31,12 @@ watts to around 3.5 watts.
 - systemctl enable powertop.service
 - reboot
 
+kernel configuration
+=====================
+
+Sometimes, one might want to see the current kernel configuration - check it out
+at ``/boot/config-$(uname -r)``.
+
 
 gnome-shell setup
 ==================

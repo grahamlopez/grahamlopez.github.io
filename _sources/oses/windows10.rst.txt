@@ -1,0 +1,74 @@
+
+*************
+Windows 10
+*************
+
+.. contents::
+   :local:
+
+Sometimes I have to use Windows 10; here are some things that I typically do.
+
+
+Ergonomics
+============
+
+capslock to control
+
+- Create a file called "caps.reg"::
+
+    Windows Registry Editor Version 5.00
+
+    [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout]
+
+    "Scancode Map"=hex:00,00,00,00,00,00,00,00,02,00,00,00,1d,00,3a,00,00,00,00,00
+
+- Execute
+- Reboot
+
+Terminals
+==========
+
+https://blog.ropnop.com/configuring-a-pretty-and-usable-terminal-emulator-for-wsl/
+- Alacritty config goes in
+  ``Users/[user]/AppData/Roaming/alacritty/alacritty.yml`` (download example
+  yaml from the releases page in github)
+- One can always try setting the legacy mintty backend for a different feel -
+- Cmder setup: https://gingter.org/2016/11/16/running-windows-10-ubuntu-bash-in-cmder/
+- Terminus is too slow to be usable, but it looks nice.
+
+I ended up going with Alacritty. It isn't bulletproof, but it is good
+enough(TM).
+
+WSL 1/2
+========
+
+`WSL vs WSL2 <https://ulsoy.org/blog/experiencing-wsl-as-a-linux-veteran-part-1/>`_
+
+
+WSL1 install
+-------------
+
+https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/
+
+https://docs.microsoft.com/en-us/windows/wsl/install-win10
+
+
+The procedure I used:
+
+- Control Panel > Programs > Turn Windows Features On Or Off. Enable the
+  “Windows Subsystem for Linux” option in the list, and then click the “OK”
+  button.
+- Click “Restart now” when you’re prompted to restart your computer. The feature
+  won’t work until you reboot.
+- Install Ubuntu 18.04 from the Microsoft store (online/in a browser)
+- No need to sign in to anything, even if prompted
+
+Configuration
+--------------
+
+Turn off terminal beep: uncomment `set bell-style none` in `/etc/inputrc`
+- Doesn't work for zsh, so put `unsetopt BEEP` in `~/.zshrc`
+- Better: just change "Critical Stop" in Sound Scheme (control panel) to
+    - "Windows Navigation Start.wav"
+    - "Windows Menu Command.wav"
+    - but setting to (None) doesn't work hashtagangryface
