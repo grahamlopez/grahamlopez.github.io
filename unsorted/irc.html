@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>weechat &#8212; graham lopez  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="sphinx" href="../sphinx/index.html" />
+    <link rel="prev" title="signing code with git" href="signing_code.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">graham lopez</a></h1>
+
+
+
+<p class="blurb">Notes by/for, and a little bit about M. Graham Lopez</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contact.html">Contact me</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cv.html">Curriculum Vitae</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/index.html">git hints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../privacy_security/index.html">Privacy / Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../blog/index.html">blog(ish)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contained/index.html">Containers / VPS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli_tools/index.html">CLI Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oses/index.html">Operating Systems</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">unsorted</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bare_repo_dotfiles.html">bare git repo dotfiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="signing_code.html">signing code with git</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">weechat</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html">sphinx</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">unsorted</a><ul>
+      <li>Previous: <a href="signing_code.html" title="previous chapter">signing code with git</a></li>
+      <li>Next: <a href="../sphinx/index.html" title="next chapter">sphinx</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="signing_code.html" title="Previous document">signing code with git</a>
+        </li>
+        <li>
+          <a href="../sphinx/index.html" title="Next document">sphinx</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="weechat">
+<h1>weechat<a class="headerlink" href="#weechat" title="Permalink to this headline">¶</a></h1>
+<p>installing weechat in ubuntu</p>
+<p><a class="reference external" href="https://weechat.org/download/debian/" target="_blank">https://weechat.org/download/debian/</a></p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-key</span> <span class="pre">adv</span> <span class="pre">--keyserver</span> <span class="pre">hkps://keys.openpgp.org</span> <span class="pre">--recv-keys</span> <span class="pre">11E9DE8848F2B65222AA75B8D1820DB22A11534E</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">&quot;deb</span> <span class="pre">https://weechat.org/ubuntu</span> <span class="pre">focal</span> <span class="pre">main&quot;</span> <span class="pre">|</span> <span class="pre">sudo</span> <span class="pre">tee</span> <span class="pre">/etc/apt/sources.list.d/weechat.list</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">weechat-curses</span> <span class="pre">weechat-plugins</span> <span class="pre">weechat-python</span> <span class="pre">weechat-perl</span></code></li>
+</ul>
+<div class="section" id="initial-weechat-setup">
+<h2>initial weechat setup<a class="headerlink" href="#initial-weechat-setup" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://weechat.org/files/doc/devel/weechat_quickstart.en.html" target="_blank">https://weechat.org/files/doc/devel/weechat_quickstart.en.html</a></p>
+<p>set up server alias and configuration</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">/server</span> <span class="pre">add</span> <span class="pre">freenode</span> <span class="pre">chat.freenode.net</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">/set</span> <span class="pre">irc.server.freenode.nicks</span> <span class="pre">&quot;mynick&quot;</span></code></li>
+</ul>
+<p>enable ssl</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">/set</span> <span class="pre">irc.server.freenode.addresses</span> <span class="pre">&quot;chat.freenode.net/7000&quot;</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">/set</span> <span class="pre">irc.server.freenode.ssl</span> <span class="pre">on</span></code></li>
+</ul>
+<p>enable auto-connect to the server at startup</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">/set</span> <span class="pre">irc.server.freenode.autoconnect</span> <span class="pre">on</span></code></li>
+</ul>
+<p>If SASL is available on the server, you can use it for authentication (you will
+be identified before you join channels):</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">/set</span> <span class="pre">irc.server.freenode.sasl_username</span> <span class="pre">&quot;mynick&quot;</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">/set</span> <span class="pre">irc.server.freenode.sasl_password</span> <span class="pre">&quot;xxxxxxx&quot;</span></code></li>
+</ul>
+<p>This password will get stored as plaintext in <code class="docutils literal notranslate"><span class="pre">${HOME}/.weechat/irc.conf</span></code></p>
+<p>To run a command after connection to server, for example to authenticate with
+nickserv (only if you don’t use SASL for authentication):</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">/set</span> <span class="pre">irc.server.freenode.command</span> <span class="pre">&quot;/msg</span> <span class="pre">nickserv</span> <span class="pre">identify</span> <span class="pre">xxxxxxx&quot;</span></code></li>
+</ul>
+<p>If you want to protect your password in configuration files, you can use
+secured data.</p>
+<p>First setup a passphrase:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">/secure</span> <span class="pre">passphrase</span> <span class="pre">this</span> <span class="pre">is</span> <span class="pre">my</span> <span class="pre">secret</span> <span class="pre">passphrase</span></code></li>
+</ul>
+<p>Then add a secured data with your freenode password:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">/secure</span> <span class="pre">set</span> <span class="pre">freenode_password</span> <span class="pre">xxxxxxx</span></code></li>
+</ul>
+<p>Then you can use ${sec.data.freenode_password} instead of your password in the
+IRC options mentioned above, for example:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">/set</span> <span class="pre">irc.server.freenode.sasl_password</span> <span class="pre">&quot;${sec.data.freenode_password}&quot;</span></code></li>
+</ul>
+<p>This can be manually put into <code class="docutils literal notranslate"><span class="pre">${HOME}/.weechat/irc.conf</span></code> for
+<code class="docutils literal notranslate"><span class="pre">freenode.sasl_password</span></code>.</p>
+<p>Note also that weechat will pull your system username by default, and IRC
+servers might see this. One can change the <code class="docutils literal notranslate"><span class="pre">username</span></code> and <code class="docutils literal notranslate"><span class="pre">nicks</span></code> options
+under the <code class="docutils literal notranslate"><span class="pre">[server_default]</span></code> section of <code class="docutils literal notranslate"><span class="pre">${HOME}/.weechat/irc.conf</span></code>.</p>
+</div>
+<div class="section" id="registering-on-freenode">
+<h2>registering on freenode<a class="headerlink" href="#registering-on-freenode" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://freenode.net/kb/answer/registration" target="_blank">https://freenode.net/kb/answer/registration</a></p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">/nick</span> <span class="pre">YourNick</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">/msg</span> <span class="pre">NickServ</span> <span class="pre">REGISTER</span> <span class="pre">YourPassword</span> <span class="pre">youremail&#64;example.com</span></code> (enter the
+command from the email)</li>
+<li><code class="docutils literal notranslate"><span class="pre">/msg</span> <span class="pre">NickServ</span> <span class="pre">IDENTIFY</span> <span class="pre">YourNick</span> <span class="pre">YourPassword</span></code></li>
+</ul>
+</div>
+<div class="section" id="channels-navigation-chatting">
+<h2>channels, navigation, chatting<a class="headerlink" href="#channels-navigation-chatting" title="Permalink to this headline">¶</a></h2>
+<p>to autojoin channels</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">/set</span> <span class="pre">irc.server.freenode.autojoin</span> <span class="pre">&quot;#channel1,channel2&quot;</span></code></li>
+</ul>
+<p><a class="reference external" href="https://weechat.org/files/doc/devel/weechat_faq.en.html#filter_irc_join_part_quit" target="_blank">set filter for join/part/quit</a></p>
+</div>
+</div>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="signing_code.html" title="Previous document">signing code with git</a>
+        </li>
+        <li>
+          <a href="../sphinx/index.html" title="Next document">sphinx</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2019, M. Graham Lopez.
+      
+    </div>
+
+    
+
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-140879797-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    
+  </body>
+</html>

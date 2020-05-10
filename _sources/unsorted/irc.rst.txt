@@ -1,0 +1,88 @@
+
+********
+weechat
+********
+
+installing weechat in ubuntu
+
+https://weechat.org/download/debian/
+
+- ``sudo apt-key adv --keyserver hkps://keys.openpgp.org --recv-keys 11E9DE8848F2B65222AA75B8D1820DB22A11534E``
+- ``echo "deb https://weechat.org/ubuntu focal main" | sudo tee /etc/apt/sources.list.d/weechat.list``
+- ``sudo apt-get install weechat-curses weechat-plugins weechat-python weechat-perl``
+
+initial weechat setup
+-----------------------
+
+https://weechat.org/files/doc/devel/weechat_quickstart.en.html
+
+set up server alias and configuration
+
+- ``/server add freenode chat.freenode.net``
+- ``/set irc.server.freenode.nicks "mynick"``
+
+enable ssl
+
+- ``/set irc.server.freenode.addresses "chat.freenode.net/7000"``
+- ``/set irc.server.freenode.ssl on``
+
+enable auto-connect to the server at startup
+
+- ``/set irc.server.freenode.autoconnect on``
+
+If SASL is available on the server, you can use it for authentication (you will
+be identified before you join channels):
+
+- ``/set irc.server.freenode.sasl_username "mynick"``
+- ``/set irc.server.freenode.sasl_password "xxxxxxx"``
+
+This password will get stored as plaintext in ``${HOME}/.weechat/irc.conf``
+
+To run a command after connection to server, for example to authenticate with
+nickserv (only if you don’t use SASL for authentication):
+
+- ``/set irc.server.freenode.command "/msg nickserv identify xxxxxxx"``
+
+If you want to protect your password in configuration files, you can use
+secured data.
+
+First setup a passphrase:
+
+- ``/secure passphrase this is my secret passphrase``
+
+Then add a secured data with your freenode password:
+
+- ``/secure set freenode_password xxxxxxx``
+
+Then you can use ${sec.data.freenode_password} instead of your password in the
+IRC options mentioned above, for example:
+
+- ``/set irc.server.freenode.sasl_password "${sec.data.freenode_password}"``
+
+This can be manually put into ``${HOME}/.weechat/irc.conf`` for
+``freenode.sasl_password``.
+
+
+Note also that weechat will pull your system username by default, and IRC
+servers might see this. One can change the ``username`` and ``nicks`` options
+under the ``[server_default]`` section of ``${HOME}/.weechat/irc.conf``.
+
+registering on freenode
+------------------------
+
+https://freenode.net/kb/answer/registration
+
+- ``/nick YourNick``
+- ``/msg NickServ REGISTER YourPassword youremail@example.com`` (enter the
+  command from the email)
+- ``/msg NickServ IDENTIFY YourNick YourPassword``
+
+channels, navigation, chatting
+-------------------------------
+
+to autojoin channels
+
+- ``/set irc.server.freenode.autojoin "#channel1,channel2"``
+
+`set filter for join/part/quit <https://weechat.org/files/doc/devel/weechat_faq.en.html#filter_irc_join_part_quit>`_
+

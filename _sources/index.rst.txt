@@ -70,8 +70,8 @@ a work-in-progress as I continue to learn.
    Yes, this site is made with `Sphinx <https://www.sphinx-doc.org>`_, so it isn't
    the most visually creative. I'm not a webdev, nor am I familiar with the common
    technologies, so when I set out to make it look nice, it ended up preventing me
-   from getting the content up. But a lot of this content is documentation-like
-   anyway, so I'm going with it for now until I can figure something nicer out.
+   from getting the content up. But a lot of this material is documentation-like
+   anyway, so I'm going with it for now until I can figure out something nicer.
 
 Read on and :ref:`contact` if you have comments, questions, or suggestions.
 

@@ -115,38 +115,46 @@
 <h1>Gentoo<a class="headerlink" href="#gentoo" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#installation-quicknotes" id="id2">Installation Quicknotes</a><ul>
-<li><a class="reference internal" href="#get-to-the-chroot" id="id3">Get to the chroot</a></li>
-<li><a class="reference internal" href="#configure-build-the-system" id="id4">Configure/build the system</a></li>
-<li><a class="reference internal" href="#configure-build-the-kernel" id="id5">configure/build the kernel</a></li>
-<li><a class="reference internal" href="#filesystem-information" id="id6">filesystem information</a></li>
-<li><a class="reference internal" href="#networking" id="id7">networking</a></li>
-<li><a class="reference internal" href="#install-utilities" id="id8">install utilities</a></li>
-<li><a class="reference internal" href="#bootloader" id="id9">bootloader</a></li>
-<li><a class="reference internal" href="#final-configuration" id="id10">final configuration</a></li>
+<li><a class="reference internal" href="#installation-quicknotes" id="id3">Installation Quicknotes</a><ul>
+<li><a class="reference internal" href="#get-to-the-chroot" id="id4">Get to the chroot</a></li>
+<li><a class="reference internal" href="#configure-build-the-system" id="id5">Configure/build the system</a></li>
+<li><a class="reference internal" href="#configure-build-the-kernel" id="id6">configure/build the kernel</a></li>
+<li><a class="reference internal" href="#filesystem-information" id="id7">filesystem information</a></li>
+<li><a class="reference internal" href="#networking" id="id8">networking</a></li>
+<li><a class="reference internal" href="#install-utilities" id="id9">install utilities</a></li>
+<li><a class="reference internal" href="#bootloader" id="id10">bootloader</a></li>
+<li><a class="reference internal" href="#final-configuration" id="id11">final configuration</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#more-installation-security" id="id11">More installation security</a></li>
-<li><a class="reference internal" href="#dual-booting-e-g-ubuntu" id="id12">Dual Booting (e.g. Ubuntu)</a><ul>
-<li><a class="reference internal" href="#ubuntu-20-04-after-gentoo" id="id13">Ubuntu 20.04 after Gentoo</a></li>
+<li><a class="reference internal" href="#more-installation-security" id="id12">More installation security</a></li>
+<li><a class="reference internal" href="#dual-booting-e-g-ubuntu" id="id13">Dual Booting (e.g. Ubuntu)</a><ul>
+<li><a class="reference internal" href="#ubuntu-20-04-after-gentoo" id="id14">Ubuntu 20.04 after Gentoo</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#encrypted-drive" id="id14">Encrypted drive</a></li>
-<li><a class="reference internal" href="#rescue-partitions-and-media" id="id15">Rescue partitions and media</a><ul>
-<li><a class="reference internal" href="#manual-backups" id="id16">manual backups</a></li>
+<li><a class="reference internal" href="#encrypted-drive" id="id15">Encrypted drive</a></li>
+<li><a class="reference internal" href="#rescue-partitions-and-media" id="id16">Rescue partitions and media</a><ul>
+<li><a class="reference internal" href="#manual-backups" id="id17">manual backups</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#uefi-boot-no-bootloader" id="id17">UEFI boot (no bootloader)</a></li>
-<li><a class="reference internal" href="#systemd-gnome-3-28" id="id18">Systemd / Gnome 3.28+</a></li>
-<li><a class="reference internal" href="#notes-on-using-portage" id="id19">Notes on Using Portage</a><ul>
-<li><a class="reference internal" href="#tips-and-tricks" id="id20">tips and tricks</a></li>
+<li><a class="reference internal" href="#uefi-boot-no-bootloader" id="id18">UEFI boot (no bootloader)</a></li>
+<li><a class="reference internal" href="#systemd-gnome-3-28" id="id19">Systemd / Gnome 3.28+</a></li>
+<li><a class="reference internal" href="#notes-on-using-portage" id="id20">Notes on Using Portage</a><ul>
+<li><a class="reference internal" href="#saving-space" id="id21">saving space</a></li>
+<li><a class="reference internal" href="#make-conf" id="id22">make.conf</a></li>
+<li><a class="reference internal" href="#use-flags" id="id23">USE flags</a></li>
+<li><a class="reference internal" href="#video-cards" id="id24">VIDEO_CARDS</a></li>
+<li><a class="reference internal" href="#tips-and-tricks" id="id25">tips and tricks</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#unsorted" id="id21">Unsorted</a></li>
+<li><a class="reference internal" href="#unsorted" id="id26">Unsorted</a><ul>
+<li><a class="reference internal" href="#tmux-split-characters" id="id27">tmux split characters</a></li>
+<li><a class="reference internal" href="#lcd-brightness" id="id28">lcd brightness</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="section" id="installation-quicknotes">
-<h2><a class="toc-backref" href="#id2">Installation Quicknotes</a><a class="headerlink" href="#installation-quicknotes" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id3">Installation Quicknotes</a><a class="headerlink" href="#installation-quicknotes" title="Permalink to this headline">¶</a></h2>
 <p>Installation resources</p>
 <ul class="simple">
 <li><a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64" target="_blank">gentoo AMD64 handbook (sectioned)</a></li>
@@ -156,7 +164,7 @@
 <li><a class="reference external" href="https://wiki.gentoo.org/wiki/Sakaki%27s_EFI_Install_Guide" target="_blank">Sakaki’s EFI Install Guide</a></li>
 </ul>
 <div class="section" id="get-to-the-chroot">
-<h3><a class="toc-backref" href="#id3">Get to the chroot</a><a class="headerlink" href="#get-to-the-chroot" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id4">Get to the chroot</a><a class="headerlink" href="#get-to-the-chroot" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Networking" target="_blank">Enable networking</a>:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">ifconfig</span> <span class="pre">-a</span></code></li>
@@ -294,7 +302,7 @@ It is okay if it is still in UTC - we’ll fix the timezone later.</p>
 </ul>
 </div>
 <div class="section" id="configure-build-the-system">
-<h3><a class="toc-backref" href="#id4">Configure/build the system</a><a class="headerlink" href="#configure-build-the-system" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id5">Configure/build the system</a><a class="headerlink" href="#configure-build-the-system" title="Permalink to this headline">¶</a></h3>
 <p>configure the build options:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">-p</span> <span class="pre">/etc/portage/repos.conf</span></code></li>
@@ -368,7 +376,7 @@ are all maintained by Gentoo’s Portage developers.”</p>
 </ul>
 </div>
 <div class="section" id="configure-build-the-kernel">
-<h3><a class="toc-backref" href="#id5">configure/build the kernel</a><a class="headerlink" href="#configure-build-the-kernel" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id6">configure/build the kernel</a><a class="headerlink" href="#configure-build-the-kernel" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">emerge</span> <span class="pre">--ask</span> <span class="pre">sys-kernel/gentoo-sources</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">/usr/src/linux</span></code></li>
@@ -378,13 +386,13 @@ are all maintained by Gentoo’s Portage developers.”</p>
 </ul>
 </div>
 <div class="section" id="filesystem-information">
-<h3><a class="toc-backref" href="#id6">filesystem information</a><a class="headerlink" href="#filesystem-information" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id7">filesystem information</a><a class="headerlink" href="#filesystem-information" title="Permalink to this headline">¶</a></h3>
 <p>Edit <code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code> with either device names or UUIDs as given by the <code class="docutils literal notranslate"><span class="pre">blkid</span></code>
 command. Note that the <code class="docutils literal notranslate"><span class="pre">/boot</span></code> partition doesn’t necessarily have to be
 present/mounted.</p>
 </div>
 <div class="section" id="networking">
-<h3><a class="toc-backref" href="#id7">networking</a><a class="headerlink" href="#networking" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id8">networking</a><a class="headerlink" href="#networking" title="Permalink to this headline">¶</a></h3>
 <p>Edit <code class="docutils literal notranslate"><span class="pre">/etc/conf.d/hostname</span></code> to set the hostname.</p>
 <ul>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">emerge</span> <span class="pre">-a</span> <span class="pre">--noreplace</span> <span class="pre">net-misc/netifrc</span></code></p>
@@ -454,7 +462,7 @@ present/mounted.</p>
 </ul>
 </div>
 <div class="section" id="install-utilities">
-<h3><a class="toc-backref" href="#id8">install utilities</a><a class="headerlink" href="#install-utilities" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id9">install utilities</a><a class="headerlink" href="#install-utilities" title="Permalink to this headline">¶</a></h3>
 <p>miscellaneous configuration</p>
 <ul class="simple">
 <li>set the root password</li>
@@ -469,7 +477,7 @@ present/mounted.</p>
 </ul>
 </div>
 <div class="section" id="bootloader">
-<h3><a class="toc-backref" href="#id9">bootloader</a><a class="headerlink" href="#bootloader" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id10">bootloader</a><a class="headerlink" href="#bootloader" title="Permalink to this headline">¶</a></h3>
 <p>the <a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation#Default:_GRUB2" target="_blank">default grub</a>
 from the handbook</p>
 <ul class="simple">
@@ -482,7 +490,7 @@ emerging. If not, then enable with <code class="docutils literal notranslate"><s
 </ul>
 </div>
 <div class="section" id="final-configuration">
-<h3><a class="toc-backref" href="#id10">final configuration</a><a class="headerlink" href="#final-configuration" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id11">final configuration</a><a class="headerlink" href="#final-configuration" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation#Adding_a_user_for_daily_use" target="_blank">add a user</a></p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">useradd</span> <span class="pre">-m</span> <span class="pre">-G</span> <span class="pre">users,wheel,audio,video</span> <span class="pre">-s</span> <span class="pre">/bin/zsh</span> <span class="pre">larry</span></code></li>
@@ -517,7 +525,7 @@ emerging. If not, then enable with <code class="docutils literal notranslate"><s
 </div>
 </div>
 <div class="section" id="more-installation-security">
-<h2><a class="toc-backref" href="#id11">More installation security</a><a class="headerlink" href="#more-installation-security" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id12">More installation security</a><a class="headerlink" href="#more-installation-security" title="Permalink to this headline">¶</a></h2>
 <p>It is good to verify all of the downloads (stage3 snapshot, portage tree
 snapshot, and each package source download) to make sure that they haven’t been
 tampered with (as far as the signing author is concerned).</p>
@@ -529,13 +537,13 @@ tampered with (as far as the signing author is concerned).</p>
 </ul>
 </div>
 <div class="section" id="dual-booting-e-g-ubuntu">
-<h2><a class="toc-backref" href="#id12">Dual Booting (e.g. Ubuntu)</a><a class="headerlink" href="#dual-booting-e-g-ubuntu" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id13">Dual Booting (e.g. Ubuntu)</a><a class="headerlink" href="#dual-booting-e-g-ubuntu" title="Permalink to this headline">¶</a></h2>
 <p>(coming soon)</p>
 <p>for starters, see the tip box in the <a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation#Configure" target="_blank">grub configure</a>
 section. (grub-mkconfig)</p>
 <p>consider <code class="docutils literal notranslate"><span class="pre">sys-boot/os-prober</span></code> for Detect other operating systems</p>
 <div class="section" id="ubuntu-20-04-after-gentoo">
-<h3><a class="toc-backref" href="#id13">Ubuntu 20.04 after Gentoo</a><a class="headerlink" href="#ubuntu-20-04-after-gentoo" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id14">Ubuntu 20.04 after Gentoo</a><a class="headerlink" href="#ubuntu-20-04-after-gentoo" title="Permalink to this headline">¶</a></h3>
 <p>This was an odd experiment. I had super vanilla (no lvm, normal grub, etc)
 gentoo installed on <code class="docutils literal notranslate"><span class="pre">/dev/sda3</span></code>, with its <code class="docutils literal notranslate"><span class="pre">/boot</span></code> and ESP on <code class="docutils literal notranslate"><span class="pre">/dev/sda1</span></code>.
 I then <code class="docutils literal notranslate"><span class="pre">dd</span> <span class="pre">if=/dev/sda3</span> <span class="pre">of=/dev/sda4</span></code>, and copied the <code class="docutils literal notranslate"><span class="pre">/boot</span></code> from
@@ -591,17 +599,17 @@ partition for each OS (especially if it is encrypted).</li>
 </div>
 </div>
 <div class="section" id="encrypted-drive">
-<h2><a class="toc-backref" href="#id14">Encrypted drive</a><a class="headerlink" href="#encrypted-drive" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id15">Encrypted drive</a><a class="headerlink" href="#encrypted-drive" title="Permalink to this headline">¶</a></h2>
 <p>This is done with <code class="docutils literal notranslate"><span class="pre">dm-crypt</span></code> and LUKS. Setting up the drives is
 straightforward. But then an initramfs is also needed so that the kernel can
 decrypt the root drive when booting.</p>
 <p>(coming soon)</p>
 </div>
 <div class="section" id="rescue-partitions-and-media">
-<h2><a class="toc-backref" href="#id15">Rescue partitions and media</a><a class="headerlink" href="#rescue-partitions-and-media" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id16">Rescue partitions and media</a><a class="headerlink" href="#rescue-partitions-and-media" title="Permalink to this headline">¶</a></h2>
 <p>consider <code class="docutils literal notranslate"><span class="pre">dev-libs/libisoburn</span></code> for Create rescue media (grub-mkrescue)</p>
 <div class="section" id="manual-backups">
-<h3><a class="toc-backref" href="#id16">manual backups</a><a class="headerlink" href="#manual-backups" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id17">manual backups</a><a class="headerlink" href="#manual-backups" title="Permalink to this headline">¶</a></h3>
 <p>One could use the following procedure:</p>
 <ol class="arabic">
 <li><p class="first">tar up the host sysem (from live media / not when it is booted)</p>
@@ -633,14 +641,14 @@ file on the two detected ESPs) in the bios setup and it booted just fine.</li>
 </div>
 </div>
 <div class="section" id="uefi-boot-no-bootloader">
-<h2><a class="toc-backref" href="#id17">UEFI boot (no bootloader)</a><a class="headerlink" href="#uefi-boot-no-bootloader" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id18">UEFI boot (no bootloader)</a><a class="headerlink" href="#uefi-boot-no-bootloader" title="Permalink to this headline">¶</a></h2>
 <p>In fact, even though either <code class="docutils literal notranslate"><span class="pre">grub</span></code> or <code class="docutils literal notranslate"><span class="pre">efibootmgr</span></code> are typically used to
 boot EFI systems, it can be done straight from the bios as described in Sakaki’s
 guide.</p>
 <p>(coming soon)</p>
 </div>
 <div class="section" id="systemd-gnome-3-28">
-<h2><a class="toc-backref" href="#id18">Systemd / Gnome 3.28+</a><a class="headerlink" href="#systemd-gnome-3-28" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id19">Systemd / Gnome 3.28+</a><a class="headerlink" href="#systemd-gnome-3-28" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><a class="reference external" href="https://wiki.archlinux.org/index.php/systemd" target="_blank">arch’s wiki page</a> is quite
 good.</li>
@@ -649,10 +657,59 @@ good.</li>
 <p>(coming soon)</p>
 </div>
 <div class="section" id="notes-on-using-portage">
-<h2><a class="toc-backref" href="#id19">Notes on Using Portage</a><a class="headerlink" href="#notes-on-using-portage" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id20">Notes on Using Portage</a><a class="headerlink" href="#notes-on-using-portage" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://wiki.gentoo.org/wiki/Portage" target="_blank">https://wiki.gentoo.org/wiki/Portage</a></p>
+<p>useful tools:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">app-portage/gentoolkit</span></code> is useful
+(equery, <a class="reference external" href="https://wiki.gentoo.org/wiki/Gentoolkit#euse" target="_blank">euse</a>,
+revdep-rebuild, among others).</li>
+<li><code class="docutils literal notranslate"><span class="pre">dispatch-conf</span></code> (included)</li>
+<li><code class="docutils literal notranslate"><span class="pre">app-portage/esearch</span></code></li>
+</ul>
+<div class="section" id="saving-space">
+<h3><a class="toc-backref" href="#id21">saving space</a><a class="headerlink" href="#saving-space" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">firmware</p>
+<blockquote>
+<div><p>edit <code class="docutils literal notranslate"><span class="pre">/etc/portage/savedconfig/sys-kernel/linux-firmware-*</span></code> and remove the
+blobs that aren’t needed. Leaving just <code class="docutils literal notranslate"><span class="pre">intel-*</span></code> and <code class="docutils literal notranslate"><span class="pre">iwlwifi-*</span></code> resulted in
+going from 521M to 144M.</p>
+</div></blockquote>
+</li>
+<li><p class="first">distfiles</p>
+<blockquote>
+<div><p>clear out <code class="docutils literal notranslate"><span class="pre">DISTDIR</span></code> where portage keeps the downloaded source tarballs. By
+default, this is at <code class="docutils literal notranslate"><span class="pre">/var/cache/distfiles</span></code>. There is also an <code class="docutils literal notranslate"><span class="pre">eclean</span></code>
+utility as part of gentoolkit, but I have no experience with it yet.</p>
+</div></blockquote>
+</li>
+</ul>
+<p>definitely more to come here</p>
+</div>
+<div class="section" id="make-conf">
+<h3><a class="toc-backref" href="#id22">make.conf</a><a class="headerlink" href="#make-conf" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://wiki.gentoo.org/wiki//etc/portage/make.conf" target="_blank">https://wiki.gentoo.org/wiki//etc/portage/make.conf</a></p>
+</div>
+<div class="section" id="use-flags">
+<h3><a class="toc-backref" href="#id23">USE flags</a><a class="headerlink" href="#use-flags" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://www.gentoo.org/support/use-flags/" target="_blank">the complete USE flag index (global and local)</a></p>
+<p>and some <a class="reference external" href="https://wiki.gentoo.org/wiki/USE_flag" target="_blank">hints and utilities</a> about
+working with USE flags.</p>
+<p><a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Working/USE#Satisfying_REQUIRED_USE_conditions" target="_blank">Here is an explanation</a>
+of some <code class="docutils literal notranslate"><span class="pre">REQUIRED_USE</span></code> expressions.</p>
+</div>
+<div class="section" id="video-cards">
+<h3><a class="toc-backref" href="#id24">VIDEO_CARDS</a><a class="headerlink" href="#video-cards" title="Permalink to this headline">¶</a></h3>
+<p>see <a class="reference external" href="https://en.wikipedia.org/wiki/Direct_Rendering_Manager#Hardware_support" target="_blank">this DRM driver list</a> for
+which cards are supported by each driver.</p>
+<p>and <a class="reference external" href="https://wiki.gentoo.org/wiki/Intel#Feature_support" target="_blank">this feature list</a>
+for which driver to use with which intel chipset generation. There is also a lot
+of useful information on that same page about configuring kernel options,
+drivers and USE flags for X, etc.</p>
+</div>
 <div class="section" id="tips-and-tricks">
-<h3><a class="toc-backref" href="#id20">tips and tricks</a><a class="headerlink" href="#tips-and-tricks" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id25">tips and tricks</a><a class="headerlink" href="#tips-and-tricks" title="Permalink to this headline">¶</a></h3>
 <p>If you want to enable Portage completions and Gentoo prompt,
 <code class="docutils literal notranslate"><span class="pre">emerge</span> <span class="pre">app-shells/gentoo-zsh-completions</span></code> and add:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">autoload</span> <span class="o">-</span><span class="n">U</span> <span class="n">compinit</span> <span class="n">promptinit</span>
@@ -667,9 +724,29 @@ to your <code class="docutils literal notranslate"><span class="pre">~/.zshrc</s
 </div>
 </div>
 <div class="section" id="unsorted">
-<h2><a class="toc-backref" href="#id21">Unsorted</a><a class="headerlink" href="#unsorted" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id26">Unsorted</a><a class="headerlink" href="#unsorted" title="Permalink to this headline">¶</a></h2>
 <p>if <code class="docutils literal notranslate"><span class="pre">/bin/ping</span></code> gives an “Operation not permitted” when run by an unpriviledged
 user (but works as root), then <code class="docutils literal notranslate"><span class="pre">setcap</span> <span class="pre">cap_net_raw=ep</span> <span class="pre">/bin/ping</span></code>.</p>
+<div class="section" id="tmux-split-characters">
+<h3><a class="toc-backref" href="#id27">tmux split characters</a><a class="headerlink" href="#tmux-split-characters" title="Permalink to this headline">¶</a></h3>
+<p>If tmux shows ‘x’/’q’ for vertical/horizontal bars when splitting panes, then
+<a class="reference external" href="https://stackoverflow.com/questions/8483798/tmux-borders-displayed-as-x-q-instead-of-lines" target="_blank">there is a mismatch</a>
+between the terminal and terminfo being used by tmux.</p>
+<p>The core cause of this is utf8 being set incorrectly. One thing to test is to
+force tmux to draw unicode characters by starting with <code class="docutils literal notranslate"><span class="pre">tmux</span> <span class="pre">-u</span></code>.</p>
+<p>The real way to set this is to set to a utf8 locale. <code class="docutils literal notranslate"><span class="pre">eselect</span> <span class="pre">locale</span> <span class="pre">list/set</span></code>
+and a new login shell should be sufficient. The gentoo wiki articles are
+thorough, see <a class="reference external" href="https://wiki.gentoo.org/wiki/UTF-8" target="_blank">utf8 on gentoo wiki</a> and
+<a class="reference external" href="https://wiki.gentoo.org/wiki/Localization/Guide" target="_blank">localization/guide</a>.</p>
+</div>
+<div class="section" id="lcd-brightness">
+<h3><a class="toc-backref" href="#id28">lcd brightness</a><a class="headerlink" href="#lcd-brightness" title="Permalink to this headline">¶</a></h3>
+<p>At least in the console, we can do this manually. First, test if the kernel has
+the necessary support:</p>
+<blockquote>
+<div>grep BACKLIGHT /boot/config</div></blockquote>
+<p>and then trying writing values into <code class="docutils literal notranslate"><span class="pre">/sys/class/backlight/[something]/brightness</span></code>.</p>
+</div>
 </div>
 </div>
 

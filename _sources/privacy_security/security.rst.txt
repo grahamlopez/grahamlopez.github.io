@@ -1,0 +1,18 @@
+
+*************************
+More details on security
+*************************
+
+Under heavy construction!
+
+.. _passwords:
+
+Passwords
+===========
+
+A password manager helps here - I have used `KeePassXC <https://keepassxc.org/>`_
+which is a port of `KeePass <https://keepass.info/index.html>`_
+which keeps the data local. I have also used `Bitwarden
+<https://bitwarden.com>`_ which has great browser and mobile integration, is not
+expense, and is open source.
+

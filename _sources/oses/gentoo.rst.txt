@@ -453,6 +453,61 @@ Notes on Using Portage
 
 https://wiki.gentoo.org/wiki/Portage
 
+useful tools:
+
+- ``app-portage/gentoolkit`` is useful
+  (equery, `euse <https://wiki.gentoo.org/wiki/Gentoolkit#euse>`_,
+  revdep-rebuild, among others).
+- ``dispatch-conf`` (included)
+- ``app-portage/esearch``
+
+saving space
+-------------
+
+- firmware
+
+    edit ``/etc/portage/savedconfig/sys-kernel/linux-firmware-*`` and remove the
+    blobs that aren't needed. Leaving just ``intel-*`` and ``iwlwifi-*`` resulted in
+    going from 521M to 144M.
+
+- distfiles
+
+    clear out ``DISTDIR`` where portage keeps the downloaded source tarballs. By
+    default, this is at ``/var/cache/distfiles``. There is also an ``eclean``
+    utility as part of gentoolkit, but I have no experience with it yet.
+
+definitely more to come here
+
+make.conf
+-----------
+
+https://wiki.gentoo.org/wiki//etc/portage/make.conf
+
+
+USE flags
+----------
+
+`the complete USE flag index (global and local) <https://www.gentoo.org/support/use-flags/>`_
+
+and some `hints and utilities <https://wiki.gentoo.org/wiki/USE_flag>`_ about
+working with USE flags.
+
+`Here is an explanation
+<https://wiki.gentoo.org/wiki/Handbook:AMD64/Working/USE#Satisfying_REQUIRED_USE_conditions>`_
+of some ``REQUIRED_USE`` expressions.
+
+VIDEO_CARDS
+------------
+
+see `this DRM driver list <https://en.wikipedia.org/wiki/Direct_Rendering_Manager#Hardware_support>`_ for
+which cards are supported by each driver.
+
+and `this feature list <https://wiki.gentoo.org/wiki/Intel#Feature_support>`_
+for which driver to use with which intel chipset generation. There is also a lot
+of useful information on that same page about configuring kernel options,
+drivers and USE flags for X, etc.
+
+
 tips and tricks
 ----------------
 
@@ -474,3 +529,32 @@ Unsorted
 
 if ``/bin/ping`` gives an "Operation not permitted" when run by an unpriviledged
 user (but works as root), then ``setcap cap_net_raw=ep /bin/ping``.
+
+
+tmux split characters
+-----------------------
+
+If tmux shows 'x'/'q' for vertical/horizontal bars when splitting panes, then
+`there is a mismatch
+<https://stackoverflow.com/questions/8483798/tmux-borders-displayed-as-x-q-instead-of-lines>`_
+between the terminal and terminfo being used by tmux.
+
+The core cause of this is utf8 being set incorrectly. One thing to test is to
+force tmux to draw unicode characters by starting with ``tmux -u``.
+
+The real way to set this is to set to a utf8 locale. ``eselect locale list/set``
+and a new login shell should be sufficient. The gentoo wiki articles are
+thorough, see `utf8 on gentoo wiki <https://wiki.gentoo.org/wiki/UTF-8>`_ and
+`localization/guide <https://wiki.gentoo.org/wiki/Localization/Guide>`_.
+
+lcd brightness
+---------------
+
+At least in the console, we can do this manually. First, test if the kernel has
+the necessary support:
+
+    grep BACKLIGHT /boot/config
+
+and then trying writing values into ``/sys/class/backlight/[something]/brightness``.
+
+

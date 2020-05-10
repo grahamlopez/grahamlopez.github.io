@@ -11,3 +11,4 @@ them sorted soon. Because everyone likes a better home.
 
    bare_repo_dotfiles
    signing_code
+   irc

@@ -1,0 +1,314 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Right Work &#8212; graham lopez  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Containers in HPC" href="container-rant.html" />
+    <link rel="prev" title="blog(ish)" href="index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">graham lopez</a></h1>
+
+
+
+<p class="blurb">Notes by/for, and a little bit about M. Graham Lopez</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../contact.html">Contact me</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cv.html">Curriculum Vitae</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/index.html">git hints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../privacy_security/index.html">Privacy / Security</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">blog(ish)</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Right Work</a></li>
+<li class="toctree-l2"><a class="reference internal" href="container-rant.html">Containers in HPC</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contained/index.html">Containers / VPS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli_tools/index.html">CLI Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oses/index.html">Operating Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unsorted/index.html">unsorted</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/index.html">sphinx</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">blog(ish)</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">blog(ish)</a></li>
+      <li>Next: <a href="container-rant.html" title="next chapter">Containers in HPC</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="index.html" title="Previous document">blog(ish)</a>
+        </li>
+        <li>
+          <a href="container-rant.html" title="Next document">Containers in HPC</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="right-work">
+<h1>Right Work<a class="headerlink" href="#right-work" title="Permalink to this headline">¶</a></h1>
+<p>(Spring, 2019)</p>
+<p>Several months ago, I ran across a post somewhere on the internet (I can’t
+remember where - maybe HackerNews?), that I really just want to re-broadcast
+here. I’m going to put this in the context of some of my own work and add some
+personal comments, but I’m not really trying to add any insight; the content
+stands on its own.</p>
+<p>This short exposition was originally posted by Andrei Alexandrescu on the <a class="reference external" href="https://forum.dlang.org/post/q7u6g1$94p$1&#64;digitalmars.com" target="_blank">dlang
+forums</a> while
+discussing some recent pull request activity and how to prioritize work and
+maintainers’ time.</p>
+<p>Besides putting some needed perspective on the kinds of work that happen around
+software, I wanted to highlight these concepts to partially explain why I choose
+to do some of the work that I do. I used to get discouraged about those days
+where productivity seems to lag, but I slowly discovered that there was always
+worthwhile tasks to be done that required less ingenuity but were also
+unglamorous. After a while, I also started to notice that when enough of these
+get added up together, it can make the difference between a project that is
+pleasant to work in and one that always seems to be hitting some kind of kink or
+speed bump.</p>
+<p>People who know me may have heard me refer to “laying bricks” or “being a
+bricklayer” in software projects. I am referring to things that should obviously
+get done, but are not the creative architecting types of tasks. Nor are these
+efforts typically seen as headline (i.e. resume/CV) worthy. Perhaps most tricky,
+bricklaying is hardly ever on the project’s critical path, so short-sighted
+project members and managers may have a difficult time with it.</p>
+<p>I find that there is rarely a shortage of people wanting to work on greenfield
+development tasks or optimizing marquee features, but usually no one is jumping
+to improve testing or clear out compiler warnings. I enjoy filling these gaps
+because I see them as force multiplyers; removing small but universal
+hinderances to better quality software benefits everyone contributing to the
+project, whether or not they even care about these things.</p>
+<div class="section" id="the-original-text">
+<h2>The original text<a class="headerlink" href="#the-original-text" title="Permalink to this headline">¶</a></h2>
+<p>At some point in the past, I had trouble finding the original text of the dlang
+forum post, and one of those times I went to an internet cache and copy-pasted
+the text for myself. If you are having trouble finding it at the original
+source, here it is as I copied it sometime in the spring of 2019. There is some
+minimal context included, but don’t get too hung up on the previous discussion
+that is being referenced.</p>
+<p>Here is Andrei Alexandrescu’s post, originally at
+<a class="reference external" href="https://forum.dlang.org/post/q7u6g1$94p$1&#64;digitalmars.com" target="_blank">https://forum.dlang.org/post/q7u6g1$94p$1&#64;digitalmars.com</a></p>
+<hr class="docutils" />
+<p>Those were unnecessarily strong words.</p>
+<p>Allow me to give a bit more context whilst clarifying I am not defending or
+condoning that attitude.</p>
+<p>That comment came after a few phone conversations whereby Walter mentioned he
+has a deluge of pull requests to review. He said if he’s to spend due time on
+all of those, he’d be unable to do any work of his own. Those pull requests
+that have these things in common (note that some may not apply to the pragma
+pull request, I’d just wrongly put it in the same bin):</p>
+<ul class="simple">
+<li>they are large</li>
+<li>the improvement they bring needs arguing</li>
+<li>their quality could be improved so they need careful review and a couple of
+passes of changes</li>
+</ul>
+<p>This is what I call Good Work.</p>
+<p>Good Work is often sizable in quantity, and is visibly the result of concerted
+effort by a competent person. Those unfamiliar with a codebase and with the
+subtleties of the task at hand cannot produce Good Work.</p>
+<p>(Contrast that with Bad Work: by definition, it is easy to inspect and reject.
+It does not create a major slowdown in a project.)</p>
+<p>Good Work is more often than not complex. Complexity is misrecognized as
+evidence of the complexity of the problem; the task was hard, the reasoning
+goes, because the solution is difficult in proportion.</p>
+<p>Good Work begets more Good Work. Typically Good Work produces context,
+opportunity, and precedent for more of the same. The same reviewer who rubber
+stamped a piece of Good Work will have an idea how to produce more Good Work
+derived from it. The kind of environment where Good Work is revered encourages
+its creation, in a cycle that creates the illusion of progress. Because Good
+Work is complex, it produces “bug ripples” whereby increasingly complex Good
+Work fixes one bug but is liable to introduce others.</p>
+<p>Good Work is difficult to argue against. The main argument in favor, which is
+very difficult to counter, is that Good Work is better than Bad Work and better
+than No Work. It is easy to create an opinion trend in favor of this or that
+Good Work.</p>
+<p>However, there are problems with Good Work. The first one is scale: an
+accumulation of Good Work does not add up to Great Work. More often, the
+increasing entropy leads to the thermal death of the project.</p>
+<p>An accumulation of Good Work is what leads to six nested calls in an advanced
+library to convert a string to an integer. Even if they are inlined away in
+execution, their smell persists.</p>
+<p>An accumulation of Good Work is what leads to a multitude of “is this kinda
+sorta almost like-a string hey I really mean it this time quite like a string”
+tests, or “we must to add &#64;trusted every five lines of code”.</p>
+<p>The other problem of Good Work is that it takes the air out of the room,
+causing Great Work to suffocate. Good Work takes great effort to author,
+debate, review, debug, and maintain. All that takes away time and mental share
+that should go into Great Work instead.</p>
+<p>Which brings us to Great Work.</p>
+<p>Great Work solves difficult problems with a paucity of means; it is
+quintessentially and surprisingly /not/ proportional response. Because of that,
+it is often deceptively simple, but always in a way that is impossible to
+anticipate yet obvious in afterthought. Scala’s implicits and D’s static if are
+great work.</p>
+<p>Great Work often reformulates an entire challenge to reveal false choices or
+artificial constraints. Alexander the Great figured it doesn’t matter how to
+get rid of the Gordian knot, so he cut it. While philosophers were still
+puzzling over The Ship of Theseus, Richard Feynman pointed out that the very
+notion of identity is ill-defined because a philosopher wouldn’t even be able
+to tell which atoms belong to a chair, and which don’t. Replacing complex
+type-based metaprogramming with trivial compile-time evaluation is great work.</p>
+<p>Great Work is often recognizable to out-of-domain people, the person on the
+street. In contrast, Good Work has high-brow expertise as a prerequisite.
+Beethoven’s Fourth Symphony is a respectable repertoire piece for any
+Philharmonic, one that music aficionados would listen to with respect. I once
+saw a janitor, a little old lady with no previous exposure to classical music,
+crying when she heard Bach’s Air for the first time. Using the same programming
+language on the client and server, or at compile-time and run-time, or for
+computation and its constraints, is great work clear as rain. You don’t need to
+be an expert to appreciate that.</p>
+<p>Great Work is what we should all aspire to. Great Work is the cure for Good
+Work.</p>
+<p>This, however, brings up a question: it seems that Great Work is not really
+easy to do on a regular basis. What to do, therefore, on a “regular” day when
+inspiration doesn’t strike?</p>
+<p>This brings us to Right Work.</p>
+<p>Right Work is work that is undeniably, pound-on-the-table good, however
+unexciting or trivial.</p>
+<p>Right Work will be silently appreciated by one’s peers as the incontestably
+right thing to do. Paying your rent, debts, and other bills is Right Work.</p>
+<p>Right Work is not necessarily simple. Becoming a better spouse or teaching your
+kids that lying is not a good policy - that’s also Right Work.</p>
+<p>In a software project, reducing the number of global variables is Right Work.</p>
+<p>Making public data private is Right Work. (Careful, perversions are always
+possible. This is not Right work:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">public</span> <span class="nb">int</span> <span class="n">percent</span><span class="p">;</span>
+
+<span class="o">==&gt;</span>
+
+<span class="n">private</span> <span class="nb">int</span> <span class="n">_percent</span><span class="p">;</span>
+<span class="nb">int</span> <span class="n">percent</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_percent</span><span class="p">;</span> <span class="p">}</span>
+<span class="n">void</span> <span class="n">percent</span><span class="p">(</span><span class="nb">int</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span> <span class="n">_percent</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>The obscure word “phronesis” - thanks Laeeth - should be a buzzword in software
+engineering circles.)</p>
+<p>Reducing state and mutation is Right Work. That means adding the “immutable”
+qualifier to variables and the “pure” attribute to functions.</p>
+<p>Making unsafe code safe is Right Work. That means inserting “&#64;safe” wherever
+possible, and identifying the smallest “&#64;trusted” primitives.</p>
+<p>Replacing legacy pointer-and-length ad-hoc pairs with slices is Right Work. So
+is replacing a complicated unstructured loop with a structured foreach loop.</p>
+<p>Most refactorings that meaningfully reduce the number of lines of code are
+Right Work. Of course, that could be perverted, too. I’m not talking more
+statements per line of code. I’m talking more /work/ per line of code.</p>
+<p>Much Right work paradoxically requires less virtuosity than complicated
+artifacts of Good Work.</p>
+<p>A successful software system is a construction of Great Work on a foundation of
+Right Work, with the inevitable Good Work here and there.</p>
+<p>That’s where we want to be.</p>
+</div>
+</div>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="index.html" title="Previous document">blog(ish)</a>
+        </li>
+        <li>
+          <a href="container-rant.html" title="Next document">Containers in HPC</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2019, M. Graham Lopez.
+      
+    </div>
+
+    
+
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-140879797-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    
+  </body>
+</html>

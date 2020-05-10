@@ -3,9 +3,6 @@
 Privacy / Security
 ####################
 
-.. toctree::
-   :maxdepth: 2
-
 Under construction.
 
 Notes about internet privacy and general security, online and on local
@@ -42,16 +39,48 @@ social media and not very present on it at all, but there is a lot of room for
 precaution in that space as well (that doesn't really apply to me for the
 aforementioned reason).
 
+(This is still a work-in-progress; there is more to come.)
+
 #. browse around https://www.privacytools.io/
 #. switch to Firefox or Safari (away from Chrome) or maybe even a better `privacy-focused browser <https://www.wired.com/story/privacy-browsers-duckduckgo-ghostery-brave>`_
 #. install `uBlock Origin <https://github.com/gorhill/uBlock>`_ (available from the normal `Firefox <https://addons.mozilla.org/addon/ublock-origin/>`_ and `Chrome <https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm>`_ extensions sources)
 #. switch your default search engine to `DuckDuckGo <https://duckduckgo.com/>`_
 #. use a reputable VPN like Nord or ExpressVPN
-#. use different passwords for all sites/accounts (a password manager helps here - I use `KeePassXC <https://keepassxc.org/>`_ which is a port of `KeePass <https://keepass.info/index.html>`_ because it keeps the data local.)
-#. enable 2-factor authentication everywhere it is supported
 #. use Tor (not just for you, but to help those who really need it as well)
-#. stop using Facebook `seriously <https://www.nbcnews.com/tech/social-media/timeline-facebook-s-privacy-issues-its-responses-n859651>`_, it's `really <https://www.nytimes.com/2018/04/11/technology/facebook-privacy-hearings.html>`_ `quite <https://www.theguardian.com/technology/2018/dec/14/facebook-privacy-problems-roundup>`_ `bad <https://en.wikipedia.org/wiki/Criticism_of_Facebook>`_
-#. dump gmail and google services
-#. use a security-focused OS like `qubes OS <https://www.qubes-os.org/>`_
+#. stop using Facebook `seriously <https://www.nbcnews.com/tech/social-media/timeline-facebook-s-privacy-issues-its-responses-n859651>`_, it `really <https://www.nytimes.com/2018/04/11/technology/facebook-privacy-hearings.html>`_ is `quite <https://www.theguardian.com/technology/2018/dec/14/facebook-privacy-problems-roundup>`_, well,  `bad <https://en.wikipedia.org/wiki/Criticism_of_Facebook>`_
+#. dump gmail and google services (see :ref:`de-google` for more details)
+#. use a security/privacy-focused OS like `qubes OS <https://www.qubes-os.org/>`_
 
-(This is still a work-in-progress; there is more to come.)
+.. toctree::
+   :maxdepth: 1
+
+   privacy
+
+Privacy and security considerations are related, but distinct. However, I tend
+to think about them together as a kind of "online hygeine." So here are some
+things that I am doing or thinking about to try to increase my and my family's
+safety online. Of course one can never arrive at the destination and say, "Now I
+am secure." It is a continual arms race, methods change, etc. Think of it more
+as maintaining a garden rather than painting a house.
+
+#. secure your cell phone account and sim card as much as possible
+#. use different passwords for all sites/accounts (see :ref:`passwords` for more details)
+#. enable 2-factor authentication everywhere it is supported
+#. prefer app-based (TOTP) 2-factor authentication over SMS/email
+
+There are a few other useful protections that don't directly have to do with
+internet/computer security, but are quite useful nonetheless. I would argue that
+these still fall under the category of "defense in depth" and guarding against
+social-engineering and other offline components of attacks on personal
+information.
+
+#. lock your credit bureau accounts
+#. don't talk to someone if they call you; call them back
+#. write down your 2fa secrets and/or backup codes
+#. create a personal theat model
+
+.. toctree::
+   :maxdepth: 1
+
+   security
+

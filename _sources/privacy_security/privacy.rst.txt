@@ -1,0 +1,33 @@
+
+*************************
+More details on privacy
+*************************
+
+Under heavy construction!
+
+.. _de-google:
+
+Dump Google
+============
+
+I try not to jump on the Google-hate bandwagon; it can be fashionable these
+days. However, there have been some reasons for concern in the latter half of
+its existence, compared to its first half.
+
+And this really applies to any free service, not just Google. The problem is,
+any service has to generate income. A good rule of thumb is, "If you aren't
+paying for the product, then you ARE the product." This typically means that in
+order for a free service provider to make money, they gather data about the
+users and generate revenue from that data by targeting ads, selling it to third
+parties, and various otherw ways.
+
+Simply put: Google reads (in an automated way) your Gmail email, they note your
+searches on google.com, youtube, and your phone, they keep track of where you
+have navigated to/from using Google Maps, etc. This is all so they can build a
+more accurate picture of who you are, generally so that advertisers can do a
+better job of predicting your (spending) behavior. This in isolation isn't too
+scary to me personally, but for previously mentioned reasons I don't like that
+this technology is in place, indepedently of how it may be used today.
+
+But de-googling is not easy. More to come here.
+
