@@ -67,6 +67,23 @@ Note also that weechat will pull your system username by default, and IRC
 servers might see this. One can change the ``username`` and ``nicks`` options
 under the ``[server_default]`` section of ``${HOME}/.weechat/irc.conf``.
 
+channels, navigation, chatting
+-------------------------------
+
+to autojoin channels
+
+- ``/set irc.server.freenode.autojoin "#channel1,channel2"``
+
+`set filter for join/part/quit <https://weechat.org/files/doc/devel/weechat_faq.en.html#filter_irc_join_part_quit>`_
+
+see ``/help list`` for how to search for channels on a given server
+
+
+
+************
+general IRC
+************
+
 registering on freenode
 ------------------------
 
@@ -77,12 +94,27 @@ https://freenode.net/kb/answer/registration
   command from the email)
 - ``/msg NickServ IDENTIFY YourNick YourPassword``
 
-channels, navigation, chatting
--------------------------------
+bouncers
+---------
 
-to autojoin channels
+- https://bnc4free.com
+- `IRC bouncer at DigitalOcean <https://www.digitalocean.com/community/tutorials/how-to-install-znc-an-irc-bouncer-on-an-ubuntu-vps>`_
 
-- ``/set irc.server.freenode.autojoin "#channel1,channel2"``
+irc and privacy/security
+--------------------------
 
-`set filter for join/part/quit <https://weechat.org/files/doc/devel/weechat_faq.en.html#filter_irc_join_part_quit>`_
+- https://www.irchelp.org/security/privacy.html
+
+coming soon
+
+connecting via Tor
+-------------------
+
+coming soon
+
+learning more
+--------------
+
+- https://www.irchelp.org
+- `freenode knowledgebase <https://freenode.net/kb/all>`_
 
