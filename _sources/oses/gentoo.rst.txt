@@ -429,6 +429,8 @@ One could use the following procedure:
    ``grub-install``, so I added it manually (it even let me browse to the efi
    file on the two detected ESPs) in the bios setup and it booted just fine.
 
+6. update the hostname in ``/etc/hosts`` and ``/etc/conf.d/hostname``
+
 UEFI boot (no bootloader)
 ==========================
 
@@ -476,7 +478,10 @@ saving space
     default, this is at ``/var/cache/distfiles``. There is also an ``eclean``
     utility as part of gentoolkit, but I have no experience with it yet.
 
-definitely more to come here
+- linux kernel sources
+
+    clear out the old sources in ``/usr/src/linux-*``. Watch out; portage will
+    try to do this for you automatically when it merges a new source tree.
 
 make.conf
 -----------
@@ -558,3 +563,8 @@ the necessary support:
 and then trying writing values into ``/sys/class/backlight/[something]/brightness``.
 
 
+Other Gentoo
+=============
+
+check out `gentoo prefix <https://wiki.gentoo.org/wiki/Project:Prefix>`_ to use
+gentoo in other OSes.

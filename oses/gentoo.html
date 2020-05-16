@@ -151,6 +151,7 @@
 <li><a class="reference internal" href="#lcd-brightness" id="id28">lcd brightness</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#other-gentoo" id="id29">Other Gentoo</a></li>
 </ul>
 </div>
 <div class="section" id="installation-quicknotes">
@@ -637,6 +638,7 @@ entries, but the <code class="docutils literal notranslate"><span class="pre">gr
 first). On the dell, the UEFI entry was not present even after the
 <code class="docutils literal notranslate"><span class="pre">grub-install</span></code>, so I added it manually (it even let me browse to the efi
 file on the two detected ESPs) in the bios setup and it booted just fine.</li>
+<li>update the hostname in <code class="docutils literal notranslate"><span class="pre">/etc/hosts</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/conf.d/hostname</span></code></li>
 </ol>
 </div>
 </div>
@@ -684,8 +686,13 @@ default, this is at <code class="docutils literal notranslate"><span class="pre"
 utility as part of gentoolkit, but I have no experience with it yet.</p>
 </div></blockquote>
 </li>
+<li><p class="first">linux kernel sources</p>
+<blockquote>
+<div><p>clear out the old sources in <code class="docutils literal notranslate"><span class="pre">/usr/src/linux-*</span></code>. Watch out; portage will
+try to do this for you automatically when it merges a new source tree.</p>
+</div></blockquote>
+</li>
 </ul>
-<p>definitely more to come here</p>
 </div>
 <div class="section" id="make-conf">
 <h3><a class="toc-backref" href="#id22">make.conf</a><a class="headerlink" href="#make-conf" title="Permalink to this headline">¶</a></h3>
@@ -747,6 +754,11 @@ the necessary support:</p>
 <div>grep BACKLIGHT /boot/config</div></blockquote>
 <p>and then trying writing values into <code class="docutils literal notranslate"><span class="pre">/sys/class/backlight/[something]/brightness</span></code>.</p>
 </div>
+</div>
+<div class="section" id="other-gentoo">
+<h2><a class="toc-backref" href="#id29">Other Gentoo</a><a class="headerlink" href="#other-gentoo" title="Permalink to this headline">¶</a></h2>
+<p>check out <a class="reference external" href="https://wiki.gentoo.org/wiki/Project:Prefix" target="_blank">gentoo prefix</a> to use
+gentoo in other OSes.</p>
 </div>
 </div>
 

@@ -223,6 +223,9 @@ I haven't tried this yet, but `this answer <https://unix.stackexchange.com/a/216
 LXC storage
 ============
 
+To check the size of a container, use ``lxc storage list`` to get their
+locations on disk.
+
 Coming soon.
 
 `mounting host /home read-write <https://tribaal.io/nicer-mounting-home-in-lxd.html>`_
