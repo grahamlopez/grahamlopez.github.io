@@ -28,8 +28,6 @@ Technology where I worked on application and numerical algorithm optimizations
 for accelerators. I earned an M.S. in Computer science and Ph.D.  in Physics
 from Wake forest University.
 
-Test change
-
 Site contents
 -----------------
 

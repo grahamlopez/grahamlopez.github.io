@@ -315,6 +315,19 @@ set the console resolution
 - enter the grub shell and use ``videoinfo`` to get the supported modes
 - set e.g. ``GRUB_GFXMODE=1366x768`` in ``/etc/default/grub`` and reboot
 
+Early configuration
+====================
+
+useful packages
+
+- gentoolkit portage-utils esearch bash-completion zsh-completions gentoo-bashcomp gentoo-zsh-completions mlocate
+
+if using zsh for root, put at least this into ``~/.zshrc``
+
+    autoload -U compinit promptinit
+    compinit
+    promptinit; prompt gentoo
+
 More installation security
 ===========================
 
@@ -462,6 +475,19 @@ useful tools:
   revdep-rebuild, among others).
 - ``dispatch-conf`` (included)
 - ``app-portage/esearch``
+- portage-utils
+- bash-completion
+- zsh-completions
+- gentoo-bashcomp
+- gentoo-zsh-completions
+- mlocate
+
+The world file at ``/var/lib/portage/world`` shows all packages installed by the
+user
+
+The default gentoo package tree lives at ``/var/db/repos/gentoo``. Besides all
+of the ebuilds, the profiles live here as well (including make.defaults,
+use.desc, use.local.desc, etc.).
 
 saving space
 -------------
@@ -491,6 +517,17 @@ https://wiki.gentoo.org/wiki//etc/portage/make.conf
 
 USE flags
 ----------
+
+sources of truth for the system:
+
+- descriptions of all global[/local] USE flags known to the system are at
+  ``/var/db/repos/gentoo/profiles/use[.local].desk``
+- ``emerge -pv packagename`` shows what USE flagss were/will be used to build
+  packagename
+
+utilities for working with USE flags (shortcuts)
+
+- FIXME: quse, euse, equery portageq
 
 `the complete USE flag index (global and local) <https://www.gentoo.org/support/use-flags/>`_
 
