@@ -21,6 +21,14 @@ to make the combined boot/esp paritions FAT32.
 
 .. error:: FIXME insert the table
 
+additional encrypted drives
+------------------------------
+
+sometimes you want to make a new partition and have in encrypted, and you want
+to also have it automounted at boot. I like the keyfile/crypttab idea from
+`this SE answer <https://unix.stackexchange.com/a/392286>`_ pretty well; it is
+general and not very complicated.
+
 Miscellaneous
 ==============
 
