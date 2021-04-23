@@ -1,0 +1,74 @@
+# one can use
+# $ docker run -v /path/to/inputs_dir:/rundir grahamican/qmcpack /rundir/input_file.xml
+
+FROM centos:latest
+
+# get the build prerequisites for qmcpack
+RUN yum update -y  \
+  && yum install -y \
+  gcc \
+  gcc-c++ \
+  svn \
+  make \
+  cmake \
+  lapack-devel \
+  libxml2-devel \
+  boost-devel \
+  fftw-devel \
+  openmpi-devel
+
+# install hdf5
+RUN curl -L https://support.hdfgroup.org/ftp/HDF5/current/bin/linux-centos7-x86_64-gcc485/hdf5-1.8.17-linux-centos7-x86_64-gcc485-shared.tar.gz -o hdf5.tar.gz \
+  && tar xzf hdf5.tar.gz \
+  && cd hdf5-* \
+  && cp lib/*hdf5* /usr/local/lib \
+  && cp include/* /usr/local/include \
+  && cd /root \
+  && rm -rf hdf5*
+
+# set up mpi environment for building
+ENV PATH=/usr/lib64/openmpi/bin:$PATH \
+  LD_LIBRARY_PATH=/usr/lib64/openmpilib:$LD_LIBRARY_PATH \
+  PYTHONPATH=/usr/lib64/python2.7/site-packages/openmpi:$PYTHONPATH \
+  MPI_BIN=/usr/lib64/openmpi/bin \
+  MPI_SYSCONFIG=/etc/openmpi-x86_64 \
+  MPI_INCLUDE=/usr/include/openmpi-x86_64 \
+  MPI_LIB=/usr/lib64/openmpi/lib \
+  MPI_PYTHON_SITEARCH=/usr/lib64/python2.7/site-packages/openmpi \
+  MPI_COMPILER=openmpi-x86_64 \
+  MPI_SUFFIX=_openmpi \
+  MPI_HOME=/usr/lib64/openmpi \
+  CXX=mpiCC
+
+# setup user and add confugs
+ARG user=qmcpack
+RUN useradd $user -s /usr/bin/zsh
+USER $user
+
+# to be able to su inside the container when necessary
+# remember to change using 'passwd'
+RUN echo "root:Changeme" | chpasswd
+
+WORKDIR /home/$user
+
+# build qmcpack
+RUN svn checkout https://svn.qmcpack.org/svn/trunk \
+  && cd trunk/build \
+  && cmake .. \
+  && make -j4 \
+# optional testing if there have been problems
+#  && ctest -V -R short \
+#  && ctest -L unit \
+# let's try to make the image a little smaller,
+# but leave useful things for interactive usage of the image as well
+  && mv bin /home/qmcpack \
+  && cd /home/qmcpack \
+  && rm -rf trunk/build \
+  && rm -rf trunk/labs \
+  && rm -rf trunk/old_docs
+
+# setup container execution
+WORKDIR /rundir
+ENTRYPOINT ["/home/qmcpack/bin/qmcpack"]
+# set some default arugments
+CMD ["--help"]
