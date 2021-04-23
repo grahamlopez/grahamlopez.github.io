@@ -48,10 +48,10 @@ order to examine the impact of negative space on protein allostery.
 Experience
 ==========
 
-| **2020--present** HPC Compilers Product Manager at NVIDIA - Hillsboro, OR
+| **2020--present** HPC Compilers Product Manager at NVIDIA - Knoxville, TN
 | *HPC compiler and developer productivity*
 
-- Set roadmaps for HPC compiler products
+- Set roadmaps for HPC compiler and developer kit products
 - Increase scientific productivity by developing programming model strategies
   with implementers and customers
 
@@ -309,7 +309,7 @@ Publications and Presentations
 Service and Committees
 =======================
 
-| **2017-2019**: ISO C++ Standards Committee - Voting Representative
+| **2017-2020**: ISO C++ Standards Committee - Voting Representative
 | **2016-2018**: International Workshop on Performance Portable Programming Models for Accelerators (P3MA, co-located with ISC) - Co-Organizer/Program Co-Chair
 | **2016-2018**: International Workshop on OpenPOWER for HPC (IWOPH, co-located with ISC) - Program Committee Co-Chair
 | **2017-2018**: Distributed and Heterogeneous Programming in C and C++ (DHPCC++, co-located with IWOCL - Committee Member
