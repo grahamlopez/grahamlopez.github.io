@@ -5,13 +5,6 @@
 Contact me
 ###########
 
-work phone: 865-574-3073
-
-email:
-
-.. image:: /_static/work-email.png
-
-
 Here are some various ways to get more info about me or get in touch:
 
 - `LinkedIn <https://linkedin.com/in/grahamlopez>`_

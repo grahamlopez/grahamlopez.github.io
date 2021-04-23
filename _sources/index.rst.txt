@@ -41,6 +41,9 @@ benefit and to encourage me to keep the quality of my notes a little bit higher.
 However, while some of these pages are fairly polished, a lot of it is very much
 a work-in-progress as I continue to learn.
 
+On the other hand, these pages are getting more and more outdated as I
+continually neglect them.
+
 .. container:: leftcol
 
    .. toctree::
