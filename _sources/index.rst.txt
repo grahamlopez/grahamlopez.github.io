@@ -13,8 +13,9 @@ Home
     :align: right
 
 I am a computing professional with a background in scientific and
-high-performance computing. Currently, I am a product manager for HPC
-compilers at NVIDIA.
+high-performance computing. Currently, I am the product manager for the `HPC SDK
+<https://developer.nvidia.com/hpc-sdk>`_ and `HPC compilers
+<https://developer.nvidia.com/hpc-compilers>`_ at NVIDIA.
 
 Recently, I was an HPC Engineer in the National Center for Computational
 Sciences at Oak Ridge National Laboratory where I worked with users and
