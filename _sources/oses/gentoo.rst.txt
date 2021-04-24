@@ -188,6 +188,7 @@ configure/build the kernel
 - ``make localyesconfig``
 - ``make && make modules_install``
 - ``make install``
+- ``cp /boot/vmlinux-<version>-gentoo /boot/EFI/Gentoo`` (if using EFI boot)
 
 If we're booting straight from EFI, make sure that the following are
 configured::
