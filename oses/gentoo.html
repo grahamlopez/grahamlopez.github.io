@@ -386,6 +386,53 @@ are all maintained by Gentoo’s Portage developers.”</p>
 <li><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">&amp;&amp;</span> <span class="pre">make</span> <span class="pre">modules_install</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install</span></code></li>
 </ul>
+<p>If we’re booting straight from EFI, make sure that the following are
+configured:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Processor</span> <span class="nb">type</span> <span class="ow">and</span> <span class="n">features</span>  <span class="o">---&gt;</span>
+  <span class="p">[</span><span class="o">*</span><span class="p">]</span> <span class="n">EFI</span> <span class="n">runtime</span> <span class="n">service</span> <span class="n">support</span>
+  <span class="p">[</span><span class="o">*</span><span class="p">]</span>   <span class="n">EFI</span> <span class="n">stub</span> <span class="n">support</span>
+  <span class="p">[</span> <span class="p">]</span>     <span class="n">EFI</span> <span class="n">mixed</span><span class="o">-</span><span class="n">mode</span> <span class="n">support</span>
+  <span class="o">...</span>
+  <span class="o">...</span>
+  <span class="p">[</span><span class="o">*</span><span class="p">]</span> <span class="n">Built</span><span class="o">-</span><span class="ow">in</span> <span class="n">kernel</span> <span class="n">command</span> <span class="n">line</span>
+  <span class="p">(</span><span class="n">root</span><span class="o">=/</span><span class="n">dev</span><span class="o">/</span><span class="n">sda2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And maybe using <code class="docutils literal notranslate"><span class="pre">root=PARTUUID=</span></code> is preferable. Then use <code class="docutils literal notranslate"><span class="pre">blkid</span></code> and do
+something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Processor</span> <span class="nb">type</span> <span class="ow">and</span> <span class="n">features</span>  <span class="o">---&gt;</span>
+  <span class="p">[</span><span class="o">*</span><span class="p">]</span> <span class="n">Built</span><span class="o">-</span><span class="ow">in</span> <span class="n">kernel</span> <span class="n">command</span> <span class="n">line</span>
+  <span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="n">PARTUUID</span><span class="o">=</span><span class="n">adf55784</span><span class="o">-</span><span class="mi">15</span><span class="n">d9</span><span class="o">-</span><span class="mi">4</span><span class="n">ca3</span><span class="o">-</span><span class="n">bb3f</span><span class="o">-</span><span class="mi">56</span><span class="n">de0b35d88d</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To ensure that wireless firmware can be loaded (firmware will be installed later
+on), make sure that the drivers are built as modules:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Device</span> <span class="n">Drivers</span>  <span class="o">---&gt;</span>
+
+        <span class="p">[</span><span class="o">*</span><span class="p">]</span> <span class="n">Network</span> <span class="n">device</span> <span class="n">support</span>  <span class="o">---&gt;</span>
+
+        <span class="o">---</span> <span class="n">Network</span> <span class="n">device</span> <span class="n">support</span>
+        <span class="p">[</span><span class="o">*</span><span class="p">]</span>   <span class="n">Wireless</span> <span class="n">LAN</span>  <span class="o">---&gt;</span>
+
+            <span class="o">---</span> <span class="n">Wireless</span> <span class="n">LAN</span>
+            <span class="p">[</span> <span class="p">]</span>   <span class="n">mac80211</span><span class="o">-</span><span class="n">based</span> <span class="n">legacy</span> <span class="n">WDS</span> <span class="n">support</span>
+            <span class="p">[</span> <span class="p">]</span>   <span class="n">ADMtek</span> <span class="n">devices</span>
+            <span class="p">[</span> <span class="p">]</span>   <span class="n">Atheros</span><span class="o">/</span><span class="n">Qualcomm</span> <span class="n">devices</span>
+            <span class="p">[</span> <span class="p">]</span>   <span class="n">Atmel</span> <span class="n">devices</span>
+            <span class="p">[</span> <span class="p">]</span>   <span class="n">Broadcom</span> <span class="n">devices</span>
+            <span class="p">[</span> <span class="p">]</span>   <span class="n">Cisco</span> <span class="n">devices</span>
+            <span class="p">[</span><span class="o">*</span><span class="p">]</span>   <span class="n">Intel</span> <span class="n">devices</span>
+            <span class="o">&lt;</span> <span class="o">&gt;</span>     <span class="n">Intel</span> <span class="n">PRO</span><span class="o">/</span><span class="n">Wireless</span> <span class="mi">2100</span> <span class="n">Network</span> <span class="n">Connection</span>
+            <span class="o">&lt;</span> <span class="o">&gt;</span>     <span class="n">Intel</span> <span class="n">PRO</span><span class="o">/</span><span class="n">Wireless</span> <span class="mi">2200</span><span class="n">BG</span> <span class="ow">and</span> <span class="mi">2915</span><span class="n">ABG</span> <span class="n">Network</span> <span class="n">Connection</span>
+            <span class="o">&lt;</span> <span class="o">&gt;</span>     <span class="n">Intel</span> <span class="n">Wireless</span> <span class="n">WiFi</span> <span class="mi">4965</span><span class="n">AGN</span> <span class="p">(</span><span class="n">iwl4965</span><span class="p">)</span>
+            <span class="o">&lt;</span> <span class="o">&gt;</span>     <span class="n">Intel</span> <span class="n">PRO</span><span class="o">/</span><span class="n">Wireless</span> <span class="mi">3945</span><span class="n">ABG</span><span class="o">/</span><span class="n">BG</span> <span class="n">Network</span> <span class="n">Connection</span> <span class="p">(</span><span class="n">iwl3945</span><span class="p">)</span>
+            <span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;</span>     <span class="n">Intel</span> <span class="n">Wireless</span> <span class="n">WiFi</span> <span class="n">Next</span> <span class="n">Gen</span> <span class="n">AGN</span> <span class="o">-</span> <span class="n">Wireless</span><span class="o">-</span><span class="n">N</span><span class="o">/</span><span class="n">Advanced</span><span class="o">-</span><span class="n">N</span><span class="o">/</span><span class="n">Ultimate</span><span class="o">-</span><span class="n">N</span> <span class="p">(</span><span class="n">iwlwifi</span><span class="p">)</span>
+            <span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;</span>       <span class="n">Intel</span> <span class="n">Wireless</span> <span class="n">WiFi</span> <span class="n">DVM</span> <span class="n">Firmware</span> <span class="n">support</span>
+            <span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;</span>       <span class="n">Intel</span> <span class="n">Wireless</span> <span class="n">WiFi</span> <span class="n">MVM</span> <span class="n">Firmware</span> <span class="n">support</span>
+                      <span class="n">Debugging</span> <span class="n">Options</span>  <span class="o">---&gt;</span>
+            <span class="p">[</span> <span class="p">]</span>   <span class="n">Intersil</span> <span class="n">devices</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="filesystem-information">
 <h3><a class="toc-backref" href="#id7">filesystem information</a><a class="headerlink" href="#filesystem-information" title="Permalink to this headline">¶</a></h3>
@@ -430,37 +477,9 @@ present/mounted.</p>
 </ul>
 <p>see here for information on <a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:X86/Networking/Wireless" target="_blank">wireless networking in gentoo</a>.</p>
 <p>probably also need <a class="reference external" href="https://wiki.gentoo.org/wiki/Iwlwifi" target="_blank">firmware for iwlwifi</a>.</p>
-<ul>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">emerge</span> <span class="pre">linux-firmware</span></code></p>
-</li>
-<li><p class="first">and make the kernel options modules:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Device</span> <span class="n">Drivers</span>  <span class="o">---&gt;</span>
-
-        <span class="p">[</span><span class="o">*</span><span class="p">]</span> <span class="n">Network</span> <span class="n">device</span> <span class="n">support</span>  <span class="o">---&gt;</span>
-
-        <span class="o">---</span> <span class="n">Network</span> <span class="n">device</span> <span class="n">support</span>
-        <span class="p">[</span><span class="o">*</span><span class="p">]</span>   <span class="n">Wireless</span> <span class="n">LAN</span>  <span class="o">---&gt;</span>
-
-            <span class="o">---</span> <span class="n">Wireless</span> <span class="n">LAN</span>
-            <span class="p">[</span> <span class="p">]</span>   <span class="n">mac80211</span><span class="o">-</span><span class="n">based</span> <span class="n">legacy</span> <span class="n">WDS</span> <span class="n">support</span>
-            <span class="p">[</span> <span class="p">]</span>   <span class="n">ADMtek</span> <span class="n">devices</span>
-            <span class="p">[</span> <span class="p">]</span>   <span class="n">Atheros</span><span class="o">/</span><span class="n">Qualcomm</span> <span class="n">devices</span>
-            <span class="p">[</span> <span class="p">]</span>   <span class="n">Atmel</span> <span class="n">devices</span>
-            <span class="p">[</span> <span class="p">]</span>   <span class="n">Broadcom</span> <span class="n">devices</span>
-            <span class="p">[</span> <span class="p">]</span>   <span class="n">Cisco</span> <span class="n">devices</span>
-            <span class="p">[</span><span class="o">*</span><span class="p">]</span>   <span class="n">Intel</span> <span class="n">devices</span>
-            <span class="o">&lt;</span> <span class="o">&gt;</span>     <span class="n">Intel</span> <span class="n">PRO</span><span class="o">/</span><span class="n">Wireless</span> <span class="mi">2100</span> <span class="n">Network</span> <span class="n">Connection</span>
-            <span class="o">&lt;</span> <span class="o">&gt;</span>     <span class="n">Intel</span> <span class="n">PRO</span><span class="o">/</span><span class="n">Wireless</span> <span class="mi">2200</span><span class="n">BG</span> <span class="ow">and</span> <span class="mi">2915</span><span class="n">ABG</span> <span class="n">Network</span> <span class="n">Connection</span>
-            <span class="o">&lt;</span> <span class="o">&gt;</span>     <span class="n">Intel</span> <span class="n">Wireless</span> <span class="n">WiFi</span> <span class="mi">4965</span><span class="n">AGN</span> <span class="p">(</span><span class="n">iwl4965</span><span class="p">)</span>
-            <span class="o">&lt;</span> <span class="o">&gt;</span>     <span class="n">Intel</span> <span class="n">PRO</span><span class="o">/</span><span class="n">Wireless</span> <span class="mi">3945</span><span class="n">ABG</span><span class="o">/</span><span class="n">BG</span> <span class="n">Network</span> <span class="n">Connection</span> <span class="p">(</span><span class="n">iwl3945</span><span class="p">)</span>
-            <span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;</span>     <span class="n">Intel</span> <span class="n">Wireless</span> <span class="n">WiFi</span> <span class="n">Next</span> <span class="n">Gen</span> <span class="n">AGN</span> <span class="o">-</span> <span class="n">Wireless</span><span class="o">-</span><span class="n">N</span><span class="o">/</span><span class="n">Advanced</span><span class="o">-</span><span class="n">N</span><span class="o">/</span><span class="n">Ultimate</span><span class="o">-</span><span class="n">N</span> <span class="p">(</span><span class="n">iwlwifi</span><span class="p">)</span>
-            <span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;</span>       <span class="n">Intel</span> <span class="n">Wireless</span> <span class="n">WiFi</span> <span class="n">DVM</span> <span class="n">Firmware</span> <span class="n">support</span>
-            <span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;</span>       <span class="n">Intel</span> <span class="n">Wireless</span> <span class="n">WiFi</span> <span class="n">MVM</span> <span class="n">Firmware</span> <span class="n">support</span>
-                      <span class="n">Debugging</span> <span class="n">Options</span>  <span class="o">---&gt;</span>
-            <span class="p">[</span> <span class="p">]</span>   <span class="n">Intersil</span> <span class="n">devices</span>
-</pre></div>
-</div>
-</li>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">emerge</span> <span class="pre">linux-firmware</span></code></li>
+<li>and make the kernel options modules (see the kernel config section above).</li>
 </ul>
 </div>
 <div class="section" id="install-utilities">

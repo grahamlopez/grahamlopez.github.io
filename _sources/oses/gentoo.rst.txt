@@ -189,6 +189,53 @@ configure/build the kernel
 - ``make && make modules_install``
 - ``make install``
 
+If we're booting straight from EFI, make sure that the following are
+configured::
+
+   Processor type and features  --->
+     [*] EFI runtime service support
+     [*]   EFI stub support
+     [ ]     EFI mixed-mode support
+     ...
+     ...
+     [*] Built-in kernel command line
+     (root=/dev/sda2)
+
+And maybe using ``root=PARTUUID=`` is preferable. Then use ``blkid`` and do
+something like::
+
+   Processor type and features  --->
+     [*] Built-in kernel command line
+     (root=PARTUUID=adf55784-15d9-4ca3-bb3f-56de0b35d88d)
+
+To ensure that wireless firmware can be loaded (firmware will be installed later
+on), make sure that the drivers are built as modules::
+
+	  Device Drivers  --->
+
+	          [*] Network device support  --->
+
+	          --- Network device support
+	          [*]   Wireless LAN  --->
+
+	              --- Wireless LAN
+	              [ ]   mac80211-based legacy WDS support
+	              [ ]   ADMtek devices
+	              [ ]   Atheros/Qualcomm devices
+	              [ ]   Atmel devices
+	              [ ]   Broadcom devices
+	              [ ]   Cisco devices
+	              [*]   Intel devices
+	              < >     Intel PRO/Wireless 2100 Network Connection
+	              < >     Intel PRO/Wireless 2200BG and 2915ABG Network Connection
+	              < >     Intel Wireless WiFi 4965AGN (iwl4965)
+	              < >     Intel PRO/Wireless 3945ABG/BG Network Connection (iwl3945)
+	              <M>     Intel Wireless WiFi Next Gen AGN - Wireless-N/Advanced-N/Ultimate-N (iwlwifi)
+	              <M>       Intel Wireless WiFi DVM Firmware support
+	              <M>       Intel Wireless WiFi MVM Firmware support
+	                        Debugging Options  --->
+	              [ ]   Intersil devices
+
 filesystem information
 -----------------------
 
@@ -233,33 +280,7 @@ probably also need `firmware for iwlwifi
 <https://wiki.gentoo.org/wiki/Iwlwifi>`_.
 
 - ``emerge linux-firmware``
-- and make the kernel options modules::
-
-	Device Drivers  --->
-
-	        [*] Network device support  --->
-
-	        --- Network device support
-	        [*]   Wireless LAN  --->
-
-	            --- Wireless LAN
-	            [ ]   mac80211-based legacy WDS support
-	            [ ]   ADMtek devices
-	            [ ]   Atheros/Qualcomm devices
-	            [ ]   Atmel devices
-	            [ ]   Broadcom devices
-	            [ ]   Cisco devices
-	            [*]   Intel devices
-	            < >     Intel PRO/Wireless 2100 Network Connection
-	            < >     Intel PRO/Wireless 2200BG and 2915ABG Network Connection
-	            < >     Intel Wireless WiFi 4965AGN (iwl4965)
-	            < >     Intel PRO/Wireless 3945ABG/BG Network Connection (iwl3945)
-	            <M>     Intel Wireless WiFi Next Gen AGN - Wireless-N/Advanced-N/Ultimate-N (iwlwifi)
-	            <M>       Intel Wireless WiFi DVM Firmware support
-	            <M>       Intel Wireless WiFi MVM Firmware support
-	                      Debugging Options  --->
-	            [ ]   Intersil devices
-
+- and make the kernel options modules (see the kernel config section above).
 
 install utilities
 ------------------
