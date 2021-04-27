@@ -251,7 +251,7 @@ Edit ``/etc/conf.d/hostname`` to set the hostname.
 
 - ``emerge -a --noreplace net-misc/netifrc``
 - ``emerge -a dhcpcd wpa_supplicant``
-- ``vim /etc/conf.d/net``
+- ``vim /etc/conf.d/net`` gets ``config_wlp2s0="dhcp"``
 - add hostname to ``/etc/hosts```
 - ``vim /etc/wpa_supplicant/wpa_supplicant.conf``::
 
