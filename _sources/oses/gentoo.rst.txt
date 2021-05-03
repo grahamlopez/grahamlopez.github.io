@@ -52,11 +52,10 @@ Get to the chroot
     - make partitions
         - ``mkpart primary START END`` (in whatever units)
         - ``mkpart primary fat32 1 1024`` (for an EFI boot partition)
-        - ``name 1 grub``
+        - ``name 1 efiboot``
         - ``set 1 boot on`` (`see here
           <https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks#Default_partitioning_scheme>`_
-          and `here
-          <https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks#Creating_the_partitions>`_)
+          and `here <https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks#Creating_the_EFI_system_partition_.28ESP.29>`_)
 
     .. caution:: if the installation media isn't booted with EFI, then
                  '/sys/firmware/efi` will not be properly populated and confuse the grup
@@ -188,7 +187,7 @@ configure/build the kernel
 - ``make localyesconfig``
 - ``make && make modules_install``
 - ``make install``
-- ``cp /boot/vmlinux-<version>-gentoo /boot/EFI/Gentoo`` (if using EFI boot)
+- ``cp /boot/vmlinux-<version>-gentoo /boot/EFI/BOOT/BOOTX64.EFI`` (if using EFI boot)
 
 If we're booting straight from EFI, make sure that the following are
 configured::
@@ -299,8 +298,8 @@ miscellaneous configuration
 - ``rc-update add syslog-ng default``
 - ``rc-update add cronie default``
 
-bootloader
------------
+bootloader (non-EFI booting)
+-----------------------------
 
 the `default grub
 <https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation#Default:_GRUB2>`_
@@ -469,11 +468,22 @@ One could use the following procedure:
 UEFI boot (no bootloader)
 ==========================
 
-In fact, even though either ``grub`` or ``efibootmgr`` are typically used to
-boot EFI systems, it can be done straight from the bios as described in Sakaki's
-guide.
+In fact, even though ``grub`` is typically used to boot EFI systems, it can be
+done straight from the bios as described in Sakaki's guide.
 
-(coming soon)
+Essentially, there needs to be an EFI type partition with a FAT32 filesystem.
+Most firmwares can be configured with the path to the image, but the default is
+``\EFI\BOOT\BOOTX64``.
+
+The ``efibootmgr`` utility can be used to manage UEFI boot entries. It is not a
+bootloader, but it rather interacts with the EFI firmware of the system itself.
+The Gentoo Handbook has a short section on setting this up at `Alternative 2:
+efibootmgr <https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Bootloader#Alternative_2:_efibootmgr>`_.
+
+For more information, check out:
+
+- `UEFI boot: how does that actually work, then? | AdamW <https://www.happyassassin.net/posts/2014/01/25/uefi-boot-how-does-that-actually-work-then/>`_
+- `Managing EFI Boot Loaders for Linux by Rod Smith <http://www.rodsbooks.com/efi-bootloaders/>`_
 
 Systemd / Gnome 3.28+
 ======================

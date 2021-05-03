@@ -121,7 +121,7 @@
 <li class="toctree-l3"><a class="reference internal" href="gentoo.html#filesystem-information">filesystem information</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gentoo.html#networking">networking</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gentoo.html#install-utilities">install utilities</a></li>
-<li class="toctree-l3"><a class="reference internal" href="gentoo.html#bootloader">bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gentoo.html#bootloader-non-efi-booting">bootloader (non-EFI booting)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gentoo.html#final-configuration">final configuration</a></li>
 </ul>
 </li>
@@ -195,9 +195,10 @@ general and not very complicated.</p>
 <div class="section" id="miscellaneous">
 <h2>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes when trying to update bios images you might get a <code class="docutils literal notranslate"><span class="pre">.iso</span></code> image that,
-when written to a flash drive with e.g. <code class="docutils literal notranslate"><span class="pre">dd</span> <span class="pre">if=update.iso</span> <span class="pre">of=/dev/sda</span> <span class="pre">status=progress</span> <span class="pre">&amp;&amp;</span> <span class="pre">sync</span></code>,
-doesn’t boot. This is because you actually have to extract the image first with
-e.g. <code class="docutils literal notranslate"><span class="pre">geteltorito</span> <span class="pre">-o</span> <span class="pre">x230.img</span> <span class="pre">g2uj33us.iso</span></code> and then burn the <code class="docutils literal notranslate"><span class="pre">.img</span></code> file.</p>
+when written to a flash drive with e.g.
+<code class="docutils literal notranslate"><span class="pre">dd</span> <span class="pre">if=update.iso</span> <span class="pre">of=/dev/sda</span> <span class="pre">bs=4096</span> <span class="pre">status=progress</span> <span class="pre">&amp;&amp;</span> <span class="pre">sync</span></code>, doesn’t boot.
+This is because you actually have to extract the image first with e.g.
+<code class="docutils literal notranslate"><span class="pre">geteltorito</span> <span class="pre">-o</span> <span class="pre">x230.img</span> <span class="pre">g2uj33us.iso</span></code> and then burn the <code class="docutils literal notranslate"><span class="pre">.img</span></code> file.</p>
 </div>
 </div>
 

@@ -122,7 +122,7 @@
 <li><a class="reference internal" href="#filesystem-information" id="id7">filesystem information</a></li>
 <li><a class="reference internal" href="#networking" id="id8">networking</a></li>
 <li><a class="reference internal" href="#install-utilities" id="id9">install utilities</a></li>
-<li><a class="reference internal" href="#bootloader" id="id10">bootloader</a></li>
+<li><a class="reference internal" href="#bootloader-non-efi-booting" id="id10">bootloader (non-EFI booting)</a></li>
 <li><a class="reference internal" href="#final-configuration" id="id11">final configuration</a></li>
 </ul>
 </li>
@@ -201,9 +201,9 @@ sectors.</p>
 <dt>make partitions</dt><dd><ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">mkpart</span> <span class="pre">primary</span> <span class="pre">START</span> <span class="pre">END</span></code> (in whatever units)</li>
 <li><code class="docutils literal notranslate"><span class="pre">mkpart</span> <span class="pre">primary</span> <span class="pre">fat32</span> <span class="pre">1</span> <span class="pre">1024</span></code> (for an EFI boot partition)</li>
-<li><code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">1</span> <span class="pre">grub</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">1</span> <span class="pre">efiboot</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">1</span> <span class="pre">boot</span> <span class="pre">on</span></code> (<a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks#Default_partitioning_scheme" target="_blank">see here</a>
-and <a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks#Creating_the_partitions" target="_blank">here</a>)</li>
+and <a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks#Creating_the_EFI_system_partition_.28ESP.29" target="_blank">here</a>)</li>
 </ul>
 </dd>
 </dl>
@@ -385,7 +385,7 @@ are all maintained by Gentoo’s Portage developers.”</p>
 <li><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">localyesconfig</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">&amp;&amp;</span> <span class="pre">make</span> <span class="pre">modules_install</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">/boot/vmlinux-&lt;version&gt;-gentoo</span> <span class="pre">/boot/EFI/Gentoo</span></code> (if using EFI boot)</li>
+<li><code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">/boot/vmlinux-&lt;version&gt;-gentoo</span> <span class="pre">/boot/EFI/BOOT/BOOTX64.EFI</span></code> (if using EFI boot)</li>
 </ul>
 <p>If we’re booting straight from EFI, make sure that the following are
 configured:</p>
@@ -498,8 +498,8 @@ present/mounted.</p>
 <li><code class="docutils literal notranslate"><span class="pre">rc-update</span> <span class="pre">add</span> <span class="pre">cronie</span> <span class="pre">default</span></code></li>
 </ul>
 </div>
-<div class="section" id="bootloader">
-<h3><a class="toc-backref" href="#id10">bootloader</a><a class="headerlink" href="#bootloader" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="bootloader-non-efi-booting">
+<h3><a class="toc-backref" href="#id10">bootloader (non-EFI booting)</a><a class="headerlink" href="#bootloader-non-efi-booting" title="Permalink to this headline">¶</a></h3>
 <p>the <a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation#Default:_GRUB2" target="_blank">default grub</a>
 from the handbook</p>
 <ul class="simple">
@@ -677,10 +677,20 @@ file on the two detected ESPs) in the bios setup and it booted just fine.</li>
 </div>
 <div class="section" id="uefi-boot-no-bootloader">
 <h2><a class="toc-backref" href="#id19">UEFI boot (no bootloader)</a><a class="headerlink" href="#uefi-boot-no-bootloader" title="Permalink to this headline">¶</a></h2>
-<p>In fact, even though either <code class="docutils literal notranslate"><span class="pre">grub</span></code> or <code class="docutils literal notranslate"><span class="pre">efibootmgr</span></code> are typically used to
-boot EFI systems, it can be done straight from the bios as described in Sakaki’s
-guide.</p>
-<p>(coming soon)</p>
+<p>In fact, even though <code class="docutils literal notranslate"><span class="pre">grub</span></code> is typically used to boot EFI systems, it can be
+done straight from the bios as described in Sakaki’s guide.</p>
+<p>Essentially, there needs to be an EFI type partition with a FAT32 filesystem.
+Most firmwares can be configured with the path to the image, but the default is
+<code class="docutils literal notranslate"><span class="pre">\EFI\BOOT\BOOTX64</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">efibootmgr</span></code> utility can be used to manage UEFI boot entries. It is not a
+bootloader, but it rather interacts with the EFI firmware of the system itself.
+The Gentoo Handbook has a short section on setting this up at <a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Bootloader#Alternative_2:_efibootmgr" target="_blank">Alternative 2:
+efibootmgr</a>.</p>
+<p>For more information, check out:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://www.happyassassin.net/posts/2014/01/25/uefi-boot-how-does-that-actually-work-then/" target="_blank">UEFI boot: how does that actually work, then? | AdamW</a></li>
+<li><a class="reference external" href="http://www.rodsbooks.com/efi-bootloaders/" target="_blank">Managing EFI Boot Loaders for Linux by Rod Smith</a></li>
+</ul>
 </div>
 <div class="section" id="systemd-gnome-3-28">
 <h2><a class="toc-backref" href="#id20">Systemd / Gnome 3.28+</a><a class="headerlink" href="#systemd-gnome-3-28" title="Permalink to this headline">¶</a></h2>
