@@ -52,7 +52,7 @@
 <li class="toctree-l2"><a class="reference internal" href="ubuntu_20.04.html">Ubuntu 20.04</a></li>
 <li class="toctree-l2"><a class="reference internal" href="windows10.html">Windows 10</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#partitioning">Partitioning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#miscellaneous">Miscellaneous</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#booting-bios-isos">Booting BIOS isos</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../unsorted/index.html">unsorted</a></li>
@@ -186,14 +186,14 @@ to make the combined boot/esp paritions FAT32.</p>
 </div>
 <div class="section" id="additional-encrypted-drives">
 <h3>additional encrypted drives<a class="headerlink" href="#additional-encrypted-drives" title="Permalink to this headline">¶</a></h3>
-<p>sometimes you want to make a new partition and have in encrypted, and you want
+<p>Sometimes you want to make a new partition and have it encrypted, and you want
 to also have it automounted at boot. I like the keyfile/crypttab idea from
 <a class="reference external" href="https://unix.stackexchange.com/a/392286" target="_blank">this SE answer</a> pretty well; it is
 general and not very complicated.</p>
 </div>
 </div>
-<div class="section" id="miscellaneous">
-<h2>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="booting-bios-isos">
+<h2>Booting BIOS isos<a class="headerlink" href="#booting-bios-isos" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes when trying to update bios images you might get a <code class="docutils literal notranslate"><span class="pre">.iso</span></code> image that,
 when written to a flash drive with e.g.
 <code class="docutils literal notranslate"><span class="pre">dd</span> <span class="pre">if=update.iso</span> <span class="pre">of=/dev/sda</span> <span class="pre">bs=4096</span> <span class="pre">status=progress</span> <span class="pre">&amp;&amp;</span> <span class="pre">sync</span></code>, doesn’t boot.
