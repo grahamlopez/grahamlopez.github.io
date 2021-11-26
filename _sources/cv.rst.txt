@@ -48,7 +48,7 @@ order to examine the impact of negative space on protein allostery.
 Experience
 ==========
 
-| **2020--present** HPC SDK and Compilers Product Manager at NVIDIA - Knoxville, TN
+| **2020--present** Product Manager, HPC SDK and HPC Compilers at NVIDIA - Knoxville, TN
 | *HPC compiler and developer productivity*
 
 - Set roadmaps for HPC compiler and developer kit products
@@ -143,6 +143,16 @@ Publications and Presentations
 ===============================
 
 `http://orcid.org/0000-0002-5375-2105 <http://orcid.org/0000-0002-5375-2105>`_
+
+.. 2020
+
+| **Accelerating Standard C++ with GPUs Using stdpar**
+| *David Olsen, M. Graham Lopez, and Bryce Adelstein Lelbach*
+| 2020 https://developer.nvidia.com/blog/accelerating-standard-c-with-gpus-using-stdpar/
+
+| **Accelerating Fortran DO CONCURRENT with GPUs and the NVIDIA HPC SDK**
+| *Guray Ozen and M. Graham Lopez*
+| 2020 https://developer.nvidia.com/blog/accelerating-fortran-do-concurrent-with-gpus-and-the-nvidia-hpc-sdk/
 
 .. 2018
 
@@ -309,7 +319,7 @@ Publications and Presentations
 Service and Committees
 =======================
 
-| **2017-2020**: ISO C++ Standards Committee - Voting Representative
+| **2017-2021**: ISO C++ Standards Committee - Voting Representative
 | **2016-2018**: International Workshop on Performance Portable Programming Models for Accelerators (P3MA, co-located with ISC) - Co-Organizer/Program Co-Chair
 | **2016-2018**: International Workshop on OpenPOWER for HPC (IWOPH, co-located with ISC) - Program Committee Co-Chair
 | **2017-2018**: Distributed and Heterogeneous Programming in C and C++ (DHPCC++, co-located with IWOCL - Committee Member
