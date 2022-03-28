@@ -144,6 +144,12 @@ Publications and Presentations
 
 `http://orcid.org/0000-0002-5375-2105 <http://orcid.org/0000-0002-5375-2105>`_
 
+.. 2022
+
+| **Enabling ISO Standard Languages for Complex HPC Workflows**
+| *M. Graham Lopez, Jeff R. Hammond, Jack C. Wells, Tom Gibbs, and Timothy B.  Costa*
+| 2022 Proceedings of the 2021 Smoky Mountains Workshop (Springer CCIS, volume 1512, pages 301-309)
+
 .. 2020
 
 | **Accelerating Standard C++ with GPUs Using stdpar**
