@@ -51,5 +51,5 @@ empty directory.
 
 miscellaneous non-git resources
 ===============================
-| `make code citable <https://guides.github.com/activities/citable-codehttps://guides.github.com/activities/citable-code/>`_
+| `make code citable <https://guides.github.com/activities/citable-code/>`_
 | `semantic versioning <http://semver.org/>`_
