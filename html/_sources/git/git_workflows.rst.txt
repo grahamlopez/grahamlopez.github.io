@@ -13,7 +13,7 @@ Summary:
 Most of this section comes from the `Atlassian workflow overview
 <https://www.atlassian.com/git/tutorials/comparing-workflows/>`_, including the
 figures (under the `CC-au license
-<https://creativecommons.org/licenses/by/2.5/au/)>`_. I like this presentation
+<https://creativecommons.org/licenses/by/2.5/au/>`_). I like this presentation
 of git workflows, because it starts from the SVN-like model that many are
 comfortable with, and adds one new concept for each successive workflow. This
 way, one can partition their understanding and choose the level at which they
@@ -60,7 +60,7 @@ original post, ["A successful Git branching
 model,"](http://nvie.com/posts/a-successful-git-branching-model/) is well worth
 a read.
 
-At the backbone of the project are the **maste**r and the **develop** branches.
+At the backbone of the project are the **master** and the **develop** branches.
 Supporting branches are all **features**, **releases**, and **hotfixes**. The
 figure and table below summarize how all of these branches work together.
 

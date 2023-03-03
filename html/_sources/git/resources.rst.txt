@@ -6,50 +6,50 @@ Big list o' resources -- links to external sites
 general reference, tutorials, cheatsheets
 ==========================================
 
-pro git book (https://git-scm.com/book/en/v2)
+`pro git book <https://git-scm.com/book/en/v2>`_
 
-| atlassian git and related tools tutorials (https://www.atlassian.com/git/tutorials)
-| github guides (https://guides.github.com)
-| github list of external tutorials (https://help.github.com/articles/good-resources-for-learning-git-and-github/)
+| `atlassian git and related tools tutorials <https://www.atlassian.com/git/tutorials>`_
+| `github guides <https://guides.github.com>`_
+| `github list of external tutorials <https://help.github.com/articles/good-resources-for-learning-git-and-github/>`_
 
-| git quick/basic reference (http://gitref.org/index.html)
-| github git cheatsheet (https://services.github.com/kit/downloads/github-git-cheat-sheet.pdf)
-| atlassian git cheatsheet (https://www.atlassian.com/dms/wac/images/landing/git/atlassian_git_cheatsheet.pdf)
+| `git quick/basic reference <http://gitref.org/index.html>`_
+| `github git cheatsheet <https://services.github.com/kit/downloads/github-git-cheat-sheet.pdf>`_
+| `atlassian git cheatsheet <https://www.atlassian.com/dms/wac/images/landing/git/atlassian_git_cheatsheet.pdf>`_
 
 branching, forking, remotes
 ============================
-| learn git branching - in-depth tutorial (http://pcottle.github.io/learnGitBranching)
-| the first page of the reference chapter on git branching (https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell)
-| syncing (remote, fetch, pull, push) overview (https://www.atlassian.com/git/tutorials/syncing)
+| `learn git branching - in-depth tutorial <http://pcottle.github.io/learnGitBranching>`_
+| `the first page of the reference chapter on git branching <https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell>`_
+| `syncing (remote, fetch, pull, push) overview <https://www.atlassian.com/git/tutorials/syncing>`_
 | https://help.github.com/articles/fork-a-repo/
 | https://help.github.com/articles/syncing-a-fork/
 
 best practices
 ===============
-| 10 simple rules paper (http://biorxiv.org/content/early/2016/05/13/048744)
-| Commit Often, Perfect Later, Publish Once: Git Best Practices (http://sethrobertson.github.io/GitBestPractices/)
-| A Quick Introduction to Version Control with Git and Github (http://dx.doi.org/10.1371/journal.pcbi.1004668)
-| No Foxtrot Merges Allowed (http://bit-booster.blogspot.ca/2016/02/no-foxtrots-allowed.html)
-| Sympy syncing guidance (prefer merge over rebase) (https://github.com/sympy/sympy/wiki/Development-workflow#synchronization-with-master-sympy-sympy)
-| Getting Solid at Git rebase vs. merge (https://medium.com/@porteneuve/getting-solid-at-git-rebase-vs-merge-4fa1a48c53aa)
+| `10 simple rules paper <http://biorxiv.org/content/early/2016/05/13/048744>`_
+| `Commit Often, Perfect Later, Publish Once: Git Best Practices <http://sethrobertson.github.io/GitBestPractices/>`_
+| `A Quick Introduction to Version Control with Git and Github <http://dx.doi.org/10.1371/journal.pcbi.1004668>`_
+| `No Foxtrot Merges Allowed <http://bit-booster.blogspot.ca/2016/02/no-foxtrots-allowed.html>`_
+| `Sympy syncing guidance <prefer merge over rebase>`_ (https://github.com/sympy/sympy/wiki/Development-workflow#synchronization-with-master-sympy-sympy)
+| `Getting Solid at Git rebase vs. merge <https://medium.com/@porteneuve/getting-solid-at-git-rebase-vs-merge-4fa1a48c53aa>`_
 
 workflows and history cleaning for PRs
 =======================================
-| workflows overview  (https://www.atlassian.com/git/tutorials/comparing-workflows)
-| the original gitflow  (http://nvie.com/posts/a-successful-git-branching-model/)
-| gitflow best practices and variations discussion  (http://stackoverflow.com/questions/24582319/branching-and-merging-best-practices-in-git)
-| git workflow guide with examples for pros (simple models)  (https://www.toptal.com/git/git-workflows-for-pros-a-good-git-guide)
-| git workflows that work  (http://blog.endpoint.com/2014/05/git-workflows-that-work.html)
+| `workflows overview  <https://www.atlassian.com/git/tutorials/comparing-workflows>`_
+| `the original gitflow  <http://nvie.com/posts/a-successful-git-branching-model/>`_
+| `gitflow best practices and variations discussion  <http://stackoverflow.com/questions/24582319/branching-and-merging-best-practices-in-git>`_
+| `git workflow guide with examples for pros <simple models>`_  (https://www.toptal.com/git/git-workflows-for-pros-a-good-git-guide)
+| `git workflows that work  <http://blog.endpoint.com/2014/05/git-workflows-that-work.html>`_
 
-| getting solid at git rebase vs. merge (https://medium.com/@porteneuve/getting-solid-at-git-rebase-vs-merge-4fa1a48c53aa#.wozxfe8am)
-| git ways of rewriting history (https://robots.thoughtbot.com/git-interactive-rebase-squash-amend-rewriting-history)
+| `getting solid at git rebase vs. merge <https://medium.com/@porteneuve/getting-solid-at-git-rebase-vs-merge-4fa1a48c53aa#.wozxfe8am>`_
+| `git ways of rewriting history <https://robots.thoughtbot.com/git-interactive-rebase-squash-amend-rewriting-history>`_
 
 If you want to experiment with the Gitflow model, This script
-([gitflow_history.sh](/uploads/3ffd72450352f16d96ec6d4eeeff6a20/gitflow_history.sh))
+(`gitflow_history.sh </uploads/3ffd72450352f16d96ec6d4eeeff6a20/gitflow_history.sh>`_)
 will generate the history shown in the Gitflow figure above; just execute in an
 empty directory.
 
 miscellaneous non-git resources
 ===============================
-| make code citable (https://guides.github.com/activities/citable-codehttps://guides.github.com/activities/citable-code/)
-| semantic versioning (http://semver.org/)
+| `make code citable <https://guides.github.com/activities/citable-code/>`_
+| `semantic versioning <http://semver.org/>`_
