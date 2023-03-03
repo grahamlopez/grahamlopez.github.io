@@ -23,7 +23,7 @@ repository, git needs the information from that commit, whereas SVN needs the
 information for that commit and the entire history leading to it.
 
 Even in the case of git operations that use diffs
-(e.g. `git cherrypick`, `git rebase`, etc.), git finds the relevant snapshots
+(e.g. `git cherry-pick`, `git rebase`, etc.), git finds the relevant snapshots
 and calculates the deltas on the fly.
 
 ## 2) "History is only for humans"
