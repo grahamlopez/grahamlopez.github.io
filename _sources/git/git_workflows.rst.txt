@@ -60,7 +60,7 @@ original post, ["A successful Git branching
 model,"](http://nvie.com/posts/a-successful-git-branching-model/) is well worth
 a read.
 
-At the backbone of the project are the **maste**r and the **develop** branches.
+At the backbone of the project are the **master** and the **develop** branches.
 Supporting branches are all **features**, **releases**, and **hotfixes**. The
 figure and table below summarize how all of these branches work together.
 
