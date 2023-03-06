@@ -41,7 +41,7 @@ Github/Gitlab/et al. make this server-side cloning easy with a GUI button that
 says "fork."  After forking on Github, then one does a ``git clone`` to get a
 local working copy of the repository to code in.
 
-merge vs. rebase vs. cherrypick
+merge vs. rebase vs. cherry-pick
 ================================
 
 This is really a fundamental issue to the way that git is storing history
@@ -55,14 +55,14 @@ quickref nature of this page, here is the generalization:
 * ``git rebase`` redefines the parent of a chosen commit. This has many uses, but
   when used in place of ``git merge``, one can move commits to another branch as if
   they had originally been started there.
-* ``git cherrypick`` can now handle multiple commits, so its function can be
+* ``git cherry-pick`` can now handle multiple commits, so its function can be
   similar to ``git rebase``. However, one key distinction is that the commits being
-  moved are left in their original place with git cherrypick, whereas with
+  moved are left in their original place with git cherry-pick, whereas with
   ``git rebase``, they only exist at the destination after the operation.
 
 Another point of potential confusion: what exactly is meant by "moving commits"
 or "applying commits" or "replaying commits" as you will often see in the
-explanations of ``git rebase`` and ``git cherrypick``. This sounds suspiciously like
+explanations of ``git rebase`` and ``git cherry-pick``. This sounds suspiciously like
 git is applying deltas, but we know that commits are snapshots. In fact, git is
 calculating diffs between adjacent commits, and applying those as patches to
 the new commits. So in this case, it is using deltas to perform the requested

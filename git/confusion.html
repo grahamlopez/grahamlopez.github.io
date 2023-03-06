@@ -151,8 +151,8 @@ Github/Gitlab/et al. make this server-side cloning easy with a GUI button that
 says “fork.”  After forking on Github, then one does a <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> to get a
 local working copy of the repository to code in.</p>
 </div>
-<div class="section" id="merge-vs-rebase-vs-cherrypick">
-<h2>merge vs. rebase vs. cherrypick<a class="headerlink" href="#merge-vs-rebase-vs-cherrypick" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="merge-vs-rebase-vs-cherry-pick">
+<h2>merge vs. rebase vs. cherry-pick<a class="headerlink" href="#merge-vs-rebase-vs-cherry-pick" title="Permalink to this heading">¶</a></h2>
 <p>This is really a fundamental issue to the way that git is storing history
 involving multiple branches, so a tutorial about branching is probably in order
 here (see the Resources list at the bottom of the page). To keep with the
@@ -164,14 +164,14 @@ from the branch being merged.</li>
 <li><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code> redefines the parent of a chosen commit. This has many uses, but
 when used in place of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code>, one can move commits to another branch as if
 they had originally been started there.</li>
-<li><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">cherrypick</span></code> can now handle multiple commits, so its function can be
+<li><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">cherry-pick</span></code> can now handle multiple commits, so its function can be
 similar to <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code>. However, one key distinction is that the commits being
-moved are left in their original place with git cherrypick, whereas with
+moved are left in their original place with git cherry-pick, whereas with
 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code>, they only exist at the destination after the operation.</li>
 </ul>
 <p>Another point of potential confusion: what exactly is meant by “moving commits”
 or “applying commits” or “replaying commits” as you will often see in the
-explanations of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">cherrypick</span></code>. This sounds suspiciously like
+explanations of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">cherry-pick</span></code>. This sounds suspiciously like
 git is applying deltas, but we know that commits are snapshots. In fact, git is
 calculating diffs between adjacent commits, and applying those as patches to
 the new commits. So in this case, it is using deltas to perform the requested
