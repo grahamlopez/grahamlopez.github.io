@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +11,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -78,7 +79,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -111,9 +112,9 @@
           <div class="body" role="main">
             
   <div class="section" id="bare-git-repo-dotfiles">
-<h1>bare git repo dotfiles<a class="headerlink" href="#bare-git-repo-dotfiles" title="Permalink to this headline">¶</a></h1>
+<h1>bare git repo dotfiles<a class="headerlink" href="#bare-git-repo-dotfiles" title="Permalink to this heading">¶</a></h1>
 <div class="section" id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this heading">¶</a></h2>
 <p>The simplest, aliased-based way is to use the following:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>git init --bare $HOME/.dots-git
 alias dotconfig=&#39;git --git-dir=$HOME/.dots-git/ --work-tree=$HOME&#39;
@@ -136,7 +137,7 @@ allow me to just use <code class="docutils literal notranslate"><span class="pre
 my <code class="docutils literal notranslate"><span class="pre">$HOME</span></code>, so it hasn’t been too big of a deal for me in practice.</p>
 </div>
 <div class="section" id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h2>
 <p>Now any files in $HOME can be versioned as usual with things like:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dotconfig</span> <span class="n">status</span>
 <span class="n">dotconfig</span> <span class="n">add</span> <span class="o">.</span><span class="n">vimrc</span>
@@ -151,7 +152,7 @@ my <code class="docutils literal notranslate"><span class="pre">$HOME</span></co
 </div>
 </div>
 <div class="section" id="install-onto-a-new-system">
-<h2>Install onto a new system<a class="headerlink" href="#install-onto-a-new-system" title="Permalink to this headline">¶</a></h2>
+<h2>Install onto a new system<a class="headerlink" href="#install-onto-a-new-system" title="Permalink to this heading">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>/usr/bin/git clone --bare https://myrepourl $HOME/.path/used/in/alias
 [git|mailconfig|...] checkout
 </pre></div>

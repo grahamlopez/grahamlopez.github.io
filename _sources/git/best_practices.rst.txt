@@ -47,9 +47,9 @@ General best practices
 10. Make code cite-able with a DOI:  https://guides.github.com/activities/citable-code/
 11. Use semantic versioning (http://semver.org) for release branches and tags
 
-  * but keep in mind that SemVer [has
-    issues](http://akkartik.name/post/versioning) and some [serious
-    issues](https://youtu.be/tlSy7EJQPzl)
+  * but keep in mind that SemVer `has
+    issues <http://akkartik.name/post/versioning>`_ and some `serious
+    issues <https://youtu.be/tlSy7EJQPzl>`_
 
 And some best practices for public collaboration on git repository services
 (e.g. Github, Gitlab, etc.)

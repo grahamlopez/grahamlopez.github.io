@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +11,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -83,7 +84,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -116,7 +117,7 @@
           <div class="body" role="main">
             
   <div class="section" id="git-workflows-how-to-organize-branching">
-<h1>git Workflows – how to organize branching<a class="headerlink" href="#git-workflows-how-to-organize-branching" title="Permalink to this headline">¶</a></h1>
+<h1>git Workflows – how to organize branching<a class="headerlink" href="#git-workflows-how-to-organize-branching" title="Permalink to this heading">¶</a></h1>
 <p>Summary:</p>
 <ol class="arabic simple">
 <li>Centralized</li>
@@ -125,7 +126,7 @@
 <li>Forking</li>
 </ol>
 <p>Most of this section comes from the <a class="reference external" href="https://www.atlassian.com/git/tutorials/comparing-workflows/" target="_blank">Atlassian workflow overview</a>, including the
-figures (under the <a class="reference external" href="https://creativecommons.org/licenses/by/2.5/au/)" target="_blank">CC-au license</a>. I like this presentation
+figures (under the <a class="reference external" href="https://creativecommons.org/licenses/by/2.5/au/" target="_blank">CC-au license</a>). I like this presentation
 of git workflows, because it starts from the SVN-like model that many are
 comfortable with, and adds one new concept for each successive workflow. This
 way, one can partition their understanding and choose the level at which they
@@ -134,7 +135,7 @@ wish to work.</p>
 their major points. If you are unfamiliar with them, go read the overview - it
 doesn’t take too long.</p>
 <div class="section" id="centralized-svn-like">
-<h2>1) Centralized (SVN-like)<a class="headerlink" href="#centralized-svn-like" title="Permalink to this headline">¶</a></h2>
+<h2>1) Centralized (SVN-like)<a class="headerlink" href="#centralized-svn-like" title="Permalink to this heading">¶</a></h2>
 <p>The centralized workflow is using git like SVN, which means using the git
 “master” branch the same as SVN “trunk” and not really branching besides that –
 all changes from everybody get committed to master.</p>
@@ -143,7 +144,7 @@ rebase preserves a more linear history
 which looks more SVN-like.  So use things like <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span> <span class="pre">--rebase</span></code>.</p>
 </div>
 <div class="section" id="feature-branch-centralized-branching">
-<h2>2) Feature branch (centralized + branching)<a class="headerlink" href="#feature-branch-centralized-branching" title="Permalink to this headline">¶</a></h2>
+<h2>2) Feature branch (centralized + branching)<a class="headerlink" href="#feature-branch-centralized-branching" title="Permalink to this heading">¶</a></h2>
 <p>This model uses branches other than master for all development work; a new
 branch is started for each feature or topic e.g. “cg_diagonalization” or
 “issue-#1024.”  Since no development work is done in master anymore, it can be
@@ -161,14 +162,14 @@ integration testing, and many other positive things more convenient)</li>
 </ul>
 </div>
 <div class="section" id="gitflow-feature-branch-organization-and-conventions">
-<h2>3) Gitflow (Feature branch + organization and conventions)<a class="headerlink" href="#gitflow-feature-branch-organization-and-conventions" title="Permalink to this headline">¶</a></h2>
+<h2>3) Gitflow (Feature branch + organization and conventions)<a class="headerlink" href="#gitflow-feature-branch-organization-and-conventions" title="Permalink to this heading">¶</a></h2>
 <p>In the Gitflow workflow as introduced and covered in detail by Vincent Driessen,
 feature branching is used with some added ground rules for how branches are
 named, where they originate from, and where they get merged/rebased to.  The
 original post, [“A successful Git branching
 model,”](<a class="reference external" href="http://nvie.com/posts/a-successful-git-branching-model/" target="_blank">http://nvie.com/posts/a-successful-git-branching-model/</a>) is well worth
 a read.</p>
-<p>At the backbone of the project are the <strong>maste**r and the **develop</strong> branches.
+<p>At the backbone of the project are the <strong>master</strong> and the <strong>develop</strong> branches.
 Supporting branches are all <strong>features</strong>, <strong>releases</strong>, and <strong>hotfixes</strong>. The
 figure and table below summarize how all of these branches work together.</p>
 <img alt="../_images/git-model2x.png" src="../_images/git-model2x.png" />
@@ -243,7 +244,7 @@ etc., the <a class="reference internal" href="repo_histories.html#gitflow-script
 history shown in the figure above.</p>
 </div>
 <div class="section" id="forking-any-workflow-forking-for-collaboration">
-<h2>4) Forking (any workflow + forking for collaboration)<a class="headerlink" href="#forking-any-workflow-forking-for-collaboration" title="Permalink to this headline">¶</a></h2>
+<h2>4) Forking (any workflow + forking for collaboration)<a class="headerlink" href="#forking-any-workflow-forking-for-collaboration" title="Permalink to this heading">¶</a></h2>
 <p>Forking isn’t a new iteration on the previous workflows; it can be applied to
 any branching workflow. It is more for defining how developers interact with the
 project repository.  Here, nobody clones the main project repository, but rather

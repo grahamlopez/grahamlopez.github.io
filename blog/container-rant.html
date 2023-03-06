@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +11,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -76,7 +77,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -109,7 +110,7 @@
           <div class="body" role="main">
             
   <div class="section" id="containers-in-hpc">
-<h1>Containers in HPC<a class="headerlink" href="#containers-in-hpc" title="Permalink to this headline">¶</a></h1>
+<h1>Containers in HPC<a class="headerlink" href="#containers-in-hpc" title="Permalink to this heading">¶</a></h1>
 <p>(Autumn, 2018)</p>
 <p>Some thoughts about containers in HPC</p>
 <p>I go to talks and meetings where self-identifying “HPC people” get together
@@ -129,7 +130,7 @@ right solution for a given problem.</p>
 <p>Some may not agree with some of the things I say below, and that’s okay. That’s
 kind of my point; tell me where I’m wrong so that the discussion can progress.</p>
 <div class="section" id="containers-provide-two-way-abstraction-isolation">
-<h2>Containers provide two-way abstraction/isolation<a class="headerlink" href="#containers-provide-two-way-abstraction-isolation" title="Permalink to this headline">¶</a></h2>
+<h2>Containers provide two-way abstraction/isolation<a class="headerlink" href="#containers-provide-two-way-abstraction-isolation" title="Permalink to this heading">¶</a></h2>
 <p>If you go and <a class="reference external" href="https://youtu.be/Q5POuMHxW-0?t=5m35s" target="_blank">watch Solomon Hykes’ (Docker founder) talk</a> about how he conceptualizes Docker and
 what containers are for, he says that he likes to think of them as shipping
 containers. Obviously, the shipping company handling the container can’t see
@@ -148,7 +149,7 @@ container. Virtual machines go lower and abstract the hardware; they are
 not what HPC applications want.)</p>
 </div>
 <div class="section" id="containers-are-not-an-interface">
-<h2>Containers are not an interface<a class="headerlink" href="#containers-are-not-an-interface" title="Permalink to this headline">¶</a></h2>
+<h2>Containers are not an interface<a class="headerlink" href="#containers-are-not-an-interface" title="Permalink to this heading">¶</a></h2>
 <p>Software interfaces are very important and very hard to get right. API design
 and maintenance is a well-respected specialization in the field of software
 engineering. Once a good interface has been specified, it does provide some
@@ -169,7 +170,7 @@ do, as the history and effort behind MPI demonstrates.</p>
 fact, they sidestep it all together.</p>
 </div>
 <div class="section" id="let-s-talk-briefly-about-abstraction">
-<h2>Let’s talk briefly about abstraction<a class="headerlink" href="#let-s-talk-briefly-about-abstraction" title="Permalink to this headline">¶</a></h2>
+<h2>Let’s talk briefly about abstraction<a class="headerlink" href="#let-s-talk-briefly-about-abstraction" title="Permalink to this heading">¶</a></h2>
 <p>In the simplest terms, software abstractions provide convenience at some cost.
 Most of the time, that cost is performance. It is possible to provide
 high-performance abstractions, but examples of this consist of some of the
@@ -197,7 +198,7 @@ package managers, some 20+ years old (and still no dominant solution), that this
 is a very old and very hard problem as well.</p>
 </div>
 <div class="section" id="cloud-computing-is-not-hpc">
-<h2>Cloud computing is not HPC<a class="headerlink" href="#cloud-computing-is-not-hpc" title="Permalink to this headline">¶</a></h2>
+<h2>Cloud computing is not HPC<a class="headerlink" href="#cloud-computing-is-not-hpc" title="Permalink to this heading">¶</a></h2>
 <p>In the discussion about containers, I often hear people claim that “cloud” and
 “HPC” are converging, overlap, or even that cloud is replacing HPC. I think
 this conflation comes from a few places. (An aside: notice that we say “cloud”
@@ -229,7 +230,7 @@ of a non “big data” capability application.</p>
 cloud “large-scale computing,” but that doesn’t make them interchangeable.</p>
 </div>
 <div class="section" id="where-do-containers-fit-into-hpc">
-<h2>Where do containers fit into HPC?<a class="headerlink" href="#where-do-containers-fit-into-hpc" title="Permalink to this headline">¶</a></h2>
+<h2>Where do containers fit into HPC?<a class="headerlink" href="#where-do-containers-fit-into-hpc" title="Permalink to this heading">¶</a></h2>
 <p>Software containers most likely could be useful to the HPC community. Given
 that they weren’t designed to be wrapping up the traditional, capability type
 of HPC applications, where do they fit in?</p>
@@ -247,7 +248,7 @@ portability requirement is lifted.</li>
 </ul>
 </div>
 <div class="section" id="a-summary">
-<h2>A summary<a class="headerlink" href="#a-summary" title="Permalink to this headline">¶</a></h2>
+<h2>A summary<a class="headerlink" href="#a-summary" title="Permalink to this heading">¶</a></h2>
 <ol class="arabic simple">
 <li>There is some inconsistency in the HPC community about what containers are,
 and what they are for, and about what problem(s) they want to solve using

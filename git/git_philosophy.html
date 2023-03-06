@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +11,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -83,7 +84,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -116,7 +117,7 @@
           <div class="body" role="main">
             
   <div class="section" id="git-philosophy">
-<h1>git philosophy<a class="headerlink" href="#git-philosophy" title="Permalink to this headline">¶</a></h1>
+<h1>git philosophy<a class="headerlink" href="#git-philosophy" title="Permalink to this heading">¶</a></h1>
 <p>Summary:</p>
 <ol class="arabic simple">
 <li>Snapshots, not deltas</li>
@@ -126,7 +127,7 @@
 <li>There are no server repositories</li>
 </ol>
 <div class="section" id="snapshots-not-deltas">
-<h2>1) “Snapshots, not deltas”<a class="headerlink" href="#snapshots-not-deltas" title="Permalink to this headline">¶</a></h2>
+<h2>1) “Snapshots, not deltas”<a class="headerlink" href="#snapshots-not-deltas" title="Permalink to this heading">¶</a></h2>
 <p>At each commit, git stores a snapshot of the entire repository state. It is more
 like cd’ing out of the source code directory, tar’ing it up, renaming the
 tarball to source.tar.backup1, and cd’ing back into the source directory.
@@ -139,19 +140,19 @@ information for that commit and the entire history leading to it.</p>
 and calculates the deltas on the fly.</p>
 </div>
 <div class="section" id="history-is-only-for-humans">
-<h2>2) “History is only for humans”<a class="headerlink" href="#history-is-only-for-humans" title="Permalink to this headline">¶</a></h2>
+<h2>2) “History is only for humans”<a class="headerlink" href="#history-is-only-for-humans" title="Permalink to this heading">¶</a></h2>
 <p>To git, the contents of the repository are more or less just a pile of data.
 There is no explicit dependency between commits since each one is a stand-alone
 snapshot of the repository (see point #1 above). The history is just provided as
 a way for the user to navigate the commits that git has collected over time.</p>
 </div>
 <div class="section" id="branching-is-free">
-<h2>3) “Branching is free”<a class="headerlink" href="#branching-is-free" title="Permalink to this headline">¶</a></h2>
+<h2>3) “Branching is free”<a class="headerlink" href="#branching-is-free" title="Permalink to this heading">¶</a></h2>
 <p>This is technically not true, but branching is so cheap that it should be
 thought of as free. So branch for everything.</p>
 </div>
 <div class="section" id="ignore-the-index">
-<h2>4) “Ignore the index”<a class="headerlink" href="#ignore-the-index" title="Permalink to this headline">¶</a></h2>
+<h2>4) “Ignore the index”<a class="headerlink" href="#ignore-the-index" title="Permalink to this heading">¶</a></h2>
 <p>It IS useful, but only once you know why you need it (hint: not all the time!)
 For example, some instances where one might want to use the index cleverly:</p>
 <ul class="simple">
@@ -163,7 +164,7 @@ For example, some instances where one might want to use the index cleverly:</p>
 <p>Besides these kinds of specific situations, feel free to skip the index.</p>
 </div>
 <div class="section" id="there-are-no-server-repositories">
-<h2>5) “There are no server repositories”<a class="headerlink" href="#there-are-no-server-repositories" title="Permalink to this headline">¶</a></h2>
+<h2>5) “There are no server repositories”<a class="headerlink" href="#there-are-no-server-repositories" title="Permalink to this heading">¶</a></h2>
 <p>A lot of the time we designate and use certain repositories like an SVN server,
 but this is an analogy at best, and taking it too far can lead to confusion
 later on – especially concerning expected behavior with branches.</p>

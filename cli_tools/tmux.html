@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +11,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -76,7 +77,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -109,7 +110,7 @@
           <div class="body" role="main">
             
   <div class="section" id="tmux-terminal-multiplexer">
-<h1>tmux - terminal multiplexer<a class="headerlink" href="#tmux-terminal-multiplexer" title="Permalink to this headline">¶</a></h1>
+<h1>tmux - terminal multiplexer<a class="headerlink" href="#tmux-terminal-multiplexer" title="Permalink to this heading">¶</a></h1>
 <p>Right after Vim, (and obviously a shell), tmux is easily the CLI tool that I use
 most. I use it for two major (and mostly separate) purposes: terminal
 management, and session management.</p>
@@ -134,13 +135,13 @@ ctrl held down to execute something like <code class="docutils literal notransla
 of the things that I use regularly and find most useful. The Tmux man page is
 above average good, so spend some time with it when you want to know more.</p>
 <div class="section" id="terminal-management">
-<h2>Terminal management<a class="headerlink" href="#terminal-management" title="Permalink to this headline">¶</a></h2>
+<h2>Terminal management<a class="headerlink" href="#terminal-management" title="Permalink to this heading">¶</a></h2>
 <p>By terminal management, I mean that if I am working on anything (e.g. coding
 project, note taking, multiple containers or remote hosts, etc.) where I will
 likely want to have more than one terminal open at once, I will always choose
 tmux to handle this over opening multiple [x|a|gnome]terms on the same desktop.</p>
 <div class="section" id="windows">
-<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h3>
+<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this heading">¶</a></h3>
 <p>Windows correspond to the area that you can see at any given time. When you
 start tmux, you are presented with a single window that contains a single
 terminal. You can open multiple windows and switch between them at will, but you
@@ -188,7 +189,7 @@ can only ever see one at time.</p>
 </table>
 </div>
 <div class="section" id="panes">
-<h3>Panes<a class="headerlink" href="#panes" title="Permalink to this headline">¶</a></h3>
+<h3>Panes<a class="headerlink" href="#panes" title="Permalink to this heading">¶</a></h3>
 <p>Panes are what let you see multiple terminals/shells at a time. As you add
 panes, they divide up the available space of their containing window. Panes are
 also sometimes called splits, and existing windows and panes can be split both
@@ -241,7 +242,7 @@ but I do use it sometime, and you might want to know that these things are
 available.</p>
 </div>
 <div class="section" id="copy-mode">
-<h3>Copy mode<a class="headerlink" href="#copy-mode" title="Permalink to this headline">¶</a></h3>
+<h3>Copy mode<a class="headerlink" href="#copy-mode" title="Permalink to this heading">¶</a></h3>
 <p>The other miscellaneous thing to know about is copy mode. This lets you
 scroll back in the terminal and select/copy text and then paste it, although I
 rarely use it for that. I use it almost every day for scroll back and search.</p>
@@ -283,7 +284,7 @@ buffer</td>
 </div>
 </div>
 <div class="section" id="session-management">
-<h2>Session management<a class="headerlink" href="#session-management" title="Permalink to this headline">¶</a></h2>
+<h2>Session management<a class="headerlink" href="#session-management" title="Permalink to this heading">¶</a></h2>
 <p>By session management, I mean the ability to set up a complex terminal-based
 workspace and then return to it later, even across login/logouts (but
 unfortunately not reboots). All of your window/pane layout will remain, as well
@@ -321,7 +322,7 @@ as the processes that are running inside of them.</p>
 </table>
 </div>
 <div class="section" id="other-useful-tmux-commands">
-<h2>Other useful tmux commands<a class="headerlink" href="#other-useful-tmux-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Other useful tmux commands<a class="headerlink" href="#other-useful-tmux-commands" title="Permalink to this heading">¶</a></h2>
 <table border="1" class="docutils align-default">
 <colgroup>
 <col width="30%" />
@@ -349,7 +350,7 @@ sessions, windows, panes</td>
 </table>
 </div>
 <div class="section" id="my-tmux-conf">
-<h2>My ~/.tmux.conf<a class="headerlink" href="#my-tmux-conf" title="Permalink to this headline">¶</a></h2>
+<h2>My ~/.tmux.conf<a class="headerlink" href="#my-tmux-conf" title="Permalink to this heading">¶</a></h2>
 <p>This (as of June 2019) is my personal <code class="docutils literal notranslate"><span class="pre">~/.tmux.conf</span></code> that I use everyday. It
 has been refined over the past 5-8 years, and is pretty stable these days. The
 biggest modifications that I do here are:</p>
@@ -570,7 +571,7 @@ compatible back to at least 2.6):</p>
 </div>
 </div>
 <div class="section" id="other-tmux-hints">
-<h2>Other tmux hints<a class="headerlink" href="#other-tmux-hints" title="Permalink to this headline">¶</a></h2>
+<h2>Other tmux hints<a class="headerlink" href="#other-tmux-hints" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">alias</span> <span class="pre">tmux=&quot;tmux</span> <span class="pre">-2&quot;</span></code></li>
 </ul>

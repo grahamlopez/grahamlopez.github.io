@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +11,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -83,7 +84,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -116,9 +117,9 @@
           <div class="body" role="main">
             
   <div class="section" id="git-annoyances-common-points-of-confusion">
-<h1>git Annoyances – common points of confusion<a class="headerlink" href="#git-annoyances-common-points-of-confusion" title="Permalink to this headline">¶</a></h1>
+<h1>git Annoyances – common points of confusion<a class="headerlink" href="#git-annoyances-common-points-of-confusion" title="Permalink to this heading">¶</a></h1>
 <div class="section" id="fetch-vs-pull">
-<h2>fetch vs. pull<a class="headerlink" href="#fetch-vs-pull" title="Permalink to this headline">¶</a></h2>
+<h2>fetch vs. pull<a class="headerlink" href="#fetch-vs-pull" title="Permalink to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span> <span class="pre">[remote-repo]</span></code> brings commits (and the branches that label them)
 from a remote repository to the local one, without integrating these into any
 local branches.  So <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span> <span class="pre">remote-repo</span></code> might result in:</p>
@@ -142,7 +143,7 @@ is configured for the current branch to be “tracking” – a lot of times thi
 a remote repository named “origin” from which the local repo was cloned.</p>
 </div>
 <div class="section" id="fork-vs-clone">
-<h2>fork vs. clone<a class="headerlink" href="#fork-vs-clone" title="Permalink to this headline">¶</a></h2>
+<h2>fork vs. clone<a class="headerlink" href="#fork-vs-clone" title="Permalink to this heading">¶</a></h2>
 <p>These are actually the same operation as far as git is concerned, but
 conceptually they are a little bit different depending on the context.
 Usually, when people say “fork” around git, they mean a server-side git clone.
@@ -151,7 +152,7 @@ says “fork.”  After forking on Github, then one does a <code class="docutils
 local working copy of the repository to code in.</p>
 </div>
 <div class="section" id="merge-vs-rebase-vs-cherrypick">
-<h2>merge vs. rebase vs. cherrypick<a class="headerlink" href="#merge-vs-rebase-vs-cherrypick" title="Permalink to this headline">¶</a></h2>
+<h2>merge vs. rebase vs. cherrypick<a class="headerlink" href="#merge-vs-rebase-vs-cherrypick" title="Permalink to this heading">¶</a></h2>
 <p>This is really a fundamental issue to the way that git is storing history
 involving multiple branches, so a tutorial about branching is probably in order
 here (see the Resources list at the bottom of the page). To keep with the
@@ -184,7 +185,7 @@ subjective (but IMO, reasonable) best-practices point of view.</p>
 on repo histories, merge commits, etc. in the <a class="reference internal" href="repo_histories.html"><span class="doc">repo histories page</span></a>.</p>
 </div>
 <div class="section" id="checkout-vs-revert-vs-reset">
-<h2>checkout vs. revert vs. reset<a class="headerlink" href="#checkout-vs-revert-vs-reset" title="Permalink to this headline">¶</a></h2>
+<h2>checkout vs. revert vs. reset<a class="headerlink" href="#checkout-vs-revert-vs-reset" title="Permalink to this heading">¶</a></h2>
 <p>All three of these commands relate to “undoing” changes in the repository.
 <a class="reference external" href="https://www.atlassian.com/git/tutorials/resetting-checking-out-and-reverting" target="_blank">This Atlassian tutorial</a>
 explains things fairly well, but here is the summary for commit-level
@@ -217,7 +218,7 @@ from the commit specified in a <code class="docutils literal notranslate"><span 
 </ul>
 </div>
 <div class="section" id="when-to-use-git-stash">
-<h2>when to use git stash<a class="headerlink" href="#when-to-use-git-stash" title="Permalink to this headline">¶</a></h2>
+<h2>when to use git stash<a class="headerlink" href="#when-to-use-git-stash" title="Permalink to this heading">¶</a></h2>
 <p>Most simply, stashing lets you clean a “dirty” working copy without committing
 the changes or losing your work. You might want to do this if you want to
 change branches or explore other commits on the current branch. Git won’t let
@@ -227,7 +228,7 @@ in-progress work and then <code class="docutils literal notranslate"><span class
 left off.</p>
 </div>
 <div class="section" id="origin-vs-upstream">
-<h2>origin vs. upstream<a class="headerlink" href="#origin-vs-upstream" title="Permalink to this headline">¶</a></h2>
+<h2>origin vs. upstream<a class="headerlink" href="#origin-vs-upstream" title="Permalink to this heading">¶</a></h2>
 <p>These are both terms referring to remote repositories. “origin” is the default
 name given to the repository from which the current one was cloned. In the
 Github context, “upstream” means the third party repository that was forked on
@@ -240,7 +241,7 @@ updated by <code class="docutils literal notranslate"><span class="pre">git</spa
 <a class="reference external" href="http://stackoverflow.com/a/6286877" target="_blank">http://stackoverflow.com/a/6286877</a> and <a class="reference external" href="http://stackoverflow.com/a/9257901" target="_blank">http://stackoverflow.com/a/9257901</a>)</p>
 </div>
 <div class="section" id="local-vs-remote-branches">
-<h2>local vs. remote branches<a class="headerlink" href="#local-vs-remote-branches" title="Permalink to this headline">¶</a></h2>
+<h2>local vs. remote branches<a class="headerlink" href="#local-vs-remote-branches" title="Permalink to this heading">¶</a></h2>
 <p>Sometimes experience with using SVN branches and then local git branches can
 cause confusion about what is going on when git branches need to live in two
 different repositories (e.g. local and remote). Remember to try to think of all
@@ -328,7 +329,7 @@ time (when we received the error about not being able to push to <code class="do
 now <code class="docutils literal notranslate"><span class="pre">master</span></code> is up to date as well.</p>
 </div>
 <div class="section" id="nesting-git-repos">
-<h2>Nesting git repos<a class="headerlink" href="#nesting-git-repos" title="Permalink to this headline">¶</a></h2>
+<h2>Nesting git repos<a class="headerlink" href="#nesting-git-repos" title="Permalink to this heading">¶</a></h2>
 <p>Sometimes it is desirable to have an independent git repository completely
 contained within another. An example might be a third-party developed library
 dependencies: you still want to track new changes and possibly send changes to
@@ -350,7 +351,7 @@ performing operations on them at the same time.</li>
 </ul>
 </div>
 <div class="section" id="how-to-delete-a-file-from-git-completely">
-<h2>How to delete a file from git completely<a class="headerlink" href="#how-to-delete-a-file-from-git-completely" title="Permalink to this headline">¶</a></h2>
+<h2>How to delete a file from git completely<a class="headerlink" href="#how-to-delete-a-file-from-git-completely" title="Permalink to this heading">¶</a></h2>
 <p>Git tries very hard to prevent any real data loss, as might be expected from a
 good VCS. However, there might be a situation where you want to actually remove
 data from the repository, such as if a large file gets accidentally added and
@@ -371,7 +372,7 @@ This can be seen easily by comparing the size of the repo before and after
 removing commits with large files in them.</p>
 </div>
 <div class="section" id="how-to-deal-with-large-files-in-git-repos">
-<h2>How to deal with large files in git repos<a class="headerlink" href="#how-to-deal-with-large-files-in-git-repos" title="Permalink to this headline">¶</a></h2>
+<h2>How to deal with large files in git repos<a class="headerlink" href="#how-to-deal-with-large-files-in-git-repos" title="Permalink to this heading">¶</a></h2>
 <p>Since git is not suited for tracking and storing large files, there have been a
 few third-party projects that try to make this a more reasonable thing to do.
 Two of the more well-known projects are <a class="reference external" href="https://git-annex.branchable.com/" target="_blank">git annex</a>

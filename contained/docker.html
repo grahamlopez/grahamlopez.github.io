@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +11,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -77,7 +78,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -110,21 +111,21 @@
           <div class="body" role="main">
             
   <div class="section" id="docker">
-<h1>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h1>
+<h1>Docker<a class="headerlink" href="#docker" title="Permalink to this heading">¶</a></h1>
 <p>(Update: for most of my uses, I currently prefer <a class="reference internal" href="lxc_lxd.html#lxc-lxd"><span class="std std-ref">LXC and LXD</span></a>, and so haven’t
 used Docker in quite some time.)</p>
 <p>Right now, this is just notes and a cheatsheet as I learn more about Docker.
 Again, most of this stuff can be found elsewhere, and I tried to list in the
 Resources section all of the places from which I took content and ideas.</p>
 <div class="section" id="some-of-my-example-dockerfiles">
-<h2>some of my example dockerfiles<a class="headerlink" href="#some-of-my-example-dockerfiles" title="Permalink to this headline">¶</a></h2>
+<h2>some of my example dockerfiles<a class="headerlink" href="#some-of-my-example-dockerfiles" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><a class="reference download internal" download="" href="../_downloads/b9e2d0a9bbb1462069681cbf597db4e8/centos7_gcc_dockerfile"><code class="xref download docutils literal notranslate"><span class="pre">centos</span> <span class="pre">gcc</span> <span class="pre">plugin</span> <span class="pre">development</span></code></a></li>
 <li><a class="reference download internal" download="" href="../_downloads/78b75a40fe29162877032064b03ba09a/centos_qmcpack_dockerfile"><code class="xref download docutils literal notranslate"><span class="pre">centos</span> <span class="pre">qmcpack</span> <span class="pre">(old)</span></code></a></li>
 </ul>
 </div>
 <div class="section" id="usage">
-<h2>usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<h2>usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h2>
 <p><a class="reference external" href="https://github.com/wsargent/docker-cheat-sheet" target="_blank">here’s a more thorough cheatsheet</a></p>
 <table border="1" class="docutils align-default">
 <colgroup>
@@ -232,7 +233,7 @@ from container-name</td>
 </table>
 </div>
 <div class="section" id="utilities">
-<h2>utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
+<h2>utilities<a class="headerlink" href="#utilities" title="Permalink to this heading">¶</a></h2>
 <p>a shell function I <a class="reference external" href="http://stackoverflow.com/questions/32723111/how-to-remove-old-and-unused-docker-images" target="_blank">found on stackoverflow</a>
 to help with cleanup:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>dcleanup() {
@@ -244,9 +245,9 @@ to help with cleanup:</p>
 <p>probably can now use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">system</span> <span class="pre">prune</span> <span class="pre">-a</span></code> for this</p>
 </div>
 <div class="section" id="advice-and-best-practices">
-<h2>advice and best practices<a class="headerlink" href="#advice-and-best-practices" title="Permalink to this headline">¶</a></h2>
+<h2>advice and best practices<a class="headerlink" href="#advice-and-best-practices" title="Permalink to this heading">¶</a></h2>
 <div class="section" id="entrypoint-vs-cmd">
-<h3>ENTRYPOINT vs. CMD<a class="headerlink" href="#entrypoint-vs-cmd" title="Permalink to this headline">¶</a></h3>
+<h3>ENTRYPOINT vs. CMD<a class="headerlink" href="#entrypoint-vs-cmd" title="Permalink to this heading">¶</a></h3>
 <p><a class="reference external" href="https://www.ctl.io/developers/blog/post/dockerfile-entrypoint-vs-cmd/" target="_blank">ENTRYPOINT vs. CMD</a>
 In summary, for a container called ‘demo’:</p>
 <table border="1" class="docutils align-default">
@@ -285,15 +286,15 @@ signals.</li>
 <p><a class="reference external" href="https://medium.com/&#64;oprearocks/how-to-properly-override-the-entrypoint-using-docker-run-2e081e5feb9d" target="_blank">Here’s how to properly override with –entrypoint</a></p>
 </div>
 <div class="section" id="users-and-mapping">
-<h3>Users and mapping<a class="headerlink" href="#users-and-mapping" title="Permalink to this headline">¶</a></h3>
+<h3>Users and mapping<a class="headerlink" href="#users-and-mapping" title="Permalink to this heading">¶</a></h3>
 <p><a class="reference external" href="https://medium.com/&#64;mccode/understanding-how-uid-and-gid-work-in-docker-containers-c37a01d01cf" target="_blank">Understanding how uid and gid work</a></p>
 </div>
 <div class="section" id="docker-and-locales">
-<h3>Docker and locales<a class="headerlink" href="#docker-and-locales" title="Permalink to this headline">¶</a></h3>
+<h3>Docker and locales<a class="headerlink" href="#docker-and-locales" title="Permalink to this heading">¶</a></h3>
 <p><a class="reference external" href="http://jaredmarkell.com/docker-and-locales/" target="_blank">Docker and locales</a></p>
 </div>
 <div class="section" id="best-practices">
-<h3>Best practices<a class="headerlink" href="#best-practices" title="Permalink to this headline">¶</a></h3>
+<h3>Best practices<a class="headerlink" href="#best-practices" title="Permalink to this heading">¶</a></h3>
 <p><a class="reference external" href="https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/" target="_blank">best practices for writing Dockerfiles</a></p>
 <p>Docker usage; a philosophy
 1. One process per container
@@ -321,7 +322,7 @@ signals.</li>
 </div>
 </div>
 <div class="section" id="docker-and-persistent-data">
-<h2>Docker and persistent data<a class="headerlink" href="#docker-and-persistent-data" title="Permalink to this headline">¶</a></h2>
+<h2>Docker and persistent data<a class="headerlink" href="#docker-and-persistent-data" title="Permalink to this heading">¶</a></h2>
 <p><a class="reference external" href="https://docs.docker.com/engine/tutorials/dockervolumes/" target="_blank">https://docs.docker.com/engine/tutorials/dockervolumes/</a>
 This is the standard Docker documentation about data volumes.  At the time of
 this writing, it is a little bit sparse and outdated from best practices.</p>
@@ -361,7 +362,7 @@ container when it is created/started.</li>
 <p>There are two ways to create a data volume: either by itself or at the same
 time as container creation.</p>
 <div class="section" id="stand-alone-volume-creation">
-<h3>stand-alone volume creation<a class="headerlink" href="#stand-alone-volume-creation" title="Permalink to this headline">¶</a></h3>
+<h3>stand-alone volume creation<a class="headerlink" href="#stand-alone-volume-creation" title="Permalink to this heading">¶</a></h3>
 <p>Use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">volume</span> <span class="pre">create</span></code> to a bare volume:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker volume create
 6a7b1bc554a43534a34659af12b0ec4e088a595c5fc05e716c31ce91380ee615
@@ -381,7 +382,7 @@ local               test-volume
 </div>
 </div>
 <div class="section" id="volume-creation-at-container-creation-time">
-<h3>volume creation at container creation time<a class="headerlink" href="#volume-creation-at-container-creation-time" title="Permalink to this headline">¶</a></h3>
+<h3>volume creation at container creation time<a class="headerlink" href="#volume-creation-at-container-creation-time" title="Permalink to this heading">¶</a></h3>
 <p>To create a bare volume at container creation time and mount it inside the
 container at <code class="docutils literal notranslate"><span class="pre">/data_dir</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker run -t -i -v /data_dir some-repo/some-container:tag /bin/bash
@@ -407,7 +408,7 @@ local               test-vol
 </div>
 </div>
 <div class="section" id="mount-a-host-directory-inside-a-container">
-<h3>mount a host directory inside a container<a class="headerlink" href="#mount-a-host-directory-inside-a-container" title="Permalink to this headline">¶</a></h3>
+<h3>mount a host directory inside a container<a class="headerlink" href="#mount-a-host-directory-inside-a-container" title="Permalink to this heading">¶</a></h3>
 <dl class="docutils">
 <dt>::</dt><dd>$ docker run -t -i -v /Users/graham/develop/gcc-6.2.0:/gcc_source grahamican/centos-dev:gcc /bin/bash
 [in a different shell]
@@ -442,11 +443,11 @@ container with the volume mount(s)).</p>
 </div>
 </div>
 <div class="section" id="installing-docker-on-ubuntu-18-04">
-<h2>installing docker on ubuntu 18.04<a class="headerlink" href="#installing-docker-on-ubuntu-18-04" title="Permalink to this headline">¶</a></h2>
+<h2>installing docker on ubuntu 18.04<a class="headerlink" href="#installing-docker-on-ubuntu-18-04" title="Permalink to this heading">¶</a></h2>
 <p><a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04" target="_blank">https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04</a></p>
 </div>
 <div class="section" id="installing-docker-on-rhel7-4-and-centos">
-<h2>installing docker on rhel7.4 and centos<a class="headerlink" href="#installing-docker-on-rhel7-4-and-centos" title="Permalink to this headline">¶</a></h2>
+<h2>installing docker on rhel7.4 and centos<a class="headerlink" href="#installing-docker-on-rhel7-4-and-centos" title="Permalink to this heading">¶</a></h2>
 <ul>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">yum</span> <span class="pre">install</span> <span class="pre">docker-latest</span></code></p>
 </li>
@@ -468,12 +469,12 @@ container with the volume mount(s)).</p>
 </ul>
 </div>
 <div class="section" id="installing-docker-on-gentoo">
-<h2>installing docker on gentoo<a class="headerlink" href="#installing-docker-on-gentoo" title="Permalink to this headline">¶</a></h2>
+<h2>installing docker on gentoo<a class="headerlink" href="#installing-docker-on-gentoo" title="Permalink to this heading">¶</a></h2>
 <p>The <a class="reference external" href="https://wiki.gentoo.org/wiki/Docker" target="_blank">gentoo wiki page on docker</a> is quite
 good.</p>
 </div>
 <div class="section" id="problems-solutions">
-<h2>Problems / Solutions<a class="headerlink" href="#problems-solutions" title="Permalink to this headline">¶</a></h2>
+<h2>Problems / Solutions<a class="headerlink" href="#problems-solutions" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li>if there is no network connection during build/run (I’ve seen this on ion
 when trying to e.g. <code class="docutils literal notranslate"><span class="pre">apt</span> <span class="pre">update</span></code>), can use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">build</span> <span class="pre">--network</span> <span class="pre">host</span></code>
@@ -483,7 +484,7 @@ and <code class="docutils literal notranslate"><span class="pre">docker</span> <
 </ul>
 </div>
 <div class="section" id="resources">
-<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this heading">¶</a></h2>
 <p><a class="reference external" href="https://github.com/wsargent/docker-cheat-sheet" target="_blank">https://github.com/wsargent/docker-cheat-sheet</a>
 a nice general cheatsheet</p>
 <p><a class="reference external" href="https://youtu.be/Q5POuMHxW-0" target="_blank">https://youtu.be/Q5POuMHxW-0</a>
@@ -497,7 +498,7 @@ a little bit about the “one process per container” rule of thumb</p>
 <p><a class="reference external" href="http://blog.thoward37.me/articles/where-are-docker-images-stored/" target="_blank">Where are Docker images stored?</a></p>
 </div>
 <div class="section" id="todo">
-<h2>Todo<a class="headerlink" href="#todo" title="Permalink to this headline">¶</a></h2>
+<h2>Todo<a class="headerlink" href="#todo" title="Permalink to this heading">¶</a></h2>
 <ul>
 <li><p class="first">best practices and motivation</p>
 </li>

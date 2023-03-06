@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +11,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -83,7 +84,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -116,13 +117,13 @@
           <div class="body" role="main">
             
   <div class="section" id="repository-histories">
-<h1>Repository histories<a class="headerlink" href="#repository-histories" title="Permalink to this headline">¶</a></h1>
+<h1>Repository histories<a class="headerlink" href="#repository-histories" title="Permalink to this heading">¶</a></h1>
 <p>Part of the reason to adopt and maintain a branching workflow is to maintain
 certain patterns in the project history.  Remember that git history is really
 only for humans; git doesn’t care how the commits relate to each other since
 they are each a complete, stand-alone snapshot of the repository.</p>
 <div class="section" id="gitflow-history">
-<h2>Gitflow History<a class="headerlink" href="#gitflow-history" title="Permalink to this headline">¶</a></h2>
+<h2>Gitflow History<a class="headerlink" href="#gitflow-history" title="Permalink to this heading">¶</a></h2>
 <p>So if you adopt the <a class="reference external" href="http://nvie.com/posts/a-successful-git-branching-model/" target="_blank">Gitflow workflow</a>, the figure
 below shows what it will look like in practice. This repository was generated
 with the <a class="reference internal" href="#gitflow-script"><span class="std std-ref">gitflow_history.sh</span></a>.</p>
@@ -142,7 +143,7 @@ branch by keeping to the left at intersections. This rule doesn’t strictly hol
 at initial branchings when reading bottom to top.</p>
 </div>
 <div class="section" id="merge-vs-rebase-effects-on-repo-history">
-<h2>Merge vs. Rebase - effects on repo history<a class="headerlink" href="#merge-vs-rebase-effects-on-repo-history" title="Permalink to this headline">¶</a></h2>
+<h2>Merge vs. Rebase - effects on repo history<a class="headerlink" href="#merge-vs-rebase-effects-on-repo-history" title="Permalink to this heading">¶</a></h2>
 <p>We already saw a brief summary of <cite>git merge vs. git rebase</cite>, and there are a
 few links in the Resources page discussing this as well.  If you start to google
 around, you will find discussions in many places where people disagree about the
@@ -193,7 +194,7 @@ history is on the left again, and the rebasing history is on the right.</p>
 <img alt="../_images/git_log.png" src="../_images/git_log.png" />
 </div>
 <div class="section" id="a-viable-policy">
-<h2>A viable policy<a class="headerlink" href="#a-viable-policy" title="Permalink to this headline">¶</a></h2>
+<h2>A viable policy<a class="headerlink" href="#a-viable-policy" title="Permalink to this heading">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="p">[</span><span class="o">--</span><span class="k">global</span><span class="p">]</span> <span class="n">pull</span><span class="o">.</span><span class="n">rebase</span> <span class="n">true</span>
 </pre></div>
 </div>
@@ -225,7 +226,7 @@ then your understanding of branching, merging, and rebasing is probably
 sufficient enough to justify your own opinions on the matter. :-)</p>
 </div>
 <div class="section" id="merge-commits-in-pull-requests">
-<h2>Merge commits in pull requests<a class="headerlink" href="#merge-commits-in-pull-requests" title="Permalink to this headline">¶</a></h2>
+<h2>Merge commits in pull requests<a class="headerlink" href="#merge-commits-in-pull-requests" title="Permalink to this heading">¶</a></h2>
 <p>Another issue that commonly comes up when using something like the Gitflow
 workflow is merge commits in pull requests. This happens when somebody is
 working in their topic branch, <code class="docutils literal notranslate"><span class="pre">develop</span></code> advances, and they want to pull in
@@ -262,7 +263,7 @@ of <code class="docutils literal notranslate"><span class="pre">3654867</span></
 <li>(PR is submitted on the <code class="docutils literal notranslate"><span class="pre">topic</span></code> branch)</li>
 </ol>
 <div class="section" id="pr-with-merge-commits">
-<h3>1. PR with merge commits<a class="headerlink" href="#pr-with-merge-commits" title="Permalink to this headline">¶</a></h3>
+<h3>1. PR with merge commits<a class="headerlink" href="#pr-with-merge-commits" title="Permalink to this heading">¶</a></h3>
 <p>One option is to just accept the PR as it stands, with the merge commits in
 tact. This will preserve the most complete history, and so is suitable for some
 situations where maximum detail is needed. After merging the PR and updating the
@@ -292,7 +293,7 @@ multiple topic branches and PRs that become intertwined with various merge
 commits, etc.</p>
 </div>
 <div class="section" id="locally-rebased">
-<h3>2. Locally rebased<a class="headerlink" href="#locally-rebased" title="Permalink to this headline">¶</a></h3>
+<h3>2. Locally rebased<a class="headerlink" href="#locally-rebased" title="Permalink to this heading">¶</a></h3>
 <p>This option involves asking the user to run a few commands to fix up their PR.
 They will rebase their work onto the new work in master, even though they’ve
 already merged it into their topic branch. During the rebase, the changes unique
@@ -336,7 +337,7 @@ the “intermediate” commit on master, even though this isn’t the sequence t
 really took place.</p>
 </div>
 <div class="section" id="github-s-merge-rebase-button">
-<h3>3. Github’s “Merge + Rebase” button<a class="headerlink" href="#github-s-merge-rebase-button" title="Permalink to this headline">¶</a></h3>
+<h3>3. Github’s “Merge + Rebase” button<a class="headerlink" href="#github-s-merge-rebase-button" title="Permalink to this heading">¶</a></h3>
 <p>Github also provides a solution to this. If you click the dropdown arrow on the
 “Merge” button on the commit, you will see an option for “Merge + Rebase.”  This
 is nice because you don’t have bug the PR submitter about anything and you can
@@ -363,7 +364,7 @@ displaying these in the correct sequence.</p>
 </div>
 </div>
 <div class="section" id="gitflow-history-sh">
-<span id="gitflow-script"></span><h2>gitflow_history.sh<a class="headerlink" href="#gitflow-history-sh" title="Permalink to this headline">¶</a></h2>
+<span id="gitflow-script"></span><h2>gitflow_history.sh<a class="headerlink" href="#gitflow-history-sh" title="Permalink to this heading">¶</a></h2>
 <p>This is a script that will generate the history shown above:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
 
