@@ -45,7 +45,7 @@ workflows and history cleaning for PRs
 | `git ways of rewriting history <https://robots.thoughtbot.com/git-interactive-rebase-squash-amend-rewriting-history>`_
 
 If you want to experiment with the Gitflow model, This script
-(:download: `gitflow_history.sh <./gitflow_history.sh>`_)
+(:download: `gitflow_history.sh <gitflow_history.sh>`_)
 will generate the history shown in the Gitflow figure above; just execute in an
 empty directory.
 
